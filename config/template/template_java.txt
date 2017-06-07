@@ -1,0 +1,19 @@
+package com.randioo.shanghaimajiang_server.entity.file;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+
+import com.randioo.shanghaimajiang_server.cache.file.${CLASS_NAME}Cache;
+
+public class ${CLASS_NAME}{
+	public static final String urlKey="${URL}";
+	${DECLARE}	
+	public static void parse(ByteBuffer ${BUFFER}){
+		${BUFFER}.order(ByteOrder.LITTLE_ENDIAN);
+		while(${BUFFER}.hasRemaining()){
+			${CLASS_NAME} ${CONFIG} = new ${CLASS_NAME}();
+			${ASSIGN}
+			${CLASS_NAME}Cache.putConfig(${CONFIG});
+		}
+	}
+}

@@ -1,0 +1,30 @@
+package com.randioo.doudizhu_server.protocol;
+import "Entity.proto";
+
+message LoginCheckAccountRequest{
+	optional string account = 1;
+}
+
+message LoginCheckAccountResponse{
+	optional int32 errorCode=1 [default = 1];
+}
+
+message LoginCreateRoleRequest{
+	optional string account=1;
+	optional string name=2;
+}
+
+message LoginCreateRoleResponse{
+	optional int32 errorCode=1 [default = 1];
+}
+
+message LoginGetRoleDataRequest{
+	optional string account=1;
+}
+
+message LoginGetRoleDataResponse{
+	optional int32 errorCode=1 [default = 1];
+	optional int32 serverTime = 2;
+	optional RoleData roleData = 3;
+}
+

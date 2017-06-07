@@ -1,0 +1,65 @@
+#$TYPE = "${BASE_TYPE}";                        
+#$NAME = "${NAME}";                        
+#$CODE = "${CODE}";                        
+#$COMMENT = "${COMMENT}";                  
+#$DECLARE_BRACE = "${DECLARE_BRACE}";      
+#$ASSIGNMENT_BRACE = "${ASSIGNMENT_BRACE}";
+#$BUFFER = "${BUFFER}";                    
+#$CONFIG = "${CONFIG}";                    
+#$KEY_TYPE = "${KEY_TYPE}";                
+#$KEY_CODE = "${KEY_CODE}";                
+#$CLASS_NAME = "${CLASS_NAME}";            
+#$DECLARE = "${DECLARE}";                  
+#$ASSIGN = "${ASSIGN}";                    
+#$URL = "${URL}";                          
+#$DIC_TYPE = "${DIC_TYPE}";	             
+#$MAKE_DIC_TYPE = "${MAKE_DIC_TYPE}";      
+#$DIC_ADD = "${DIC_ADD}";
+#$DIC_VAR_NAME = "${DIC_VAR_NAME}";
+
+int=int
+double=double
+short=short
+byte=byte
+bool=boolean
+string=String
+
+class_int=Integer
+class_double=Double
+class_short=Short
+class_byte=Byte
+class_bool=Boolean
+class_string=String
+
+declare_int=public ${BASE_TYPE} ${CODE};${DECLARE_BRACE}
+declare_double=public ${BASE_TYPE} ${CODE};${DECLARE_BRACE}
+declare_short=public ${BASE_TYPE} ${CODE};${DECLARE_BRACE}
+declare_byte=public ${BASE_TYPE} ${CODE};${DECLARE_BRACE}
+declare_bool=public ${BASE_TYPE} ${CODE};${DECLARE_BRACE}
+declare_string=public ${BASE_TYPE} ${CODE};${DECLARE_BRACE}
+
+assignment_int=${CONFIG}.${CODE}=${BUFFER}.getInt();${ASSIGNMENT_BRACE}
+assignment_double=${CONFIG}.${CODE}=${BUFFER}.getDouble();${ASSIGNMENT_BRACE}
+assignment_short=${CONFIG}.${CODE}=${BUFFER}.getShort();${ASSIGNMENT_BRACE}
+assignment_byte=${CONFIG}.${CODE}=${BUFFER}.getByte();${ASSIGNMENT_BRACE}
+assignment_bool=${CONFIG}.${CODE}=${BUFFER}.getBoolean();${ASSIGNMENT_BRACE}
+assignment_string={byte[] b = new byte[${BUFFER}.getShort()];${BUFFER}.get(b);${CONFIG}.${CODE} = new String(b);}${ASSIGNMENT_BRACE}
+
+prefix=.java
+
+comment=/** ${COMMENT} */${DECLARE_BRACE}
+
+assignment_brace=\n\t\t\t
+declare_brace=\n\t
+
+keyTypeUse=${BASE_CLASS_TYPE}
+
+mapVarName=map
+mapClass=Map<${KEY_TYPE},${CLASS_NAME}>
+mapDeclareClass=Map<${KEY_TYPE},${CLASS_NAME}> ${DIC_VAR_NAME} = new HashMap<${KEY_TYPE},${CLASS_NAME}>();
+mapAddMethod=${DIC_VAR_NAME}.put(${KEY_CODE},${CONFIG});
+
+listVarName=list
+listClass=List<${CLASS_NAME}>
+listDeclareClass=List<${CLASS_NAME}> ${DIC_VAR_NAME} = new ArrayList<${CLASS_NAME}>();
+listAddMethod=${DIC_VAR_NAME}.add(${CONFIG});

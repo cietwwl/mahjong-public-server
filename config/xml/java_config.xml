@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<data>
+<!--
+注意:excel文件的不需要写路径了.都会在命令行中统一加上table的目录;(当然如果有额外的子目录请加上)
+constant.xlsx 注意这个文件是程序用的特殊处理过的,不会加上目录前缀的;
+
+node节点:
+	type=编程语言类型，命名根据lang文件夹下的名字
+	xlsx=xlsx文件路径+名字;
+	page=里面的工作表(页);
+	key=获取单条数据时的索引(例如生成英雄数据时,会将所有英雄数据写到一个dictionary中,同时使用key定义的变量作为索引;
+		如果这个字段为空,则会将所有数据写到一个数组中;例如:CityPathConfig
+	out=生成的二进制文件输出目录+名字;
+	code=需要生成的代码文件路径+名字
+
+	localization	是否需要本地化成对应的语言;
+	optional		可选列,获取对应语言的所在列;
+
+item节点:
+	type=变量类型｛int,string,short,byte,double｝;
+	name=配置项名字;
+	code=变量名;
+	replace=替换某个值;
+		例如:hero.xlsx中的品质配的是汉字"金,白,绿"等,游戏中需要换成对应到的常量;GOLD等..
+		而常量定义在constant.xlsx的"品质"表中;表内有两列,一列是"颜色"(值是汉字),另一列是对应的常量"名字";
+		则replace中写=constant.xlsx|品质|颜色|名字;(新内容所在的文档|新文档中的表|要查找的字段|查找到对应的字段后取的值所在的列)
+		gap= 暂时没用;
+	
+	字段值不能含有%之类的特殊字符
+	
+	2014_3_21修改:
+	注释功能: 现在代码中属性的默认的注释就是xml中name属性值,可以使用comment="品质的索引"来描写更贴切的注释;
+	新的替换方法;
+		例如xlsx中表品质都是配汉字,而代码中希望用数字的话则可以;
+		newReplace="白,绿,蓝,资,金|1,2,3,4,5";就会自动替换了;
+		newReplace可以和replace搭配使用了;
+-->
+	<!--<node type="client" xlsx="parameter.xlsx" page="参数" key="" out="parameter.tbl" code="ParamConfig">
+		<item type="string" name="参数项" code="param" />
+		<item type="string" name="性别" code="value" replace="constant.xlsx|性别|性别|值" />
+		<item type="int" name="颜色" code="color" replace="constant.xlsx|品质|颜色|值" />
+	</node>
+	<node type="client" xlsx="parameter.xlsx" page="参数" key="" out="parameter2.tbl" code="Param2Config">
+		<item type="string" name="参数项" code="param" />
+		<item type="string" name="性别" code="value" replace="constant.xlsx|性别|性别|值" />
+		<item type="int" name="颜色" code="color" replace="constant.xlsx|品质|颜色|值" />
+	</node>-->
+
+	<node type="java" xlsx="开局配置表.xlsx" page="开局花费" out="game_config_need_money.tbl" code="GameRoundConfig">
+		<item type="int" name="编号" code="id"/>
+        <item type="int" name="局数" code="round"/>
+        <item type="int" name="所需花费" code="needMoney"/>
+	</node>	
+</data>

@@ -1,0 +1,22 @@
+﻿package com.randioo.configClass
+{
+	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
+
+	public class ${CLASS_NAME}
+	{
+		public static const urlKey:String = "${URL}";
+		${DECLARE}	
+		static public function parse(${BUFFER}:ByteArray):${DIC_TYPE}
+		{
+			${MAKE_DIC_TYPE}
+			while(${BUFFER}.bytesAvailable)
+			{
+				var ${CONFIG}:${CLASS_NAME} = new ${CLASS_NAME}();
+				${ASSIGN}
+				${DIC_ADD}
+			}
+			return ${DIC_VAR_NAME};
+		}
+	}
+}

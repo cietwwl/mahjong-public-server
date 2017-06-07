@@ -1,0 +1,79 @@
+package com.randioo.doudizhu_server.protocol;
+
+import "Entity.proto";
+
+message FightReadyRequest{
+}
+
+message FightReadyResponse{
+	optional int32 errorCode = 1[default = 1];
+}
+
+message SCFightReady{
+	optional int32 seated = 1;
+}
+
+message SCFightStart{
+	repeated int32 pai = 1;
+	optional int32 times = 2;	
+	repeated PaiNum PaiNum = 4; 
+	
+}
+message FightCallLandLordRequest{
+	optional int32 fen = 1;
+}
+message FightCallLandLordResponse{
+	optional int32 errorCode = 1 [default = 1];
+}
+message SCFightCallLandLord{
+	optional int32 seated = 1;
+	optional int32 countdown = 2;
+	optional int32 currentFen = 3;
+	optional int32 fen = 4;
+	
+}
+message SCFightPutOut{
+	optional int32 seated = 1;
+	optional int32 countdown = 2;	
+}
+message SCFightLandLord{
+	repeated int32 pai = 1;
+	repeated int32 landLordPai = 2;
+	optional int32 seated = 3;
+}
+
+
+message FightExitGameRequest{
+	
+}
+
+message FightExitGameResponse{
+	optional int32 errorCode = 1 [default = 1];
+}
+
+
+message SCFightExitGame{
+	optional string gameRoleId = 1;
+}
+
+message SCFightApplyExitGame{
+	optional string gameRoleId = 1;
+	optional int32 countDown = 2;
+}
+
+message FightAgreeExitGameRequest{
+	optional string gameRoleId = 1;
+}
+
+message FightAgreeExitGameResponse{
+	optional int32 errorCode = 1 [default = 1];
+	optional string name = 2;
+}
+
+message SCFightGameDismiss{
+	
+}
+
+message SCFightLoadResource{
+	
+}

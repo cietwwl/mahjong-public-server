@@ -1,0 +1,29 @@
+package com.randioo.doudizhu_server.protocol;
+import "Login.proto";
+import "Role.proto";
+import "Match.proto";
+import "Fight.proto";
+import "MoneyExchange.proto";
+import "Settings.proto";
+
+
+message CS{
+	optional LoginCheckAccountRequest LoginCheckAccountRequest = 1;
+	optional LoginCreateRoleRequest LoginCreateRoleRequest = 2;
+	optional LoginGetRoleDataRequest LoginGetRoleDataRequest = 3;
+
+	optional RoleRenameRequest RoleRenameRequest = 4;
+
+	optional MatchCreateGameRequest MatchCreateGameRequest = 5;
+	optional MatchJoinGameRequest MatchJoinGameRequest = 6;
+
+	optional FightReadyRequest FightReadyRequest = 7;
+	optional FightExitGameRequest FightExitGameRequest = 8;
+	optional FightAgreeExitGameRequest FightAgreeExitGameRequest = 9;
+	optional MoneyExchangeRequest MoneyExchangeRequest = 10;
+	optional SettingsRequest SettingsRequest = 11;
+	optional GetRoleDataRequest GetRoleDataRequest = 12;
+	optional GetSettingsRequest GetSettingsRequest = 13;
+	optional MatchAIRequest MatchAIRequest = 14;
+	optional FightCallLandLordRequest FightCallLandLordRequest = 15;
+} // 15

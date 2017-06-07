@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd 
+    http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd 
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd 
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<bean id="databaseInitialization" class="com.randioo.randioo_server_base.db.DatabaseInitialization">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="databaseName" value="mahjong_public_server"></property>
+		<property name="sqls">
+			<list>
+				<value>
+					CREATE TABLE IF NOT EXISTS {database}.`role` (
+					`roleId` int(11) DEFAULT NULL COMMENT '玩家id',
+					`account` varchar(255) DEFAULT NULL COMMENT '帐号',
+					`name` varchar(255) DEFAULT NULL COMMENT '名称',
+					`money` int(11) DEFAULT NULL COMMENT '游戏币（欢乐豆）',
+					`gameId` int(11) DEFAULT NULL COMMENT '游戏id',
+					`sex` int(2) DEFAULT NULL COMMENT '性别',
+					`moneyExchangeNum` int(11) DEFAULT NULL COMMENT '游戏币（欢乐豆）兑换数量',
+					`volume` int(4) DEFAULT NULL COMMENT '音效音量',
+					`musicVolume` int(4) DEFAULT NULL COMMENT '音乐音量',
+					`loginTimeStr` varchar(255) DEFAULT NULL COMMENT '登陆时间',
+					`offlineTimeStr` varchar(255) DEFAULT NULL COMMENT '离线时间',
+					`createTimeStr` varchar(255) DEFAULT NULL COMMENT '创建时间',
+					`loadTimeStr` varchar(255) DEFAULT NULL COMMENT '加载时间',
+					`moneyExchangeTimeStr` varchar(255) DEFAULT NULL COMMENT '游戏币兑换时间',
+					PRIMARY KEY (`roleId`)
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+				</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="schedulerManager" class="com.randioo.randioo_server_base.scheduler.SchedulerManager">
+		<property name="schedulers">
+			<list>
+				<ref bean="eventScheduler" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="serviceManager" class="com.randioo.randioo_server_base.service.ServiceManager">
+		<property name="services">
+			<list>
+				<ref bean="loginService" />
+				<ref bean="gmService" />
+				<ref bean="roleService" />
+				<ref bean="moneyExchangeService" />
+				<ref bean="settingService" />
+				<ref bean="matchService" />
+				<ref bean="fightService" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 双缓冲时间定时器 -->
+	<bean id="eventScheduler" class="com.randioo.randioo_server_base.scheduler.EventScheduler">
+		<property name="slowTime" value="15"></property>
+		<property name="quickTime" value="1"></property>
+	</bean>
+
+	<!-- 匹配模块 -->
+	<bean id="matchModelService" class="com.randioo.randioo_server_base.module.match.MatchModelServiceImpl"></bean>
+</beans>

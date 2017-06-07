@@ -1,0 +1,6 @@
+excelFile--- 配置表,策划填写
+xml---名字必须是config.xml,里面填写Config类的属性和值
+template--- 生成的类模版
+lang---编程语言特性表
+
+将资源文件放入excelFile,template,xml,lang客户端点击as_config.bat,服务端点击java_config.bat

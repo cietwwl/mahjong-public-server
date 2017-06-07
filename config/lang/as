@@ -1,0 +1,64 @@
+#$TYPE = "${BASE_TYPE}";                        
+#$NAME = "${NAME}";                        
+#$CODE = "${CODE}";                        
+#$COMMENT = "${COMMENT}";                  
+#$DECLARE_BRACE = "${DECLARE_BRACE}";      
+#$ASSIGNMENT_BRACE = "${ASSIGNMENT_BRACE}";
+#$BUFFER = "${BUFFER}";                    
+#$CONFIG = "${CONFIG}";                    
+#$KEY_TYPE = "${KEY_TYPE}";                
+#$KEY_CODE = "${KEY_CODE}";                
+#$CLASS_NAME = "${CLASS_NAME}";            
+#$DECLARE = "${DECLARE}";                  
+#$ASSIGN = "${ASSIGN}";                    
+#$URL = "${URL}";                          
+#$DIC_TYPE = "${DIC_TYPE}";	             
+#$MAKE_DIC_TYPE = "${MAKE_DIC_TYPE}";      
+#$DIC_ADD = "${DIC_ADD}";
+
+int=int
+double=Number
+short=int
+byte=int
+bool=Boolean
+string=String
+
+class_int=int
+class_double=Number
+class_short=int
+class_byte=int
+class_bool=Boolean
+class_string=String
+
+declare_int=public var ${CODE}:${BASE_TYPE};${DECLARE_BRACE}
+declare_double=public var ${CODE}:${BASE_TYPE};${DECLARE_BRACE}
+declare_short=public var ${CODE}:${BASE_TYPE};${DECLARE_BRACE}
+declare_byte=public var ${CODE}:${BASE_TYPE};${DECLARE_BRACE}
+declare_bool=public var ${CODE}:${BASE_TYPE};${DECLARE_BRACE}
+declare_string=public var ${CODE}:${BASE_TYPE};${DECLARE_BRACE}
+
+assignment_int=${CONFIG}.${CODE} = ${BUFFER}.readInt();${ASSIGNMENT_BRACE}
+assignment_double=${CONFIG}.${CODE} = ${BUFFER}.readDouble();${ASSIGNMENT_BRACE}
+assignment_short=${CONFIG}.${CODE} = ${BUFFER}.readShort();${ASSIGNMENT_BRACE}
+assignment_byte=${CONFIG}.${CODE} = ${BUFFER}.readByte();${ASSIGNMENT_BRACE}
+assignment_bool=${CONFIG}.${CODE} = ${BUFFER}.readBoolean();${ASSIGNMENT_BRACE}
+assignment_string=${CONFIG}.${CODE} = ${BUFFER}.readUTFBytes(${BUFFER}.readUnsignedShort());${ASSIGNMENT_BRACE}
+
+prefix=.as
+
+keyTypeUse=${BASE_TYPE}
+
+comment=/** ${COMMENT} */${DECLARE_BRACE}
+
+assignment_brace=\n\t\t\t\t
+declare_brace=\n\t\t
+
+mapVarName=dic
+mapClass=Dictionary
+mapDeclareClass=var ${DIC_VAR_NAME}:Dictionary = new Dictionary();
+mapAddMethod=${DIC_VAR_NAME}[${CONFIG}.${KEY_CODE}] = ${CONFIG};
+
+listVarName=vect
+listClass=Vector.<${CLASS_NAME}>
+listDeclareClass=var ${DIC_VAR_NAME}:Vector.<${CLASS_NAME}> = new Vector.<${CLASS_NAME}>();
+listAddMethod=${DIC_VAR_NAME}[${DIC_VAR_NAME}.length] = ${CONFIG};
