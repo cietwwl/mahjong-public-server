@@ -1,7 +1,5 @@
 package com.randioo.mahjong_public_server.handler;
 
-import java.io.InputStream;
-
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 import org.slf4j.Logger;
@@ -11,13 +9,13 @@ import org.springframework.stereotype.Component;
 
 import com.randioo.mahjong_public_server.entity.bo.Role;
 import com.randioo.mahjong_public_server.module.close.service.CloseService;
-import com.randioo.mahjong_public_server.protocol.ClientMessage.CS;
 import com.randioo.randioo_server_base.cache.RoleCache;
-import com.randioo.randioo_server_base.net.GameServerHandlerAdapter;
+import com.randioo.randioo_server_base.net.BackgroundServerHandlerAdapter;
+import com.randioo.randioo_server_base.protocol.randioo.Message;
 import com.randioo.randioo_server_base.utils.TimeUtils;
 
 @Component
-public class GameServerHandler extends GameServerHandlerAdapter {
+public class BackgroundServerHandler extends BackgroundServerHandlerAdapter {
 	private Logger logger = LoggerFactory.getLogger(this.getClass().getSimpleName());
 
 	@Autowired
@@ -63,22 +61,14 @@ public class GameServerHandler extends GameServerHandlerAdapter {
 
 	@Override
 	public void messageReceived(IoSession session, Object messageObj) throws Exception {
-
-		InputStream input = (InputStream) messageObj;
-
-		try {
-			CS message = CS.parseDelimitedFrom(input);
-			actionDispatcher(message, session);
-		} finally {
-			if (input != null) {
-				input.close();
-			}
-		}
-
+		Message message = (Message) messageObj;
+		logger.info("receive message ,protocol --> " + message.getType());
+		actionDispatcher(messageObj, session);
 	}
 
 	@Override
 	public void messageSent(IoSession session, Object message) throws Exception {
+
 		logger.info(getMessage(message, session));
 	}
 
@@ -98,11 +88,7 @@ public class GameServerHandler extends GameServerHandlerAdapter {
 		sb.append(TimeUtils.getDetailTimeStr()).append(" [roleId:").append(roleId).append(",account:")
 				.append(roleAccount).append(",name:").append(roleName).append("] ").append(message);
 		String output = sb.toString();
-		if (output.length() < 120) {
-			output = output.replaceAll("\n", " ").replace("\t", " ").replace("  ", "");
-		}
 
 		return output;
 	}
-
 }

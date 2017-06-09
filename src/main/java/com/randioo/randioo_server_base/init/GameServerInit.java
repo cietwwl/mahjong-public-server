@@ -36,10 +36,8 @@ public class GameServerInit {
 		schedulerManager.start();
 		logger.info("scheduler start");
 
-		WanServer.startServer(new ProtocolCodecFilter(new ProtoCodecFactory()), gameServerHandlerAdapter, new InetSocketAddress(
-				GlobleConfig.Int(GlobleEnum.PORT)));
+		WanServer.startServer(new ProtocolCodecFilter(new ProtoCodecFactory()), gameServerHandlerAdapter,
+				new InetSocketAddress(GlobleConfig.Int(GlobleEnum.PORT)));
 		logger.info("socket start");
-
-		logger.info("socket port:" + GlobleConfig.Int(GlobleEnum.PORT));
 	}
 }

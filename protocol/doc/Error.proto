@@ -1,4 +1,4 @@
-package com.randioo.doudizhu_server.protocol;
+package com.randioo.mahjong_public_server.protocol;
 
 enum ErrorCode{
 
@@ -23,20 +23,23 @@ enum ErrorCode{
 	NAME_SPECIAL_CHAR = 13;//名字特殊字符
 
 	
-	//玩家
-	NO_MONEY = 14;//没有钱
-	CONNECT_ERROR = 15;//服务器链接失败
-
-
 	//匹配
-	GAME_CREATE_ERROR = 16;//创建游戏失败
-	GAME_JOIN_ERROR = 17;//加入游戏失败
-	ROUND_ERROR = 18;//操作错误
-	MONEY_NUM_ERROR = 19;//兑换数量错误
-	MATCH_ERROR_LOCK = 20;//房间号错误
-	MATCH_MAX_ROLE_COUNT = 21;//房间已经满了
+	GAME_CREATE_ERROR = 14;//创建游戏失败
+	GAME_JOIN_ERROR = 15;//加入游戏失败
+	ROUND_ERROR = 16;//操作错误
+	MONEY_NUM_ERROR = 17;//兑换数量错误
+	MATCH_ERROR_LOCK = 18;//房间号错误
+	MATCH_MAX_ROLE_COUNT = 19;//房间已经满了
 
-	GAME_NOT_EXIST = 22;//游戏不存在
-	GAME_EXITING = 23;//其他人正申请退出
-	APPLY_REJECT = 24;//拒绝解散房间
-} // 24
+	GAME_NOT_EXIST = 20;//游戏不存在
+	GAME_EXITING = 21;//其他人正申请退出
+	APPLY_REJECT = 22;//拒绝解散房间
+	NOT_YOUR_TURN = 23;//没轮到你
+	
+	NOT_SAME_TYPE = 24;//牌型不符
+	SMALLER = 25;//牌比上家小
+	NULL_REJECT = 26;//不允许不出牌
+	NOT_LANDLORD = 27;//你不是地主
+	MINGPAI_FORBIDDEN = 28;//不能明牌
+	FIRST_ROUND = 29;//第一轮
+} // 29

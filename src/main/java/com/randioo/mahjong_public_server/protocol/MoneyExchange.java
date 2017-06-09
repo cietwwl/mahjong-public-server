@@ -27,12 +27,12 @@ public final class MoneyExchange {
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.randioo.mahjong_public_server.protocol.MoneyExchange.internal_static_com_randioo_doudizhu_server_protocol_MoneyExchangeRequest_descriptor;
+      return com.randioo.mahjong_public_server.protocol.MoneyExchange.internal_static_com_randioo_mahjong_public_server_protocol_MoneyExchangeRequest_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.randioo.mahjong_public_server.protocol.MoneyExchange.internal_static_com_randioo_doudizhu_server_protocol_MoneyExchangeRequest_fieldAccessorTable;
+      return com.randioo.mahjong_public_server.protocol.MoneyExchange.internal_static_com_randioo_mahjong_public_server_protocol_MoneyExchangeRequest_fieldAccessorTable;
     }
     
     // optional int32 num = 1;
@@ -164,7 +164,7 @@ public final class MoneyExchange {
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
       private com.randioo.mahjong_public_server.protocol.MoneyExchange.MoneyExchangeRequest result;
       
-      // Construct using com.randioo.doudizhu_server.protocol.MoneyExchange.MoneyExchangeRequest.newBuilder()
+      // Construct using com.randioo.mahjong_public_server.protocol.MoneyExchange.MoneyExchangeRequest.newBuilder()
       private Builder() {}
       
       private static Builder create() {
@@ -319,7 +319,7 @@ public final class MoneyExchange {
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.randioo.doudizhu_server.protocol.MoneyExchangeRequest)
+      // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.MoneyExchangeRequest)
     }
     
     static {
@@ -328,7 +328,7 @@ public final class MoneyExchange {
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.randioo.doudizhu_server.protocol.MoneyExchangeRequest)
+    // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.MoneyExchangeRequest)
   }
   
   public static final class MoneyExchangeResponse extends
@@ -350,12 +350,12 @@ public final class MoneyExchange {
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.randioo.mahjong_public_server.protocol.MoneyExchange.internal_static_com_randioo_doudizhu_server_protocol_MoneyExchangeResponse_descriptor;
+      return com.randioo.mahjong_public_server.protocol.MoneyExchange.internal_static_com_randioo_mahjong_public_server_protocol_MoneyExchangeResponse_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.randioo.mahjong_public_server.protocol.MoneyExchange.internal_static_com_randioo_doudizhu_server_protocol_MoneyExchangeResponse_fieldAccessorTable;
+      return com.randioo.mahjong_public_server.protocol.MoneyExchange.internal_static_com_randioo_mahjong_public_server_protocol_MoneyExchangeResponse_fieldAccessorTable;
     }
     
     // optional int32 errorCode = 1 [default = 1];
@@ -365,7 +365,7 @@ public final class MoneyExchange {
     public boolean hasErrorCode() { return hasErrorCode; }
     public int getErrorCode() { return errorCode_; }
     
-    // optional .com.randioo.doudizhu_server.protocol.RoleData roleData = 2;
+    // optional .com.randioo.mahjong_public_server.protocol.RoleData roleData = 2;
     public static final int ROLEDATA_FIELD_NUMBER = 2;
     private boolean hasRoleData;
     private com.randioo.mahjong_public_server.protocol.Entity.RoleData roleData_;
@@ -488,7 +488,7 @@ public final class MoneyExchange {
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
       private com.randioo.mahjong_public_server.protocol.MoneyExchange.MoneyExchangeResponse result;
       
-      // Construct using com.randioo.doudizhu_server.protocol.MoneyExchange.MoneyExchangeResponse.newBuilder()
+      // Construct using com.randioo.mahjong_public_server.protocol.MoneyExchange.MoneyExchangeResponse.newBuilder()
       private Builder() {}
       
       private static Builder create() {
@@ -630,7 +630,7 @@ public final class MoneyExchange {
         return this;
       }
       
-      // optional .com.randioo.doudizhu_server.protocol.RoleData roleData = 2;
+      // optional .com.randioo.mahjong_public_server.protocol.RoleData roleData = 2;
       public boolean hasRoleData() {
         return result.hasRoleData();
       }
@@ -667,7 +667,7 @@ public final class MoneyExchange {
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.randioo.doudizhu_server.protocol.MoneyExchangeResponse)
+      // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.MoneyExchangeResponse)
     }
     
     static {
@@ -676,19 +676,19 @@ public final class MoneyExchange {
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.randioo.doudizhu_server.protocol.MoneyExchangeResponse)
+    // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.MoneyExchangeResponse)
   }
   
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_randioo_doudizhu_server_protocol_MoneyExchangeRequest_descriptor;
+    internal_static_com_randioo_mahjong_public_server_protocol_MoneyExchangeRequest_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_randioo_doudizhu_server_protocol_MoneyExchangeRequest_fieldAccessorTable;
+      internal_static_com_randioo_mahjong_public_server_protocol_MoneyExchangeRequest_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_randioo_doudizhu_server_protocol_MoneyExchangeResponse_descriptor;
+    internal_static_com_randioo_mahjong_public_server_protocol_MoneyExchangeResponse_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_randioo_doudizhu_server_protocol_MoneyExchangeResponse_fieldAccessorTable;
+      internal_static_com_randioo_mahjong_public_server_protocol_MoneyExchangeResponse_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -698,31 +698,32 @@ public final class MoneyExchange {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023MoneyExchange.proto\022$com.randioo.doudi" +
-      "zhu_server.protocol\032\014Entity.proto\"0\n\024Mon" +
-      "eyExchangeRequest\022\013\n\003num\030\001 \001(\005\022\013\n\003add\030\002 " +
-      "\001(\010\"o\n\025MoneyExchangeResponse\022\024\n\terrorCod" +
-      "e\030\001 \001(\005:\0011\022@\n\010roleData\030\002 \001(\0132..com.randi" +
-      "oo.doudizhu_server.protocol.RoleData"
+      "\n\023MoneyExchange.proto\022*com.randioo.mahjo" +
+      "ng_public_server.protocol\032\014Entity.proto\"" +
+      "0\n\024MoneyExchangeRequest\022\013\n\003num\030\001 \001(\005\022\013\n\003" +
+      "add\030\002 \001(\010\"u\n\025MoneyExchangeResponse\022\024\n\ter" +
+      "rorCode\030\001 \001(\005:\0011\022F\n\010roleData\030\002 \001(\01324.com" +
+      ".randioo.mahjong_public_server.protocol." +
+      "RoleData"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
             com.google.protobuf.Descriptors.FileDescriptor root) {
           descriptor = root;
-          internal_static_com_randioo_doudizhu_server_protocol_MoneyExchangeRequest_descriptor =
+          internal_static_com_randioo_mahjong_public_server_protocol_MoneyExchangeRequest_descriptor =
             getDescriptor().getMessageTypes().get(0);
-          internal_static_com_randioo_doudizhu_server_protocol_MoneyExchangeRequest_fieldAccessorTable = new
+          internal_static_com_randioo_mahjong_public_server_protocol_MoneyExchangeRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_randioo_doudizhu_server_protocol_MoneyExchangeRequest_descriptor,
+              internal_static_com_randioo_mahjong_public_server_protocol_MoneyExchangeRequest_descriptor,
               new java.lang.String[] { "Num", "Add", },
               com.randioo.mahjong_public_server.protocol.MoneyExchange.MoneyExchangeRequest.class,
               com.randioo.mahjong_public_server.protocol.MoneyExchange.MoneyExchangeRequest.Builder.class);
-          internal_static_com_randioo_doudizhu_server_protocol_MoneyExchangeResponse_descriptor =
+          internal_static_com_randioo_mahjong_public_server_protocol_MoneyExchangeResponse_descriptor =
             getDescriptor().getMessageTypes().get(1);
-          internal_static_com_randioo_doudizhu_server_protocol_MoneyExchangeResponse_fieldAccessorTable = new
+          internal_static_com_randioo_mahjong_public_server_protocol_MoneyExchangeResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_randioo_doudizhu_server_protocol_MoneyExchangeResponse_descriptor,
+              internal_static_com_randioo_mahjong_public_server_protocol_MoneyExchangeResponse_descriptor,
               new java.lang.String[] { "ErrorCode", "RoleData", },
               com.randioo.mahjong_public_server.protocol.MoneyExchange.MoneyExchangeResponse.class,
               com.randioo.mahjong_public_server.protocol.MoneyExchange.MoneyExchangeResponse.Builder.class);

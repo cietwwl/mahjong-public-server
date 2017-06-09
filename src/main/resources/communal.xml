@@ -53,6 +53,7 @@
 				<ref bean="settingService" />
 				<ref bean="matchService" />
 				<ref bean="fightService" />
+				<ref bean="raceService" />
 			</list>
 		</property>
 	</bean>

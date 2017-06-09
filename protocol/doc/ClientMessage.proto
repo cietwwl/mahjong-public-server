@@ -1,4 +1,4 @@
-package com.randioo.doudizhu_server.protocol;
+package com.randioo.mahjong_public_server.protocol;
 import "Login.proto";
 import "Role.proto";
 import "Match.proto";
@@ -26,4 +26,8 @@ message CS{
 	optional GetSettingsRequest GetSettingsRequest = 13;
 	optional MatchAIRequest MatchAIRequest = 14;
 	optional FightCallLandLordRequest FightCallLandLordRequest = 15;
-} // 15
+	optional FightSendCardRequest FightSendCardRequest = 16;
+	optional FightMingPaiRequest FightMingPaiRequest = 17;
+	optional FightRecommandRequest FightRecommandRequest = 18;
+	optional FightGetlastRoundRequest FightGetlastRoundRequest = 19;
+} // 19

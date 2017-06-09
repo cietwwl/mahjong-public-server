@@ -1,4 +1,4 @@
-package com.randioo.doudizhu_server.protocol;
+package com.randioo.mahjong_public_server.protocol;
 
 message RoleData{
 	optional int32 roleId = 1;
@@ -11,14 +11,23 @@ message RoleData{
 }
 
 message GameConfig{
-	optional int32 round = 1;
-	optional int32 di = 2;
-	optional bool moguai = 3;
-	optional bool mingpai = 4;
+	optional int32 raceType = 1;
+	optional int32 maxCount = 2;
+	optional int32 gangScore = 3;
+	optional bool zhuahu = 4;
+	optional int32 endCatchCount = 5;
+	optional int32 catchScore = 6;
+	optional bool gangkai = 7;
+	optional int32 minStartScore = 8;
 }
 message PaiNum{
 	optional int32 seated = 1;
 	optional int32 num = 3;
+}
+
+message Record{
+	optional int32 seated = 1;
+	repeated int32 pai = 2;
 }
 
 enum GameType{
@@ -31,9 +40,8 @@ message GameRoleData{
 	optional string name = 2;
 	optional int32 seated = 3;
 	optional bool ready = 4;
-	optional int32 seatIndex = 5;
-	optional string headImgUrl = 6;
-	optional int32 money = 7;
+	optional string headImgUrl = 5;
+	optional int32 money = 6;
 }
 
 enum GameState{

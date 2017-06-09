@@ -27,12 +27,12 @@ public final class Role {
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_doudizhu_server_protocol_RoleRenameRequest_descriptor;
+      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_mahjong_public_server_protocol_RoleRenameRequest_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_doudizhu_server_protocol_RoleRenameRequest_fieldAccessorTable;
+      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_mahjong_public_server_protocol_RoleRenameRequest_fieldAccessorTable;
     }
     
     // optional string name = 1;
@@ -150,7 +150,7 @@ public final class Role {
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
       private com.randioo.mahjong_public_server.protocol.Role.RoleRenameRequest result;
       
-      // Construct using com.randioo.doudizhu_server.protocol.Role.RoleRenameRequest.newBuilder()
+      // Construct using com.randioo.mahjong_public_server.protocol.Role.RoleRenameRequest.newBuilder()
       private Builder() {}
       
       private static Builder create() {
@@ -283,7 +283,7 @@ public final class Role {
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.randioo.doudizhu_server.protocol.RoleRenameRequest)
+      // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.RoleRenameRequest)
     }
     
     static {
@@ -292,7 +292,7 @@ public final class Role {
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.randioo.doudizhu_server.protocol.RoleRenameRequest)
+    // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.RoleRenameRequest)
   }
   
   public static final class RoleRenameResponse extends
@@ -314,12 +314,12 @@ public final class Role {
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_doudizhu_server_protocol_RoleRenameResponse_descriptor;
+      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_mahjong_public_server_protocol_RoleRenameResponse_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_doudizhu_server_protocol_RoleRenameResponse_fieldAccessorTable;
+      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_mahjong_public_server_protocol_RoleRenameResponse_fieldAccessorTable;
     }
     
     // optional int32 errorCode = 1 [default = 1];
@@ -437,7 +437,7 @@ public final class Role {
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
       private com.randioo.mahjong_public_server.protocol.Role.RoleRenameResponse result;
       
-      // Construct using com.randioo.doudizhu_server.protocol.Role.RoleRenameResponse.newBuilder()
+      // Construct using com.randioo.mahjong_public_server.protocol.Role.RoleRenameResponse.newBuilder()
       private Builder() {}
       
       private static Builder create() {
@@ -567,7 +567,7 @@ public final class Role {
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.randioo.doudizhu_server.protocol.RoleRenameResponse)
+      // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.RoleRenameResponse)
     }
     
     static {
@@ -576,7 +576,7 @@ public final class Role {
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.randioo.doudizhu_server.protocol.RoleRenameResponse)
+    // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.RoleRenameResponse)
   }
   
   public static final class GetRoleDataRequest extends
@@ -598,12 +598,12 @@ public final class Role {
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_doudizhu_server_protocol_GetRoleDataRequest_descriptor;
+      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataRequest_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_doudizhu_server_protocol_GetRoleDataRequest_fieldAccessorTable;
+      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataRequest_fieldAccessorTable;
     }
     
     private void initFields() {
@@ -707,7 +707,7 @@ public final class Role {
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
       private com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest result;
       
-      // Construct using com.randioo.doudizhu_server.protocol.Role.GetRoleDataRequest.newBuilder()
+      // Construct using com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest.newBuilder()
       private Builder() {}
       
       private static Builder create() {
@@ -812,7 +812,7 @@ public final class Role {
       }
       
       
-      // @@protoc_insertion_point(builder_scope:com.randioo.doudizhu_server.protocol.GetRoleDataRequest)
+      // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.GetRoleDataRequest)
     }
     
     static {
@@ -821,7 +821,7 @@ public final class Role {
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.randioo.doudizhu_server.protocol.GetRoleDataRequest)
+    // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.GetRoleDataRequest)
   }
   
   public static final class GetRoleDataResponse extends
@@ -843,12 +843,12 @@ public final class Role {
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_doudizhu_server_protocol_GetRoleDataResponse_descriptor;
+      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataResponse_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_doudizhu_server_protocol_GetRoleDataResponse_fieldAccessorTable;
+      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataResponse_fieldAccessorTable;
     }
     
     // optional int32 errorCode = 1 [default = 1];
@@ -858,7 +858,7 @@ public final class Role {
     public boolean hasErrorCode() { return hasErrorCode; }
     public int getErrorCode() { return errorCode_; }
     
-    // optional .com.randioo.doudizhu_server.protocol.RoleData roleData = 2;
+    // optional .com.randioo.mahjong_public_server.protocol.RoleData roleData = 2;
     public static final int ROLEDATA_FIELD_NUMBER = 2;
     private boolean hasRoleData;
     private com.randioo.mahjong_public_server.protocol.Entity.RoleData roleData_;
@@ -981,7 +981,7 @@ public final class Role {
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
       private com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse result;
       
-      // Construct using com.randioo.doudizhu_server.protocol.Role.GetRoleDataResponse.newBuilder()
+      // Construct using com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse.newBuilder()
       private Builder() {}
       
       private static Builder create() {
@@ -1123,7 +1123,7 @@ public final class Role {
         return this;
       }
       
-      // optional .com.randioo.doudizhu_server.protocol.RoleData roleData = 2;
+      // optional .com.randioo.mahjong_public_server.protocol.RoleData roleData = 2;
       public boolean hasRoleData() {
         return result.hasRoleData();
       }
@@ -1160,7 +1160,7 @@ public final class Role {
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.randioo.doudizhu_server.protocol.GetRoleDataResponse)
+      // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.GetRoleDataResponse)
     }
     
     static {
@@ -1169,29 +1169,29 @@ public final class Role {
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.randioo.doudizhu_server.protocol.GetRoleDataResponse)
+    // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.GetRoleDataResponse)
   }
   
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_randioo_doudizhu_server_protocol_RoleRenameRequest_descriptor;
+    internal_static_com_randioo_mahjong_public_server_protocol_RoleRenameRequest_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_randioo_doudizhu_server_protocol_RoleRenameRequest_fieldAccessorTable;
+      internal_static_com_randioo_mahjong_public_server_protocol_RoleRenameRequest_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_randioo_doudizhu_server_protocol_RoleRenameResponse_descriptor;
+    internal_static_com_randioo_mahjong_public_server_protocol_RoleRenameResponse_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_randioo_doudizhu_server_protocol_RoleRenameResponse_fieldAccessorTable;
+      internal_static_com_randioo_mahjong_public_server_protocol_RoleRenameResponse_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_randioo_doudizhu_server_protocol_GetRoleDataRequest_descriptor;
+    internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataRequest_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_randioo_doudizhu_server_protocol_GetRoleDataRequest_fieldAccessorTable;
+      internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataRequest_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_randioo_doudizhu_server_protocol_GetRoleDataResponse_descriptor;
+    internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataResponse_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_randioo_doudizhu_server_protocol_GetRoleDataResponse_fieldAccessorTable;
+      internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataResponse_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1201,48 +1201,49 @@ public final class Role {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nRole.proto\022$com.randioo.doudizhu_serve" +
-      "r.protocol\032\014Entity.proto\"!\n\021RoleRenameRe" +
-      "quest\022\014\n\004name\030\001 \001(\t\"*\n\022RoleRenameRespons" +
-      "e\022\024\n\terrorCode\030\001 \001(\005:\0011\"\024\n\022GetRoleDataRe" +
-      "quest\"m\n\023GetRoleDataResponse\022\024\n\terrorCod" +
-      "e\030\001 \001(\005:\0011\022@\n\010roleData\030\002 \001(\0132..com.randi" +
-      "oo.doudizhu_server.protocol.RoleData"
+      "\n\nRole.proto\022*com.randioo.mahjong_public" +
+      "_server.protocol\032\014Entity.proto\"!\n\021RoleRe" +
+      "nameRequest\022\014\n\004name\030\001 \001(\t\"*\n\022RoleRenameR" +
+      "esponse\022\024\n\terrorCode\030\001 \001(\005:\0011\"\024\n\022GetRole" +
+      "DataRequest\"s\n\023GetRoleDataResponse\022\024\n\ter" +
+      "rorCode\030\001 \001(\005:\0011\022F\n\010roleData\030\002 \001(\01324.com" +
+      ".randioo.mahjong_public_server.protocol." +
+      "RoleData"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
             com.google.protobuf.Descriptors.FileDescriptor root) {
           descriptor = root;
-          internal_static_com_randioo_doudizhu_server_protocol_RoleRenameRequest_descriptor =
+          internal_static_com_randioo_mahjong_public_server_protocol_RoleRenameRequest_descriptor =
             getDescriptor().getMessageTypes().get(0);
-          internal_static_com_randioo_doudizhu_server_protocol_RoleRenameRequest_fieldAccessorTable = new
+          internal_static_com_randioo_mahjong_public_server_protocol_RoleRenameRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_randioo_doudizhu_server_protocol_RoleRenameRequest_descriptor,
+              internal_static_com_randioo_mahjong_public_server_protocol_RoleRenameRequest_descriptor,
               new java.lang.String[] { "Name", },
               com.randioo.mahjong_public_server.protocol.Role.RoleRenameRequest.class,
               com.randioo.mahjong_public_server.protocol.Role.RoleRenameRequest.Builder.class);
-          internal_static_com_randioo_doudizhu_server_protocol_RoleRenameResponse_descriptor =
+          internal_static_com_randioo_mahjong_public_server_protocol_RoleRenameResponse_descriptor =
             getDescriptor().getMessageTypes().get(1);
-          internal_static_com_randioo_doudizhu_server_protocol_RoleRenameResponse_fieldAccessorTable = new
+          internal_static_com_randioo_mahjong_public_server_protocol_RoleRenameResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_randioo_doudizhu_server_protocol_RoleRenameResponse_descriptor,
+              internal_static_com_randioo_mahjong_public_server_protocol_RoleRenameResponse_descriptor,
               new java.lang.String[] { "ErrorCode", },
               com.randioo.mahjong_public_server.protocol.Role.RoleRenameResponse.class,
               com.randioo.mahjong_public_server.protocol.Role.RoleRenameResponse.Builder.class);
-          internal_static_com_randioo_doudizhu_server_protocol_GetRoleDataRequest_descriptor =
+          internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataRequest_descriptor =
             getDescriptor().getMessageTypes().get(2);
-          internal_static_com_randioo_doudizhu_server_protocol_GetRoleDataRequest_fieldAccessorTable = new
+          internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_randioo_doudizhu_server_protocol_GetRoleDataRequest_descriptor,
+              internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataRequest_descriptor,
               new java.lang.String[] { },
               com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest.class,
               com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest.Builder.class);
-          internal_static_com_randioo_doudizhu_server_protocol_GetRoleDataResponse_descriptor =
+          internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataResponse_descriptor =
             getDescriptor().getMessageTypes().get(3);
-          internal_static_com_randioo_doudizhu_server_protocol_GetRoleDataResponse_fieldAccessorTable = new
+          internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_randioo_doudizhu_server_protocol_GetRoleDataResponse_descriptor,
+              internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataResponse_descriptor,
               new java.lang.String[] { "ErrorCode", "RoleData", },
               com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse.class,
               com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse.Builder.class);
