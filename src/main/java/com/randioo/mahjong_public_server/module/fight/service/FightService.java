@@ -19,7 +19,7 @@ public interface FightService extends ObserveBaseServiceInterface {
 	 * @param role
 	 * @param paiList
 	 */
-	void sendCard(Role role, List<Integer> paiList);
+	void sendCard(Role role, int card);
 
 	/**
 	 * 分牌
@@ -28,5 +28,20 @@ public interface FightService extends ObserveBaseServiceInterface {
 	 * @author wcy 2017年5月31日
 	 */
 	void dispatchCard(int gameId);
+
+	/**
+	 * 游戏开始
+	 * 
+	 * @param gameId
+	 */
+	void gameStart(int gameId);
+
+	/**
+	 * 摸牌
+	 * 
+	 * @param gameRoleId
+	 * @param gameId
+	 */
+	void touchCard(String gameRoleId, int gameId);
 
 }

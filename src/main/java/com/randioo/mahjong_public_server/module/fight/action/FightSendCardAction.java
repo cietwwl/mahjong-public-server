@@ -22,7 +22,6 @@ public class FightSendCardAction implements IActionSupport {
 	public void execute(Object data, IoSession session) {
 		FightSendCardRequest request = (FightSendCardRequest) data;
 		Role role = (Role) RoleCache.getRoleBySession(session);
-		fightService.sendCard(role, request.getPaiList());
+		fightService.sendCard(role, request.getCard());
 	}
-
 }

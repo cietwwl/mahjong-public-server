@@ -13,5 +13,10 @@ public class FightConstant {
 	public static final int SEND_CARD_WAIT_TIME = 30;
 
 	public static final int COUNTDOWN = 9;
+	
+	public static final int CHI = 1;
+	public static final int PENG = 2;
+	public static final int GANE = 3;
+	public static final int HU = 4;
 
 }

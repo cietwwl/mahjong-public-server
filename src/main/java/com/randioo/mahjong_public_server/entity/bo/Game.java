@@ -1,10 +1,12 @@
 package com.randioo.mahjong_public_server.entity.bo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.randioo.mahjong_public_server.entity.po.TargetCard;
 import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
 import com.randioo.mahjong_public_server.protocol.Entity.GameConfig;
 import com.randioo.mahjong_public_server.protocol.Entity.GameState;
@@ -36,6 +38,14 @@ public class Game {
 	private int sendCardCount;
 	// 出牌的时间戳
 	private int sendCardTime;
+	// 庄家的玩家id
+	private String zhuangGameRoleId;
+	// 剩余的牌
+	private List<Integer> remainCards = new ArrayList<>();
+	// 桌上的牌<索引id,出牌的列表>
+	private Map<Integer, List<Integer>> desktopCardMap = new HashMap<>();
+	// 当前的牌
+	private TargetCard targetCard = new TargetCard();
 
 	public int getOnlineRoleCount() {
 		return onlineRoleCount;
@@ -133,4 +143,28 @@ public class Game {
 		this.sendCardTime = sendCardTime;
 	}
 
+	public String getZhuangGameRoleId() {
+		return zhuangGameRoleId;
+	}
+
+	public void setZhuangGameRoleId(String zhuangGameRoleId) {
+		this.zhuangGameRoleId = zhuangGameRoleId;
+	}
+
+	/**
+	 * 获得剩余牌
+	 * 
+	 * @return
+	 */
+	public List<Integer> getRemainCards() {
+		return remainCards;
+	}
+
+	public Map<Integer, List<Integer>> getDesktopCardMap() {
+		return desktopCardMap;
+	}
+
+	public TargetCard getTargetCard() {
+		return targetCard;
+	}
 }

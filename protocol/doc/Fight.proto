@@ -2,14 +2,14 @@ package com.randioo.mahjong_public_server.protocol;
 
 import "Entity.proto";
 
-message FightReadyRequest{
+message FightReadyRequest{//
 }
 
-message FightReadyResponse{
+message FightReadyResponse{//
 	optional int32 errorCode = 1[default = 1];
 }
 
-message SCFightReady{
+message SCFightReady{//
 	optional int32 seated = 1;
 }
 
@@ -52,7 +52,7 @@ message FightRecommandResponse{
 	}
 	repeated RecommandPai recommandPai = 2;
 }
-message SCFightStart{
+message SCFightStart{//
 	repeated int32 pai = 1;
 	optional int32 times = 2;	
 	repeated PaiNum PaiNum = 4; 
@@ -81,76 +81,62 @@ message SCFightGameOver{
 	}
 	repeated GameOverData gameOverData = 1;
 }
-message FightCallLandLordRequest{
-	optional int32 fen = 1;
-}
-message FightCallLandLordResponse{
-	optional int32 errorCode = 1 [default = 1];
-}
-message SCFightCallLandLord{
-	optional int32 seated = 1;
-	optional int32 countdown = 2;
-	optional int32 currentFen = 3;
-	optional int32 fen = 4;
-	
-}
+
 message SCFightPutOut{
 	optional int32 seated = 1;
 	optional int32 countdown = 2;
 	optional bool allowGuo = 3;	
 }
-message SCFightPutOutPai{
-	optional int32 seated = 1;
-	repeated int32 putOutPai = 2;
-	optional int32 times = 3;
-	repeated PaiNum PaiNum = 4;	
+message SCFightSendCard{
+	optional int32 card = 1;
+	optional string gameRoleId = 2;
 }
-message FightSendCardRequest{
-	repeated int32 pai = 1;	
+message FightSendCardRequest{//
+	optional int32 card = 1;	
 }
-message FightSendCardResponse{
+
+message FightSendCardResponse{//
 	optional int32 errorCode = 1 [default = 1];
 }
-message SCFightLandLord{
-	repeated int32 pai = 1;
-	repeated int32 landLordPai = 2;
-	optional int32 seated = 3;
-}
 
-
-message FightExitGameRequest{
+message FightExitGameRequest{//
 	
 }
 
-message FightExitGameResponse{
+message FightExitGameResponse{//
 	optional int32 errorCode = 1 [default = 1];
 }
 
 
-message SCFightExitGame{
+message SCFightExitGame{//
 	optional string gameRoleId = 1;
 }
 
-message SCFightApplyExitGame{
+message SCFightApplyExitGame{//
 	optional string name = 1;
 	optional int32 countDown = 2;
 }
 
-message FightAgreeExitGameRequest{
+message FightAgreeExitGameRequest{//
 	optional bool agree = 1[default = true];
 }
 
-message FightAgreeExitGameResponse{
+message FightAgreeExitGameResponse{//
 	optional int32 errorCode = 1 [default = 1];
 }
-message SCAgreeExitGame{
+message SCAgreeExitGame{//
 	optional string name = 1;
 }
 
-message SCFightGameDismiss{
+message SCFightGameDismiss{//
 	
 }
 
 message SCFightLoadResource{
 	
+}
+
+message SCFightTouchCard{
+	optional string gameRoleId = 1;
+	optional int32 touchCard = 2;
 }

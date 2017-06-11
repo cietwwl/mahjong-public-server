@@ -25,9 +25,8 @@ message CS{
 	optional GetRoleDataRequest GetRoleDataRequest = 12;
 	optional GetSettingsRequest GetSettingsRequest = 13;
 	optional MatchAIRequest MatchAIRequest = 14;
-	optional FightCallLandLordRequest FightCallLandLordRequest = 15;
-	optional FightSendCardRequest FightSendCardRequest = 16;
-	optional FightMingPaiRequest FightMingPaiRequest = 17;
-	optional FightRecommandRequest FightRecommandRequest = 18;
-	optional FightGetlastRoundRequest FightGetlastRoundRequest = 19;
-} // 19
+	optional FightSendCardRequest FightSendCardRequest = 15;
+	optional FightMingPaiRequest FightMingPaiRequest = 16;
+	optional FightRecommandRequest FightRecommandRequest = 17;
+	optional FightGetlastRoundRequest FightGetlastRoundRequest = 18;
+} // 18
