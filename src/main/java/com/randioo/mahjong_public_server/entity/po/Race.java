@@ -40,5 +40,4 @@ public class Race {
 	public void setGameId(int gameId) {
 		this.gameId = gameId;
 	}
-
 }

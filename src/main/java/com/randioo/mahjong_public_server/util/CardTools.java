@@ -1,5 +1,11 @@
 package com.randioo.mahjong_public_server.util;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import com.randioo.mahjong_public_server.entity.po.CardSort;
+
 public class CardTools {
 	public static final int TONG = 1;
 	public static final int TIAO = 2;
@@ -25,24 +31,24 @@ public class CardTools {
 			// 0x61, 0x61, 0x61, 0x61,// 西
 			// 0x71, 0x71, 0x71, 0x71,// 北
 			0x81, 0x81, 0x81, 0x81,// 中
-			// 0x91, 0x91, 0x91, 0x91,// 发
-			// 0xA1, 0xA1, 0xA1, 0xA1,// 白
-			// 0xB1,// 梅
-			// 0xB2,// 兰
-			// 0xB3,// 竹
-			// 0xB4,// 菊
-			// 0xB5,// 春
-			// 0xB6,// 夏
-			// 0xB7,// 秋
-			// 0xB8,// 冬
-			// 0xB9,// 财神
-			// 0xBA,// 猫
-			// 0xBB,// 老鼠
-			// 0xBC,// 聚宝盆
-			// 0xC1,// 白搭
-			// 0xC1,// 白搭
-			// 0xC1,// 白搭
-			// 0xC1,// 白搭
+	// 0x91, 0x91, 0x91, 0x91,// 发
+	// 0xA1, 0xA1, 0xA1, 0xA1,// 白
+	// 0xB1,// 梅
+	// 0xB2,// 兰
+	// 0xB3,// 竹
+	// 0xB4,// 菊
+	// 0xB5,// 春
+	// 0xB6,// 夏
+	// 0xB7,// 秋
+	// 0xB8,// 冬
+	// 0xB9,// 财神
+	// 0xBA,// 猫
+	// 0xBB,// 老鼠
+	// 0xBC,// 聚宝盆
+	// 0xC1,// 白搭
+	// 0xC1,// 白搭
+	// 0xC1,// 白搭
+	// 0xC1,// 白搭
 	};
 
 	/**
@@ -58,6 +64,25 @@ public class CardTools {
 
 	public static int getType(int pai) {
 		return pai & 0xF0 >> 4;
+	}
+
+	public static void main(String[] args) {
+		CardSort cardSort = new CardSort(4);
+		List<Integer> cards = new ArrayList<>();
+
+		cards.add(1);
+		cards.add(1);
+		cards.add(1);
+		cards.add(3);
+		cards.add(4);
+		cards.add(2);
+		cards.add(2);
+		cards.add(2);
+
+		cardSort.fillCardSort(cards);
+		for (Set<Integer> set : cardSort.getList()) {
+			System.out.println(set);
+		}
 	}
 
 }

@@ -39,9 +39,16 @@ message SC{
 	optional FightMingPaiResponse FightMingPaiResponse = 26;
 	optional FightGetlastRoundResponse FightGetlastRoundResponse = 27;
 	optional SCFightTouchCard SCFightTouchCard = 28;//摸一张牌
+	optional SCFightNoticeChooseCardList SCFightNoticeChooseCardList = 29;//通知杠碰胡
+	optional FightPengResponse FightPengResponse = 30;
+	optional SCFightPeng SCFightPeng = 31;
+	optional FightGangResponse FightGangResponse = 32;
+	optional SCFightGang SCFightGang = 33;
+	optional FightHuResponse FightHuResponse = 34;
+	optional SCFightHu SCFightHu = 35;
 
-	optional MoneyExchangeResponse MoneyExchangeResponse = 29;//燃点币游戏币（欢乐豆）互换
+	optional MoneyExchangeResponse MoneyExchangeResponse = 36;//燃点币游戏币（欢乐豆）互换
 	
-	optional SettingsResponse SettingsResponse = 30;//设置
-	optional GetSettingsResponse GetSettingsResponse = 31;//设置
-} // 31
+	optional SettingsResponse SettingsResponse = 37;//设置
+	optional GetSettingsResponse GetSettingsResponse = 38;//设置
+} // 38

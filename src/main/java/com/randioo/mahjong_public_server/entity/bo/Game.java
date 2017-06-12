@@ -6,8 +6,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.randioo.mahjong_public_server.entity.po.TargetCard;
 import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
+import com.randioo.mahjong_public_server.entity.po.TargetCard;
+import com.randioo.mahjong_public_server.entity.po.cardlist.Gang;
+import com.randioo.mahjong_public_server.entity.po.cardlist.Hu;
+import com.randioo.mahjong_public_server.entity.po.cardlist.Kan;
 import com.randioo.mahjong_public_server.protocol.Entity.GameConfig;
 import com.randioo.mahjong_public_server.protocol.Entity.GameState;
 import com.randioo.mahjong_public_server.protocol.Entity.GameType;
@@ -44,8 +47,14 @@ public class Game {
 	private List<Integer> remainCards = new ArrayList<>();
 	// 桌上的牌<索引id,出牌的列表>
 	private Map<Integer, List<Integer>> desktopCardMap = new HashMap<>();
-	// 当前的牌
-	private TargetCard targetCard = new TargetCard();
+	// 每次的杠碰胡
+	private Map<Integer, Map<Gang, Boolean>> tempGangMap = new HashMap<>();
+	// 每次的碰
+	private Map<Integer, Map<Kan, Boolean>> tempKanMap = new HashMap<>();
+	// 每次的胡
+	private Map<Integer, Map<Hu, Boolean>> tempHuMap = new HashMap<>();
+	// 出牌放在桌上的表
+	private Map<Integer, List<Integer>> sendDesktopCardMap = new HashMap<>();
 
 	public int getOnlineRoleCount() {
 		return onlineRoleCount;
@@ -164,7 +173,19 @@ public class Game {
 		return desktopCardMap;
 	}
 
-	public TargetCard getTargetCard() {
-		return targetCard;
+	public Map<Integer, Map<Gang, Boolean>> getTempGangMap() {
+		return tempGangMap;
+	}
+
+	public Map<Integer, Map<Hu, Boolean>> getTempHuMap() {
+		return tempHuMap;
+	}
+
+	public Map<Integer, Map<Kan, Boolean>> getTempKanMap() {
+		return tempKanMap;
+	}
+
+	public Map<Integer, List<Integer>> getSendDesktopCardMap() {
+		return sendDesktopCardMap;
 	}
 }

@@ -140,3 +140,45 @@ message SCFightTouchCard{
 	optional string gameRoleId = 1;
 	optional int32 touchCard = 2;
 }
+
+message SCFightNoticeChooseCardList{
+	repeated PengData pengData = 1;
+	repeated GangData gangData = 2;
+	repeated HuData huData = 3;
+}
+
+message FightPengRequest{
+	
+}
+
+message FightPengResponse{
+	
+}
+
+message SCFightPeng{
+	
+}
+
+message FightGangRequest{
+	
+}
+
+message FightGangResponse{
+	
+}
+
+message SCFightGang{
+	
+}
+
+message FightHuRequest{
+	
+}
+
+message FightHuResponse{
+	
+}
+
+message SCFightHu{
+	
+}

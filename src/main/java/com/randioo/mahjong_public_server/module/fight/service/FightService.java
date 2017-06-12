@@ -1,7 +1,5 @@
 package com.randioo.mahjong_public_server.module.fight.service;
 
-import java.util.List;
-
 import com.google.protobuf.GeneratedMessage;
 import com.randioo.mahjong_public_server.entity.bo.Role;
 import com.randioo.randioo_server_base.service.ObserveBaseServiceInterface;
@@ -43,5 +41,11 @@ public interface FightService extends ObserveBaseServiceInterface {
 	 * @param gameId
 	 */
 	void touchCard(String gameRoleId, int gameId);
+
+	void peng(Role role, int card);
+
+	void gang(Role role, int card);
+
+	void hu(Role role);
 
 }

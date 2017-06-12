@@ -29,4 +29,7 @@ message CS{
 	optional FightMingPaiRequest FightMingPaiRequest = 16;
 	optional FightRecommandRequest FightRecommandRequest = 17;
 	optional FightGetlastRoundRequest FightGetlastRoundRequest = 18;
-} // 18
+	optional FightPengRequest FightPengRequest = 19;
+	optional FightGangRequest FightGangRequest = 20;
+	optional FightHuRequest FightHuRequest = 21;
+} // 21

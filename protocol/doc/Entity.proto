@@ -49,3 +49,15 @@ enum GameState{
 	GAME_START_START = 2;
 	GAME_START_END = 3;
 }
+
+message GangData{
+	repeated int32 gang = 1;
+}
+
+message PengData{
+	repeated int32 peng = 1;
+}
+
+message HuData{
+	repeated int32 hu = 1;
+}

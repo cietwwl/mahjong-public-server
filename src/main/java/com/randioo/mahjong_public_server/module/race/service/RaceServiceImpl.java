@@ -46,18 +46,10 @@ public class RaceServiceImpl extends ObserveBaseService implements RaceService {
 	}
 
 	private GameConfig parseGameConfig(MahjongRaceConfigure configure) {
-		GameConfig.Builder gameConfigBuilder = GameConfig.newBuilder();
-
-		gameConfigBuilder.setCatchScore(configure.catchScore);
-		gameConfigBuilder.setEndCatchCount(configure.endCatchCount);
-		gameConfigBuilder.setGangkai(configure.gangkai);
-		gameConfigBuilder.setGangScore(configure.gangScore);
-		gameConfigBuilder.setMaxCount(configure.maxCount);
-		gameConfigBuilder.setMinStartScore(configure.minStartScore);
-		gameConfigBuilder.setRaceType(configure.raceType);
-		gameConfigBuilder.setZhuahu(configure.zhuahu);
-
-		GameConfig gameConfig = gameConfigBuilder.build();
+		GameConfig gameConfig = GameConfig.newBuilder().setZhuahu(configure.zhuahu).setRaceType(configure.raceType)
+				.setMinStartScore(configure.minStartScore).setMaxCount(configure.maxCount)
+				.setGangScore(configure.gangScore).setGangkai(configure.gangkai).setCatchScore(configure.catchScore)
+				.setEndCatchCount(configure.endCatchCount).build();
 
 		return gameConfig;
 	}
