@@ -46,9 +46,12 @@ message SC{
 	optional SCFightGang SCFightGang = 33;
 	optional FightHuResponse FightHuResponse = 34;
 	optional SCFightHu SCFightHu = 35;
+	optional FightGuoResponse FightGuoResponse = 36;
+	optional SCFightGuo SCFightGuo = 37;
+	optional SCFightNoticeSendCard SCFightNoticeSendCard = 38;
 
-	optional MoneyExchangeResponse MoneyExchangeResponse = 36;//燃点币游戏币（欢乐豆）互换
+	optional MoneyExchangeResponse MoneyExchangeResponse = 39;//燃点币游戏币（欢乐豆）互换
 	
-	optional SettingsResponse SettingsResponse = 37;//设置
-	optional GetSettingsResponse GetSettingsResponse = 38;//设置
-} // 38
+	optional SettingsResponse SettingsResponse = 40;//设置
+	optional GetSettingsResponse GetSettingsResponse = 41;//设置
+} // 41

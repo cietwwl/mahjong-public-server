@@ -2,7 +2,9 @@ package com.randioo.mahjong_public_server.module.fight.service;
 
 import com.google.protobuf.GeneratedMessage;
 import com.randioo.mahjong_public_server.entity.bo.Role;
+import com.randioo.mahjong_public_server.entity.po.CallCardListsAction;
 import com.randioo.randioo_server_base.service.ObserveBaseServiceInterface;
+import com.randioo.randioo_server_base.template.Ref;
 
 public interface FightService extends ObserveBaseServiceInterface {
 	public void readyGame(Role role);
@@ -42,10 +44,14 @@ public interface FightService extends ObserveBaseServiceInterface {
 	 */
 	void touchCard(String gameRoleId, int gameId);
 
-	void peng(Role role, int card);
+	void peng(Role role, int card,int gameSendCount);
 
-	void gang(Role role, int card);
+	void gang(Role role, int card,int gameSendCount);
 
-	void hu(Role role);
+	void hu(Role role,int gameSendCount);
+
+	void guo(Role role,int gameSendCount);
+
+	boolean getPreviousCallCardListAction(int gameId, int seatedIndex, int currentIndex, Ref<CallCardListsAction> ref);
 
 }

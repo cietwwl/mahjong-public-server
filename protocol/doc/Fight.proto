@@ -182,3 +182,19 @@ message FightHuResponse{
 message SCFightHu{
 	
 }
+
+message FightGuoRequest{
+	
+}
+
+message FightGuoResponse{
+	
+}
+
+message SCFightGuo{
+	
+}
+
+message SCFightNoticeSendCard{
+	
+}

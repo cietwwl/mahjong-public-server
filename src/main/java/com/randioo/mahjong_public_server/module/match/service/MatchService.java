@@ -47,4 +47,6 @@ public interface MatchService extends ObserveBaseServiceInterface {
 
 	Game createGameByGameConfig(GameConfig gameConfig);
 
+	void joinGame(Role role, int gameId);
+
 }

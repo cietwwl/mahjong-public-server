@@ -49,11 +49,11 @@
 				<ref bean="loginService" />
 				<ref bean="gmService" />
 				<ref bean="roleService" />
-				<ref bean="moneyExchangeService" />
 				<ref bean="settingService" />
 				<ref bean="matchService" />
 				<ref bean="fightService" />
 				<ref bean="raceService" />
+				<ref bean="closeService" />
 			</list>
 		</property>
 	</bean>

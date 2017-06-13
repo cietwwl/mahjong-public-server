@@ -182,6 +182,13 @@ public final class ClientMessage {
     public boolean hasFightHuRequest() { return hasFightHuRequest; }
     public com.randioo.mahjong_public_server.protocol.Fight.FightHuRequest getFightHuRequest() { return fightHuRequest_; }
     
+    // optional .com.randioo.mahjong_public_server.protocol.FightGuoRequest FightGuoRequest = 22;
+    public static final int FIGHTGUOREQUEST_FIELD_NUMBER = 22;
+    private boolean hasFightGuoRequest;
+    private com.randioo.mahjong_public_server.protocol.Fight.FightGuoRequest fightGuoRequest_;
+    public boolean hasFightGuoRequest() { return hasFightGuoRequest; }
+    public com.randioo.mahjong_public_server.protocol.Fight.FightGuoRequest getFightGuoRequest() { return fightGuoRequest_; }
+    
     private void initFields() {
       loginCheckAccountRequest_ = com.randioo.mahjong_public_server.protocol.Login.LoginCheckAccountRequest.getDefaultInstance();
       loginCreateRoleRequest_ = com.randioo.mahjong_public_server.protocol.Login.LoginCreateRoleRequest.getDefaultInstance();
@@ -204,6 +211,7 @@ public final class ClientMessage {
       fightPengRequest_ = com.randioo.mahjong_public_server.protocol.Fight.FightPengRequest.getDefaultInstance();
       fightGangRequest_ = com.randioo.mahjong_public_server.protocol.Fight.FightGangRequest.getDefaultInstance();
       fightHuRequest_ = com.randioo.mahjong_public_server.protocol.Fight.FightHuRequest.getDefaultInstance();
+      fightGuoRequest_ = com.randioo.mahjong_public_server.protocol.Fight.FightGuoRequest.getDefaultInstance();
     }
     public final boolean isInitialized() {
       return true;
@@ -274,6 +282,9 @@ public final class ClientMessage {
       }
       if (hasFightHuRequest()) {
         output.writeMessage(21, getFightHuRequest());
+      }
+      if (hasFightGuoRequest()) {
+        output.writeMessage(22, getFightGuoRequest());
       }
       getUnknownFields().writeTo(output);
     }
@@ -367,6 +378,10 @@ public final class ClientMessage {
       if (hasFightHuRequest()) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(21, getFightHuRequest());
+      }
+      if (hasFightGuoRequest()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(22, getFightGuoRequest());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -589,6 +604,9 @@ public final class ClientMessage {
         if (other.hasFightHuRequest()) {
           mergeFightHuRequest(other.getFightHuRequest());
         }
+        if (other.hasFightGuoRequest()) {
+          mergeFightGuoRequest(other.getFightGuoRequest());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -801,6 +819,15 @@ public final class ClientMessage {
               }
               input.readMessage(subBuilder, extensionRegistry);
               setFightHuRequest(subBuilder.buildPartial());
+              break;
+            }
+            case 178: {
+              com.randioo.mahjong_public_server.protocol.Fight.FightGuoRequest.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Fight.FightGuoRequest.newBuilder();
+              if (hasFightGuoRequest()) {
+                subBuilder.mergeFrom(getFightGuoRequest());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setFightGuoRequest(subBuilder.buildPartial());
               break;
             }
           }
@@ -1585,6 +1612,43 @@ public final class ClientMessage {
         return this;
       }
       
+      // optional .com.randioo.mahjong_public_server.protocol.FightGuoRequest FightGuoRequest = 22;
+      public boolean hasFightGuoRequest() {
+        return result.hasFightGuoRequest();
+      }
+      public com.randioo.mahjong_public_server.protocol.Fight.FightGuoRequest getFightGuoRequest() {
+        return result.getFightGuoRequest();
+      }
+      public Builder setFightGuoRequest(com.randioo.mahjong_public_server.protocol.Fight.FightGuoRequest value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.hasFightGuoRequest = true;
+        result.fightGuoRequest_ = value;
+        return this;
+      }
+      public Builder setFightGuoRequest(com.randioo.mahjong_public_server.protocol.Fight.FightGuoRequest.Builder builderForValue) {
+        result.hasFightGuoRequest = true;
+        result.fightGuoRequest_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergeFightGuoRequest(com.randioo.mahjong_public_server.protocol.Fight.FightGuoRequest value) {
+        if (result.hasFightGuoRequest() &&
+            result.fightGuoRequest_ != com.randioo.mahjong_public_server.protocol.Fight.FightGuoRequest.getDefaultInstance()) {
+          result.fightGuoRequest_ =
+            com.randioo.mahjong_public_server.protocol.Fight.FightGuoRequest.newBuilder(result.fightGuoRequest_).mergeFrom(value).buildPartial();
+        } else {
+          result.fightGuoRequest_ = value;
+        }
+        result.hasFightGuoRequest = true;
+        return this;
+      }
+      public Builder clearFightGuoRequest() {
+        result.hasFightGuoRequest = false;
+        result.fightGuoRequest_ = com.randioo.mahjong_public_server.protocol.Fight.FightGuoRequest.getDefaultInstance();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.CS)
     }
     
@@ -1614,7 +1678,7 @@ public final class ClientMessage {
       "\n\023ClientMessage.proto\022*com.randioo.mahjo" +
       "ng_public_server.protocol\032\013Login.proto\032\n" +
       "Role.proto\032\013Match.proto\032\013Fight.proto\032\023Mo" +
-      "neyExchange.proto\032\016Settings.proto\"\306\017\n\002CS" +
+      "neyExchange.proto\032\016Settings.proto\"\234\020\n\002CS" +
       "\022f\n\030LoginCheckAccountRequest\030\001 \001(\0132D.com" +
       ".randioo.mahjong_public_server.protocol." +
       "LoginCheckAccountRequest\022b\n\026LoginCreateR" +
@@ -1664,7 +1728,9 @@ public final class ClientMessage {
       "2<.com.randioo.mahjong_public_server.pro" +
       "tocol.FightGangRequest\022R\n\016FightHuRequest" +
       "\030\025 \001(\0132:.com.randioo.mahjong_public_serv" +
-      "er.protocol.FightHuRequest"
+      "er.protocol.FightHuRequest\022T\n\017FightGuoRe" +
+      "quest\030\026 \001(\0132;.com.randioo.mahjong_public" +
+      "_server.protocol.FightGuoRequest"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1676,7 +1742,7 @@ public final class ClientMessage {
           internal_static_com_randioo_mahjong_public_server_protocol_CS_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_randioo_mahjong_public_server_protocol_CS_descriptor,
-              new java.lang.String[] { "LoginCheckAccountRequest", "LoginCreateRoleRequest", "LoginGetRoleDataRequest", "RoleRenameRequest", "MatchCreateGameRequest", "MatchJoinGameRequest", "FightReadyRequest", "FightExitGameRequest", "FightAgreeExitGameRequest", "MoneyExchangeRequest", "SettingsRequest", "GetRoleDataRequest", "GetSettingsRequest", "MatchAIRequest", "FightSendCardRequest", "FightMingPaiRequest", "FightRecommandRequest", "FightGetlastRoundRequest", "FightPengRequest", "FightGangRequest", "FightHuRequest", },
+              new java.lang.String[] { "LoginCheckAccountRequest", "LoginCreateRoleRequest", "LoginGetRoleDataRequest", "RoleRenameRequest", "MatchCreateGameRequest", "MatchJoinGameRequest", "FightReadyRequest", "FightExitGameRequest", "FightAgreeExitGameRequest", "MoneyExchangeRequest", "SettingsRequest", "GetRoleDataRequest", "GetSettingsRequest", "MatchAIRequest", "FightSendCardRequest", "FightMingPaiRequest", "FightRecommandRequest", "FightGetlastRoundRequest", "FightPengRequest", "FightGangRequest", "FightHuRequest", "FightGuoRequest", },
               com.randioo.mahjong_public_server.protocol.ClientMessage.CS.class,
               com.randioo.mahjong_public_server.protocol.ClientMessage.CS.Builder.class);
           return null;

@@ -100,6 +100,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 
 	@Override
 	public GeneratedMessage createRoom(Role role, GameConfig gameConfig) {
+		logger.debug("createRoom -->start");
 		if (!checkConfig(gameConfig)) {
 			return SC
 					.newBuilder()
@@ -112,6 +113,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 		RoleGameInfo roleGameInfo = game.getRoleIdMap().get(this.getGameRoleId(game.getGameId(), role.getRoleId()));
 
 		GameRoleData myGameRoleData = this.parseGameRoleData(roleGameInfo, game.getGameId());
+		logger.debug("createRoom-->end");
 		return SC
 				.newBuilder()
 				.setMatchCreateGameResponse(
@@ -162,6 +164,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 	 */
 	private void addAccountRole(Game game, int roleId) {
 		String gameRoleId = getGameRoleId(game.getGameId(), roleId);
+		logger.debug(gameRoleId);
 
 		addRole(game, roleId, gameRoleId);
 	}
@@ -184,6 +187,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 	private void addRole(Game game, int roleId, String gameRoleId) {
 		RoleGameInfo roleGameInfo = this.createRoleGameInfo(roleId, gameRoleId);
 		// roleGameInfo.seatIndex = game.getRoleIdMap().size();
+		logger.debug("addRole" + game.getGameId() + " roleId =" + roleId);
 		if (roleId != 0) {
 			Role role = (Role) RoleCache.getRoleById(roleId);
 			role.setGameId(game.getGameId());
@@ -260,7 +264,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 					.build();
 		}
 
-		this.addAccountRole(game, role.getRoleId());
+		this.joinGame(role, gameId);
 
 		RoleGameInfo roleGameInfo = game.getRoleIdMap().get(this.getGameRoleId(game.getGameId(), role.getRoleId()));
 
@@ -284,6 +288,14 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 				.setMatchJoinGameResponse(
 						MatchJoinGameResponse.newBuilder().addAllGameRoleData(gameRoleDataList)
 								.setSeated(myGameRoleData.getSeated()).setId(lockString)).build();
+	}
+
+	@Override
+	public void joinGame(Role role, int gameId) {
+		logger.debug("joinGame" + role.getAccount());
+		Game game = GameCache.getGameMap().get(gameId);
+		logger.debug("game-->" + game);
+		this.addAccountRole(game, role.getRoleId());
 	}
 
 	@Override

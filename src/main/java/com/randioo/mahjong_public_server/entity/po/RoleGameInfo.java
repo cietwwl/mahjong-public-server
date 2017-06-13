@@ -6,7 +6,7 @@ import java.util.List;
 import com.randioo.mahjong_public_server.entity.po.cardlist.CardList;
 
 public class RoleGameInfo {
-	/**游戏中的玩家id*/
+	/** 游戏中的玩家id */
 	public String gameRoleId;
 	/** 全局玩家id */
 	public int roleId;
@@ -21,4 +21,10 @@ public class RoleGameInfo {
 	public int newCard;
 	/** 已经碰过或杠过的牌 */
 	public List<CardList> showCardLists = new ArrayList<>();
+
+	@Override
+	public String toString() {
+		return "[gameRoleId=" + gameRoleId + "|roleId=" + roleId + "|ready=" + ready + "|cards=" + cards
+				+ "|newCard=" + newCard + " ]";
+	}
 }

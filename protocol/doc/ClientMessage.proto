@@ -32,4 +32,5 @@ message CS{
 	optional FightPengRequest FightPengRequest = 19;
 	optional FightGangRequest FightGangRequest = 20;
 	optional FightHuRequest FightHuRequest = 21;
-} // 21
+	optional FightGuoRequest FightGuoRequest = 22;
+} // 22

@@ -4,7 +4,9 @@ import java.net.InetSocketAddress;
 
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 
+import com.randioo.mahjong_public_server.entity.bo.Game;
 import com.randioo.mahjong_public_server.handler.BackgroundServerHandler;
+import com.randioo.mahjong_public_server.test.Test;
 import com.randioo.randioo_server_base.config.GlobleConfig;
 import com.randioo.randioo_server_base.config.GlobleConfig.GlobleEnum;
 import com.randioo.randioo_server_base.init.GameServerInit;
@@ -34,6 +36,8 @@ public class mahjong_public_serverApp {
 				GlobleConfig.Int(GlobleEnum.PORT) + 10000));
 
 		GlobleConfig.set(GlobleEnum.LOGIN, true);
+
+		((Test)SpringContext.getBean("test")).fuck();
 
 	}
 
