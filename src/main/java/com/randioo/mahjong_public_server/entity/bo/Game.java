@@ -6,9 +6,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.randioo.mahjong_public_server.entity.po.CallCardList;
 import com.randioo.mahjong_public_server.entity.po.CallCardListsAction;
 import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
-import com.randioo.mahjong_public_server.entity.po.cardlist.CardList;
 import com.randioo.mahjong_public_server.protocol.Entity.GameConfig;
 import com.randioo.mahjong_public_server.protocol.Entity.GameState;
 import com.randioo.mahjong_public_server.protocol.Entity.GameType;
@@ -46,7 +46,7 @@ public class Game {
 	// 桌上的牌<索引id,出牌的列表>
 	private Map<Integer, List<Integer>> desktopCardMap = new HashMap<>();
 	// 每个人每次叫牌的临时存储
-	private Map<Integer, CallCardListsAction> tempCardListMap = new HashMap<>();
+	private Map<Integer,CallCardListsAction> callCardListsActionMap = new HashMap<>();
 	// 出牌放在桌上的表
 	private Map<Integer, List<Integer>> sendDesktopCardMap = new HashMap<>();
 
@@ -171,7 +171,7 @@ public class Game {
 		return sendDesktopCardMap;
 	}
 
-	public Map<Integer, CallCardListsAction> getTempCardListMap() {
-		return tempCardListMap;
+	public Map<Integer,CallCardListsAction> getCallCardLists() {
+		return callCardListsActionMap;
 	}
 }
