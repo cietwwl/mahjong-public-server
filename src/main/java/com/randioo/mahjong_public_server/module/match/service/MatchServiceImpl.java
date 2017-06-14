@@ -21,6 +21,7 @@ import com.randioo.mahjong_public_server.protocol.Entity.GameRoleData;
 import com.randioo.mahjong_public_server.protocol.Entity.GameState;
 import com.randioo.mahjong_public_server.protocol.Entity.GameType;
 import com.randioo.mahjong_public_server.protocol.Error.ErrorCode;
+import com.randioo.mahjong_public_server.protocol.Match.MatchAIResponse;
 import com.randioo.mahjong_public_server.protocol.Match.MatchCreateGameResponse;
 import com.randioo.mahjong_public_server.protocol.Match.MatchJoinGameResponse;
 import com.randioo.mahjong_public_server.protocol.Match.SCMatchJoinGame;
@@ -227,7 +228,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 	@Override
 	public GeneratedMessage joinGame(Role role, String lockString) {
 		Integer gameId = GameCache.getGameLockStringMap().get(lockString);
-		System.out.println("gameid:" + gameId);
+		logger.debug("gameid:" + gameId);
 		if (gameId == null) {
 			return SC
 					.newBuilder()
@@ -237,7 +238,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 		}
 
 		Game game = GameCache.getGameMap().get(gameId);
-		System.out.println("game:" + game);
+		logger.debug("game:" + game);
 		if (game == null) {
 			return SC
 					.newBuilder()
@@ -312,23 +313,21 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 	@Override
 	public void matchAI(Role role) {
 		int roleId = role.getRoleId();
-		GameConfig config = GameConfig.newBuilder().build();
+		GameConfig config = GameConfig.newBuilder().setMaxCount(4).build();
 		Game game = createGame(roleId, config);
 		RoleGameInfo tRoleGameInfo = game.getRoleIdMap().get(this.getGameRoleId(game.getGameId(), role.getRoleId()));
 
 		GameRoleData myGameRoleData = this.parseGameRoleData(tRoleGameInfo, game.getGameId());
-		SessionUtils.sc(
-				role.getRoleId(),
-				SC.newBuilder()
-						.setMatchCreateGameResponse(
-								MatchCreateGameResponse.newBuilder().setId(game.getLockString())
-										.setGameRoleData(myGameRoleData)).build());
+		SessionUtils.sc(role.getRoleId(),
+				SC.newBuilder().setMatchAIResponse(MatchAIResponse.newBuilder().setGameRoleData(myGameRoleData))
+						.build());
+
 		int maxCount = game.getGameConfig().getMaxCount();
 		for (int i = game.getRoleIdMap().size(); i < maxCount; i++) {
 			String gameRoleId = addAIRole(game);
 
 			RoleGameInfo info = game.getRoleIdMap().get(gameRoleId);
-			System.out.println(info);
+			logger.debug(info.toString());
 			int index = game.getRoleIdList().indexOf(gameRoleId);
 			GameRoleData AIGameRoleData = GameRoleData.newBuilder().setGameRoleId(info.gameRoleId).setReady(info.ready)
 					.setSeated(index).setName("ROBOT" + info.gameRoleId).build();
@@ -360,7 +359,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 	 */
 	@Override
 	public String getGameRoleId(int gameId, int roleId) {
-		return gameId + "_" + roleId;
+		return gameId + "_" + roleId + "_0";
 	}
 
 	/**

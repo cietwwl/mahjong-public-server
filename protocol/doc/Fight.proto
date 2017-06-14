@@ -85,7 +85,6 @@ message SCFightGameOver{
 message SCFightPutOut{
 	optional int32 seated = 1;
 	optional int32 countdown = 2;
-	optional bool allowGuo = 3;	
 }
 message SCFightSendCard{
 	optional int32 card = 1;

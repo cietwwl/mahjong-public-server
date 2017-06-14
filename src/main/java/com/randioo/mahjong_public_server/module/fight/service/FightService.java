@@ -44,14 +44,14 @@ public interface FightService extends ObserveBaseServiceInterface {
 	 */
 	void touchCard(String gameRoleId, int gameId);
 
-	void peng(Role role, int card,int gameSendCount);
+	void peng(Role role, int gameSendCount);
 
-	void gang(Role role, int card,int gameSendCount);
+	void gang(Role role, int card, int gameSendCount);
 
-	void hu(Role role,int gameSendCount);
+	void hu(Role role, int gameSendCount);
 
-	void guo(Role role,int gameSendCount);
+	void guo(Role role, int gameSendCount);
 
-	boolean getPreviousCallCardListAction(int gameId, int seatedIndex, int currentIndex, Ref<CallCardListsAction> ref);
+	void getPreviousCallCardListAction(int gameId, int seatedIndex, int currentIndex);
 
 }

@@ -14,7 +14,7 @@ import com.randioo.mahjong_public_server.module.login.LoginConstant;
 import com.randioo.mahjong_public_server.module.login.service.LoginService;
 import com.randioo.mahjong_public_server.protocol.Entity.RoleData;
 import com.randioo.mahjong_public_server.protocol.Error.ErrorCode;
-import com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse;
+import com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse;
 import com.randioo.mahjong_public_server.protocol.Role.RoleRenameResponse;
 import com.randioo.mahjong_public_server.protocol.ServerMessage.SC;
 import com.randioo.mahjong_public_server.util.HttpConnection;
@@ -184,6 +184,6 @@ public class RoleServiceImpl extends ObserveBaseService implements RoleService {
 		RoleData roleData = loginService.getRoleData(role);
 		
 
-		return SC.newBuilder().setGetRoleDataResponse(GetRoleDataResponse.newBuilder().setRoleData(roleData)).build();
+		return SC.newBuilder().setRoleGetRoleDataResponse(RoleGetRoleDataResponse.newBuilder().setRoleData(roleData)).build();
 	}
 }

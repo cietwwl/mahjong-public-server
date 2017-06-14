@@ -615,31 +615,31 @@ public final class Settings {
     // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.SettingsResponse)
   }
   
-  public static final class GetSettingsRequest extends
+  public static final class SettingsShowRequest extends
       com.google.protobuf.GeneratedMessage {
-    // Use GetSettingsRequest.newBuilder() to construct.
-    private GetSettingsRequest() {
+    // Use SettingsShowRequest.newBuilder() to construct.
+    private SettingsShowRequest() {
       initFields();
     }
-    private GetSettingsRequest(boolean noInit) {}
+    private SettingsShowRequest(boolean noInit) {}
     
-    private static final GetSettingsRequest defaultInstance;
-    public static GetSettingsRequest getDefaultInstance() {
+    private static final SettingsShowRequest defaultInstance;
+    public static SettingsShowRequest getDefaultInstance() {
       return defaultInstance;
     }
     
-    public GetSettingsRequest getDefaultInstanceForType() {
+    public SettingsShowRequest getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.randioo.mahjong_public_server.protocol.Settings.internal_static_com_randioo_mahjong_public_server_protocol_GetSettingsRequest_descriptor;
+      return com.randioo.mahjong_public_server.protocol.Settings.internal_static_com_randioo_mahjong_public_server_protocol_SettingsShowRequest_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.randioo.mahjong_public_server.protocol.Settings.internal_static_com_randioo_mahjong_public_server_protocol_GetSettingsRequest_fieldAccessorTable;
+      return com.randioo.mahjong_public_server.protocol.Settings.internal_static_com_randioo_mahjong_public_server_protocol_SettingsShowRequest_fieldAccessorTable;
     }
     
     private void initFields() {
@@ -665,41 +665,41 @@ public final class Settings {
       return size;
     }
     
-    public static com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest parseFrom(byte[] data)
+    public static com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest parseFrom(java.io.InputStream input)
+    public static com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest parseDelimitedFrom(java.io.InputStream input)
+    public static com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -708,7 +708,7 @@ public final class Settings {
         return null;
       }
     }
-    public static com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest parseDelimitedFrom(
+    public static com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -719,12 +719,12 @@ public final class Settings {
         return null;
       }
     }
-    public static com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -734,25 +734,25 @@ public final class Settings {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest prototype) {
+    public static Builder newBuilder(com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
-      private com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest result;
+      private com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest result;
       
-      // Construct using com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest.newBuilder()
+      // Construct using com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest.newBuilder()
       private Builder() {}
       
       private static Builder create() {
         Builder builder = new Builder();
-        builder.result = new com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest();
+        builder.result = new com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest();
         return builder;
       }
       
-      protected com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest internalGetResult() {
+      protected com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest internalGetResult() {
         return result;
       }
       
@@ -761,7 +761,7 @@ public final class Settings {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
         }
-        result = new com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest();
+        result = new com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest();
         return this;
       }
       
@@ -771,24 +771,24 @@ public final class Settings {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest.getDescriptor();
+        return com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest.getDescriptor();
       }
       
-      public com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest getDefaultInstanceForType() {
-        return com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest.getDefaultInstance();
+      public com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest getDefaultInstanceForType() {
+        return com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest.getDefaultInstance();
       }
       
       public boolean isInitialized() {
         return result.isInitialized();
       }
-      public com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest build() {
+      public com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return buildPartial();
       }
       
-      private com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest buildParsed()
+      private com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
         if (!isInitialized()) {
           throw newUninitializedMessageException(
@@ -797,27 +797,27 @@ public final class Settings {
         return buildPartial();
       }
       
-      public com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest buildPartial() {
+      public com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
         }
-        com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest returnMe = result;
+        com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest returnMe = result;
         result = null;
         return returnMe;
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest) {
-          return mergeFrom((com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest)other);
+        if (other instanceof com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest) {
+          return mergeFrom((com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest other) {
-        if (other == com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest other) {
+        if (other == com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest.getDefaultInstance()) return this;
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -848,43 +848,43 @@ public final class Settings {
       }
       
       
-      // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.GetSettingsRequest)
+      // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.SettingsShowRequest)
     }
     
     static {
-      defaultInstance = new GetSettingsRequest(true);
+      defaultInstance = new SettingsShowRequest(true);
       com.randioo.mahjong_public_server.protocol.Settings.internalForceInit();
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.GetSettingsRequest)
+    // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.SettingsShowRequest)
   }
   
-  public static final class GetSettingsResponse extends
+  public static final class SettingsShowResponse extends
       com.google.protobuf.GeneratedMessage {
-    // Use GetSettingsResponse.newBuilder() to construct.
-    private GetSettingsResponse() {
+    // Use SettingsShowResponse.newBuilder() to construct.
+    private SettingsShowResponse() {
       initFields();
     }
-    private GetSettingsResponse(boolean noInit) {}
+    private SettingsShowResponse(boolean noInit) {}
     
-    private static final GetSettingsResponse defaultInstance;
-    public static GetSettingsResponse getDefaultInstance() {
+    private static final SettingsShowResponse defaultInstance;
+    public static SettingsShowResponse getDefaultInstance() {
       return defaultInstance;
     }
     
-    public GetSettingsResponse getDefaultInstanceForType() {
+    public SettingsShowResponse getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.randioo.mahjong_public_server.protocol.Settings.internal_static_com_randioo_mahjong_public_server_protocol_GetSettingsResponse_descriptor;
+      return com.randioo.mahjong_public_server.protocol.Settings.internal_static_com_randioo_mahjong_public_server_protocol_SettingsShowResponse_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.randioo.mahjong_public_server.protocol.Settings.internal_static_com_randioo_mahjong_public_server_protocol_GetSettingsResponse_fieldAccessorTable;
+      return com.randioo.mahjong_public_server.protocol.Settings.internal_static_com_randioo_mahjong_public_server_protocol_SettingsShowResponse_fieldAccessorTable;
     }
     
     // optional int32 errorCode = 1 [default = 1];
@@ -952,41 +952,41 @@ public final class Settings {
       return size;
     }
     
-    public static com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse parseFrom(byte[] data)
+    public static com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse parseFrom(java.io.InputStream input)
+    public static com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse parseDelimitedFrom(java.io.InputStream input)
+    public static com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -995,7 +995,7 @@ public final class Settings {
         return null;
       }
     }
-    public static com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse parseDelimitedFrom(
+    public static com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1006,12 +1006,12 @@ public final class Settings {
         return null;
       }
     }
-    public static com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1021,25 +1021,25 @@ public final class Settings {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse prototype) {
+    public static Builder newBuilder(com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
-      private com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse result;
+      private com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse result;
       
-      // Construct using com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse.newBuilder()
+      // Construct using com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse.newBuilder()
       private Builder() {}
       
       private static Builder create() {
         Builder builder = new Builder();
-        builder.result = new com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse();
+        builder.result = new com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse();
         return builder;
       }
       
-      protected com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse internalGetResult() {
+      protected com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse internalGetResult() {
         return result;
       }
       
@@ -1048,7 +1048,7 @@ public final class Settings {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
         }
-        result = new com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse();
+        result = new com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse();
         return this;
       }
       
@@ -1058,24 +1058,24 @@ public final class Settings {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse.getDescriptor();
+        return com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse.getDescriptor();
       }
       
-      public com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse getDefaultInstanceForType() {
-        return com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse.getDefaultInstance();
+      public com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse getDefaultInstanceForType() {
+        return com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse.getDefaultInstance();
       }
       
       public boolean isInitialized() {
         return result.isInitialized();
       }
-      public com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse build() {
+      public com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return buildPartial();
       }
       
-      private com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse buildParsed()
+      private com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
         if (!isInitialized()) {
           throw newUninitializedMessageException(
@@ -1084,27 +1084,27 @@ public final class Settings {
         return buildPartial();
       }
       
-      public com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse buildPartial() {
+      public com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
         }
-        com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse returnMe = result;
+        com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse returnMe = result;
         result = null;
         return returnMe;
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse) {
-          return mergeFrom((com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse)other);
+        if (other instanceof com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse) {
+          return mergeFrom((com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse other) {
-        if (other == com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse other) {
+        if (other == com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse.getDefaultInstance()) return this;
         if (other.hasErrorCode()) {
           setErrorCode(other.getErrorCode());
         }
@@ -1210,16 +1210,16 @@ public final class Settings {
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.GetSettingsResponse)
+      // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.SettingsShowResponse)
     }
     
     static {
-      defaultInstance = new GetSettingsResponse(true);
+      defaultInstance = new SettingsShowResponse(true);
       com.randioo.mahjong_public_server.protocol.Settings.internalForceInit();
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.GetSettingsResponse)
+    // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.SettingsShowResponse)
   }
   
   private static com.google.protobuf.Descriptors.Descriptor
@@ -1233,15 +1233,15 @@ public final class Settings {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_randioo_mahjong_public_server_protocol_SettingsResponse_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_randioo_mahjong_public_server_protocol_GetSettingsRequest_descriptor;
+    internal_static_com_randioo_mahjong_public_server_protocol_SettingsShowRequest_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_randioo_mahjong_public_server_protocol_GetSettingsRequest_fieldAccessorTable;
+      internal_static_com_randioo_mahjong_public_server_protocol_SettingsShowRequest_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_randioo_mahjong_public_server_protocol_GetSettingsResponse_descriptor;
+    internal_static_com_randioo_mahjong_public_server_protocol_SettingsShowResponse_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_randioo_mahjong_public_server_protocol_GetSettingsResponse_fieldAccessorTable;
+      internal_static_com_randioo_mahjong_public_server_protocol_SettingsShowResponse_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1255,9 +1255,9 @@ public final class Settings {
       "blic_server.protocol\">\n\017SettingsRequest\022" +
       "\022\n\006volume\030\001 \001(\005:\00250\022\027\n\013musicVolume\030\002 \001(\005" +
       ":\00250\"(\n\020SettingsResponse\022\024\n\terrorCode\030\001 " +
-      "\001(\005:\0011\"\024\n\022GetSettingsRequest\"X\n\023GetSetti" +
-      "ngsResponse\022\024\n\terrorCode\030\001 \001(\005:\0011\022\022\n\006vol" +
-      "ume\030\002 \001(\005:\00250\022\027\n\013musicVolume\030\003 \001(\005:\00250"
+      "\001(\005:\0011\"\025\n\023SettingsShowRequest\"Y\n\024Setting" +
+      "sShowResponse\022\024\n\terrorCode\030\001 \001(\005:\0011\022\022\n\006v" +
+      "olume\030\002 \001(\005:\00250\022\027\n\013musicVolume\030\003 \001(\005:\00250"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1280,22 +1280,22 @@ public final class Settings {
               new java.lang.String[] { "ErrorCode", },
               com.randioo.mahjong_public_server.protocol.Settings.SettingsResponse.class,
               com.randioo.mahjong_public_server.protocol.Settings.SettingsResponse.Builder.class);
-          internal_static_com_randioo_mahjong_public_server_protocol_GetSettingsRequest_descriptor =
+          internal_static_com_randioo_mahjong_public_server_protocol_SettingsShowRequest_descriptor =
             getDescriptor().getMessageTypes().get(2);
-          internal_static_com_randioo_mahjong_public_server_protocol_GetSettingsRequest_fieldAccessorTable = new
+          internal_static_com_randioo_mahjong_public_server_protocol_SettingsShowRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_randioo_mahjong_public_server_protocol_GetSettingsRequest_descriptor,
+              internal_static_com_randioo_mahjong_public_server_protocol_SettingsShowRequest_descriptor,
               new java.lang.String[] { },
-              com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest.class,
-              com.randioo.mahjong_public_server.protocol.Settings.GetSettingsRequest.Builder.class);
-          internal_static_com_randioo_mahjong_public_server_protocol_GetSettingsResponse_descriptor =
+              com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest.class,
+              com.randioo.mahjong_public_server.protocol.Settings.SettingsShowRequest.Builder.class);
+          internal_static_com_randioo_mahjong_public_server_protocol_SettingsShowResponse_descriptor =
             getDescriptor().getMessageTypes().get(3);
-          internal_static_com_randioo_mahjong_public_server_protocol_GetSettingsResponse_fieldAccessorTable = new
+          internal_static_com_randioo_mahjong_public_server_protocol_SettingsShowResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_randioo_mahjong_public_server_protocol_GetSettingsResponse_descriptor,
+              internal_static_com_randioo_mahjong_public_server_protocol_SettingsShowResponse_descriptor,
               new java.lang.String[] { "ErrorCode", "Volume", "MusicVolume", },
-              com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse.class,
-              com.randioo.mahjong_public_server.protocol.Settings.GetSettingsResponse.Builder.class);
+              com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse.class,
+              com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse.Builder.class);
           return null;
         }
       };

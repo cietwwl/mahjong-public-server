@@ -6587,13 +6587,6 @@ public final class Fight {
     public boolean hasCountdown() { return hasCountdown; }
     public int getCountdown() { return countdown_; }
     
-    // optional bool allowGuo = 3;
-    public static final int ALLOWGUO_FIELD_NUMBER = 3;
-    private boolean hasAllowGuo;
-    private boolean allowGuo_ = false;
-    public boolean hasAllowGuo() { return hasAllowGuo; }
-    public boolean getAllowGuo() { return allowGuo_; }
-    
     private void initFields() {
     }
     public final boolean isInitialized() {
@@ -6608,9 +6601,6 @@ public final class Fight {
       }
       if (hasCountdown()) {
         output.writeInt32(2, getCountdown());
-      }
-      if (hasAllowGuo()) {
-        output.writeBool(3, getAllowGuo());
       }
       getUnknownFields().writeTo(output);
     }
@@ -6628,10 +6618,6 @@ public final class Fight {
       if (hasCountdown()) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, getCountdown());
-      }
-      if (hasAllowGuo()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(3, getAllowGuo());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6797,9 +6783,6 @@ public final class Fight {
         if (other.hasCountdown()) {
           setCountdown(other.getCountdown());
         }
-        if (other.hasAllowGuo()) {
-          setAllowGuo(other.getAllowGuo());
-        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -6831,10 +6814,6 @@ public final class Fight {
             }
             case 16: {
               setCountdown(input.readInt32());
-              break;
-            }
-            case 24: {
-              setAllowGuo(input.readBool());
               break;
             }
           }
@@ -6875,24 +6854,6 @@ public final class Fight {
       public Builder clearCountdown() {
         result.hasCountdown = false;
         result.countdown_ = 0;
-        return this;
-      }
-      
-      // optional bool allowGuo = 3;
-      public boolean hasAllowGuo() {
-        return result.hasAllowGuo();
-      }
-      public boolean getAllowGuo() {
-        return result.getAllowGuo();
-      }
-      public Builder setAllowGuo(boolean value) {
-        result.hasAllowGuo = true;
-        result.allowGuo_ = value;
-        return this;
-      }
-      public Builder clearAllowGuo() {
-        result.hasAllowGuo = false;
-        result.allowGuo_ = false;
         return this;
       }
       
@@ -14583,35 +14544,34 @@ public final class Fight {
       "ahjong_public_server.protocol.SCFightGam" +
       "eOver.GameOverData\032S\n\014GameOverData\022\014\n\004na" +
       "me\030\001 \001(\t\022\023\n\013landLordNum\030\002 \001(\005\022\021\n\tfarmerN" +
-      "um\030\003 \001(\005\022\r\n\005score\030\004 \001(\005\"D\n\rSCFightPutOut" +
-      "\022\016\n\006seated\030\001 \001(\005\022\021\n\tcountdown\030\002 \001(\005\022\020\n\010a" +
-      "llowGuo\030\003 \001(\010\"3\n\017SCFightSendCard\022\014\n\004card" +
-      "\030\001 \001(\005\022\022\n\ngameRoleId\030\002 \001(\t\"$\n\024FightSendC",
-      "ardRequest\022\014\n\004card\030\001 \001(\005\"-\n\025FightSendCar" +
-      "dResponse\022\024\n\terrorCode\030\001 \001(\005:\0011\"\026\n\024Fight" +
-      "ExitGameRequest\"-\n\025FightExitGameResponse" +
-      "\022\024\n\terrorCode\030\001 \001(\005:\0011\"%\n\017SCFightExitGam" +
-      "e\022\022\n\ngameRoleId\030\001 \001(\t\"7\n\024SCFightApplyExi" +
-      "tGame\022\014\n\004name\030\001 \001(\t\022\021\n\tcountDown\030\002 \001(\005\"0" +
-      "\n\031FightAgreeExitGameRequest\022\023\n\005agree\030\001 \001" +
-      "(\010:\004true\"2\n\032FightAgreeExitGameResponse\022\024" +
-      "\n\terrorCode\030\001 \001(\005:\0011\"\037\n\017SCAgreeExitGame\022" +
-      "\014\n\004name\030\001 \001(\t\"\024\n\022SCFightGameDismiss\"\025\n\023S",
-      "CFightLoadResource\"9\n\020SCFightTouchCard\022\022" +
-      "\n\ngameRoleId\030\001 \001(\t\022\021\n\ttouchCard\030\002 \001(\005\"\361\001" +
-      "\n\033SCFightNoticeChooseCardList\022F\n\010pengDat" +
-      "a\030\001 \003(\01324.com.randioo.mahjong_public_ser" +
-      "ver.protocol.PengData\022F\n\010gangData\030\002 \003(\0132" +
-      "4.com.randioo.mahjong_public_server.prot" +
-      "ocol.GangData\022B\n\006huData\030\003 \003(\01322.com.rand" +
-      "ioo.mahjong_public_server.protocol.HuDat" +
-      "a\"\022\n\020FightPengRequest\"\023\n\021FightPengRespon" +
-      "se\"\r\n\013SCFightPeng\"\022\n\020FightGangRequest\"\023\n",
-      "\021FightGangResponse\"\r\n\013SCFightGang\"\020\n\016Fig" +
-      "htHuRequest\"\021\n\017FightHuResponse\"\013\n\tSCFigh" +
-      "tHu\"\021\n\017FightGuoRequest\"\022\n\020FightGuoRespon" +
-      "se\"\014\n\nSCFightGuo\"\027\n\025SCFightNoticeSendCar" +
-      "d"
+      "um\030\003 \001(\005\022\r\n\005score\030\004 \001(\005\"2\n\rSCFightPutOut" +
+      "\022\016\n\006seated\030\001 \001(\005\022\021\n\tcountdown\030\002 \001(\005\"3\n\017S" +
+      "CFightSendCard\022\014\n\004card\030\001 \001(\005\022\022\n\ngameRole" +
+      "Id\030\002 \001(\t\"$\n\024FightSendCardRequest\022\014\n\004card",
+      "\030\001 \001(\005\"-\n\025FightSendCardResponse\022\024\n\terror" +
+      "Code\030\001 \001(\005:\0011\"\026\n\024FightExitGameRequest\"-\n" +
+      "\025FightExitGameResponse\022\024\n\terrorCode\030\001 \001(" +
+      "\005:\0011\"%\n\017SCFightExitGame\022\022\n\ngameRoleId\030\001 " +
+      "\001(\t\"7\n\024SCFightApplyExitGame\022\014\n\004name\030\001 \001(" +
+      "\t\022\021\n\tcountDown\030\002 \001(\005\"0\n\031FightAgreeExitGa" +
+      "meRequest\022\023\n\005agree\030\001 \001(\010:\004true\"2\n\032FightA" +
+      "greeExitGameResponse\022\024\n\terrorCode\030\001 \001(\005:" +
+      "\0011\"\037\n\017SCAgreeExitGame\022\014\n\004name\030\001 \001(\t\"\024\n\022S" +
+      "CFightGameDismiss\"\025\n\023SCFightLoadResource",
+      "\"9\n\020SCFightTouchCard\022\022\n\ngameRoleId\030\001 \001(\t" +
+      "\022\021\n\ttouchCard\030\002 \001(\005\"\361\001\n\033SCFightNoticeCho" +
+      "oseCardList\022F\n\010pengData\030\001 \003(\01324.com.rand" +
+      "ioo.mahjong_public_server.protocol.PengD" +
+      "ata\022F\n\010gangData\030\002 \003(\01324.com.randioo.mahj" +
+      "ong_public_server.protocol.GangData\022B\n\006h" +
+      "uData\030\003 \003(\01322.com.randioo.mahjong_public" +
+      "_server.protocol.HuData\"\022\n\020FightPengRequ" +
+      "est\"\023\n\021FightPengResponse\"\r\n\013SCFightPeng\"" +
+      "\022\n\020FightGangRequest\"\023\n\021FightGangResponse",
+      "\"\r\n\013SCFightGang\"\020\n\016FightHuRequest\"\021\n\017Fig" +
+      "htHuResponse\"\013\n\tSCFightHu\"\021\n\017FightGuoReq" +
+      "uest\"\022\n\020FightGuoResponse\"\014\n\nSCFightGuo\"\027" +
+      "\n\025SCFightNoticeSendCard"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -14775,7 +14735,7 @@ public final class Fight {
           internal_static_com_randioo_mahjong_public_server_protocol_SCFightPutOut_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_randioo_mahjong_public_server_protocol_SCFightPutOut_descriptor,
-              new java.lang.String[] { "Seated", "Countdown", "AllowGuo", },
+              new java.lang.String[] { "Seated", "Countdown", },
               com.randioo.mahjong_public_server.protocol.Fight.SCFightPutOut.class,
               com.randioo.mahjong_public_server.protocol.Fight.SCFightPutOut.Builder.class);
           internal_static_com_randioo_mahjong_public_server_protocol_SCFightSendCard_descriptor =

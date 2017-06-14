@@ -37,7 +37,7 @@ public class mahjong_public_serverApp {
 
 		GlobleConfig.set(GlobleEnum.LOGIN, true);
 
-		((Test)SpringContext.getBean("test")).fuck();
+//		((Test)SpringContext.getBean("test")).fuck();
 
 	}
 

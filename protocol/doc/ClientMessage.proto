@@ -13,24 +13,26 @@ message CS{
 	optional LoginGetRoleDataRequest LoginGetRoleDataRequest = 3;
 
 	optional RoleRenameRequest RoleRenameRequest = 4;
+	optional RoleGetRoleDataRequest RoleGetRoleDataRequest = 5;
 
-	optional MatchCreateGameRequest MatchCreateGameRequest = 5;
-	optional MatchJoinGameRequest MatchJoinGameRequest = 6;
+	optional MatchCreateGameRequest MatchCreateGameRequest = 6;
+	optional MatchJoinGameRequest MatchJoinGameRequest = 7;
+	optional MatchAIRequest MatchAIRequest = 8;
 
-	optional FightReadyRequest FightReadyRequest = 7;
-	optional FightExitGameRequest FightExitGameRequest = 8;
-	optional FightAgreeExitGameRequest FightAgreeExitGameRequest = 9;
-	optional MoneyExchangeRequest MoneyExchangeRequest = 10;
-	optional SettingsRequest SettingsRequest = 11;
-	optional GetRoleDataRequest GetRoleDataRequest = 12;
-	optional GetSettingsRequest GetSettingsRequest = 13;
-	optional MatchAIRequest MatchAIRequest = 14;
-	optional FightSendCardRequest FightSendCardRequest = 15;
-	optional FightMingPaiRequest FightMingPaiRequest = 16;
-	optional FightRecommandRequest FightRecommandRequest = 17;
-	optional FightGetlastRoundRequest FightGetlastRoundRequest = 18;
-	optional FightPengRequest FightPengRequest = 19;
-	optional FightGangRequest FightGangRequest = 20;
-	optional FightHuRequest FightHuRequest = 21;
-	optional FightGuoRequest FightGuoRequest = 22;
+	optional FightReadyRequest FightReadyRequest = 9;
+	optional FightExitGameRequest FightExitGameRequest = 10;
+	optional FightAgreeExitGameRequest FightAgreeExitGameRequest = 11;
+	optional FightSendCardRequest FightSendCardRequest = 12;
+	optional FightMingPaiRequest FightMingPaiRequest = 13;
+	optional FightRecommandRequest FightRecommandRequest = 14;
+	optional FightGetlastRoundRequest FightGetlastRoundRequest = 15;
+	optional FightPengRequest FightPengRequest = 16;
+	optional FightGangRequest FightGangRequest = 17;
+	optional FightHuRequest FightHuRequest = 18;
+	optional FightGuoRequest FightGuoRequest = 19;
+
+	optional MoneyExchangeRequest MoneyExchangeRequest = 20;
+
+	optional SettingsRequest SettingsRequest = 21;
+	optional SettingsShowRequest SettingsShowRequest = 22;
 } // 22

@@ -2,12 +2,12 @@ package com.randioo.mahjong_public_server.protocol;
 
 message RoleData{
 	optional int32 roleId = 1;
-	optional string name = 2;
+	/*optional string name = 2;
 	optional int32 money = 3;
 	optional int32 volume = 4;
 	optional int32 musicVolume = 5;
 	optional string headImgUrl = 6;
-	optional int32 randiooMoney = 7;
+	optional int32 randiooMoney = 7;*/
 }
 
 message GameConfig{

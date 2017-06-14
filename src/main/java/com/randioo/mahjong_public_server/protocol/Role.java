@@ -579,31 +579,31 @@ public final class Role {
     // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.RoleRenameResponse)
   }
   
-  public static final class GetRoleDataRequest extends
+  public static final class RoleGetRoleDataRequest extends
       com.google.protobuf.GeneratedMessage {
-    // Use GetRoleDataRequest.newBuilder() to construct.
-    private GetRoleDataRequest() {
+    // Use RoleGetRoleDataRequest.newBuilder() to construct.
+    private RoleGetRoleDataRequest() {
       initFields();
     }
-    private GetRoleDataRequest(boolean noInit) {}
+    private RoleGetRoleDataRequest(boolean noInit) {}
     
-    private static final GetRoleDataRequest defaultInstance;
-    public static GetRoleDataRequest getDefaultInstance() {
+    private static final RoleGetRoleDataRequest defaultInstance;
+    public static RoleGetRoleDataRequest getDefaultInstance() {
       return defaultInstance;
     }
     
-    public GetRoleDataRequest getDefaultInstanceForType() {
+    public RoleGetRoleDataRequest getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataRequest_descriptor;
+      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_mahjong_public_server_protocol_RoleGetRoleDataRequest_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataRequest_fieldAccessorTable;
+      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_mahjong_public_server_protocol_RoleGetRoleDataRequest_fieldAccessorTable;
     }
     
     private void initFields() {
@@ -629,41 +629,41 @@ public final class Role {
       return size;
     }
     
-    public static com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest parseFrom(byte[] data)
+    public static com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest parseFrom(java.io.InputStream input)
+    public static com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest parseDelimitedFrom(java.io.InputStream input)
+    public static com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -672,7 +672,7 @@ public final class Role {
         return null;
       }
     }
-    public static com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest parseDelimitedFrom(
+    public static com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -683,12 +683,12 @@ public final class Role {
         return null;
       }
     }
-    public static com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -698,25 +698,25 @@ public final class Role {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest prototype) {
+    public static Builder newBuilder(com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
-      private com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest result;
+      private com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest result;
       
-      // Construct using com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest.newBuilder()
+      // Construct using com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest.newBuilder()
       private Builder() {}
       
       private static Builder create() {
         Builder builder = new Builder();
-        builder.result = new com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest();
+        builder.result = new com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest();
         return builder;
       }
       
-      protected com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest internalGetResult() {
+      protected com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest internalGetResult() {
         return result;
       }
       
@@ -725,7 +725,7 @@ public final class Role {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
         }
-        result = new com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest();
+        result = new com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest();
         return this;
       }
       
@@ -735,24 +735,24 @@ public final class Role {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest.getDescriptor();
+        return com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest.getDescriptor();
       }
       
-      public com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest getDefaultInstanceForType() {
-        return com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest.getDefaultInstance();
+      public com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest getDefaultInstanceForType() {
+        return com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest.getDefaultInstance();
       }
       
       public boolean isInitialized() {
         return result.isInitialized();
       }
-      public com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest build() {
+      public com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return buildPartial();
       }
       
-      private com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest buildParsed()
+      private com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
         if (!isInitialized()) {
           throw newUninitializedMessageException(
@@ -761,27 +761,27 @@ public final class Role {
         return buildPartial();
       }
       
-      public com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest buildPartial() {
+      public com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
         }
-        com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest returnMe = result;
+        com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest returnMe = result;
         result = null;
         return returnMe;
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest) {
-          return mergeFrom((com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest)other);
+        if (other instanceof com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest) {
+          return mergeFrom((com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest other) {
-        if (other == com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest other) {
+        if (other == com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest.getDefaultInstance()) return this;
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -812,43 +812,43 @@ public final class Role {
       }
       
       
-      // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.GetRoleDataRequest)
+      // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.RoleGetRoleDataRequest)
     }
     
     static {
-      defaultInstance = new GetRoleDataRequest(true);
+      defaultInstance = new RoleGetRoleDataRequest(true);
       com.randioo.mahjong_public_server.protocol.Role.internalForceInit();
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.GetRoleDataRequest)
+    // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.RoleGetRoleDataRequest)
   }
   
-  public static final class GetRoleDataResponse extends
+  public static final class RoleGetRoleDataResponse extends
       com.google.protobuf.GeneratedMessage {
-    // Use GetRoleDataResponse.newBuilder() to construct.
-    private GetRoleDataResponse() {
+    // Use RoleGetRoleDataResponse.newBuilder() to construct.
+    private RoleGetRoleDataResponse() {
       initFields();
     }
-    private GetRoleDataResponse(boolean noInit) {}
+    private RoleGetRoleDataResponse(boolean noInit) {}
     
-    private static final GetRoleDataResponse defaultInstance;
-    public static GetRoleDataResponse getDefaultInstance() {
+    private static final RoleGetRoleDataResponse defaultInstance;
+    public static RoleGetRoleDataResponse getDefaultInstance() {
       return defaultInstance;
     }
     
-    public GetRoleDataResponse getDefaultInstanceForType() {
+    public RoleGetRoleDataResponse getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataResponse_descriptor;
+      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_mahjong_public_server_protocol_RoleGetRoleDataResponse_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataResponse_fieldAccessorTable;
+      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_mahjong_public_server_protocol_RoleGetRoleDataResponse_fieldAccessorTable;
     }
     
     // optional int32 errorCode = 1 [default = 1];
@@ -903,41 +903,41 @@ public final class Role {
       return size;
     }
     
-    public static com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse parseFrom(byte[] data)
+    public static com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse parseFrom(java.io.InputStream input)
+    public static com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse parseDelimitedFrom(java.io.InputStream input)
+    public static com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -946,7 +946,7 @@ public final class Role {
         return null;
       }
     }
-    public static com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse parseDelimitedFrom(
+    public static com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -957,12 +957,12 @@ public final class Role {
         return null;
       }
     }
-    public static com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -972,25 +972,25 @@ public final class Role {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse prototype) {
+    public static Builder newBuilder(com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
-      private com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse result;
+      private com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse result;
       
-      // Construct using com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse.newBuilder()
+      // Construct using com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse.newBuilder()
       private Builder() {}
       
       private static Builder create() {
         Builder builder = new Builder();
-        builder.result = new com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse();
+        builder.result = new com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse();
         return builder;
       }
       
-      protected com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse internalGetResult() {
+      protected com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse internalGetResult() {
         return result;
       }
       
@@ -999,7 +999,7 @@ public final class Role {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
         }
-        result = new com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse();
+        result = new com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse();
         return this;
       }
       
@@ -1009,24 +1009,24 @@ public final class Role {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse.getDescriptor();
+        return com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse.getDescriptor();
       }
       
-      public com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse getDefaultInstanceForType() {
-        return com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse.getDefaultInstance();
+      public com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse getDefaultInstanceForType() {
+        return com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse.getDefaultInstance();
       }
       
       public boolean isInitialized() {
         return result.isInitialized();
       }
-      public com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse build() {
+      public com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return buildPartial();
       }
       
-      private com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse buildParsed()
+      private com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
         if (!isInitialized()) {
           throw newUninitializedMessageException(
@@ -1035,27 +1035,27 @@ public final class Role {
         return buildPartial();
       }
       
-      public com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse buildPartial() {
+      public com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
         }
-        com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse returnMe = result;
+        com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse returnMe = result;
         result = null;
         return returnMe;
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse) {
-          return mergeFrom((com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse)other);
+        if (other instanceof com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse) {
+          return mergeFrom((com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse other) {
-        if (other == com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse other) {
+        if (other == com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse.getDefaultInstance()) return this;
         if (other.hasErrorCode()) {
           setErrorCode(other.getErrorCode());
         }
@@ -1160,16 +1160,16 @@ public final class Role {
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.GetRoleDataResponse)
+      // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.RoleGetRoleDataResponse)
     }
     
     static {
-      defaultInstance = new GetRoleDataResponse(true);
+      defaultInstance = new RoleGetRoleDataResponse(true);
       com.randioo.mahjong_public_server.protocol.Role.internalForceInit();
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.GetRoleDataResponse)
+    // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.RoleGetRoleDataResponse)
   }
   
   private static com.google.protobuf.Descriptors.Descriptor
@@ -1183,15 +1183,15 @@ public final class Role {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_randioo_mahjong_public_server_protocol_RoleRenameResponse_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataRequest_descriptor;
+    internal_static_com_randioo_mahjong_public_server_protocol_RoleGetRoleDataRequest_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataRequest_fieldAccessorTable;
+      internal_static_com_randioo_mahjong_public_server_protocol_RoleGetRoleDataRequest_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataResponse_descriptor;
+    internal_static_com_randioo_mahjong_public_server_protocol_RoleGetRoleDataResponse_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataResponse_fieldAccessorTable;
+      internal_static_com_randioo_mahjong_public_server_protocol_RoleGetRoleDataResponse_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1204,11 +1204,11 @@ public final class Role {
       "\n\nRole.proto\022*com.randioo.mahjong_public" +
       "_server.protocol\032\014Entity.proto\"!\n\021RoleRe" +
       "nameRequest\022\014\n\004name\030\001 \001(\t\"*\n\022RoleRenameR" +
-      "esponse\022\024\n\terrorCode\030\001 \001(\005:\0011\"\024\n\022GetRole" +
-      "DataRequest\"s\n\023GetRoleDataResponse\022\024\n\ter" +
-      "rorCode\030\001 \001(\005:\0011\022F\n\010roleData\030\002 \001(\01324.com" +
-      ".randioo.mahjong_public_server.protocol." +
-      "RoleData"
+      "esponse\022\024\n\terrorCode\030\001 \001(\005:\0011\"\030\n\026RoleGet" +
+      "RoleDataRequest\"w\n\027RoleGetRoleDataRespon" +
+      "se\022\024\n\terrorCode\030\001 \001(\005:\0011\022F\n\010roleData\030\002 \001" +
+      "(\01324.com.randioo.mahjong_public_server.p" +
+      "rotocol.RoleData"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1231,22 +1231,22 @@ public final class Role {
               new java.lang.String[] { "ErrorCode", },
               com.randioo.mahjong_public_server.protocol.Role.RoleRenameResponse.class,
               com.randioo.mahjong_public_server.protocol.Role.RoleRenameResponse.Builder.class);
-          internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataRequest_descriptor =
+          internal_static_com_randioo_mahjong_public_server_protocol_RoleGetRoleDataRequest_descriptor =
             getDescriptor().getMessageTypes().get(2);
-          internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataRequest_fieldAccessorTable = new
+          internal_static_com_randioo_mahjong_public_server_protocol_RoleGetRoleDataRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataRequest_descriptor,
+              internal_static_com_randioo_mahjong_public_server_protocol_RoleGetRoleDataRequest_descriptor,
               new java.lang.String[] { },
-              com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest.class,
-              com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest.Builder.class);
-          internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataResponse_descriptor =
+              com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest.class,
+              com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest.Builder.class);
+          internal_static_com_randioo_mahjong_public_server_protocol_RoleGetRoleDataResponse_descriptor =
             getDescriptor().getMessageTypes().get(3);
-          internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataResponse_fieldAccessorTable = new
+          internal_static_com_randioo_mahjong_public_server_protocol_RoleGetRoleDataResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_randioo_mahjong_public_server_protocol_GetRoleDataResponse_descriptor,
+              internal_static_com_randioo_mahjong_public_server_protocol_RoleGetRoleDataResponse_descriptor,
               new java.lang.String[] { "ErrorCode", "RoleData", },
-              com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse.class,
-              com.randioo.mahjong_public_server.protocol.Role.GetRoleDataResponse.Builder.class);
+              com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse.class,
+              com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse.Builder.class);
           return null;
         }
       };

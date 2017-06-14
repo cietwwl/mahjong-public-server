@@ -178,48 +178,6 @@ public final class Entity {
     public boolean hasRoleId() { return hasRoleId; }
     public int getRoleId() { return roleId_; }
     
-    // optional string name = 2;
-    public static final int NAME_FIELD_NUMBER = 2;
-    private boolean hasName;
-    private java.lang.String name_ = "";
-    public boolean hasName() { return hasName; }
-    public java.lang.String getName() { return name_; }
-    
-    // optional int32 money = 3;
-    public static final int MONEY_FIELD_NUMBER = 3;
-    private boolean hasMoney;
-    private int money_ = 0;
-    public boolean hasMoney() { return hasMoney; }
-    public int getMoney() { return money_; }
-    
-    // optional int32 volume = 4;
-    public static final int VOLUME_FIELD_NUMBER = 4;
-    private boolean hasVolume;
-    private int volume_ = 0;
-    public boolean hasVolume() { return hasVolume; }
-    public int getVolume() { return volume_; }
-    
-    // optional int32 musicVolume = 5;
-    public static final int MUSICVOLUME_FIELD_NUMBER = 5;
-    private boolean hasMusicVolume;
-    private int musicVolume_ = 0;
-    public boolean hasMusicVolume() { return hasMusicVolume; }
-    public int getMusicVolume() { return musicVolume_; }
-    
-    // optional string headImgUrl = 6;
-    public static final int HEADIMGURL_FIELD_NUMBER = 6;
-    private boolean hasHeadImgUrl;
-    private java.lang.String headImgUrl_ = "";
-    public boolean hasHeadImgUrl() { return hasHeadImgUrl; }
-    public java.lang.String getHeadImgUrl() { return headImgUrl_; }
-    
-    // optional int32 randiooMoney = 7;
-    public static final int RANDIOOMONEY_FIELD_NUMBER = 7;
-    private boolean hasRandiooMoney;
-    private int randiooMoney_ = 0;
-    public boolean hasRandiooMoney() { return hasRandiooMoney; }
-    public int getRandiooMoney() { return randiooMoney_; }
-    
     private void initFields() {
     }
     public final boolean isInitialized() {
@@ -231,24 +189,6 @@ public final class Entity {
       getSerializedSize();
       if (hasRoleId()) {
         output.writeInt32(1, getRoleId());
-      }
-      if (hasName()) {
-        output.writeString(2, getName());
-      }
-      if (hasMoney()) {
-        output.writeInt32(3, getMoney());
-      }
-      if (hasVolume()) {
-        output.writeInt32(4, getVolume());
-      }
-      if (hasMusicVolume()) {
-        output.writeInt32(5, getMusicVolume());
-      }
-      if (hasHeadImgUrl()) {
-        output.writeString(6, getHeadImgUrl());
-      }
-      if (hasRandiooMoney()) {
-        output.writeInt32(7, getRandiooMoney());
       }
       getUnknownFields().writeTo(output);
     }
@@ -262,30 +202,6 @@ public final class Entity {
       if (hasRoleId()) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, getRoleId());
-      }
-      if (hasName()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(2, getName());
-      }
-      if (hasMoney()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, getMoney());
-      }
-      if (hasVolume()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, getVolume());
-      }
-      if (hasMusicVolume()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, getMusicVolume());
-      }
-      if (hasHeadImgUrl()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(6, getHeadImgUrl());
-      }
-      if (hasRandiooMoney()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, getRandiooMoney());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -448,24 +364,6 @@ public final class Entity {
         if (other.hasRoleId()) {
           setRoleId(other.getRoleId());
         }
-        if (other.hasName()) {
-          setName(other.getName());
-        }
-        if (other.hasMoney()) {
-          setMoney(other.getMoney());
-        }
-        if (other.hasVolume()) {
-          setVolume(other.getVolume());
-        }
-        if (other.hasMusicVolume()) {
-          setMusicVolume(other.getMusicVolume());
-        }
-        if (other.hasHeadImgUrl()) {
-          setHeadImgUrl(other.getHeadImgUrl());
-        }
-        if (other.hasRandiooMoney()) {
-          setRandiooMoney(other.getRandiooMoney());
-        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -495,30 +393,6 @@ public final class Entity {
               setRoleId(input.readInt32());
               break;
             }
-            case 18: {
-              setName(input.readString());
-              break;
-            }
-            case 24: {
-              setMoney(input.readInt32());
-              break;
-            }
-            case 32: {
-              setVolume(input.readInt32());
-              break;
-            }
-            case 40: {
-              setMusicVolume(input.readInt32());
-              break;
-            }
-            case 50: {
-              setHeadImgUrl(input.readString());
-              break;
-            }
-            case 56: {
-              setRandiooMoney(input.readInt32());
-              break;
-            }
           }
         }
       }
@@ -539,120 +413,6 @@ public final class Entity {
       public Builder clearRoleId() {
         result.hasRoleId = false;
         result.roleId_ = 0;
-        return this;
-      }
-      
-      // optional string name = 2;
-      public boolean hasName() {
-        return result.hasName();
-      }
-      public java.lang.String getName() {
-        return result.getName();
-      }
-      public Builder setName(java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  result.hasName = true;
-        result.name_ = value;
-        return this;
-      }
-      public Builder clearName() {
-        result.hasName = false;
-        result.name_ = getDefaultInstance().getName();
-        return this;
-      }
-      
-      // optional int32 money = 3;
-      public boolean hasMoney() {
-        return result.hasMoney();
-      }
-      public int getMoney() {
-        return result.getMoney();
-      }
-      public Builder setMoney(int value) {
-        result.hasMoney = true;
-        result.money_ = value;
-        return this;
-      }
-      public Builder clearMoney() {
-        result.hasMoney = false;
-        result.money_ = 0;
-        return this;
-      }
-      
-      // optional int32 volume = 4;
-      public boolean hasVolume() {
-        return result.hasVolume();
-      }
-      public int getVolume() {
-        return result.getVolume();
-      }
-      public Builder setVolume(int value) {
-        result.hasVolume = true;
-        result.volume_ = value;
-        return this;
-      }
-      public Builder clearVolume() {
-        result.hasVolume = false;
-        result.volume_ = 0;
-        return this;
-      }
-      
-      // optional int32 musicVolume = 5;
-      public boolean hasMusicVolume() {
-        return result.hasMusicVolume();
-      }
-      public int getMusicVolume() {
-        return result.getMusicVolume();
-      }
-      public Builder setMusicVolume(int value) {
-        result.hasMusicVolume = true;
-        result.musicVolume_ = value;
-        return this;
-      }
-      public Builder clearMusicVolume() {
-        result.hasMusicVolume = false;
-        result.musicVolume_ = 0;
-        return this;
-      }
-      
-      // optional string headImgUrl = 6;
-      public boolean hasHeadImgUrl() {
-        return result.hasHeadImgUrl();
-      }
-      public java.lang.String getHeadImgUrl() {
-        return result.getHeadImgUrl();
-      }
-      public Builder setHeadImgUrl(java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  result.hasHeadImgUrl = true;
-        result.headImgUrl_ = value;
-        return this;
-      }
-      public Builder clearHeadImgUrl() {
-        result.hasHeadImgUrl = false;
-        result.headImgUrl_ = getDefaultInstance().getHeadImgUrl();
-        return this;
-      }
-      
-      // optional int32 randiooMoney = 7;
-      public boolean hasRandiooMoney() {
-        return result.hasRandiooMoney();
-      }
-      public int getRandiooMoney() {
-        return result.getRandiooMoney();
-      }
-      public Builder setRandiooMoney(int value) {
-        result.hasRandiooMoney = true;
-        result.randiooMoney_ = value;
-        return this;
-      }
-      public Builder clearRandiooMoney() {
-        result.hasRandiooMoney = false;
-        result.randiooMoney_ = 0;
         return this;
       }
       
@@ -3429,25 +3189,22 @@ public final class Entity {
   static {
     java.lang.String[] descriptorData = {
       "\n\014Entity.proto\022*com.randioo.mahjong_publ" +
-      "ic_server.protocol\"\206\001\n\010RoleData\022\016\n\006roleI" +
-      "d\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\r\n\005money\030\003 \001(\005\022\016\n\006" +
-      "volume\030\004 \001(\005\022\023\n\013musicVolume\030\005 \001(\005\022\022\n\nhea" +
-      "dImgUrl\030\006 \001(\t\022\024\n\014randiooMoney\030\007 \001(\005\"\246\001\n\n" +
-      "GameConfig\022\020\n\010raceType\030\001 \001(\005\022\020\n\010maxCount" +
-      "\030\002 \001(\005\022\021\n\tgangScore\030\003 \001(\005\022\016\n\006zhuahu\030\004 \001(" +
-      "\010\022\025\n\rendCatchCount\030\005 \001(\005\022\022\n\ncatchScore\030\006" +
-      " \001(\005\022\017\n\007gangkai\030\007 \001(\010\022\025\n\rminStartScore\030\010" +
-      " \001(\005\"%\n\006PaiNum\022\016\n\006seated\030\001 \001(\005\022\013\n\003num\030\003 ",
-      "\001(\005\"%\n\006Record\022\016\n\006seated\030\001 \001(\005\022\013\n\003pai\030\002 \003" +
-      "(\005\"r\n\014GameRoleData\022\022\n\ngameRoleId\030\001 \001(\t\022\014" +
-      "\n\004name\030\002 \001(\t\022\016\n\006seated\030\003 \001(\005\022\r\n\005ready\030\004 " +
-      "\001(\010\022\022\n\nheadImgUrl\030\005 \001(\t\022\r\n\005money\030\006 \001(\005\"\030" +
-      "\n\010GangData\022\014\n\004gang\030\001 \003(\005\"\030\n\010PengData\022\014\n\004" +
-      "peng\030\001 \003(\005\"\024\n\006HuData\022\n\n\002hu\030\001 \003(\005*5\n\010Game" +
-      "Type\022\023\n\017GAME_TYPE_MATCH\020\001\022\024\n\020GAME_TYPE_F" +
-      "RIEND\020\002*M\n\tGameState\022\026\n\022GAME_STATE_PREPA" +
-      "RE\020\001\022\024\n\020GAME_START_START\020\002\022\022\n\016GAME_START" +
-      "_END\020\003"
+      "ic_server.protocol\"\032\n\010RoleData\022\016\n\006roleId" +
+      "\030\001 \001(\005\"\246\001\n\nGameConfig\022\020\n\010raceType\030\001 \001(\005\022" +
+      "\020\n\010maxCount\030\002 \001(\005\022\021\n\tgangScore\030\003 \001(\005\022\016\n\006" +
+      "zhuahu\030\004 \001(\010\022\025\n\rendCatchCount\030\005 \001(\005\022\022\n\nc" +
+      "atchScore\030\006 \001(\005\022\017\n\007gangkai\030\007 \001(\010\022\025\n\rminS" +
+      "tartScore\030\010 \001(\005\"%\n\006PaiNum\022\016\n\006seated\030\001 \001(" +
+      "\005\022\013\n\003num\030\003 \001(\005\"%\n\006Record\022\016\n\006seated\030\001 \001(\005" +
+      "\022\013\n\003pai\030\002 \003(\005\"r\n\014GameRoleData\022\022\n\ngameRol" +
+      "eId\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\016\n\006seated\030\003 \001(\005\022",
+      "\r\n\005ready\030\004 \001(\010\022\022\n\nheadImgUrl\030\005 \001(\t\022\r\n\005mo" +
+      "ney\030\006 \001(\005\"\030\n\010GangData\022\014\n\004gang\030\001 \003(\005\"\030\n\010P" +
+      "engData\022\014\n\004peng\030\001 \003(\005\"\024\n\006HuData\022\n\n\002hu\030\001 " +
+      "\003(\005*5\n\010GameType\022\023\n\017GAME_TYPE_MATCH\020\001\022\024\n\020" +
+      "GAME_TYPE_FRIEND\020\002*M\n\tGameState\022\026\n\022GAME_" +
+      "STATE_PREPARE\020\001\022\024\n\020GAME_START_START\020\002\022\022\n" +
+      "\016GAME_START_END\020\003"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3459,7 +3216,7 @@ public final class Entity {
           internal_static_com_randioo_mahjong_public_server_protocol_RoleData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_randioo_mahjong_public_server_protocol_RoleData_descriptor,
-              new java.lang.String[] { "RoleId", "Name", "Money", "Volume", "MusicVolume", "HeadImgUrl", "RandiooMoney", },
+              new java.lang.String[] { "RoleId", },
               com.randioo.mahjong_public_server.protocol.Entity.RoleData.class,
               com.randioo.mahjong_public_server.protocol.Entity.RoleData.Builder.class);
           internal_static_com_randioo_mahjong_public_server_protocol_GameConfig_descriptor =

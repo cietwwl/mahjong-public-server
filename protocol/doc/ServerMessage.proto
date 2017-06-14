@@ -12,46 +12,46 @@ message SC{
 	optional LoginGetRoleDataResponse LoginGetRoleDataResponse = 3;
 
 	optional RoleRenameResponse RoleRenameResponse = 4;
-	optional GetRoleDataResponse GetRoleDataResponse = 5;
+	optional RoleGetRoleDataResponse RoleGetRoleDataResponse = 5;
 
 	optional MatchCreateGameResponse MatchCreateGameResponse = 6;
 	optional MatchJoinGameResponse MatchJoinGameResponse = 7;
 	optional SCMatchJoinGame SCMatchJoinGame = 8;
+	optional MatchAIResponse MatchAIResponse = 9;
 
-	optional FightReadyResponse FightReadyResponse = 9;//准备(只有好友对战用)
-	optional SCFightReady SCFightReady = 10;//某玩家进行准备
-	optional SCFightStart SCFightStart = 11;//游戏开始
-	optional FightExitGameResponse FightExitGameResponse = 12;//游戏退出
-	optional SCFightExitGame SCFightExitGame = 13;//某玩家游戏退出
-	optional SCFightApplyExitGame SCFightApplyExitGame = 14;//某玩家申请游戏退出
-	optional FightAgreeExitGameResponse FightAgreeExitGameResponse = 15;//同意游戏退出
-	optional SCFightGameDismiss SCFightGameDismiss = 16;//游戏解散
-	optional SCFightLoadResource SCFightLoadResource = 17;//游戏资源加载(用于匹配)
+	optional FightReadyResponse FightReadyResponse = 10;//准备(只有好友对战用)
+	optional SCFightReady SCFightReady = 11;//某玩家进行准备
+	optional SCFightStart SCFightStart = 12;//游戏开始
+	optional FightExitGameResponse FightExitGameResponse = 13;//游戏退出
+	optional SCFightExitGame SCFightExitGame = 14;//某玩家游戏退出
+	optional SCFightApplyExitGame SCFightApplyExitGame = 15;//某玩家申请游戏退出
+	optional FightAgreeExitGameResponse FightAgreeExitGameResponse = 16;//同意游戏退出
+	optional SCFightGameDismiss SCFightGameDismiss = 17;//游戏解散
+	optional SCFightLoadResource SCFightLoadResource = 18;//游戏资源加载(用于匹配)
+	optional SCFightPutOut SCFightPutOut = 19;//通知出牌
+	optional FightSendCardResponse FightSendCardResponse = 20;
+	optional SCFightSendCard SCFightSendCard = 21;
+	optional SCAgreeExitGame SCAgreeExitGame = 22;
+	optional SCFightMingPai SCFightMingPai = 23;
+	optional SCFightRoundOver SCFightRoundOver = 24;
+	optional FightRecommandResponse FightRecommandResponse = 25;
+	optional SCFightGameOver SCFightGameOver = 26;
+	optional FightMingPaiResponse FightMingPaiResponse = 27;
+	optional FightGetlastRoundResponse FightGetlastRoundResponse = 28;
+	optional SCFightTouchCard SCFightTouchCard = 29;//摸一张牌
+	optional SCFightNoticeChooseCardList SCFightNoticeChooseCardList = 30;//通知杠碰胡
+	optional FightPengResponse FightPengResponse = 31;
+	optional SCFightPeng SCFightPeng = 32;
+	optional FightGangResponse FightGangResponse = 33;
+	optional SCFightGang SCFightGang = 34;
+	optional FightHuResponse FightHuResponse = 35;
+	optional SCFightHu SCFightHu = 36;
+	optional FightGuoResponse FightGuoResponse = 37;
+	optional SCFightGuo SCFightGuo = 38;
+	optional SCFightNoticeSendCard SCFightNoticeSendCard = 39;
 
-	optional SCFightPutOut SCFightPutOut = 18;//通知出牌
-	optional FightSendCardResponse FightSendCardResponse = 19;
-	optional SCFightSendCard SCFightSendCard = 20;
-	optional SCAgreeExitGame SCAgreeExitGame = 21;
-	optional SCFightMingPai SCFightMingPai = 22;
-	optional SCFightRoundOver SCFightRoundOver = 23;
-	optional FightRecommandResponse FightRecommandResponse = 24;
-	optional SCFightGameOver SCFightGameOver = 25;
-	optional FightMingPaiResponse FightMingPaiResponse = 26;
-	optional FightGetlastRoundResponse FightGetlastRoundResponse = 27;
-	optional SCFightTouchCard SCFightTouchCard = 28;//摸一张牌
-	optional SCFightNoticeChooseCardList SCFightNoticeChooseCardList = 29;//通知杠碰胡
-	optional FightPengResponse FightPengResponse = 30;
-	optional SCFightPeng SCFightPeng = 31;
-	optional FightGangResponse FightGangResponse = 32;
-	optional SCFightGang SCFightGang = 33;
-	optional FightHuResponse FightHuResponse = 34;
-	optional SCFightHu SCFightHu = 35;
-	optional FightGuoResponse FightGuoResponse = 36;
-	optional SCFightGuo SCFightGuo = 37;
-	optional SCFightNoticeSendCard SCFightNoticeSendCard = 38;
-
-	optional MoneyExchangeResponse MoneyExchangeResponse = 39;//燃点币游戏币（欢乐豆）互换
+	optional MoneyExchangeResponse MoneyExchangeResponse = 40;//燃点币游戏币（欢乐豆）互换
 	
-	optional SettingsResponse SettingsResponse = 40;//设置
-	optional GetSettingsResponse GetSettingsResponse = 41;//设置
-} // 41
+	optional SettingsResponse SettingsResponse = 41;//设置
+	optional SettingsShowResponse SettingsShowResponse = 42;//设置
+} // 42

@@ -7,14 +7,14 @@ import org.springframework.stereotype.Controller;
 import com.google.protobuf.GeneratedMessage;
 import com.randioo.mahjong_public_server.entity.bo.Role;
 import com.randioo.mahjong_public_server.module.role.service.RoleService;
-import com.randioo.mahjong_public_server.protocol.Role.GetRoleDataRequest;
+import com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataRequest;
 import com.randioo.randioo_server_base.annotation.PTAnnotation;
 import com.randioo.randioo_server_base.cache.RoleCache;
 import com.randioo.randioo_server_base.template.IActionSupport;
 import com.randioo.randioo_server_base.utils.SessionUtils;
 
 @Controller
-@PTAnnotation(GetRoleDataRequest.class)
+@PTAnnotation(RoleGetRoleDataRequest.class)
 public class RoleDataAction implements IActionSupport {
 
 	@Autowired
@@ -22,7 +22,7 @@ public class RoleDataAction implements IActionSupport {
 
 	@Override
 	public void execute(Object data, IoSession session) {
-		GetRoleDataRequest request = (GetRoleDataRequest) data;
+		RoleGetRoleDataRequest request = (RoleGetRoleDataRequest) data;
 		String account = ((Role) RoleCache.getRoleBySession(session)).getAccount();
 		GeneratedMessage sc = roleService.getRoleData(account);
 		SessionUtils.sc(session, sc);

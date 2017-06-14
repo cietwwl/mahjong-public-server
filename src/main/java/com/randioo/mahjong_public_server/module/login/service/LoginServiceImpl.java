@@ -222,15 +222,20 @@ public class LoginServiceImpl extends ObserveBaseService implements LoginService
 	@Override
 	public RoleData getRoleData(Role role) {
 		roleService.roleInit(role);
-		RoleData.Builder roleDataBuilder = RoleData
+		// RoleData.Builder roleDataBuilder = RoleData
+		// .newBuilder()
+		// .setRoleId(
+		// (Tool.regExpression(role.getAccount(), "[0-9]*") ?
+		// Integer.parseInt(role.getAccount()) : role
+		// .getRoleId())).setName(role.getName()).setMoney(role.getMoney())
+		// .setMusicVolume(role.getMusicVolume()).setVolume(role.getVolume())
+		// .setRandiooMoney(role.getRandiooMoney()).setHeadImgUrl(role.getHeadImgUrl());
+
+		return RoleData
 				.newBuilder()
 				.setRoleId(
 						(Tool.regExpression(role.getAccount(), "[0-9]*") ? Integer.parseInt(role.getAccount()) : role
-								.getRoleId())).setName(role.getName()).setMoney(role.getMoney())
-				.setMusicVolume(role.getMusicVolume()).setVolume(role.getVolume())
-				.setRandiooMoney(role.getRandiooMoney()).setHeadImgUrl(role.getHeadImgUrl());
-
-		return roleDataBuilder.build();
+								.getRoleId())).build();
 	}
 
 	@Override

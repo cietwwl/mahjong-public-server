@@ -8,10 +8,10 @@ message RoleRenameRequest{
 message RoleRenameResponse{
 	optional int32 errorCode = 1 [default =1];
 }
-message GetRoleDataRequest{
+message RoleGetRoleDataRequest{
 }
 
-message GetRoleDataResponse{
+message RoleGetRoleDataResponse{
 	optional int32 errorCode=1 [default = 1];
 	optional RoleData roleData = 2;
 }

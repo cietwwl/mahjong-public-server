@@ -12,7 +12,8 @@ public class CardTools {
 	public static final int WAN = 3;
 	public static final int ZHONG = 8;
 
-	public final static int[] CARDS = { 11, 12, 13, 14, 15, 16, 17, 18, 19, // 筒
+	public final static int[] CARDS = {
+			11, 12, 13, 14, 15, 16, 17, 18, 19, // 筒
 			11, 12, 13, 14, 15, 16, 17, 18, 19, // 筒
 			11, 12, 13, 14, 15, 16, 17, 18, 19, // 筒
 			11, 12, 13, 14, 15, 16, 17, 18, 19, // 筒
