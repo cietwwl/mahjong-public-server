@@ -50,6 +50,7 @@ import com.randioo.mahjong_public_server.protocol.Fight.SCFightGameDismiss;
 import com.randioo.mahjong_public_server.protocol.Fight.SCFightGameOver;
 import com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeChooseCardList;
 import com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeChooseCardList.Builder;
+import com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeReady;
 import com.randioo.mahjong_public_server.protocol.Fight.SCFightPutOut;
 import com.randioo.mahjong_public_server.protocol.Fight.SCFightReady;
 import com.randioo.mahjong_public_server.protocol.Fight.SCFightSendCard;
@@ -484,6 +485,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
 			roleGameInfo.newCard = remainCards.remove(0);
 		} else {// 牌出完了，则游戏技术
 			this.gameOver(gameId, gameRoleId);
+			return;
 		}
 
 		// 通知该玩家摸到的是什么牌
@@ -852,8 +854,10 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
 			gameResultMap.put(roleGameInfo.roleId, 0);
 		}
 
+		// 所有人发结算通知
 		this.sendAllSeatSC(game, SC.newBuilder().setSCFightGameOver(SCFightGameOver.newBuilder()).build());
-		this.gameStart(gameId);
+		// 所有人发准备通知
+		this.sendAllSeatSC(game, SC.newBuilder().setSCFightNoticeReady(SCFightNoticeReady.newBuilder()).build());
 
 		notifyObservers(FightConstant.GAME_OVER, gameResultMap);
 	}
@@ -930,7 +934,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
 						}
 					}
 				};
-				evt.setEndTime(TimeUtils.getNowTime() + 3);
+				evt.setEndTime(TimeUtils.getNowTime() + 1);
 				evt.setGameId(gameId);
 				eventScheduler.addEvent(evt);
 			}

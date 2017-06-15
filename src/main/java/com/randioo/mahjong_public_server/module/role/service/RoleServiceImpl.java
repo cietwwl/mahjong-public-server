@@ -137,53 +137,59 @@ public class RoleServiceImpl extends ObserveBaseService implements RoleService {
 	}
 
 	public void initRoleDataFromHttp(Role role) {
-		int money = -1;
-		String name = "";
-		String headImgUrl = "";
-		HttpConnection connection = new HttpConnection(
-		/* "http://manager.app.randioo.com/gateway/MaJiang/getMoney.php?key=f4f3f65d6d804d138043fbbd1843d510&&id=" */
-		"http://10.0.51.6/APPadmin/gateway/MaJiang/getMoney.php?key=f4f3f65d6d804d138043fbbd1843d510&&id=",
-				role.getAccount());
-		connection.connect();
-		String result = connection.result;
-		System.out.println("json:" + result);
-		if (result == null)
-			throw new HttpConnectException();
+		boolean debug = true;
+		if (debug) {
+			role.setName("guest" + role.getRoleId());
+			role.setHeadImgUrl("ui://h24q1ml0x7tz13m");
+			role.setRandiooMoney(100);
+		} else {
+			int money = -1;
+			String name = "";
+			String headImgUrl = "";
+			HttpConnection connection = new HttpConnection(
+			/* "http://manager.app.randioo.com/gateway/MaJiang/getMoney.php?key=f4f3f65d6d804d138043fbbd1843d510&&id=" */
+			"http://10.0.51.6/APPadmin/gateway/MaJiang/getMoney.php?key=f4f3f65d6d804d138043fbbd1843d510&&id=",
+					role.getAccount());
+			connection.connect();
+			String result = connection.result;
+			System.out.println("json:" + result);
+			if (result == null)
+				throw new HttpConnectException();
 
-		try {
-			JSONObject obj = new JSONObject(result);
-			money = obj.getInt("randioo_money");
-			if (money != -1) {
-				name = obj.getString("nickname");
-				headImgUrl = obj.getString("headimgurl");
-				if (headImgUrl.equals("null")) {
-					headImgUrl = null;
+			try {
+				JSONObject obj = new JSONObject(result);
+				money = obj.getInt("randioo_money");
+				if (money != -1) {
+					name = obj.getString("nickname");
+					headImgUrl = obj.getString("headimgurl");
+					if (headImgUrl.equals("null")) {
+						headImgUrl = null;
+					}
 				}
+
+			} catch (JSONException e) {
+				if (GlobleConfig.Boolean(GlobleEnum.DEBUG))
+					e.printStackTrace();
+				else
+					throw new HttpConnectException();
 			}
 
-		} catch (JSONException e) {
-			if (GlobleConfig.Boolean(GlobleEnum.DEBUG))
-				e.printStackTrace();
-			else
-				throw new HttpConnectException();
+			if (money == -1)
+				money = 100;
+
+			role.setName(StringUtils.isNullOrEmpty(name) ? "guest" + role.getRoleId() : name);
+			System.out.println("@@@" + headImgUrl + (headImgUrl == null));
+			role.setHeadImgUrl(StringUtils.isNullOrEmpty(headImgUrl) ? "ui://h24q1ml0x7tz13m" : headImgUrl);
+			role.setRandiooMoney(money);
 		}
-
-		if (money == -1)
-			money = 100;
-
-		role.setName(StringUtils.isNullOrEmpty(name) ? "guest" + role.getRoleId() : name);
-		System.out.println("@@@" + headImgUrl + (headImgUrl == null));
-		role.setHeadImgUrl(StringUtils.isNullOrEmpty(headImgUrl) ? "ui://h24q1ml0x7tz13m" : headImgUrl);
-		role.setRandiooMoney(money);
-
 	}
 
 	@Override
 	public GeneratedMessage getRoleData(String account) {
 		Role role = loginService.getRoleByAccount(account);
 		RoleData roleData = loginService.getRoleData(role);
-		
 
-		return SC.newBuilder().setRoleGetRoleDataResponse(RoleGetRoleDataResponse.newBuilder().setRoleData(roleData)).build();
+		return SC.newBuilder().setRoleGetRoleDataResponse(RoleGetRoleDataResponse.newBuilder().setRoleData(roleData))
+				.build();
 	}
 }
