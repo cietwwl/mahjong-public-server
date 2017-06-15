@@ -2,101 +2,6 @@ package com.randioo.mahjong_public_server.protocol;
 
 import "Entity.proto";
 
-message FightReadyRequest{//
-}
-
-message FightReadyResponse{//
-	optional int32 errorCode = 1[default = 1];
-}
-
-message SCFightReady{//
-	optional int32 seated = 1;
-}
-
-message SCFightMingPai{
-	optional int32 seated = 1;
-	repeated int32 pai = 2;	
-}
-message FightMingPaiRequest{
-}
-message FightMingPaiResponse{
-	optional int32 errorCode = 1 [default = 1];
-}
-
-message FightGetlastRoundRequest{
-}
-message FightGetlastRoundResponse{
-	optional int32 errorCode = 1 [default = 1];
-	repeated Record records = 2;
-}
-message FightRejoinRequest{
-}
-message FightRejoinResponse{
-	repeated int32 pai = 1;
-	repeated int32 landLordPai = 2;
-	optional string roomId = 3;
-	optional bool moguai = 4;
-	optional int32 seated = 5;
-	message gameRolePlayData{
-		optional GameRoleData gameRoleData = 1;
-		optional int32 allScore = 2;
-		optional int32 paiNum = 3;
-	}
-}
-message FightRecommandRequest{
-}
-message FightRecommandResponse{
-	optional int32 errorCode = 1 [default = 1];
-	message RecommandPai{
-		repeated int32 pai = 1; 
-	}
-	repeated RecommandPai recommandPai = 2;
-}
-message SCFightStart{//
-	repeated int32 pai = 1;
-	optional int32 times = 2;	
-	repeated PaiNum PaiNum = 4; 
-	
-}
-message SCFightRoundOver{
-	optional int32 di = 1;
-	optional int32 bomb = 2;
-	optional bool spring = 3;
-	optional bool moguai = 4;
-	optional bool mingpai = 5;
-	message Score{
-		optional string name = 1;
-		optional int32 score = 2;
-		optional int32 allScore = 3;
-	}
-	repeated Score score = 6;
-	optional bool over = 7;
-}
-message SCFightGameOver{	
-	message GameOverData{
-		optional string name = 1;
-		optional int32 landLordNum = 2;
-		optional int32 farmerNum = 3;
-		optional int32 score = 4;
-	}
-	repeated GameOverData gameOverData = 1;
-}
-
-message SCFightPutOut{
-	optional int32 seated = 1;
-	optional int32 countdown = 2;
-}
-message SCFightSendCard{
-	optional int32 card = 1;
-	optional string gameRoleId = 2;
-}
-message FightSendCardRequest{//
-	optional int32 card = 1;	
-}
-
-message FightSendCardResponse{//
-	optional int32 errorCode = 1 [default = 1];
-}
 
 message FightExitGameRequest{//
 	
@@ -108,7 +13,7 @@ message FightExitGameResponse{//
 
 
 message SCFightExitGame{//
-	optional string gameRoleId = 1;
+	optional int32 seat = 1;
 }
 
 message SCFightApplyExitGame{//
@@ -123,6 +28,7 @@ message FightAgreeExitGameRequest{//
 message FightAgreeExitGameResponse{//
 	optional int32 errorCode = 1 [default = 1];
 }
+
 message SCAgreeExitGame{//
 	optional string name = 1;
 }
@@ -135,15 +41,109 @@ message SCFightLoadResource{
 	
 }
 
+message FightReadyRequest{//
+}
+
+message FightReadyResponse{//
+	optional int32 errorCode = 1[default = 1];
+}
+
+message SCFightNoticeReady{
+}
+
+message SCFightReady{//
+	optional int32 seat = 1;
+}
+
+message SCFightMingPai{
+	optional int32 seat = 1;
+	repeated int32 pai = 2;	
+}
+message FightMingPaiRequest{
+}
+message FightMingPaiResponse{
+	optional int32 errorCode = 1 [default = 1];
+}
+
+message FightGetlastRoundRequest{
+}
+
+message FightGetlastRoundResponse{
+	optional int32 errorCode = 1 [default = 1];
+	repeated Record records = 2;
+}
+
+message FightRejoinRequest{
+}
+
+message FightRejoinResponse{
+	repeated int32 pai = 1;
+	repeated int32 landLordPai = 2;
+	optional string roomId = 3;
+	optional bool moguai = 4;
+	optional int32 seat = 5;
+}
+
+message FightRecommandRequest{
+}
+
+message FightRecommandResponse{
+	optional int32 errorCode = 1 [default = 1];
+	repeated RecommandPai recommandPai = 2;
+}
+
+message SCFightStart{//
+	repeated int32 pai = 1;
+	optional int32 times = 2;	
+	repeated PaiNum PaiNum = 3;
+	optional int32 remainCardCount = 4;
+}
+
+message SCFightRoundOver{
+	optional int32 di = 1;
+	optional int32 bomb = 2;
+	optional bool spring = 3;
+	optional bool moguai = 4;
+	optional bool mingpai = 5;
+	repeated Score score = 6;
+	optional bool over = 7;
+}
+message SCFightGameOver{	
+	
+	repeated GameOverData gameOverData = 1;
+}
+
+message SCFightPutOut{
+	optional int32 seat = 1;
+	optional int32 countdown = 2;
+}
+
+message FightSendCardRequest{
+	optional int32 card = 1;
+	optional bool isTouchCard = 2[default=false];
+}
+
+message FightSendCardResponse{//
+	optional int32 errorCode = 1 [default = 1];
+}
+message SCFightSendCard{
+	optional int32 card = 1;
+	optional int32 seat = 2;
+	optional bool isTouchCard = 3;
+}
+
 message SCFightTouchCard{
-	optional string gameRoleId = 1;
+	optional int32 seat = 1;
 	optional int32 touchCard = 2;
+	optional int32 remainCardCount = 3;
 }
 
 message SCFightNoticeChooseCardList{
-	repeated PengData pengData = 1;
-	repeated GangData gangData = 2;
-	repeated HuData huData = 3;
+	repeated CallHuData callHuData = 1;
+	optional CallGangData callGangData = 2;
+	optional CallPengData callPengData = 3;
+	repeated CallShunData callShunData = 4;
+	optional bool guo = 5;
 }
 
 message FightPengRequest{
@@ -155,7 +155,8 @@ message FightPengResponse{
 }
 
 message SCFightPeng{
-	
+	optional int32 seat = 1;
+	optional int32 card = 2;
 }
 
 message FightGangRequest{
@@ -167,7 +168,9 @@ message FightGangResponse{
 }
 
 message SCFightGang{
-	
+	optional int32 seat = 1;
+	optional int32 card = 2;
+	optional bool visible = 3;
 }
 
 message FightHuRequest{
@@ -179,7 +182,7 @@ message FightHuResponse{
 }
 
 message SCFightHu{
-	
+	optional int32 seat = 1;
 }
 
 message FightGuoRequest{
@@ -191,9 +194,6 @@ message FightGuoResponse{
 }
 
 message SCFightGuo{
-	
+	optional int32 seat = 1;
 }
 
-message SCFightNoticeSendCard{
-	
-}

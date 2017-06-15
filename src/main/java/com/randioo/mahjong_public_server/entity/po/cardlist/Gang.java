@@ -7,6 +7,9 @@ import com.randioo.mahjong_public_server.entity.po.CardSort;
 
 public class Gang implements CardList {
 	public int card;
+	public int seat;
+	public boolean visible;
+	public int pengSeat;
 
 	@Override
 	public void check(List<CardList> cardLists, CardSort cardSort, int card) {

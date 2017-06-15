@@ -21,6 +21,7 @@ import com.randioo.mahjong_public_server.protocol.Entity.GameRoleData;
 import com.randioo.mahjong_public_server.protocol.Entity.GameState;
 import com.randioo.mahjong_public_server.protocol.Entity.GameType;
 import com.randioo.mahjong_public_server.protocol.Error.ErrorCode;
+import com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeReady;
 import com.randioo.mahjong_public_server.protocol.Match.MatchAIResponse;
 import com.randioo.mahjong_public_server.protocol.Match.MatchCreateGameResponse;
 import com.randioo.mahjong_public_server.protocol.Match.MatchJoinGameResponse;
@@ -288,7 +289,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 				.newBuilder()
 				.setMatchJoinGameResponse(
 						MatchJoinGameResponse.newBuilder().addAllGameRoleData(gameRoleDataList)
-								.setSeated(myGameRoleData.getSeated()).setId(lockString)).build();
+								.setSeat(myGameRoleData.getSeat()).setId(lockString)).build();
 	}
 
 	@Override
@@ -330,12 +331,15 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 			logger.debug(info.toString());
 			int index = game.getRoleIdList().indexOf(gameRoleId);
 			GameRoleData AIGameRoleData = GameRoleData.newBuilder().setGameRoleId(info.gameRoleId).setReady(info.ready)
-					.setSeated(index).setName("ROBOT" + info.gameRoleId).build();
+					.setSeat(index).setName("ROBOT" + info.gameRoleId).build();
 
 			SC scJoinGame = SC.newBuilder()
 					.setSCMatchJoinGame(SCMatchJoinGame.newBuilder().setGameRoleData(AIGameRoleData)).build();
 			SessionUtils.sc(role.getRoleId(), scJoinGame);
 		}
+		
+		SessionUtils.sc(role.getRoleId(), SC.newBuilder().setSCFightNoticeReady(SCFightNoticeReady.newBuilder())
+				.build());
 
 	}
 
@@ -345,7 +349,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 
 		Game game = GameCache.getGameMap().get(gameId);
 		int index = game.getRoleIdList().indexOf(info.gameRoleId);
-		return GameRoleData.newBuilder().setGameRoleId(info.gameRoleId).setReady(info.ready).setSeated(index)
+		return GameRoleData.newBuilder().setGameRoleId(info.gameRoleId).setReady(info.ready).setSeat(index)
 				.setName(name).setHeadImgUrl(role.getHeadImgUrl()).setMoney(role.getMoney()).build();
 	}
 

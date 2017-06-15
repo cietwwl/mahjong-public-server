@@ -19,15 +19,18 @@ public class GameServerHandlerAdapter extends IoHandlerAdapter {
 	 * @author wcy 2017年1月3日
 	 * @throws ActionSupportFakeException
 	 */
-	protected void actionDispatcher(GeneratedMessage message, IoSession session) throws ActionSupportFakeException {
+	protected void actionDispatcher(GeneratedMessage message, IoSession session) throws Exception {
 		Map<FieldDescriptor, Object> allFields = message.getAllFields();
 		for (Map.Entry<FieldDescriptor, Object> entrySet : allFields.entrySet()) {
 			String name = entrySet.getKey().getName();
 			IActionSupport action = Navigation.getAction(name);
+			if (action == null)
+				throw new ActionSupportFakeException();
+
 			try {
 				action.execute(entrySet.getValue(), session);
 			} catch (Exception e) {
-				throw new ActionSupportFakeException();
+				throw e;
 			}
 		}
 	}

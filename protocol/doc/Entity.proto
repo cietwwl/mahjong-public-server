@@ -2,6 +2,8 @@ package com.randioo.mahjong_public_server.protocol;
 
 message RoleData{
 	optional int32 roleId = 1;
+	optional int32 gameId = 2;
+
 	/*optional string name = 2;
 	optional int32 money = 3;
 	optional int32 volume = 4;
@@ -21,12 +23,12 @@ message GameConfig{
 	optional int32 minStartScore = 8;
 }
 message PaiNum{
-	optional int32 seated = 1;
+	optional int32 seat = 1;
 	optional int32 num = 3;
 }
 
 message Record{
-	optional int32 seated = 1;
+	optional int32 seat = 1;
 	repeated int32 pai = 2;
 }
 
@@ -38,7 +40,7 @@ enum GameType{
 message GameRoleData{
 	optional string gameRoleId = 1;
 	optional string name = 2;
-	optional int32 seated = 3;
+	optional int32 seat = 3;
 	optional bool ready = 4;
 	optional string headImgUrl = 5;
 	optional int32 money = 6;
@@ -50,14 +52,62 @@ enum GameState{
 	GAME_START_END = 3;
 }
 
+message CallGangData{
+	optional int32 callId = 1;
+	optional GangData gangData = 2;
+}
+
 message GangData{
-	repeated int32 gang = 1;
+	repeated int32 card = 2;
+}
+
+message CallPengData{
+	optional int32 callId = 1;
+	optional PengData pengData = 2;
 }
 
 message PengData{
-	repeated int32 peng = 1;
+	repeated int32 card = 2;
+}
+
+message CallHuData{
+	optional int32 callId = 1;
+	optional HuData huData = 2;
 }
 
 message HuData{
-	repeated int32 hu = 1;
+	repeated int32 card = 2;
+}
+
+message CallShunData{
+	optional int32 callId = 1;
+	optional ShunData shunData = 2;	
+}
+
+message ShunData{
+	optional int32 card1 = 2;
+	optional int32 card2 = 3;
+	optional int32 card3 = 4;
+}
+
+message GameOverData{
+	optional string name = 1;
+	optional int32 landLordNum = 2;
+	optional int32 farmerNum = 3;
+	optional int32 score = 4;
+}
+
+message RecommandPai{
+	repeated int32 pai = 1; 
+}
+
+message Score{
+	optional string name = 1;
+	optional int32 score = 2;
+	optional int32 allScore = 3;
+}
+
+message GameData{
+	optional int32 gameId = 1;
+	repeated GameRoleData gameRoleData = 2;
 }

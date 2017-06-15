@@ -11,16 +11,18 @@ import com.randioo.mahjong_public_server.entity.po.CardSort;
  * @author wcy 2017年6月12日
  *
  */
-public class Kan implements CardList {
+public class Peng implements CardList {
 	public int card;
+	public int seat;
 
 	@Override
 	public void check(List<CardList> cardLists, CardSort cardSort, int card) {
 		Set<Integer> set = cardSort.getList().get(2);
 		if (set.contains(card)) {
-			Kan kan = new Kan();
-			kan.card = card;
-			cardLists.add(kan);
+			Peng peng = new Peng();
+			peng.card = card;
+			cardLists.add(peng);
 		}
 	}
+
 }

@@ -2,9 +2,7 @@ package com.randioo.mahjong_public_server.module.fight.service;
 
 import com.google.protobuf.GeneratedMessage;
 import com.randioo.mahjong_public_server.entity.bo.Role;
-import com.randioo.mahjong_public_server.entity.po.CallCardListsAction;
 import com.randioo.randioo_server_base.service.ObserveBaseServiceInterface;
-import com.randioo.randioo_server_base.template.Ref;
 
 public interface FightService extends ObserveBaseServiceInterface {
 	public void readyGame(Role role);
@@ -19,7 +17,7 @@ public interface FightService extends ObserveBaseServiceInterface {
 	 * @param role
 	 * @param paiList
 	 */
-	void sendCard(Role role, int card);
+	void sendCard(Role role, int card, boolean isTouchCard);
 
 	/**
 	 * 分牌

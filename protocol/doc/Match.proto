@@ -30,7 +30,7 @@ message MatchJoinGameResponse{
 	optional int32 errorCode = 1[default = 1];
 	repeated GameRoleData gameRoleData = 2;
 	optional string id = 3;
-	optional int32 seated = 4;
+	optional int32 seat = 4;
 }
 
 message SCMatchJoinGame{

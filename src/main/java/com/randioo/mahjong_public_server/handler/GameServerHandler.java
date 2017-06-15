@@ -66,8 +66,9 @@ public class GameServerHandler extends GameServerHandlerAdapter {
 
 		InputStream input = (InputStream) messageObj;
 
+		CS message = null;
 		try {
-			CS message = CS.parseDelimitedFrom(input);
+			message = CS.parseDelimitedFrom(input);
 			logger.info(message.toString());
 			actionDispatcher(message, session);
 		} finally {

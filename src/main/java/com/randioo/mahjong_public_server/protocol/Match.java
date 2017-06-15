@@ -1679,12 +1679,12 @@ public final class Match {
     public boolean hasId() { return hasId; }
     public java.lang.String getId() { return id_; }
     
-    // optional int32 seated = 4;
-    public static final int SEATED_FIELD_NUMBER = 4;
-    private boolean hasSeated;
-    private int seated_ = 0;
-    public boolean hasSeated() { return hasSeated; }
-    public int getSeated() { return seated_; }
+    // optional int32 seat = 4;
+    public static final int SEAT_FIELD_NUMBER = 4;
+    private boolean hasSeat;
+    private int seat_ = 0;
+    public boolean hasSeat() { return hasSeat; }
+    public int getSeat() { return seat_; }
     
     private void initFields() {
     }
@@ -1704,8 +1704,8 @@ public final class Match {
       if (hasId()) {
         output.writeString(3, getId());
       }
-      if (hasSeated()) {
-        output.writeInt32(4, getSeated());
+      if (hasSeat()) {
+        output.writeInt32(4, getSeat());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1728,9 +1728,9 @@ public final class Match {
         size += com.google.protobuf.CodedOutputStream
           .computeStringSize(3, getId());
       }
-      if (hasSeated()) {
+      if (hasSeat()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, getSeated());
+          .computeInt32Size(4, getSeat());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1906,8 +1906,8 @@ public final class Match {
         if (other.hasId()) {
           setId(other.getId());
         }
-        if (other.hasSeated()) {
-          setSeated(other.getSeated());
+        if (other.hasSeat()) {
+          setSeat(other.getSeat());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1949,7 +1949,7 @@ public final class Match {
               break;
             }
             case 32: {
-              setSeated(input.readInt32());
+              setSeat(input.readInt32());
               break;
             }
           }
@@ -2047,21 +2047,21 @@ public final class Match {
         return this;
       }
       
-      // optional int32 seated = 4;
-      public boolean hasSeated() {
-        return result.hasSeated();
+      // optional int32 seat = 4;
+      public boolean hasSeat() {
+        return result.hasSeat();
       }
-      public int getSeated() {
-        return result.getSeated();
+      public int getSeat() {
+        return result.getSeat();
       }
-      public Builder setSeated(int value) {
-        result.hasSeated = true;
-        result.seated_ = value;
+      public Builder setSeat(int value) {
+        result.hasSeat = true;
+        result.seat_ = value;
         return this;
       }
-      public Builder clearSeated() {
-        result.hasSeated = false;
-        result.seated_ = 0;
+      public Builder clearSeat() {
+        result.hasSeat = false;
+        result.seat_ = 0;
         return this;
       }
       
@@ -2442,14 +2442,14 @@ public final class Match {
       "\0011\022\n\n\002id\030\002 \001(\t\022\016\n\006moguai\030\003 \001(\010\022N\n\014gameRo",
       "leData\030\004 \001(\01328.com.randioo.mahjong_publi" +
       "c_server.protocol.GameRoleData\"*\n\024MatchJ" +
-      "oinGameRequest\022\022\n\nlockString\030\001 \001(\t\"\231\001\n\025M" +
+      "oinGameRequest\022\022\n\nlockString\030\001 \001(\t\"\227\001\n\025M" +
       "atchJoinGameResponse\022\024\n\terrorCode\030\001 \001(\005:" +
       "\0011\022N\n\014gameRoleData\030\002 \003(\01328.com.randioo.m" +
       "ahjong_public_server.protocol.GameRoleDa" +
-      "ta\022\n\n\002id\030\003 \001(\t\022\016\n\006seated\030\004 \001(\005\"a\n\017SCMatc" +
-      "hJoinGame\022N\n\014gameRoleData\030\001 \001(\01328.com.ra" +
-      "ndioo.mahjong_public_server.protocol.Gam" +
-      "eRoleData"
+      "ta\022\n\n\002id\030\003 \001(\t\022\014\n\004seat\030\004 \001(\005\"a\n\017SCMatchJ" +
+      "oinGame\022N\n\014gameRoleData\030\001 \001(\01328.com.rand" +
+      "ioo.mahjong_public_server.protocol.GameR" +
+      "oleData"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2501,7 +2501,7 @@ public final class Match {
           internal_static_com_randioo_mahjong_public_server_protocol_MatchJoinGameResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_randioo_mahjong_public_server_protocol_MatchJoinGameResponse_descriptor,
-              new java.lang.String[] { "ErrorCode", "GameRoleData", "Id", "Seated", },
+              new java.lang.String[] { "ErrorCode", "GameRoleData", "Id", "Seat", },
               com.randioo.mahjong_public_server.protocol.Match.MatchJoinGameResponse.class,
               com.randioo.mahjong_public_server.protocol.Match.MatchJoinGameResponse.Builder.class);
           internal_static_com_randioo_mahjong_public_server_protocol_SCMatchJoinGame_descriptor =

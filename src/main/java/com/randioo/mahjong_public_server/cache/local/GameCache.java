@@ -42,7 +42,7 @@ public class GameCache {
 
 	public static Map<Class<? extends CardList>, Function> getAddProtoFunctionMap() {
 		return addProtoFunctionMap;
-	}
+	}	
 
 	public static List<Class<? extends CardList>> getCheckSelfCardList() {
 		return checkSelfCardList;
