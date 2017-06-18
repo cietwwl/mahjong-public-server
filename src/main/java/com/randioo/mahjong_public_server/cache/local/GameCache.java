@@ -40,7 +40,7 @@ public class GameCache {
 		return parseCardListToProtoFunctionMap;
 	}
 
-	public static Map<Class<? extends CardList>, Function> getAddProtoFunctionMap() {
+	public static Map<Class<? extends CardList>, Function> getNoticeChooseCardListFunctionMap() {
 		return addProtoFunctionMap;
 	}	
 
