@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import com.randioo.mahjong_public_server.entity.po.CallCardList;
 import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
@@ -32,6 +34,8 @@ public class Game {
 	private List<String> roleIdList = new ArrayList<>();
 	// 当前玩家id
 	private int currentRoleIdIndex;
+	// 当前指针指向的目标牌
+	private int currentCardSeatIndex;
 	// 游戏倍数
 	private int multiple;
 	// 出牌计数
@@ -39,13 +43,15 @@ public class Game {
 	// 出牌的时间戳
 	private int sendCardTime;
 	// 庄家的玩家id
-	private String zhuangGameRoleId;
+	private int zhuangSeat = -1;
 	// 剩余的牌
 	private List<Integer> remainCards = new ArrayList<>();
 	// 桌上的牌<索引id,出牌的列表>
 	private Map<Integer, List<Integer>> desktopCardMap = new HashMap<>();
 	// 每个人每次叫牌的临时存储
 	private List<CallCardList> callCardLists = new ArrayList<>();
+	// 每个人胡的牌要另外再存一份
+	private List<CallCardList> huCallCardLists = new ArrayList<>();
 	// 出牌放在桌上的表
 	private Map<Integer, List<Integer>> sendDesktopCardMap = new HashMap<>();
 
@@ -145,12 +151,12 @@ public class Game {
 		this.sendCardTime = sendCardTime;
 	}
 
-	public String getZhuangGameRoleId() {
-		return zhuangGameRoleId;
+	public int getZhuangSeat() {
+		return zhuangSeat;
 	}
 
-	public void setZhuangGameRoleId(String zhuangGameRoleId) {
-		this.zhuangGameRoleId = zhuangGameRoleId;
+	public void setZhuangSeat(int zhuangSeat) {
+		this.zhuangSeat = zhuangSeat;
 	}
 
 	/**
@@ -172,5 +178,23 @@ public class Game {
 
 	public List<CallCardList> getCallCardLists() {
 		return callCardLists;
+	}
+
+	/**
+	 * 当前指针指向的目标牌
+	 * 
+	 * @return
+	 * @author wcy 2017年6月16日
+	 */
+	public int getCurrentCardSeatIndex() {
+		return currentCardSeatIndex;
+	}
+
+	public void setCurrentCardSeatIndex(int currentCardSeatIndex) {
+		this.currentCardSeatIndex = currentCardSeatIndex;
+	}
+
+	public List<CallCardList> getHuCallCardLists() {
+		return huCallCardLists;
 	}
 }

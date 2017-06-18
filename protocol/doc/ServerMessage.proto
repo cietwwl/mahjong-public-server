@@ -29,29 +29,28 @@ message SC{
 	optional FightAgreeExitGameResponse FightAgreeExitGameResponse = 17;//同意游戏退出
 	optional SCFightGameDismiss SCFightGameDismiss = 18;//游戏解散
 	optional SCFightLoadResource SCFightLoadResource = 19;//游戏资源加载(用于匹配)
-	optional SCFightPutOut SCFightPutOut = 20;//通知出牌
+	optional SCFightNoticeSendCard SCFightNoticeSendCard = 20;//通知出牌
 	optional FightSendCardResponse FightSendCardResponse = 21;
 	optional SCFightSendCard SCFightSendCard = 22;
 	optional SCAgreeExitGame SCAgreeExitGame = 23;
-	optional SCFightMingPai SCFightMingPai = 24;
-	optional SCFightRoundOver SCFightRoundOver = 25;
-	optional FightRecommandResponse FightRecommandResponse = 26;
-	optional SCFightGameOver SCFightGameOver = 27;
-	optional FightMingPaiResponse FightMingPaiResponse = 28;
-	optional FightGetlastRoundResponse FightGetlastRoundResponse = 29;
-	optional SCFightTouchCard SCFightTouchCard = 30;//摸一张牌
-	optional SCFightNoticeChooseCardList SCFightNoticeChooseCardList = 31;//通知杠碰胡
-	optional FightPengResponse FightPengResponse = 32;
-	optional SCFightPeng SCFightPeng = 33;
-	optional FightGangResponse FightGangResponse = 34;
-	optional SCFightGang SCFightGang = 35;
-	optional FightHuResponse FightHuResponse = 36;
-	optional SCFightHu SCFightHu = 37;
-	optional FightGuoResponse FightGuoResponse = 38;
-	optional SCFightGuo SCFightGuo = 39;
+	optional SCFightRoundOver SCFightRoundOver = 24;
+	optional FightRecommandResponse FightRecommandResponse = 25;
+	optional SCFightGameOver SCFightGameOver = 26;
+	optional FightGetlastRoundResponse FightGetlastRoundResponse = 27;
+	optional SCFightTouchCard SCFightTouchCard = 28;//摸一张牌
+	optional SCFightNoticeChooseCardList SCFightNoticeChooseCardList = 29;//通知所有人的杠碰胡
+	optional FightPengResponse FightPengResponse = 30;
+	optional SCFightPeng SCFightPeng = 31;
+	optional FightGangResponse FightGangResponse = 32;
+	optional SCFightGang SCFightGang = 33;
+	optional FightHuResponse FightHuResponse = 34;
+	optional SCFightHu SCFightHu = 35;
+	optional FightGuoResponse FightGuoResponse = 36;
+	optional SCFightGuo SCFightGuo = 37;
+	optional SCFightCountdown SCFightCountdown = 38;
 
-	optional MoneyExchangeResponse MoneyExchangeResponse = 40;//燃点币游戏币（欢乐豆）互换
+	optional MoneyExchangeResponse MoneyExchangeResponse = 39;//燃点币游戏币（欢乐豆）互换
 	
-	optional SettingsResponse SettingsResponse = 41;//设置
-	optional SettingsShowResponse SettingsShowResponse = 42;//设置
-} // 42
+	optional SettingsResponse SettingsResponse = 40;//设置
+	optional SettingsShowResponse SettingsShowResponse = 41;//设置
+} // 41

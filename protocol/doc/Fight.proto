@@ -55,15 +55,6 @@ message SCFightReady{//
 	optional int32 seat = 1;
 }
 
-message SCFightMingPai{
-	optional int32 seat = 1;
-	repeated int32 pai = 2;	
-}
-message FightMingPaiRequest{
-}
-message FightMingPaiResponse{
-	optional int32 errorCode = 1 [default = 1];
-}
 
 message FightGetlastRoundRequest{
 }
@@ -97,6 +88,7 @@ message SCFightStart{//
 	optional int32 times = 2;	
 	repeated PaiNum PaiNum = 3;
 	optional int32 remainCardCount = 4;
+	optional int32 zhuangSeat = 5;
 }
 
 message SCFightRoundOver{
@@ -113,9 +105,8 @@ message SCFightGameOver{
 	repeated GameOverData gameOverData = 1;
 }
 
-message SCFightPutOut{
+message SCFightNoticeSendCard{
 	optional int32 seat = 1;
-	optional int32 countdown = 2;
 }
 
 message FightSendCardRequest{
@@ -142,25 +133,32 @@ message SCFightNoticeChooseCardList{
 	repeated CallHuData callHuData = 1;
 	optional CallGangData callGangData = 2;
 	optional CallPengData callPengData = 3;
-	repeated CallShunData callShunData = 4;
-	optional bool guo = 5;
+	repeated CallChiData callChiData = 4;
+	optional int32 seat = 5;
+	optional int32 tempGameCount = 6;
+}
+
+message SCFightCountdown{
+	optional int32 countdown = 1;
 }
 
 message FightPengRequest{
-	
+	optional int32 tempGameCount = 1;
+	optional int32 callCardListId = 2;
 }
 
 message FightPengResponse{
-	
+	optional int32 errorCode = 1[default = 1];	
 }
 
 message SCFightPeng{
 	optional int32 seat = 1;
-	optional int32 card = 2;
+	optional PengData pengData = 2;
 }
 
 message FightGangRequest{
-	
+	optional int32 tempGameCount = 1;
+	optional int32 callCardListId = 2;
 }
 
 message FightGangResponse{
@@ -174,7 +172,8 @@ message SCFightGang{
 }
 
 message FightHuRequest{
-	
+	optional int32 tempGameCount = 1;
+	optional int32 callCardListId = 2;
 }
 
 message FightHuResponse{

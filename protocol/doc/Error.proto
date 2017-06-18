@@ -42,4 +42,8 @@ enum ErrorCode{
 	NOT_LANDLORD = 27;//你不是地主
 	MINGPAI_FORBIDDEN = 28;//不能明牌
 	FIRST_ROUND = 29;//第一轮
-} // 29
+
+	//战斗
+	FIGHT_TIME_PASS = 30;//时间过期
+	FIGHT_MORE_CARD = 31;//牌多了一张，有问题
+} // 31

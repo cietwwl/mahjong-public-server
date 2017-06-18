@@ -10,10 +10,9 @@ public class Lists {
 	 * @param arr
 	 * @return
 	 */
-	public static List<Integer> fillList(List<Integer> list, int[] arr) {
+	public static void fillList(List<Integer> list, int[] arr) {
 		for (int i : arr)
 			list.add(i);
 
-		return list;
 	}
 }

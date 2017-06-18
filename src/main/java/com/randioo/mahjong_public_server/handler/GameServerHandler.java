@@ -13,7 +13,7 @@ import com.randioo.mahjong_public_server.entity.bo.Role;
 import com.randioo.mahjong_public_server.module.close.service.CloseService;
 import com.randioo.mahjong_public_server.protocol.ClientMessage.CS;
 import com.randioo.randioo_server_base.cache.RoleCache;
-import com.randioo.randioo_server_base.net.GameServerHandlerAdapter;
+import com.randioo.randioo_server_base.handler.GameServerHandlerAdapter;
 import com.randioo.randioo_server_base.utils.TimeUtils;
 
 @Component

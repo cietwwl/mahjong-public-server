@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import com.randioo.mahjong_public_server.entity.bo.Role;
 import com.randioo.mahjong_public_server.module.close.service.CloseService;
 import com.randioo.randioo_server_base.cache.RoleCache;
-import com.randioo.randioo_server_base.net.BackgroundServerHandlerAdapter;
+import com.randioo.randioo_server_base.handler.BackgroundServerHandlerAdapter;
 import com.randioo.randioo_server_base.protocol.randioo.Message;
 import com.randioo.randioo_server_base.utils.TimeUtils;
 

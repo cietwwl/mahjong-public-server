@@ -8,6 +8,7 @@ public class FightConstant {
 	public static final String NEXT_ROLE_TO_CALL_LANDLORD = "next_role_to_call_landlord";
 	public static final String APPLY_LEAVE = "apply_leave";
 	public static final String GAME_OVER = "game_over";
+	public static final String FIGHT_NOTICE_SEND_CARD = "fight_notice_send_card";
 
 	public static final int SCORE_3 = 3;
 
@@ -19,5 +20,6 @@ public class FightConstant {
 	public static final int PENG = 2;
 	public static final int GANE = 3;
 	public static final int HU = 4;
+
 
 }

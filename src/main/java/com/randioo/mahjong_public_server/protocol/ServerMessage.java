@@ -168,12 +168,12 @@ public final class ServerMessage {
     public boolean hasSCFightLoadResource() { return hasSCFightLoadResource; }
     public com.randioo.mahjong_public_server.protocol.Fight.SCFightLoadResource getSCFightLoadResource() { return sCFightLoadResource_; }
     
-    // optional .com.randioo.mahjong_public_server.protocol.SCFightPutOut SCFightPutOut = 20;
-    public static final int SCFIGHTPUTOUT_FIELD_NUMBER = 20;
-    private boolean hasSCFightPutOut;
-    private com.randioo.mahjong_public_server.protocol.Fight.SCFightPutOut sCFightPutOut_;
-    public boolean hasSCFightPutOut() { return hasSCFightPutOut; }
-    public com.randioo.mahjong_public_server.protocol.Fight.SCFightPutOut getSCFightPutOut() { return sCFightPutOut_; }
+    // optional .com.randioo.mahjong_public_server.protocol.SCFightNoticeSendCard SCFightNoticeSendCard = 20;
+    public static final int SCFIGHTNOTICESENDCARD_FIELD_NUMBER = 20;
+    private boolean hasSCFightNoticeSendCard;
+    private com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeSendCard sCFightNoticeSendCard_;
+    public boolean hasSCFightNoticeSendCard() { return hasSCFightNoticeSendCard; }
+    public com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeSendCard getSCFightNoticeSendCard() { return sCFightNoticeSendCard_; }
     
     // optional .com.randioo.mahjong_public_server.protocol.FightSendCardResponse FightSendCardResponse = 21;
     public static final int FIGHTSENDCARDRESPONSE_FIELD_NUMBER = 21;
@@ -196,134 +196,127 @@ public final class ServerMessage {
     public boolean hasSCAgreeExitGame() { return hasSCAgreeExitGame; }
     public com.randioo.mahjong_public_server.protocol.Fight.SCAgreeExitGame getSCAgreeExitGame() { return sCAgreeExitGame_; }
     
-    // optional .com.randioo.mahjong_public_server.protocol.SCFightMingPai SCFightMingPai = 24;
-    public static final int SCFIGHTMINGPAI_FIELD_NUMBER = 24;
-    private boolean hasSCFightMingPai;
-    private com.randioo.mahjong_public_server.protocol.Fight.SCFightMingPai sCFightMingPai_;
-    public boolean hasSCFightMingPai() { return hasSCFightMingPai; }
-    public com.randioo.mahjong_public_server.protocol.Fight.SCFightMingPai getSCFightMingPai() { return sCFightMingPai_; }
-    
-    // optional .com.randioo.mahjong_public_server.protocol.SCFightRoundOver SCFightRoundOver = 25;
-    public static final int SCFIGHTROUNDOVER_FIELD_NUMBER = 25;
+    // optional .com.randioo.mahjong_public_server.protocol.SCFightRoundOver SCFightRoundOver = 24;
+    public static final int SCFIGHTROUNDOVER_FIELD_NUMBER = 24;
     private boolean hasSCFightRoundOver;
     private com.randioo.mahjong_public_server.protocol.Fight.SCFightRoundOver sCFightRoundOver_;
     public boolean hasSCFightRoundOver() { return hasSCFightRoundOver; }
     public com.randioo.mahjong_public_server.protocol.Fight.SCFightRoundOver getSCFightRoundOver() { return sCFightRoundOver_; }
     
-    // optional .com.randioo.mahjong_public_server.protocol.FightRecommandResponse FightRecommandResponse = 26;
-    public static final int FIGHTRECOMMANDRESPONSE_FIELD_NUMBER = 26;
+    // optional .com.randioo.mahjong_public_server.protocol.FightRecommandResponse FightRecommandResponse = 25;
+    public static final int FIGHTRECOMMANDRESPONSE_FIELD_NUMBER = 25;
     private boolean hasFightRecommandResponse;
     private com.randioo.mahjong_public_server.protocol.Fight.FightRecommandResponse fightRecommandResponse_;
     public boolean hasFightRecommandResponse() { return hasFightRecommandResponse; }
     public com.randioo.mahjong_public_server.protocol.Fight.FightRecommandResponse getFightRecommandResponse() { return fightRecommandResponse_; }
     
-    // optional .com.randioo.mahjong_public_server.protocol.SCFightGameOver SCFightGameOver = 27;
-    public static final int SCFIGHTGAMEOVER_FIELD_NUMBER = 27;
+    // optional .com.randioo.mahjong_public_server.protocol.SCFightGameOver SCFightGameOver = 26;
+    public static final int SCFIGHTGAMEOVER_FIELD_NUMBER = 26;
     private boolean hasSCFightGameOver;
     private com.randioo.mahjong_public_server.protocol.Fight.SCFightGameOver sCFightGameOver_;
     public boolean hasSCFightGameOver() { return hasSCFightGameOver; }
     public com.randioo.mahjong_public_server.protocol.Fight.SCFightGameOver getSCFightGameOver() { return sCFightGameOver_; }
     
-    // optional .com.randioo.mahjong_public_server.protocol.FightMingPaiResponse FightMingPaiResponse = 28;
-    public static final int FIGHTMINGPAIRESPONSE_FIELD_NUMBER = 28;
-    private boolean hasFightMingPaiResponse;
-    private com.randioo.mahjong_public_server.protocol.Fight.FightMingPaiResponse fightMingPaiResponse_;
-    public boolean hasFightMingPaiResponse() { return hasFightMingPaiResponse; }
-    public com.randioo.mahjong_public_server.protocol.Fight.FightMingPaiResponse getFightMingPaiResponse() { return fightMingPaiResponse_; }
-    
-    // optional .com.randioo.mahjong_public_server.protocol.FightGetlastRoundResponse FightGetlastRoundResponse = 29;
-    public static final int FIGHTGETLASTROUNDRESPONSE_FIELD_NUMBER = 29;
+    // optional .com.randioo.mahjong_public_server.protocol.FightGetlastRoundResponse FightGetlastRoundResponse = 27;
+    public static final int FIGHTGETLASTROUNDRESPONSE_FIELD_NUMBER = 27;
     private boolean hasFightGetlastRoundResponse;
     private com.randioo.mahjong_public_server.protocol.Fight.FightGetlastRoundResponse fightGetlastRoundResponse_;
     public boolean hasFightGetlastRoundResponse() { return hasFightGetlastRoundResponse; }
     public com.randioo.mahjong_public_server.protocol.Fight.FightGetlastRoundResponse getFightGetlastRoundResponse() { return fightGetlastRoundResponse_; }
     
-    // optional .com.randioo.mahjong_public_server.protocol.SCFightTouchCard SCFightTouchCard = 30;
-    public static final int SCFIGHTTOUCHCARD_FIELD_NUMBER = 30;
+    // optional .com.randioo.mahjong_public_server.protocol.SCFightTouchCard SCFightTouchCard = 28;
+    public static final int SCFIGHTTOUCHCARD_FIELD_NUMBER = 28;
     private boolean hasSCFightTouchCard;
     private com.randioo.mahjong_public_server.protocol.Fight.SCFightTouchCard sCFightTouchCard_;
     public boolean hasSCFightTouchCard() { return hasSCFightTouchCard; }
     public com.randioo.mahjong_public_server.protocol.Fight.SCFightTouchCard getSCFightTouchCard() { return sCFightTouchCard_; }
     
-    // optional .com.randioo.mahjong_public_server.protocol.SCFightNoticeChooseCardList SCFightNoticeChooseCardList = 31;
-    public static final int SCFIGHTNOTICECHOOSECARDLIST_FIELD_NUMBER = 31;
+    // optional .com.randioo.mahjong_public_server.protocol.SCFightNoticeChooseCardList SCFightNoticeChooseCardList = 29;
+    public static final int SCFIGHTNOTICECHOOSECARDLIST_FIELD_NUMBER = 29;
     private boolean hasSCFightNoticeChooseCardList;
     private com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeChooseCardList sCFightNoticeChooseCardList_;
     public boolean hasSCFightNoticeChooseCardList() { return hasSCFightNoticeChooseCardList; }
     public com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeChooseCardList getSCFightNoticeChooseCardList() { return sCFightNoticeChooseCardList_; }
     
-    // optional .com.randioo.mahjong_public_server.protocol.FightPengResponse FightPengResponse = 32;
-    public static final int FIGHTPENGRESPONSE_FIELD_NUMBER = 32;
+    // optional .com.randioo.mahjong_public_server.protocol.FightPengResponse FightPengResponse = 30;
+    public static final int FIGHTPENGRESPONSE_FIELD_NUMBER = 30;
     private boolean hasFightPengResponse;
     private com.randioo.mahjong_public_server.protocol.Fight.FightPengResponse fightPengResponse_;
     public boolean hasFightPengResponse() { return hasFightPengResponse; }
     public com.randioo.mahjong_public_server.protocol.Fight.FightPengResponse getFightPengResponse() { return fightPengResponse_; }
     
-    // optional .com.randioo.mahjong_public_server.protocol.SCFightPeng SCFightPeng = 33;
-    public static final int SCFIGHTPENG_FIELD_NUMBER = 33;
+    // optional .com.randioo.mahjong_public_server.protocol.SCFightPeng SCFightPeng = 31;
+    public static final int SCFIGHTPENG_FIELD_NUMBER = 31;
     private boolean hasSCFightPeng;
     private com.randioo.mahjong_public_server.protocol.Fight.SCFightPeng sCFightPeng_;
     public boolean hasSCFightPeng() { return hasSCFightPeng; }
     public com.randioo.mahjong_public_server.protocol.Fight.SCFightPeng getSCFightPeng() { return sCFightPeng_; }
     
-    // optional .com.randioo.mahjong_public_server.protocol.FightGangResponse FightGangResponse = 34;
-    public static final int FIGHTGANGRESPONSE_FIELD_NUMBER = 34;
+    // optional .com.randioo.mahjong_public_server.protocol.FightGangResponse FightGangResponse = 32;
+    public static final int FIGHTGANGRESPONSE_FIELD_NUMBER = 32;
     private boolean hasFightGangResponse;
     private com.randioo.mahjong_public_server.protocol.Fight.FightGangResponse fightGangResponse_;
     public boolean hasFightGangResponse() { return hasFightGangResponse; }
     public com.randioo.mahjong_public_server.protocol.Fight.FightGangResponse getFightGangResponse() { return fightGangResponse_; }
     
-    // optional .com.randioo.mahjong_public_server.protocol.SCFightGang SCFightGang = 35;
-    public static final int SCFIGHTGANG_FIELD_NUMBER = 35;
+    // optional .com.randioo.mahjong_public_server.protocol.SCFightGang SCFightGang = 33;
+    public static final int SCFIGHTGANG_FIELD_NUMBER = 33;
     private boolean hasSCFightGang;
     private com.randioo.mahjong_public_server.protocol.Fight.SCFightGang sCFightGang_;
     public boolean hasSCFightGang() { return hasSCFightGang; }
     public com.randioo.mahjong_public_server.protocol.Fight.SCFightGang getSCFightGang() { return sCFightGang_; }
     
-    // optional .com.randioo.mahjong_public_server.protocol.FightHuResponse FightHuResponse = 36;
-    public static final int FIGHTHURESPONSE_FIELD_NUMBER = 36;
+    // optional .com.randioo.mahjong_public_server.protocol.FightHuResponse FightHuResponse = 34;
+    public static final int FIGHTHURESPONSE_FIELD_NUMBER = 34;
     private boolean hasFightHuResponse;
     private com.randioo.mahjong_public_server.protocol.Fight.FightHuResponse fightHuResponse_;
     public boolean hasFightHuResponse() { return hasFightHuResponse; }
     public com.randioo.mahjong_public_server.protocol.Fight.FightHuResponse getFightHuResponse() { return fightHuResponse_; }
     
-    // optional .com.randioo.mahjong_public_server.protocol.SCFightHu SCFightHu = 37;
-    public static final int SCFIGHTHU_FIELD_NUMBER = 37;
+    // optional .com.randioo.mahjong_public_server.protocol.SCFightHu SCFightHu = 35;
+    public static final int SCFIGHTHU_FIELD_NUMBER = 35;
     private boolean hasSCFightHu;
     private com.randioo.mahjong_public_server.protocol.Fight.SCFightHu sCFightHu_;
     public boolean hasSCFightHu() { return hasSCFightHu; }
     public com.randioo.mahjong_public_server.protocol.Fight.SCFightHu getSCFightHu() { return sCFightHu_; }
     
-    // optional .com.randioo.mahjong_public_server.protocol.FightGuoResponse FightGuoResponse = 38;
-    public static final int FIGHTGUORESPONSE_FIELD_NUMBER = 38;
+    // optional .com.randioo.mahjong_public_server.protocol.FightGuoResponse FightGuoResponse = 36;
+    public static final int FIGHTGUORESPONSE_FIELD_NUMBER = 36;
     private boolean hasFightGuoResponse;
     private com.randioo.mahjong_public_server.protocol.Fight.FightGuoResponse fightGuoResponse_;
     public boolean hasFightGuoResponse() { return hasFightGuoResponse; }
     public com.randioo.mahjong_public_server.protocol.Fight.FightGuoResponse getFightGuoResponse() { return fightGuoResponse_; }
     
-    // optional .com.randioo.mahjong_public_server.protocol.SCFightGuo SCFightGuo = 39;
-    public static final int SCFIGHTGUO_FIELD_NUMBER = 39;
+    // optional .com.randioo.mahjong_public_server.protocol.SCFightGuo SCFightGuo = 37;
+    public static final int SCFIGHTGUO_FIELD_NUMBER = 37;
     private boolean hasSCFightGuo;
     private com.randioo.mahjong_public_server.protocol.Fight.SCFightGuo sCFightGuo_;
     public boolean hasSCFightGuo() { return hasSCFightGuo; }
     public com.randioo.mahjong_public_server.protocol.Fight.SCFightGuo getSCFightGuo() { return sCFightGuo_; }
     
-    // optional .com.randioo.mahjong_public_server.protocol.MoneyExchangeResponse MoneyExchangeResponse = 40;
-    public static final int MONEYEXCHANGERESPONSE_FIELD_NUMBER = 40;
+    // optional .com.randioo.mahjong_public_server.protocol.SCFightCountdown SCFightCountdown = 38;
+    public static final int SCFIGHTCOUNTDOWN_FIELD_NUMBER = 38;
+    private boolean hasSCFightCountdown;
+    private com.randioo.mahjong_public_server.protocol.Fight.SCFightCountdown sCFightCountdown_;
+    public boolean hasSCFightCountdown() { return hasSCFightCountdown; }
+    public com.randioo.mahjong_public_server.protocol.Fight.SCFightCountdown getSCFightCountdown() { return sCFightCountdown_; }
+    
+    // optional .com.randioo.mahjong_public_server.protocol.MoneyExchangeResponse MoneyExchangeResponse = 39;
+    public static final int MONEYEXCHANGERESPONSE_FIELD_NUMBER = 39;
     private boolean hasMoneyExchangeResponse;
     private com.randioo.mahjong_public_server.protocol.MoneyExchange.MoneyExchangeResponse moneyExchangeResponse_;
     public boolean hasMoneyExchangeResponse() { return hasMoneyExchangeResponse; }
     public com.randioo.mahjong_public_server.protocol.MoneyExchange.MoneyExchangeResponse getMoneyExchangeResponse() { return moneyExchangeResponse_; }
     
-    // optional .com.randioo.mahjong_public_server.protocol.SettingsResponse SettingsResponse = 41;
-    public static final int SETTINGSRESPONSE_FIELD_NUMBER = 41;
+    // optional .com.randioo.mahjong_public_server.protocol.SettingsResponse SettingsResponse = 40;
+    public static final int SETTINGSRESPONSE_FIELD_NUMBER = 40;
     private boolean hasSettingsResponse;
     private com.randioo.mahjong_public_server.protocol.Settings.SettingsResponse settingsResponse_;
     public boolean hasSettingsResponse() { return hasSettingsResponse; }
     public com.randioo.mahjong_public_server.protocol.Settings.SettingsResponse getSettingsResponse() { return settingsResponse_; }
     
-    // optional .com.randioo.mahjong_public_server.protocol.SettingsShowResponse SettingsShowResponse = 42;
-    public static final int SETTINGSSHOWRESPONSE_FIELD_NUMBER = 42;
+    // optional .com.randioo.mahjong_public_server.protocol.SettingsShowResponse SettingsShowResponse = 41;
+    public static final int SETTINGSSHOWRESPONSE_FIELD_NUMBER = 41;
     private boolean hasSettingsShowResponse;
     private com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse settingsShowResponse_;
     public boolean hasSettingsShowResponse() { return hasSettingsShowResponse; }
@@ -349,15 +342,13 @@ public final class ServerMessage {
       fightAgreeExitGameResponse_ = com.randioo.mahjong_public_server.protocol.Fight.FightAgreeExitGameResponse.getDefaultInstance();
       sCFightGameDismiss_ = com.randioo.mahjong_public_server.protocol.Fight.SCFightGameDismiss.getDefaultInstance();
       sCFightLoadResource_ = com.randioo.mahjong_public_server.protocol.Fight.SCFightLoadResource.getDefaultInstance();
-      sCFightPutOut_ = com.randioo.mahjong_public_server.protocol.Fight.SCFightPutOut.getDefaultInstance();
+      sCFightNoticeSendCard_ = com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeSendCard.getDefaultInstance();
       fightSendCardResponse_ = com.randioo.mahjong_public_server.protocol.Fight.FightSendCardResponse.getDefaultInstance();
       sCFightSendCard_ = com.randioo.mahjong_public_server.protocol.Fight.SCFightSendCard.getDefaultInstance();
       sCAgreeExitGame_ = com.randioo.mahjong_public_server.protocol.Fight.SCAgreeExitGame.getDefaultInstance();
-      sCFightMingPai_ = com.randioo.mahjong_public_server.protocol.Fight.SCFightMingPai.getDefaultInstance();
       sCFightRoundOver_ = com.randioo.mahjong_public_server.protocol.Fight.SCFightRoundOver.getDefaultInstance();
       fightRecommandResponse_ = com.randioo.mahjong_public_server.protocol.Fight.FightRecommandResponse.getDefaultInstance();
       sCFightGameOver_ = com.randioo.mahjong_public_server.protocol.Fight.SCFightGameOver.getDefaultInstance();
-      fightMingPaiResponse_ = com.randioo.mahjong_public_server.protocol.Fight.FightMingPaiResponse.getDefaultInstance();
       fightGetlastRoundResponse_ = com.randioo.mahjong_public_server.protocol.Fight.FightGetlastRoundResponse.getDefaultInstance();
       sCFightTouchCard_ = com.randioo.mahjong_public_server.protocol.Fight.SCFightTouchCard.getDefaultInstance();
       sCFightNoticeChooseCardList_ = com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeChooseCardList.getDefaultInstance();
@@ -369,6 +360,7 @@ public final class ServerMessage {
       sCFightHu_ = com.randioo.mahjong_public_server.protocol.Fight.SCFightHu.getDefaultInstance();
       fightGuoResponse_ = com.randioo.mahjong_public_server.protocol.Fight.FightGuoResponse.getDefaultInstance();
       sCFightGuo_ = com.randioo.mahjong_public_server.protocol.Fight.SCFightGuo.getDefaultInstance();
+      sCFightCountdown_ = com.randioo.mahjong_public_server.protocol.Fight.SCFightCountdown.getDefaultInstance();
       moneyExchangeResponse_ = com.randioo.mahjong_public_server.protocol.MoneyExchange.MoneyExchangeResponse.getDefaultInstance();
       settingsResponse_ = com.randioo.mahjong_public_server.protocol.Settings.SettingsResponse.getDefaultInstance();
       settingsShowResponse_ = com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse.getDefaultInstance();
@@ -437,8 +429,8 @@ public final class ServerMessage {
       if (hasSCFightLoadResource()) {
         output.writeMessage(19, getSCFightLoadResource());
       }
-      if (hasSCFightPutOut()) {
-        output.writeMessage(20, getSCFightPutOut());
+      if (hasSCFightNoticeSendCard()) {
+        output.writeMessage(20, getSCFightNoticeSendCard());
       }
       if (hasFightSendCardResponse()) {
         output.writeMessage(21, getFightSendCardResponse());
@@ -449,62 +441,59 @@ public final class ServerMessage {
       if (hasSCAgreeExitGame()) {
         output.writeMessage(23, getSCAgreeExitGame());
       }
-      if (hasSCFightMingPai()) {
-        output.writeMessage(24, getSCFightMingPai());
-      }
       if (hasSCFightRoundOver()) {
-        output.writeMessage(25, getSCFightRoundOver());
+        output.writeMessage(24, getSCFightRoundOver());
       }
       if (hasFightRecommandResponse()) {
-        output.writeMessage(26, getFightRecommandResponse());
+        output.writeMessage(25, getFightRecommandResponse());
       }
       if (hasSCFightGameOver()) {
-        output.writeMessage(27, getSCFightGameOver());
-      }
-      if (hasFightMingPaiResponse()) {
-        output.writeMessage(28, getFightMingPaiResponse());
+        output.writeMessage(26, getSCFightGameOver());
       }
       if (hasFightGetlastRoundResponse()) {
-        output.writeMessage(29, getFightGetlastRoundResponse());
+        output.writeMessage(27, getFightGetlastRoundResponse());
       }
       if (hasSCFightTouchCard()) {
-        output.writeMessage(30, getSCFightTouchCard());
+        output.writeMessage(28, getSCFightTouchCard());
       }
       if (hasSCFightNoticeChooseCardList()) {
-        output.writeMessage(31, getSCFightNoticeChooseCardList());
+        output.writeMessage(29, getSCFightNoticeChooseCardList());
       }
       if (hasFightPengResponse()) {
-        output.writeMessage(32, getFightPengResponse());
+        output.writeMessage(30, getFightPengResponse());
       }
       if (hasSCFightPeng()) {
-        output.writeMessage(33, getSCFightPeng());
+        output.writeMessage(31, getSCFightPeng());
       }
       if (hasFightGangResponse()) {
-        output.writeMessage(34, getFightGangResponse());
+        output.writeMessage(32, getFightGangResponse());
       }
       if (hasSCFightGang()) {
-        output.writeMessage(35, getSCFightGang());
+        output.writeMessage(33, getSCFightGang());
       }
       if (hasFightHuResponse()) {
-        output.writeMessage(36, getFightHuResponse());
+        output.writeMessage(34, getFightHuResponse());
       }
       if (hasSCFightHu()) {
-        output.writeMessage(37, getSCFightHu());
+        output.writeMessage(35, getSCFightHu());
       }
       if (hasFightGuoResponse()) {
-        output.writeMessage(38, getFightGuoResponse());
+        output.writeMessage(36, getFightGuoResponse());
       }
       if (hasSCFightGuo()) {
-        output.writeMessage(39, getSCFightGuo());
+        output.writeMessage(37, getSCFightGuo());
+      }
+      if (hasSCFightCountdown()) {
+        output.writeMessage(38, getSCFightCountdown());
       }
       if (hasMoneyExchangeResponse()) {
-        output.writeMessage(40, getMoneyExchangeResponse());
+        output.writeMessage(39, getMoneyExchangeResponse());
       }
       if (hasSettingsResponse()) {
-        output.writeMessage(41, getSettingsResponse());
+        output.writeMessage(40, getSettingsResponse());
       }
       if (hasSettingsShowResponse()) {
-        output.writeMessage(42, getSettingsShowResponse());
+        output.writeMessage(41, getSettingsShowResponse());
       }
       getUnknownFields().writeTo(output);
     }
@@ -591,9 +580,9 @@ public final class ServerMessage {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(19, getSCFightLoadResource());
       }
-      if (hasSCFightPutOut()) {
+      if (hasSCFightNoticeSendCard()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(20, getSCFightPutOut());
+          .computeMessageSize(20, getSCFightNoticeSendCard());
       }
       if (hasFightSendCardResponse()) {
         size += com.google.protobuf.CodedOutputStream
@@ -607,81 +596,77 @@ public final class ServerMessage {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(23, getSCAgreeExitGame());
       }
-      if (hasSCFightMingPai()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(24, getSCFightMingPai());
-      }
       if (hasSCFightRoundOver()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(25, getSCFightRoundOver());
+          .computeMessageSize(24, getSCFightRoundOver());
       }
       if (hasFightRecommandResponse()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(26, getFightRecommandResponse());
+          .computeMessageSize(25, getFightRecommandResponse());
       }
       if (hasSCFightGameOver()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(27, getSCFightGameOver());
-      }
-      if (hasFightMingPaiResponse()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(28, getFightMingPaiResponse());
+          .computeMessageSize(26, getSCFightGameOver());
       }
       if (hasFightGetlastRoundResponse()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(29, getFightGetlastRoundResponse());
+          .computeMessageSize(27, getFightGetlastRoundResponse());
       }
       if (hasSCFightTouchCard()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(30, getSCFightTouchCard());
+          .computeMessageSize(28, getSCFightTouchCard());
       }
       if (hasSCFightNoticeChooseCardList()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(31, getSCFightNoticeChooseCardList());
+          .computeMessageSize(29, getSCFightNoticeChooseCardList());
       }
       if (hasFightPengResponse()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(32, getFightPengResponse());
+          .computeMessageSize(30, getFightPengResponse());
       }
       if (hasSCFightPeng()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(33, getSCFightPeng());
+          .computeMessageSize(31, getSCFightPeng());
       }
       if (hasFightGangResponse()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(34, getFightGangResponse());
+          .computeMessageSize(32, getFightGangResponse());
       }
       if (hasSCFightGang()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(35, getSCFightGang());
+          .computeMessageSize(33, getSCFightGang());
       }
       if (hasFightHuResponse()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(36, getFightHuResponse());
+          .computeMessageSize(34, getFightHuResponse());
       }
       if (hasSCFightHu()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(37, getSCFightHu());
+          .computeMessageSize(35, getSCFightHu());
       }
       if (hasFightGuoResponse()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(38, getFightGuoResponse());
+          .computeMessageSize(36, getFightGuoResponse());
       }
       if (hasSCFightGuo()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(39, getSCFightGuo());
+          .computeMessageSize(37, getSCFightGuo());
+      }
+      if (hasSCFightCountdown()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(38, getSCFightCountdown());
       }
       if (hasMoneyExchangeResponse()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(40, getMoneyExchangeResponse());
+          .computeMessageSize(39, getMoneyExchangeResponse());
       }
       if (hasSettingsResponse()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(41, getSettingsResponse());
+          .computeMessageSize(40, getSettingsResponse());
       }
       if (hasSettingsShowResponse()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(42, getSettingsShowResponse());
+          .computeMessageSize(41, getSettingsShowResponse());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -898,8 +883,8 @@ public final class ServerMessage {
         if (other.hasSCFightLoadResource()) {
           mergeSCFightLoadResource(other.getSCFightLoadResource());
         }
-        if (other.hasSCFightPutOut()) {
-          mergeSCFightPutOut(other.getSCFightPutOut());
+        if (other.hasSCFightNoticeSendCard()) {
+          mergeSCFightNoticeSendCard(other.getSCFightNoticeSendCard());
         }
         if (other.hasFightSendCardResponse()) {
           mergeFightSendCardResponse(other.getFightSendCardResponse());
@@ -910,9 +895,6 @@ public final class ServerMessage {
         if (other.hasSCAgreeExitGame()) {
           mergeSCAgreeExitGame(other.getSCAgreeExitGame());
         }
-        if (other.hasSCFightMingPai()) {
-          mergeSCFightMingPai(other.getSCFightMingPai());
-        }
         if (other.hasSCFightRoundOver()) {
           mergeSCFightRoundOver(other.getSCFightRoundOver());
         }
@@ -921,9 +903,6 @@ public final class ServerMessage {
         }
         if (other.hasSCFightGameOver()) {
           mergeSCFightGameOver(other.getSCFightGameOver());
-        }
-        if (other.hasFightMingPaiResponse()) {
-          mergeFightMingPaiResponse(other.getFightMingPaiResponse());
         }
         if (other.hasFightGetlastRoundResponse()) {
           mergeFightGetlastRoundResponse(other.getFightGetlastRoundResponse());
@@ -957,6 +936,9 @@ public final class ServerMessage {
         }
         if (other.hasSCFightGuo()) {
           mergeSCFightGuo(other.getSCFightGuo());
+        }
+        if (other.hasSCFightCountdown()) {
+          mergeSCFightCountdown(other.getSCFightCountdown());
         }
         if (other.hasMoneyExchangeResponse()) {
           mergeMoneyExchangeResponse(other.getMoneyExchangeResponse());
@@ -1164,12 +1146,12 @@ public final class ServerMessage {
               break;
             }
             case 162: {
-              com.randioo.mahjong_public_server.protocol.Fight.SCFightPutOut.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Fight.SCFightPutOut.newBuilder();
-              if (hasSCFightPutOut()) {
-                subBuilder.mergeFrom(getSCFightPutOut());
+              com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeSendCard.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeSendCard.newBuilder();
+              if (hasSCFightNoticeSendCard()) {
+                subBuilder.mergeFrom(getSCFightNoticeSendCard());
               }
               input.readMessage(subBuilder, extensionRegistry);
-              setSCFightPutOut(subBuilder.buildPartial());
+              setSCFightNoticeSendCard(subBuilder.buildPartial());
               break;
             }
             case 170: {
@@ -1200,15 +1182,6 @@ public final class ServerMessage {
               break;
             }
             case 194: {
-              com.randioo.mahjong_public_server.protocol.Fight.SCFightMingPai.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Fight.SCFightMingPai.newBuilder();
-              if (hasSCFightMingPai()) {
-                subBuilder.mergeFrom(getSCFightMingPai());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setSCFightMingPai(subBuilder.buildPartial());
-              break;
-            }
-            case 202: {
               com.randioo.mahjong_public_server.protocol.Fight.SCFightRoundOver.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Fight.SCFightRoundOver.newBuilder();
               if (hasSCFightRoundOver()) {
                 subBuilder.mergeFrom(getSCFightRoundOver());
@@ -1217,7 +1190,7 @@ public final class ServerMessage {
               setSCFightRoundOver(subBuilder.buildPartial());
               break;
             }
-            case 210: {
+            case 202: {
               com.randioo.mahjong_public_server.protocol.Fight.FightRecommandResponse.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Fight.FightRecommandResponse.newBuilder();
               if (hasFightRecommandResponse()) {
                 subBuilder.mergeFrom(getFightRecommandResponse());
@@ -1226,7 +1199,7 @@ public final class ServerMessage {
               setFightRecommandResponse(subBuilder.buildPartial());
               break;
             }
-            case 218: {
+            case 210: {
               com.randioo.mahjong_public_server.protocol.Fight.SCFightGameOver.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Fight.SCFightGameOver.newBuilder();
               if (hasSCFightGameOver()) {
                 subBuilder.mergeFrom(getSCFightGameOver());
@@ -1235,16 +1208,7 @@ public final class ServerMessage {
               setSCFightGameOver(subBuilder.buildPartial());
               break;
             }
-            case 226: {
-              com.randioo.mahjong_public_server.protocol.Fight.FightMingPaiResponse.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Fight.FightMingPaiResponse.newBuilder();
-              if (hasFightMingPaiResponse()) {
-                subBuilder.mergeFrom(getFightMingPaiResponse());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setFightMingPaiResponse(subBuilder.buildPartial());
-              break;
-            }
-            case 234: {
+            case 218: {
               com.randioo.mahjong_public_server.protocol.Fight.FightGetlastRoundResponse.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Fight.FightGetlastRoundResponse.newBuilder();
               if (hasFightGetlastRoundResponse()) {
                 subBuilder.mergeFrom(getFightGetlastRoundResponse());
@@ -1253,7 +1217,7 @@ public final class ServerMessage {
               setFightGetlastRoundResponse(subBuilder.buildPartial());
               break;
             }
-            case 242: {
+            case 226: {
               com.randioo.mahjong_public_server.protocol.Fight.SCFightTouchCard.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Fight.SCFightTouchCard.newBuilder();
               if (hasSCFightTouchCard()) {
                 subBuilder.mergeFrom(getSCFightTouchCard());
@@ -1262,7 +1226,7 @@ public final class ServerMessage {
               setSCFightTouchCard(subBuilder.buildPartial());
               break;
             }
-            case 250: {
+            case 234: {
               com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeChooseCardList.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeChooseCardList.newBuilder();
               if (hasSCFightNoticeChooseCardList()) {
                 subBuilder.mergeFrom(getSCFightNoticeChooseCardList());
@@ -1271,7 +1235,7 @@ public final class ServerMessage {
               setSCFightNoticeChooseCardList(subBuilder.buildPartial());
               break;
             }
-            case 258: {
+            case 242: {
               com.randioo.mahjong_public_server.protocol.Fight.FightPengResponse.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Fight.FightPengResponse.newBuilder();
               if (hasFightPengResponse()) {
                 subBuilder.mergeFrom(getFightPengResponse());
@@ -1280,7 +1244,7 @@ public final class ServerMessage {
               setFightPengResponse(subBuilder.buildPartial());
               break;
             }
-            case 266: {
+            case 250: {
               com.randioo.mahjong_public_server.protocol.Fight.SCFightPeng.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Fight.SCFightPeng.newBuilder();
               if (hasSCFightPeng()) {
                 subBuilder.mergeFrom(getSCFightPeng());
@@ -1289,7 +1253,7 @@ public final class ServerMessage {
               setSCFightPeng(subBuilder.buildPartial());
               break;
             }
-            case 274: {
+            case 258: {
               com.randioo.mahjong_public_server.protocol.Fight.FightGangResponse.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Fight.FightGangResponse.newBuilder();
               if (hasFightGangResponse()) {
                 subBuilder.mergeFrom(getFightGangResponse());
@@ -1298,7 +1262,7 @@ public final class ServerMessage {
               setFightGangResponse(subBuilder.buildPartial());
               break;
             }
-            case 282: {
+            case 266: {
               com.randioo.mahjong_public_server.protocol.Fight.SCFightGang.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Fight.SCFightGang.newBuilder();
               if (hasSCFightGang()) {
                 subBuilder.mergeFrom(getSCFightGang());
@@ -1307,7 +1271,7 @@ public final class ServerMessage {
               setSCFightGang(subBuilder.buildPartial());
               break;
             }
-            case 290: {
+            case 274: {
               com.randioo.mahjong_public_server.protocol.Fight.FightHuResponse.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Fight.FightHuResponse.newBuilder();
               if (hasFightHuResponse()) {
                 subBuilder.mergeFrom(getFightHuResponse());
@@ -1316,7 +1280,7 @@ public final class ServerMessage {
               setFightHuResponse(subBuilder.buildPartial());
               break;
             }
-            case 298: {
+            case 282: {
               com.randioo.mahjong_public_server.protocol.Fight.SCFightHu.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Fight.SCFightHu.newBuilder();
               if (hasSCFightHu()) {
                 subBuilder.mergeFrom(getSCFightHu());
@@ -1325,7 +1289,7 @@ public final class ServerMessage {
               setSCFightHu(subBuilder.buildPartial());
               break;
             }
-            case 306: {
+            case 290: {
               com.randioo.mahjong_public_server.protocol.Fight.FightGuoResponse.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Fight.FightGuoResponse.newBuilder();
               if (hasFightGuoResponse()) {
                 subBuilder.mergeFrom(getFightGuoResponse());
@@ -1334,7 +1298,7 @@ public final class ServerMessage {
               setFightGuoResponse(subBuilder.buildPartial());
               break;
             }
-            case 314: {
+            case 298: {
               com.randioo.mahjong_public_server.protocol.Fight.SCFightGuo.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Fight.SCFightGuo.newBuilder();
               if (hasSCFightGuo()) {
                 subBuilder.mergeFrom(getSCFightGuo());
@@ -1343,7 +1307,16 @@ public final class ServerMessage {
               setSCFightGuo(subBuilder.buildPartial());
               break;
             }
-            case 322: {
+            case 306: {
+              com.randioo.mahjong_public_server.protocol.Fight.SCFightCountdown.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Fight.SCFightCountdown.newBuilder();
+              if (hasSCFightCountdown()) {
+                subBuilder.mergeFrom(getSCFightCountdown());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setSCFightCountdown(subBuilder.buildPartial());
+              break;
+            }
+            case 314: {
               com.randioo.mahjong_public_server.protocol.MoneyExchange.MoneyExchangeResponse.Builder subBuilder = com.randioo.mahjong_public_server.protocol.MoneyExchange.MoneyExchangeResponse.newBuilder();
               if (hasMoneyExchangeResponse()) {
                 subBuilder.mergeFrom(getMoneyExchangeResponse());
@@ -1352,7 +1325,7 @@ public final class ServerMessage {
               setMoneyExchangeResponse(subBuilder.buildPartial());
               break;
             }
-            case 330: {
+            case 322: {
               com.randioo.mahjong_public_server.protocol.Settings.SettingsResponse.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Settings.SettingsResponse.newBuilder();
               if (hasSettingsResponse()) {
                 subBuilder.mergeFrom(getSettingsResponse());
@@ -1361,7 +1334,7 @@ public final class ServerMessage {
               setSettingsResponse(subBuilder.buildPartial());
               break;
             }
-            case 338: {
+            case 330: {
               com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Settings.SettingsShowResponse.newBuilder();
               if (hasSettingsShowResponse()) {
                 subBuilder.mergeFrom(getSettingsShowResponse());
@@ -2078,40 +2051,40 @@ public final class ServerMessage {
         return this;
       }
       
-      // optional .com.randioo.mahjong_public_server.protocol.SCFightPutOut SCFightPutOut = 20;
-      public boolean hasSCFightPutOut() {
-        return result.hasSCFightPutOut();
+      // optional .com.randioo.mahjong_public_server.protocol.SCFightNoticeSendCard SCFightNoticeSendCard = 20;
+      public boolean hasSCFightNoticeSendCard() {
+        return result.hasSCFightNoticeSendCard();
       }
-      public com.randioo.mahjong_public_server.protocol.Fight.SCFightPutOut getSCFightPutOut() {
-        return result.getSCFightPutOut();
+      public com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeSendCard getSCFightNoticeSendCard() {
+        return result.getSCFightNoticeSendCard();
       }
-      public Builder setSCFightPutOut(com.randioo.mahjong_public_server.protocol.Fight.SCFightPutOut value) {
+      public Builder setSCFightNoticeSendCard(com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeSendCard value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        result.hasSCFightPutOut = true;
-        result.sCFightPutOut_ = value;
+        result.hasSCFightNoticeSendCard = true;
+        result.sCFightNoticeSendCard_ = value;
         return this;
       }
-      public Builder setSCFightPutOut(com.randioo.mahjong_public_server.protocol.Fight.SCFightPutOut.Builder builderForValue) {
-        result.hasSCFightPutOut = true;
-        result.sCFightPutOut_ = builderForValue.build();
+      public Builder setSCFightNoticeSendCard(com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeSendCard.Builder builderForValue) {
+        result.hasSCFightNoticeSendCard = true;
+        result.sCFightNoticeSendCard_ = builderForValue.build();
         return this;
       }
-      public Builder mergeSCFightPutOut(com.randioo.mahjong_public_server.protocol.Fight.SCFightPutOut value) {
-        if (result.hasSCFightPutOut() &&
-            result.sCFightPutOut_ != com.randioo.mahjong_public_server.protocol.Fight.SCFightPutOut.getDefaultInstance()) {
-          result.sCFightPutOut_ =
-            com.randioo.mahjong_public_server.protocol.Fight.SCFightPutOut.newBuilder(result.sCFightPutOut_).mergeFrom(value).buildPartial();
+      public Builder mergeSCFightNoticeSendCard(com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeSendCard value) {
+        if (result.hasSCFightNoticeSendCard() &&
+            result.sCFightNoticeSendCard_ != com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeSendCard.getDefaultInstance()) {
+          result.sCFightNoticeSendCard_ =
+            com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeSendCard.newBuilder(result.sCFightNoticeSendCard_).mergeFrom(value).buildPartial();
         } else {
-          result.sCFightPutOut_ = value;
+          result.sCFightNoticeSendCard_ = value;
         }
-        result.hasSCFightPutOut = true;
+        result.hasSCFightNoticeSendCard = true;
         return this;
       }
-      public Builder clearSCFightPutOut() {
-        result.hasSCFightPutOut = false;
-        result.sCFightPutOut_ = com.randioo.mahjong_public_server.protocol.Fight.SCFightPutOut.getDefaultInstance();
+      public Builder clearSCFightNoticeSendCard() {
+        result.hasSCFightNoticeSendCard = false;
+        result.sCFightNoticeSendCard_ = com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeSendCard.getDefaultInstance();
         return this;
       }
       
@@ -2226,44 +2199,7 @@ public final class ServerMessage {
         return this;
       }
       
-      // optional .com.randioo.mahjong_public_server.protocol.SCFightMingPai SCFightMingPai = 24;
-      public boolean hasSCFightMingPai() {
-        return result.hasSCFightMingPai();
-      }
-      public com.randioo.mahjong_public_server.protocol.Fight.SCFightMingPai getSCFightMingPai() {
-        return result.getSCFightMingPai();
-      }
-      public Builder setSCFightMingPai(com.randioo.mahjong_public_server.protocol.Fight.SCFightMingPai value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        result.hasSCFightMingPai = true;
-        result.sCFightMingPai_ = value;
-        return this;
-      }
-      public Builder setSCFightMingPai(com.randioo.mahjong_public_server.protocol.Fight.SCFightMingPai.Builder builderForValue) {
-        result.hasSCFightMingPai = true;
-        result.sCFightMingPai_ = builderForValue.build();
-        return this;
-      }
-      public Builder mergeSCFightMingPai(com.randioo.mahjong_public_server.protocol.Fight.SCFightMingPai value) {
-        if (result.hasSCFightMingPai() &&
-            result.sCFightMingPai_ != com.randioo.mahjong_public_server.protocol.Fight.SCFightMingPai.getDefaultInstance()) {
-          result.sCFightMingPai_ =
-            com.randioo.mahjong_public_server.protocol.Fight.SCFightMingPai.newBuilder(result.sCFightMingPai_).mergeFrom(value).buildPartial();
-        } else {
-          result.sCFightMingPai_ = value;
-        }
-        result.hasSCFightMingPai = true;
-        return this;
-      }
-      public Builder clearSCFightMingPai() {
-        result.hasSCFightMingPai = false;
-        result.sCFightMingPai_ = com.randioo.mahjong_public_server.protocol.Fight.SCFightMingPai.getDefaultInstance();
-        return this;
-      }
-      
-      // optional .com.randioo.mahjong_public_server.protocol.SCFightRoundOver SCFightRoundOver = 25;
+      // optional .com.randioo.mahjong_public_server.protocol.SCFightRoundOver SCFightRoundOver = 24;
       public boolean hasSCFightRoundOver() {
         return result.hasSCFightRoundOver();
       }
@@ -2300,7 +2236,7 @@ public final class ServerMessage {
         return this;
       }
       
-      // optional .com.randioo.mahjong_public_server.protocol.FightRecommandResponse FightRecommandResponse = 26;
+      // optional .com.randioo.mahjong_public_server.protocol.FightRecommandResponse FightRecommandResponse = 25;
       public boolean hasFightRecommandResponse() {
         return result.hasFightRecommandResponse();
       }
@@ -2337,7 +2273,7 @@ public final class ServerMessage {
         return this;
       }
       
-      // optional .com.randioo.mahjong_public_server.protocol.SCFightGameOver SCFightGameOver = 27;
+      // optional .com.randioo.mahjong_public_server.protocol.SCFightGameOver SCFightGameOver = 26;
       public boolean hasSCFightGameOver() {
         return result.hasSCFightGameOver();
       }
@@ -2374,44 +2310,7 @@ public final class ServerMessage {
         return this;
       }
       
-      // optional .com.randioo.mahjong_public_server.protocol.FightMingPaiResponse FightMingPaiResponse = 28;
-      public boolean hasFightMingPaiResponse() {
-        return result.hasFightMingPaiResponse();
-      }
-      public com.randioo.mahjong_public_server.protocol.Fight.FightMingPaiResponse getFightMingPaiResponse() {
-        return result.getFightMingPaiResponse();
-      }
-      public Builder setFightMingPaiResponse(com.randioo.mahjong_public_server.protocol.Fight.FightMingPaiResponse value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        result.hasFightMingPaiResponse = true;
-        result.fightMingPaiResponse_ = value;
-        return this;
-      }
-      public Builder setFightMingPaiResponse(com.randioo.mahjong_public_server.protocol.Fight.FightMingPaiResponse.Builder builderForValue) {
-        result.hasFightMingPaiResponse = true;
-        result.fightMingPaiResponse_ = builderForValue.build();
-        return this;
-      }
-      public Builder mergeFightMingPaiResponse(com.randioo.mahjong_public_server.protocol.Fight.FightMingPaiResponse value) {
-        if (result.hasFightMingPaiResponse() &&
-            result.fightMingPaiResponse_ != com.randioo.mahjong_public_server.protocol.Fight.FightMingPaiResponse.getDefaultInstance()) {
-          result.fightMingPaiResponse_ =
-            com.randioo.mahjong_public_server.protocol.Fight.FightMingPaiResponse.newBuilder(result.fightMingPaiResponse_).mergeFrom(value).buildPartial();
-        } else {
-          result.fightMingPaiResponse_ = value;
-        }
-        result.hasFightMingPaiResponse = true;
-        return this;
-      }
-      public Builder clearFightMingPaiResponse() {
-        result.hasFightMingPaiResponse = false;
-        result.fightMingPaiResponse_ = com.randioo.mahjong_public_server.protocol.Fight.FightMingPaiResponse.getDefaultInstance();
-        return this;
-      }
-      
-      // optional .com.randioo.mahjong_public_server.protocol.FightGetlastRoundResponse FightGetlastRoundResponse = 29;
+      // optional .com.randioo.mahjong_public_server.protocol.FightGetlastRoundResponse FightGetlastRoundResponse = 27;
       public boolean hasFightGetlastRoundResponse() {
         return result.hasFightGetlastRoundResponse();
       }
@@ -2448,7 +2347,7 @@ public final class ServerMessage {
         return this;
       }
       
-      // optional .com.randioo.mahjong_public_server.protocol.SCFightTouchCard SCFightTouchCard = 30;
+      // optional .com.randioo.mahjong_public_server.protocol.SCFightTouchCard SCFightTouchCard = 28;
       public boolean hasSCFightTouchCard() {
         return result.hasSCFightTouchCard();
       }
@@ -2485,7 +2384,7 @@ public final class ServerMessage {
         return this;
       }
       
-      // optional .com.randioo.mahjong_public_server.protocol.SCFightNoticeChooseCardList SCFightNoticeChooseCardList = 31;
+      // optional .com.randioo.mahjong_public_server.protocol.SCFightNoticeChooseCardList SCFightNoticeChooseCardList = 29;
       public boolean hasSCFightNoticeChooseCardList() {
         return result.hasSCFightNoticeChooseCardList();
       }
@@ -2522,7 +2421,7 @@ public final class ServerMessage {
         return this;
       }
       
-      // optional .com.randioo.mahjong_public_server.protocol.FightPengResponse FightPengResponse = 32;
+      // optional .com.randioo.mahjong_public_server.protocol.FightPengResponse FightPengResponse = 30;
       public boolean hasFightPengResponse() {
         return result.hasFightPengResponse();
       }
@@ -2559,7 +2458,7 @@ public final class ServerMessage {
         return this;
       }
       
-      // optional .com.randioo.mahjong_public_server.protocol.SCFightPeng SCFightPeng = 33;
+      // optional .com.randioo.mahjong_public_server.protocol.SCFightPeng SCFightPeng = 31;
       public boolean hasSCFightPeng() {
         return result.hasSCFightPeng();
       }
@@ -2596,7 +2495,7 @@ public final class ServerMessage {
         return this;
       }
       
-      // optional .com.randioo.mahjong_public_server.protocol.FightGangResponse FightGangResponse = 34;
+      // optional .com.randioo.mahjong_public_server.protocol.FightGangResponse FightGangResponse = 32;
       public boolean hasFightGangResponse() {
         return result.hasFightGangResponse();
       }
@@ -2633,7 +2532,7 @@ public final class ServerMessage {
         return this;
       }
       
-      // optional .com.randioo.mahjong_public_server.protocol.SCFightGang SCFightGang = 35;
+      // optional .com.randioo.mahjong_public_server.protocol.SCFightGang SCFightGang = 33;
       public boolean hasSCFightGang() {
         return result.hasSCFightGang();
       }
@@ -2670,7 +2569,7 @@ public final class ServerMessage {
         return this;
       }
       
-      // optional .com.randioo.mahjong_public_server.protocol.FightHuResponse FightHuResponse = 36;
+      // optional .com.randioo.mahjong_public_server.protocol.FightHuResponse FightHuResponse = 34;
       public boolean hasFightHuResponse() {
         return result.hasFightHuResponse();
       }
@@ -2707,7 +2606,7 @@ public final class ServerMessage {
         return this;
       }
       
-      // optional .com.randioo.mahjong_public_server.protocol.SCFightHu SCFightHu = 37;
+      // optional .com.randioo.mahjong_public_server.protocol.SCFightHu SCFightHu = 35;
       public boolean hasSCFightHu() {
         return result.hasSCFightHu();
       }
@@ -2744,7 +2643,7 @@ public final class ServerMessage {
         return this;
       }
       
-      // optional .com.randioo.mahjong_public_server.protocol.FightGuoResponse FightGuoResponse = 38;
+      // optional .com.randioo.mahjong_public_server.protocol.FightGuoResponse FightGuoResponse = 36;
       public boolean hasFightGuoResponse() {
         return result.hasFightGuoResponse();
       }
@@ -2781,7 +2680,7 @@ public final class ServerMessage {
         return this;
       }
       
-      // optional .com.randioo.mahjong_public_server.protocol.SCFightGuo SCFightGuo = 39;
+      // optional .com.randioo.mahjong_public_server.protocol.SCFightGuo SCFightGuo = 37;
       public boolean hasSCFightGuo() {
         return result.hasSCFightGuo();
       }
@@ -2818,7 +2717,44 @@ public final class ServerMessage {
         return this;
       }
       
-      // optional .com.randioo.mahjong_public_server.protocol.MoneyExchangeResponse MoneyExchangeResponse = 40;
+      // optional .com.randioo.mahjong_public_server.protocol.SCFightCountdown SCFightCountdown = 38;
+      public boolean hasSCFightCountdown() {
+        return result.hasSCFightCountdown();
+      }
+      public com.randioo.mahjong_public_server.protocol.Fight.SCFightCountdown getSCFightCountdown() {
+        return result.getSCFightCountdown();
+      }
+      public Builder setSCFightCountdown(com.randioo.mahjong_public_server.protocol.Fight.SCFightCountdown value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.hasSCFightCountdown = true;
+        result.sCFightCountdown_ = value;
+        return this;
+      }
+      public Builder setSCFightCountdown(com.randioo.mahjong_public_server.protocol.Fight.SCFightCountdown.Builder builderForValue) {
+        result.hasSCFightCountdown = true;
+        result.sCFightCountdown_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergeSCFightCountdown(com.randioo.mahjong_public_server.protocol.Fight.SCFightCountdown value) {
+        if (result.hasSCFightCountdown() &&
+            result.sCFightCountdown_ != com.randioo.mahjong_public_server.protocol.Fight.SCFightCountdown.getDefaultInstance()) {
+          result.sCFightCountdown_ =
+            com.randioo.mahjong_public_server.protocol.Fight.SCFightCountdown.newBuilder(result.sCFightCountdown_).mergeFrom(value).buildPartial();
+        } else {
+          result.sCFightCountdown_ = value;
+        }
+        result.hasSCFightCountdown = true;
+        return this;
+      }
+      public Builder clearSCFightCountdown() {
+        result.hasSCFightCountdown = false;
+        result.sCFightCountdown_ = com.randioo.mahjong_public_server.protocol.Fight.SCFightCountdown.getDefaultInstance();
+        return this;
+      }
+      
+      // optional .com.randioo.mahjong_public_server.protocol.MoneyExchangeResponse MoneyExchangeResponse = 39;
       public boolean hasMoneyExchangeResponse() {
         return result.hasMoneyExchangeResponse();
       }
@@ -2855,7 +2791,7 @@ public final class ServerMessage {
         return this;
       }
       
-      // optional .com.randioo.mahjong_public_server.protocol.SettingsResponse SettingsResponse = 41;
+      // optional .com.randioo.mahjong_public_server.protocol.SettingsResponse SettingsResponse = 40;
       public boolean hasSettingsResponse() {
         return result.hasSettingsResponse();
       }
@@ -2892,7 +2828,7 @@ public final class ServerMessage {
         return this;
       }
       
-      // optional .com.randioo.mahjong_public_server.protocol.SettingsShowResponse SettingsShowResponse = 42;
+      // optional .com.randioo.mahjong_public_server.protocol.SettingsShowResponse SettingsShowResponse = 41;
       public boolean hasSettingsShowResponse() {
         return result.hasSettingsShowResponse();
       }
@@ -2958,7 +2894,7 @@ public final class ServerMessage {
       "\n\023ServerMessage.proto\022*com.randioo.mahjo" +
       "ng_public_server.protocol\032\013Login.proto\032\n" +
       "Role.proto\032\013Match.proto\032\013Fight.proto\032\023Mo" +
-      "neyExchange.proto\032\016Settings.proto\"\214\036\n\002SC" +
+      "neyExchange.proto\032\016Settings.proto\"\300\035\n\002SC" +
       "\022h\n\031LoginCheckAccountResponse\030\001 \001(\0132E.co" +
       "m.randioo.mahjong_public_server.protocol" +
       ".LoginCheckAccountResponse\022d\n\027LoginCreat" +
@@ -3003,59 +2939,57 @@ public final class ServerMessage {
       ".com.randioo.mahjong_public_server.proto" +
       "col.SCFightGameDismiss\022\\\n\023SCFightLoadRes" +
       "ource\030\023 \001(\0132?.com.randioo.mahjong_public" +
-      "_server.protocol.SCFightLoadResource\022P\n\r" +
-      "SCFightPutOut\030\024 \001(\01329.com.randioo.mahjon",
-      "g_public_server.protocol.SCFightPutOut\022`" +
-      "\n\025FightSendCardResponse\030\025 \001(\0132A.com.rand" +
-      "ioo.mahjong_public_server.protocol.Fight" +
-      "SendCardResponse\022T\n\017SCFightSendCard\030\026 \001(" +
-      "\0132;.com.randioo.mahjong_public_server.pr" +
-      "otocol.SCFightSendCard\022T\n\017SCAgreeExitGam" +
-      "e\030\027 \001(\0132;.com.randioo.mahjong_public_ser" +
-      "ver.protocol.SCAgreeExitGame\022R\n\016SCFightM" +
-      "ingPai\030\030 \001(\0132:.com.randioo.mahjong_publi" +
-      "c_server.protocol.SCFightMingPai\022V\n\020SCFi",
-      "ghtRoundOver\030\031 \001(\0132<.com.randioo.mahjong" +
-      "_public_server.protocol.SCFightRoundOver" +
-      "\022b\n\026FightRecommandResponse\030\032 \001(\0132B.com.r" +
-      "andioo.mahjong_public_server.protocol.Fi" +
-      "ghtRecommandResponse\022T\n\017SCFightGameOver\030" +
-      "\033 \001(\0132;.com.randioo.mahjong_public_serve" +
-      "r.protocol.SCFightGameOver\022^\n\024FightMingP" +
-      "aiResponse\030\034 \001(\0132@.com.randioo.mahjong_p" +
-      "ublic_server.protocol.FightMingPaiRespon" +
-      "se\022h\n\031FightGetlastRoundResponse\030\035 \001(\0132E.",
-      "com.randioo.mahjong_public_server.protoc" +
-      "ol.FightGetlastRoundResponse\022V\n\020SCFightT" +
-      "ouchCard\030\036 \001(\0132<.com.randioo.mahjong_pub" +
-      "lic_server.protocol.SCFightTouchCard\022l\n\033" +
-      "SCFightNoticeChooseCardList\030\037 \001(\0132G.com." +
-      "randioo.mahjong_public_server.protocol.S" +
-      "CFightNoticeChooseCardList\022X\n\021FightPengR" +
-      "esponse\030  \001(\0132=.com.randioo.mahjong_publ" +
-      "ic_server.protocol.FightPengResponse\022L\n\013" +
-      "SCFightPeng\030! \001(\01327.com.randioo.mahjong_",
-      "public_server.protocol.SCFightPeng\022X\n\021Fi" +
-      "ghtGangResponse\030\" \001(\0132=.com.randioo.mahj" +
-      "ong_public_server.protocol.FightGangResp" +
-      "onse\022L\n\013SCFightGang\030# \001(\01327.com.randioo." +
-      "mahjong_public_server.protocol.SCFightGa" +
-      "ng\022T\n\017FightHuResponse\030$ \001(\0132;.com.randio" +
-      "o.mahjong_public_server.protocol.FightHu" +
-      "Response\022H\n\tSCFightHu\030% \001(\01325.com.randio" +
+      "_server.protocol.SCFightLoadResource\022`\n\025" +
+      "SCFightNoticeSendCard\030\024 \001(\0132A.com.randio",
       "o.mahjong_public_server.protocol.SCFight" +
-      "Hu\022V\n\020FightGuoResponse\030& \001(\0132<.com.randi",
-      "oo.mahjong_public_server.protocol.FightG" +
-      "uoResponse\022J\n\nSCFightGuo\030\' \001(\01326.com.ran" +
-      "dioo.mahjong_public_server.protocol.SCFi" +
-      "ghtGuo\022`\n\025MoneyExchangeResponse\030( \001(\0132A." +
-      "com.randioo.mahjong_public_server.protoc" +
-      "ol.MoneyExchangeResponse\022V\n\020SettingsResp" +
-      "onse\030) \001(\0132<.com.randioo.mahjong_public_" +
-      "server.protocol.SettingsResponse\022^\n\024Sett" +
-      "ingsShowResponse\030* \001(\0132@.com.randioo.mah" +
-      "jong_public_server.protocol.SettingsShow",
-      "Response"
+      "NoticeSendCard\022`\n\025FightSendCardResponse\030" +
+      "\025 \001(\0132A.com.randioo.mahjong_public_serve" +
+      "r.protocol.FightSendCardResponse\022T\n\017SCFi" +
+      "ghtSendCard\030\026 \001(\0132;.com.randioo.mahjong_" +
+      "public_server.protocol.SCFightSendCard\022T" +
+      "\n\017SCAgreeExitGame\030\027 \001(\0132;.com.randioo.ma" +
+      "hjong_public_server.protocol.SCAgreeExit" +
+      "Game\022V\n\020SCFightRoundOver\030\030 \001(\0132<.com.ran" +
+      "dioo.mahjong_public_server.protocol.SCFi",
+      "ghtRoundOver\022b\n\026FightRecommandResponse\030\031" +
+      " \001(\0132B.com.randioo.mahjong_public_server" +
+      ".protocol.FightRecommandResponse\022T\n\017SCFi" +
+      "ghtGameOver\030\032 \001(\0132;.com.randioo.mahjong_" +
+      "public_server.protocol.SCFightGameOver\022h" +
+      "\n\031FightGetlastRoundResponse\030\033 \001(\0132E.com." +
+      "randioo.mahjong_public_server.protocol.F" +
+      "ightGetlastRoundResponse\022V\n\020SCFightTouch" +
+      "Card\030\034 \001(\0132<.com.randioo.mahjong_public_" +
+      "server.protocol.SCFightTouchCard\022l\n\033SCFi",
+      "ghtNoticeChooseCardList\030\035 \001(\0132G.com.rand" +
+      "ioo.mahjong_public_server.protocol.SCFig" +
+      "htNoticeChooseCardList\022X\n\021FightPengRespo" +
+      "nse\030\036 \001(\0132=.com.randioo.mahjong_public_s" +
+      "erver.protocol.FightPengResponse\022L\n\013SCFi" +
+      "ghtPeng\030\037 \001(\01327.com.randioo.mahjong_publ" +
+      "ic_server.protocol.SCFightPeng\022X\n\021FightG" +
+      "angResponse\030  \001(\0132=.com.randioo.mahjong_" +
+      "public_server.protocol.FightGangResponse" +
+      "\022L\n\013SCFightGang\030! \001(\01327.com.randioo.mahj",
+      "ong_public_server.protocol.SCFightGang\022T" +
+      "\n\017FightHuResponse\030\" \001(\0132;.com.randioo.ma" +
+      "hjong_public_server.protocol.FightHuResp" +
+      "onse\022H\n\tSCFightHu\030# \001(\01325.com.randioo.ma" +
+      "hjong_public_server.protocol.SCFightHu\022V" +
+      "\n\020FightGuoResponse\030$ \001(\0132<.com.randioo.m" +
+      "ahjong_public_server.protocol.FightGuoRe" +
+      "sponse\022J\n\nSCFightGuo\030% \001(\01326.com.randioo" +
+      ".mahjong_public_server.protocol.SCFightG" +
+      "uo\022V\n\020SCFightCountdown\030& \001(\0132<.com.randi",
+      "oo.mahjong_public_server.protocol.SCFigh" +
+      "tCountdown\022`\n\025MoneyExchangeResponse\030\' \001(" +
+      "\0132A.com.randioo.mahjong_public_server.pr" +
+      "otocol.MoneyExchangeResponse\022V\n\020Settings" +
+      "Response\030( \001(\0132<.com.randioo.mahjong_pub" +
+      "lic_server.protocol.SettingsResponse\022^\n\024" +
+      "SettingsShowResponse\030) \001(\0132@.com.randioo" +
+      ".mahjong_public_server.protocol.Settings" +
+      "ShowResponse"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3067,7 +3001,7 @@ public final class ServerMessage {
           internal_static_com_randioo_mahjong_public_server_protocol_SC_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_randioo_mahjong_public_server_protocol_SC_descriptor,
-              new java.lang.String[] { "LoginCheckAccountResponse", "LoginCreateRoleResponse", "LoginGetRoleDataResponse", "RoleRenameResponse", "RoleGetRoleDataResponse", "MatchCreateGameResponse", "MatchJoinGameResponse", "SCMatchJoinGame", "MatchAIResponse", "SCFightNoticeReady", "FightReadyResponse", "SCFightReady", "SCFightStart", "FightExitGameResponse", "SCFightExitGame", "SCFightApplyExitGame", "FightAgreeExitGameResponse", "SCFightGameDismiss", "SCFightLoadResource", "SCFightPutOut", "FightSendCardResponse", "SCFightSendCard", "SCAgreeExitGame", "SCFightMingPai", "SCFightRoundOver", "FightRecommandResponse", "SCFightGameOver", "FightMingPaiResponse", "FightGetlastRoundResponse", "SCFightTouchCard", "SCFightNoticeChooseCardList", "FightPengResponse", "SCFightPeng", "FightGangResponse", "SCFightGang", "FightHuResponse", "SCFightHu", "FightGuoResponse", "SCFightGuo", "MoneyExchangeResponse", "SettingsResponse", "SettingsShowResponse", },
+              new java.lang.String[] { "LoginCheckAccountResponse", "LoginCreateRoleResponse", "LoginGetRoleDataResponse", "RoleRenameResponse", "RoleGetRoleDataResponse", "MatchCreateGameResponse", "MatchJoinGameResponse", "SCMatchJoinGame", "MatchAIResponse", "SCFightNoticeReady", "FightReadyResponse", "SCFightReady", "SCFightStart", "FightExitGameResponse", "SCFightExitGame", "SCFightApplyExitGame", "FightAgreeExitGameResponse", "SCFightGameDismiss", "SCFightLoadResource", "SCFightNoticeSendCard", "FightSendCardResponse", "SCFightSendCard", "SCAgreeExitGame", "SCFightRoundOver", "FightRecommandResponse", "SCFightGameOver", "FightGetlastRoundResponse", "SCFightTouchCard", "SCFightNoticeChooseCardList", "FightPengResponse", "SCFightPeng", "FightGangResponse", "SCFightGang", "FightHuResponse", "SCFightHu", "FightGuoResponse", "SCFightGuo", "SCFightCountdown", "MoneyExchangeResponse", "SettingsResponse", "SettingsShowResponse", },
               com.randioo.mahjong_public_server.protocol.ServerMessage.SC.class,
               com.randioo.mahjong_public_server.protocol.ServerMessage.SC.Builder.class);
           return null;

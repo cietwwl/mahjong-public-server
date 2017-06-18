@@ -20,11 +20,11 @@ public class RoleGameInfo {
 	/** 新拿的牌 */
 	public int newCard;
 	/** 已经碰过或杠过的牌 */
-	public List<CallCardList> showCardLists = new ArrayList<>();
+	public List<CardList> showCardLists = new ArrayList<>();
 
 	@Override
 	public String toString() {
-		return "[gameRoleId=" + gameRoleId + "|roleId=" + roleId + "|ready=" + ready + "|cards=" + cards
-				+ "|newCard=" + newCard + " ]";
+		return "[gameRoleId=" + gameRoleId + "|roleId=" + roleId + "|ready=" + ready + "|cards=" + cards + "|newCard="
+				+ newCard + " ]";
 	}
 }

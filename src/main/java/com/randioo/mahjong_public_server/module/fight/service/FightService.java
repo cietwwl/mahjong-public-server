@@ -2,6 +2,7 @@ package com.randioo.mahjong_public_server.module.fight.service;
 
 import com.google.protobuf.GeneratedMessage;
 import com.randioo.mahjong_public_server.entity.bo.Role;
+import com.randioo.mahjong_public_server.entity.po.CallCardList;
 import com.randioo.randioo_server_base.service.ObserveBaseServiceInterface;
 
 public interface FightService extends ObserveBaseServiceInterface {
@@ -40,16 +41,22 @@ public interface FightService extends ObserveBaseServiceInterface {
 	 * @param gameRoleId
 	 * @param gameId
 	 */
-	void touchCard(String gameRoleId, int gameId);
+	void touchCard(int gameId);
 
-	void peng(Role role, int gameSendCount);
+	void peng(Role role, int gameSendCount, int callCardListId);
 
-	void gang(Role role, int card, int gameSendCount);
+	void gang(Role role, int gameSendCount, int callCardListId);
 
-	void hu(Role role, int gameSendCount);
+	void hu(Role role, int gameSendCount,int callCardListId);
 
 	void guo(Role role, int gameSendCount);
 
-	void getPreviousCallCardListAction(int gameId, int seatedIndex, int currentIndex);
+	/**
+	 * 获得之前一个人的卡组
+	 * 
+	 * @param gameId
+	 * @author wcy 2017年6月17日
+	 */
+	CallCardList getPreviousCallCardList(int gameId);
 
 }

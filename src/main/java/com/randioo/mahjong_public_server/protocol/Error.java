@@ -39,6 +39,8 @@ public final class Error {
     NOT_LANDLORD(26, 27),
     MINGPAI_FORBIDDEN(27, 28),
     FIRST_ROUND(28, 29),
+    FIGHT_TIME_PASS(29, 30),
+    FIGHT_MORE_CARD(30, 31),
     ;
     
     
@@ -75,6 +77,8 @@ public final class Error {
         case 27: return NOT_LANDLORD;
         case 28: return MINGPAI_FORBIDDEN;
         case 29: return FIRST_ROUND;
+        case 30: return FIGHT_TIME_PASS;
+        case 31: return FIGHT_MORE_CARD;
         default: return null;
       }
     }
@@ -105,7 +109,7 @@ public final class Error {
     }
     
     private static final ErrorCode[] VALUES = {
-      OK, NO_STRING, NO_ROLE_ACCOUNT, EXIST_ROLE, CREATE_FAILED, REJECT_LOGIN, ACCOUNT_ILLEGEL, IN_LOGIN, NAME_SENSITIVE, NO_ROLE_DATA, NAME_REPEATED, NAME_TOO_LONG, NAME_SPECIAL_CHAR, GAME_CREATE_ERROR, GAME_JOIN_ERROR, ROUND_ERROR, MONEY_NUM_ERROR, MATCH_ERROR_LOCK, MATCH_MAX_ROLE_COUNT, GAME_NOT_EXIST, GAME_EXITING, APPLY_REJECT, NOT_YOUR_TURN, NOT_SAME_TYPE, SMALLER, NULL_REJECT, NOT_LANDLORD, MINGPAI_FORBIDDEN, FIRST_ROUND, 
+      OK, NO_STRING, NO_ROLE_ACCOUNT, EXIST_ROLE, CREATE_FAILED, REJECT_LOGIN, ACCOUNT_ILLEGEL, IN_LOGIN, NAME_SENSITIVE, NO_ROLE_DATA, NAME_REPEATED, NAME_TOO_LONG, NAME_SPECIAL_CHAR, GAME_CREATE_ERROR, GAME_JOIN_ERROR, ROUND_ERROR, MONEY_NUM_ERROR, MATCH_ERROR_LOCK, MATCH_MAX_ROLE_COUNT, GAME_NOT_EXIST, GAME_EXITING, APPLY_REJECT, NOT_YOUR_TURN, NOT_SAME_TYPE, SMALLER, NULL_REJECT, NOT_LANDLORD, MINGPAI_FORBIDDEN, FIRST_ROUND, FIGHT_TIME_PASS, FIGHT_MORE_CARD, 
     };
     public static ErrorCode valueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
@@ -139,7 +143,7 @@ public final class Error {
   static {
     java.lang.String[] descriptorData = {
       "\n\013Error.proto\022*com.randioo.mahjong_publi" +
-      "c_server.protocol*\252\004\n\tErrorCode\022\006\n\002OK\020\001\022" +
+      "c_server.protocol*\324\004\n\tErrorCode\022\006\n\002OK\020\001\022" +
       "\r\n\tNO_STRING\020\002\022\023\n\017NO_ROLE_ACCOUNT\020\003\022\016\n\nE" +
       "XIST_ROLE\020\004\022\021\n\rCREATE_FAILED\020\005\022\020\n\014REJECT" +
       "_LOGIN\020\006\022\023\n\017ACCOUNT_ILLEGEL\020\007\022\014\n\010IN_LOGI" +
@@ -153,7 +157,8 @@ public final class Error {
       "REJECT\020\026\022\021\n\rNOT_YOUR_TURN\020\027\022\021\n\rNOT_SAME_" +
       "TYPE\020\030\022\013\n\007SMALLER\020\031\022\017\n\013NULL_REJECT\020\032\022\020\n\014" +
       "NOT_LANDLORD\020\033\022\025\n\021MINGPAI_FORBIDDEN\020\034\022\017\n" +
-      "\013FIRST_ROUND\020\035"
+      "\013FIRST_ROUND\020\035\022\023\n\017FIGHT_TIME_PASS\020\036\022\023\n\017F" +
+      "IGHT_MORE_CARD\020\037"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

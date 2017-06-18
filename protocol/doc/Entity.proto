@@ -21,6 +21,7 @@ message GameConfig{
 	optional int32 catchScore = 6;
 	optional bool gangkai = 7;
 	optional int32 minStartScore = 8;
+	optional string endTime = 9;
 }
 message PaiNum{
 	optional int32 seat = 1;
@@ -67,7 +68,8 @@ message CallPengData{
 }
 
 message PengData{
-	repeated int32 card = 2;
+	optional int32 targetSeat = 1;
+	optional int32 card = 2;
 }
 
 message CallHuData{
@@ -79,12 +81,12 @@ message HuData{
 	repeated int32 card = 2;
 }
 
-message CallShunData{
+message CallChiData{
 	optional int32 callId = 1;
-	optional ShunData shunData = 2;	
+	optional ChiData chiData = 2;	
 }
 
-message ShunData{
+message ChiData{
 	optional int32 card1 = 2;
 	optional int32 card2 = 3;
 	optional int32 card3 = 4;

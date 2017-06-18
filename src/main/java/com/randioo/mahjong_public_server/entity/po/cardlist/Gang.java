@@ -1,13 +1,13 @@
 package com.randioo.mahjong_public_server.entity.po.cardlist;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import com.randioo.mahjong_public_server.entity.po.CardSort;
 
-public class Gang implements CardList {
+public class Gang extends AbstractCardList {
 	public int card;
-	public int seat;
 	public boolean visible;
 	public int pengSeat;
 
@@ -19,5 +19,13 @@ public class Gang implements CardList {
 			gang.card = card;
 			cardLists.add(gang);
 		}
+	}
+
+	@Override
+	public List<Integer> getCards() {
+		List<Integer> list = new ArrayList<>(4);
+		for (int i = 0; i < 4; i++)
+			list.add(card);
+		return list;
 	}
 }
