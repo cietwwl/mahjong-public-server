@@ -194,7 +194,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 			Role role = (Role) RoleCache.getRoleById(roleId);
 			role.setGameId(game.getGameId());
 		}
-		game.getRoleIdMap().put(roleGameInfo.gameRoleId, roleGameInfo);
+		game.getRoleIdMap().put(gameRoleId, roleGameInfo);
 		game.getRoleIdList().add(gameRoleId);
 	}
 

@@ -8,17 +8,63 @@ import com.randioo.mahjong_public_server.entity.po.CardSort;
 
 public class Gang extends AbstractCardList {
 	public int card;
-	public boolean visible;
-	public int pengSeat;
+	public boolean dark;
+	public Peng peng = null;
 
 	@Override
-	public void check(List<CardList> cardLists, CardSort cardSort, int card) {
-		Set<Integer> set = cardSort.getList().get(2);
-		if (set.contains(card)) {
-			Gang gang = new Gang();
-			gang.card = card;
-			cardLists.add(gang);
+	public void check(List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList,
+			boolean isTouch) {
+		Set<Integer> set = cardSort.getList().get(3);
+		boolean hasPeng = set.size() > 0;
+
+		// 如果是我的牌
+		if (isTouch) {
+			// 检查暗杠
+			if (hasPeng) {
+				for (int value : set) {
+					if (value == 81)
+						continue;
+
+					Gang gang = new Gang();
+					gang.card = value;
+					gang.dark = true;
+					cardLists.add(gang);
+				}
+			}
+			// 拿的牌检查补杠
+			if (card == 81) {
+				return;
+			}
+			for (CardList cardList : showCardList) {
+				if (cardList instanceof Peng) {
+					Peng peng = (Peng) cardList;
+					// 如果碰过的牌是这张牌，则可以补杠
+					if (peng.card == card) {
+						Gang gang = new Gang();
+						gang.dark = false;
+						gang.card = card;
+						gang.peng = peng;
+
+						cardLists.add(gang);
+						break;
+					}
+				}
+			}
+		} else {
+			// 明杠
+			if (hasPeng) {
+				for (int value : set) {
+					if (card == 81 || card != value)
+						continue;
+
+					Gang gang = new Gang();
+					gang.card = value;
+					gang.dark = false;
+					cardLists.add(gang);
+				}
+			}
 		}
+
 	}
 
 	@Override
@@ -27,5 +73,10 @@ public class Gang extends AbstractCardList {
 		for (int i = 0; i < 4; i++)
 			list.add(card);
 		return list;
+	}
+
+	@Override
+	public String toString() {
+		return "cardList=>gang:card=" + card + " visible=" + dark + " peng=" + peng + " " + super.toString();
 	}
 }

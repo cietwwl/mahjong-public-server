@@ -144,6 +144,75 @@ public final class Entity {
     // @@protoc_insertion_point(enum_scope:com.randioo.mahjong_public_server.protocol.GameState)
   }
   
+  public enum GangType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    GANG_LIGHT(0, 1),
+    GANG_DARK(1, 2),
+    GANG_ADD(2, 3),
+    ;
+    
+    
+    public final int getNumber() { return value; }
+    
+    public static GangType valueOf(int value) {
+      switch (value) {
+        case 1: return GANG_LIGHT;
+        case 2: return GANG_DARK;
+        case 3: return GANG_ADD;
+        default: return null;
+      }
+    }
+    
+    public static com.google.protobuf.Internal.EnumLiteMap<GangType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<GangType>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<GangType>() {
+            public GangType findValueByNumber(int number) {
+              return GangType.valueOf(number)
+    ;        }
+          };
+    
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.randioo.mahjong_public_server.protocol.Entity.getDescriptor().getEnumTypes().get(2);
+    }
+    
+    private static final GangType[] VALUES = {
+      GANG_LIGHT, GANG_DARK, GANG_ADD, 
+    };
+    public static GangType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+    private final int index;
+    private final int value;
+    private GangType(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+    
+    static {
+      com.randioo.mahjong_public_server.protocol.Entity.getDescriptor();
+    }
+    
+    // @@protoc_insertion_point(enum_scope:com.randioo.mahjong_public_server.protocol.GangType)
+  }
+  
   public static final class RoleData extends
       com.google.protobuf.GeneratedMessage {
     // Use RoleData.newBuilder() to construct.
@@ -2617,19 +2686,29 @@ public final class Entity {
       return com.randioo.mahjong_public_server.protocol.Entity.internal_static_com_randioo_mahjong_public_server_protocol_GangData_fieldAccessorTable;
     }
     
-    // repeated int32 card = 2;
+    // optional int32 targetSeat = 1;
+    public static final int TARGETSEAT_FIELD_NUMBER = 1;
+    private boolean hasTargetSeat;
+    private int targetSeat_ = 0;
+    public boolean hasTargetSeat() { return hasTargetSeat; }
+    public int getTargetSeat() { return targetSeat_; }
+    
+    // optional int32 card = 2;
     public static final int CARD_FIELD_NUMBER = 2;
-    private java.util.List<java.lang.Integer> card_ =
-      java.util.Collections.emptyList();
-    public java.util.List<java.lang.Integer> getCardList() {
-      return card_;
-    }
-    public int getCardCount() { return card_.size(); }
-    public int getCard(int index) {
-      return card_.get(index);
-    }
+    private boolean hasCard;
+    private int card_ = 0;
+    public boolean hasCard() { return hasCard; }
+    public int getCard() { return card_; }
+    
+    // optional .com.randioo.mahjong_public_server.protocol.GangType gangType = 3;
+    public static final int GANGTYPE_FIELD_NUMBER = 3;
+    private boolean hasGangType;
+    private com.randioo.mahjong_public_server.protocol.Entity.GangType gangType_;
+    public boolean hasGangType() { return hasGangType; }
+    public com.randioo.mahjong_public_server.protocol.Entity.GangType getGangType() { return gangType_; }
     
     private void initFields() {
+      gangType_ = com.randioo.mahjong_public_server.protocol.Entity.GangType.GANG_LIGHT;
     }
     public final boolean isInitialized() {
       return true;
@@ -2638,8 +2717,14 @@ public final class Entity {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      for (int element : getCardList()) {
-        output.writeInt32(2, element);
+      if (hasTargetSeat()) {
+        output.writeInt32(1, getTargetSeat());
+      }
+      if (hasCard()) {
+        output.writeInt32(2, getCard());
+      }
+      if (hasGangType()) {
+        output.writeEnum(3, getGangType().getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -2650,14 +2735,17 @@ public final class Entity {
       if (size != -1) return size;
     
       size = 0;
-      {
-        int dataSize = 0;
-        for (int element : getCardList()) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(element);
-        }
-        size += dataSize;
-        size += 1 * getCardList().size();
+      if (hasTargetSeat()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, getTargetSeat());
+      }
+      if (hasCard()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, getCard());
+      }
+      if (hasGangType()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, getGangType().getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2801,10 +2889,6 @@ public final class Entity {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
         }
-        if (result.card_ != java.util.Collections.EMPTY_LIST) {
-          result.card_ =
-            java.util.Collections.unmodifiableList(result.card_);
-        }
         com.randioo.mahjong_public_server.protocol.Entity.GangData returnMe = result;
         result = null;
         return returnMe;
@@ -2821,11 +2905,14 @@ public final class Entity {
       
       public Builder mergeFrom(com.randioo.mahjong_public_server.protocol.Entity.GangData other) {
         if (other == com.randioo.mahjong_public_server.protocol.Entity.GangData.getDefaultInstance()) return this;
-        if (!other.card_.isEmpty()) {
-          if (result.card_.isEmpty()) {
-            result.card_ = new java.util.ArrayList<java.lang.Integer>();
-          }
-          result.card_.addAll(other.card_);
+        if (other.hasTargetSeat()) {
+          setTargetSeat(other.getTargetSeat());
+        }
+        if (other.hasCard()) {
+          setCard(other.getCard());
+        }
+        if (other.hasGangType()) {
+          setGangType(other.getGangType());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2852,17 +2939,22 @@ public final class Entity {
               }
               break;
             }
-            case 16: {
-              addCard(input.readInt32());
+            case 8: {
+              setTargetSeat(input.readInt32());
               break;
             }
-            case 18: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              while (input.getBytesUntilLimit() > 0) {
-                addCard(input.readInt32());
+            case 16: {
+              setCard(input.readInt32());
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              com.randioo.mahjong_public_server.protocol.Entity.GangType value = com.randioo.mahjong_public_server.protocol.Entity.GangType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                setGangType(value);
               }
-              input.popLimit(limit);
               break;
             }
           }
@@ -2870,37 +2962,60 @@ public final class Entity {
       }
       
       
-      // repeated int32 card = 2;
-      public java.util.List<java.lang.Integer> getCardList() {
-        return java.util.Collections.unmodifiableList(result.card_);
+      // optional int32 targetSeat = 1;
+      public boolean hasTargetSeat() {
+        return result.hasTargetSeat();
       }
-      public int getCardCount() {
-        return result.getCardCount();
+      public int getTargetSeat() {
+        return result.getTargetSeat();
       }
-      public int getCard(int index) {
-        return result.getCard(index);
-      }
-      public Builder setCard(int index, int value) {
-        result.card_.set(index, value);
+      public Builder setTargetSeat(int value) {
+        result.hasTargetSeat = true;
+        result.targetSeat_ = value;
         return this;
       }
-      public Builder addCard(int value) {
-        if (result.card_.isEmpty()) {
-          result.card_ = new java.util.ArrayList<java.lang.Integer>();
-        }
-        result.card_.add(value);
+      public Builder clearTargetSeat() {
+        result.hasTargetSeat = false;
+        result.targetSeat_ = 0;
         return this;
       }
-      public Builder addAllCard(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        if (result.card_.isEmpty()) {
-          result.card_ = new java.util.ArrayList<java.lang.Integer>();
-        }
-        super.addAll(values, result.card_);
+      
+      // optional int32 card = 2;
+      public boolean hasCard() {
+        return result.hasCard();
+      }
+      public int getCard() {
+        return result.getCard();
+      }
+      public Builder setCard(int value) {
+        result.hasCard = true;
+        result.card_ = value;
         return this;
       }
       public Builder clearCard() {
-        result.card_ = java.util.Collections.emptyList();
+        result.hasCard = false;
+        result.card_ = 0;
+        return this;
+      }
+      
+      // optional .com.randioo.mahjong_public_server.protocol.GangType gangType = 3;
+      public boolean hasGangType() {
+        return result.hasGangType();
+      }
+      public com.randioo.mahjong_public_server.protocol.Entity.GangType getGangType() {
+        return result.getGangType();
+      }
+      public Builder setGangType(com.randioo.mahjong_public_server.protocol.Entity.GangType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.hasGangType = true;
+        result.gangType_ = value;
+        return this;
+      }
+      public Builder clearGangType() {
+        result.hasGangType = false;
+        result.gangType_ = com.randioo.mahjong_public_server.protocol.Entity.GangType.GANG_LIGHT;
         return this;
       }
       
@@ -6544,29 +6659,32 @@ public final class Entity {
       "\010\022\022\n\nheadImgUrl\030\005 \001(\t\022\r\n\005money\030\006 \001(\005\"f\n\014" +
       "CallGangData\022\016\n\006callId\030\001 \001(\005\022F\n\010gangData" +
       "\030\002 \001(\01324.com.randioo.mahjong_public_serv" +
-      "er.protocol.GangData\"\030\n\010GangData\022\014\n\004card" +
-      "\030\002 \003(\005\"f\n\014CallPengData\022\016\n\006callId\030\001 \001(\005\022F" +
-      "\n\010pengData\030\002 \001(\01324.com.randioo.mahjong_p" +
-      "ublic_server.protocol.PengData\",\n\010PengDa" +
-      "ta\022\022\n\ntargetSeat\030\001 \001(\005\022\014\n\004card\030\002 \001(\005\"`\n\n" +
-      "CallHuData\022\016\n\006callId\030\001 \001(\005\022B\n\006huData\030\002 \001",
-      "(\01322.com.randioo.mahjong_public_server.p" +
-      "rotocol.HuData\"\026\n\006HuData\022\014\n\004card\030\002 \003(\005\"c" +
-      "\n\013CallChiData\022\016\n\006callId\030\001 \001(\005\022D\n\007chiData" +
-      "\030\002 \001(\01323.com.randioo.mahjong_public_serv" +
-      "er.protocol.ChiData\"6\n\007ChiData\022\r\n\005card1\030" +
-      "\002 \001(\005\022\r\n\005card2\030\003 \001(\005\022\r\n\005card3\030\004 \001(\005\"S\n\014G" +
-      "ameOverData\022\014\n\004name\030\001 \001(\t\022\023\n\013landLordNum" +
-      "\030\002 \001(\005\022\021\n\tfarmerNum\030\003 \001(\005\022\r\n\005score\030\004 \001(\005" +
-      "\"\033\n\014RecommandPai\022\013\n\003pai\030\001 \003(\005\"6\n\005Score\022\014" +
-      "\n\004name\030\001 \001(\t\022\r\n\005score\030\002 \001(\005\022\020\n\010allScore\030",
-      "\003 \001(\005\"j\n\010GameData\022\016\n\006gameId\030\001 \001(\005\022N\n\014gam" +
-      "eRoleData\030\002 \003(\01328.com.randioo.mahjong_pu" +
-      "blic_server.protocol.GameRoleData*5\n\010Gam" +
-      "eType\022\023\n\017GAME_TYPE_MATCH\020\001\022\024\n\020GAME_TYPE_" +
-      "FRIEND\020\002*M\n\tGameState\022\026\n\022GAME_STATE_PREP" +
-      "ARE\020\001\022\024\n\020GAME_START_START\020\002\022\022\n\016GAME_STAR" +
-      "T_END\020\003"
+      "er.protocol.GangData\"t\n\010GangData\022\022\n\ntarg" +
+      "etSeat\030\001 \001(\005\022\014\n\004card\030\002 \001(\005\022F\n\010gangType\030\003" +
+      " \001(\01624.com.randioo.mahjong_public_server" +
+      ".protocol.GangType\"f\n\014CallPengData\022\016\n\006ca" +
+      "llId\030\001 \001(\005\022F\n\010pengData\030\002 \001(\01324.com.randi" +
+      "oo.mahjong_public_server.protocol.PengDa",
+      "ta\",\n\010PengData\022\022\n\ntargetSeat\030\001 \001(\005\022\014\n\004ca" +
+      "rd\030\002 \001(\005\"`\n\nCallHuData\022\016\n\006callId\030\001 \001(\005\022B" +
+      "\n\006huData\030\002 \001(\01322.com.randioo.mahjong_pub" +
+      "lic_server.protocol.HuData\"\026\n\006HuData\022\014\n\004" +
+      "card\030\002 \003(\005\"c\n\013CallChiData\022\016\n\006callId\030\001 \001(" +
+      "\005\022D\n\007chiData\030\002 \001(\01323.com.randioo.mahjong" +
+      "_public_server.protocol.ChiData\"6\n\007ChiDa" +
+      "ta\022\r\n\005card1\030\002 \001(\005\022\r\n\005card2\030\003 \001(\005\022\r\n\005card" +
+      "3\030\004 \001(\005\"S\n\014GameOverData\022\014\n\004name\030\001 \001(\t\022\023\n" +
+      "\013landLordNum\030\002 \001(\005\022\021\n\tfarmerNum\030\003 \001(\005\022\r\n",
+      "\005score\030\004 \001(\005\"\033\n\014RecommandPai\022\013\n\003pai\030\001 \003(" +
+      "\005\"6\n\005Score\022\014\n\004name\030\001 \001(\t\022\r\n\005score\030\002 \001(\005\022" +
+      "\020\n\010allScore\030\003 \001(\005\"j\n\010GameData\022\016\n\006gameId\030" +
+      "\001 \001(\005\022N\n\014gameRoleData\030\002 \003(\01328.com.randio" +
+      "o.mahjong_public_server.protocol.GameRol" +
+      "eData*5\n\010GameType\022\023\n\017GAME_TYPE_MATCH\020\001\022\024" +
+      "\n\020GAME_TYPE_FRIEND\020\002*M\n\tGameState\022\026\n\022GAM" +
+      "E_STATE_PREPARE\020\001\022\024\n\020GAME_START_START\020\002\022" +
+      "\022\n\016GAME_START_END\020\003*7\n\010GangType\022\016\n\nGANG_" +
+      "LIGHT\020\001\022\r\n\tGANG_DARK\020\002\022\014\n\010GANG_ADD\020\003"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6626,7 +6744,7 @@ public final class Entity {
           internal_static_com_randioo_mahjong_public_server_protocol_GangData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_randioo_mahjong_public_server_protocol_GangData_descriptor,
-              new java.lang.String[] { "Card", },
+              new java.lang.String[] { "TargetSeat", "Card", "GangType", },
               com.randioo.mahjong_public_server.protocol.Entity.GangData.class,
               com.randioo.mahjong_public_server.protocol.Entity.GangData.Builder.class);
           internal_static_com_randioo_mahjong_public_server_protocol_CallPengData_descriptor =

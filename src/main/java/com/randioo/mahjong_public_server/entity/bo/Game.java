@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import com.randioo.mahjong_public_server.entity.po.CallCardList;
 import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
@@ -196,5 +194,32 @@ public class Game {
 
 	public List<CallCardList> getHuCallCardLists() {
 		return huCallCardLists;
+	}
+
+	@Override
+	public String toString() {
+		String n = System.getProperty("line.separator");
+		String t = "\t";
+		StringBuilder sb = new StringBuilder();
+		sb.append("Game :[").append(n);
+		sb.append(t).append("gameId=>").append(gameId).append(n);
+		sb.append(t).append("roleGameInfoMap").append(n);
+		for (RoleGameInfo roleGameInfo : roleIdMap.values()) {
+			sb.append(t).append(roleGameInfo.toString()).append(n);
+		}
+		sb.append(t).append("callCardLists=>");
+		for (CallCardList callCardList : callCardLists) {
+			sb.append(t).append(callCardList).append(n);
+		}
+		sb.append(t).append("huCallCardList=>").append(n);
+		for (CallCardList callCardList : huCallCardLists) {
+			sb.append(t).append(callCardList).append(n);
+		}
+		sb.append(t).append("currentRoleIndex=>").append(currentRoleIdIndex).append(n);
+		sb.append(t).append("currentCardIndex=>").append(currentCardSeatIndex).append(n);
+		sb.append(t).append("sendCardCount=>").append(sendCardCount).append(n);
+		sb.append(t).append("remainCards=>").append(remainCards).append(n);
+		sb.append(t).append("]").append(n);
+		return sb.toString();
 	}
 }

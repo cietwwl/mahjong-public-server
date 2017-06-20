@@ -106,7 +106,7 @@ public class GmServiceImpl extends ObserveBaseService implements GmService {
 		}
 
 		if (Platform.getOS() == OS.WIN) {
-			new Thread(new EntityRunnable<Function>(function) {
+			Thread t = new Thread(new EntityRunnable<Function>(function) {
 
 				private Scanner in = new Scanner(System.in);
 
@@ -131,7 +131,9 @@ public class GmServiceImpl extends ObserveBaseService implements GmService {
 					}
 				}
 
-			}).start();
+			});
+			
+//			t.start();
 
 		}
 	}

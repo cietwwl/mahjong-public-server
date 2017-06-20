@@ -69,7 +69,7 @@ public class GameServerHandler extends GameServerHandlerAdapter {
 		CS message = null;
 		try {
 			message = CS.parseDelimitedFrom(input);
-			logger.info(message.toString());
+			logger.warn(message.toString());
 			actionDispatcher(message, session);
 		} finally {
 			if (input != null) {
@@ -81,7 +81,7 @@ public class GameServerHandler extends GameServerHandlerAdapter {
 
 	@Override
 	public void messageSent(IoSession session, Object message) throws Exception {
-		logger.info(getMessage(message, session));
+		logger.warn(getMessage(message, session));
 	}
 
 	private String getMessage(Object message, IoSession session) {

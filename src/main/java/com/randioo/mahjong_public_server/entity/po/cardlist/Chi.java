@@ -10,7 +10,7 @@ public class Chi extends AbstractCardList {
 	public int card;
 
 	@Override
-	public void check(List<CardList> cardLists, CardSort cardSort, int card) {
+	public void check(List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList, boolean isMine) {
 		Set<Integer> set = cardSort.getList().get(0);
 
 	}
@@ -22,5 +22,5 @@ public class Chi extends AbstractCardList {
 			list.add(card + i);
 		return list;
 	}
-	
+
 }

@@ -16,10 +16,11 @@ public class Peng extends AbstractCardList {
 	public int card;
 
 	@Override
-	public void check(List<CardList> cardLists, CardSort cardSort, int card) {
-		Set<Integer> set = cardSort.getList().get(1);
+	public void check(List<CardList> cardLists, CardSort cardSort, int card,List<CardList> showCardList,boolean isMine) {
 		if (card == 81)
 			return;
+		
+		Set<Integer> set = cardSort.getList().get(2);
 		if (set.contains(card)) {
 			Peng peng = new Peng();
 			peng.card = card;

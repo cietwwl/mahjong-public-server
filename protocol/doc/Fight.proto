@@ -162,13 +162,12 @@ message FightGangRequest{
 }
 
 message FightGangResponse{
-	
+	optional int32 errorCode = 1[default = 1];
 }
 
 message SCFightGang{
 	optional int32 seat = 1;
-	optional int32 card = 2;
-	optional bool visible = 3;
+	optional GangData gangData = 2;
 }
 
 message FightHuRequest{
@@ -177,7 +176,7 @@ message FightHuRequest{
 }
 
 message FightHuResponse{
-	
+	optional int32 errorCode = 1[default=1];
 }
 
 message SCFightHu{
@@ -185,11 +184,11 @@ message SCFightHu{
 }
 
 message FightGuoRequest{
-	
+	optional int32 tempGameCount = 1;
 }
 
 message FightGuoResponse{
-	
+	optional int32 errorCode = 1[default = 1];
 }
 
 message SCFightGuo{

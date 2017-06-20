@@ -59,7 +59,15 @@ message CallGangData{
 }
 
 message GangData{
-	repeated int32 card = 2;
+	optional int32 targetSeat = 1;
+	optional int32 card = 2;
+	optional GangType gangType = 3;
+}
+
+enum GangType{
+	GANG_LIGHT=1;
+	GANG_DARK=2;
+	GANG_ADD=3;
 }
 
 message CallPengData{

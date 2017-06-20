@@ -9,6 +9,7 @@ public class FightConstant {
 	public static final String APPLY_LEAVE = "apply_leave";
 	public static final String GAME_OVER = "game_over";
 	public static final String FIGHT_NOTICE_SEND_CARD = "fight_notice_send_card";
+	public static final String FIGHT_GANG_PENG_HU = "fight_gang_peng_hu";
 
 	public static final int SCORE_3 = 3;
 
@@ -20,6 +21,11 @@ public class FightConstant {
 	public static final int PENG = 2;
 	public static final int GANE = 3;
 	public static final int HU = 4;
+	
+	public static final int GANG_LIGHT = 1;
+	public static final int GANG_DARK = 2;
+	public static final int GANG_ADD = 3;
+	
 
 
 }

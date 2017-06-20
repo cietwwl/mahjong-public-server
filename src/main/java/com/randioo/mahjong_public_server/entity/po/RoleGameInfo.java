@@ -24,7 +24,17 @@ public class RoleGameInfo {
 
 	@Override
 	public String toString() {
-		return "[gameRoleId=" + gameRoleId + "|roleId=" + roleId + "|ready=" + ready + "|cards=" + cards + "|newCard="
-				+ newCard + " ]";
+		String n = System.getProperty("line.separator");
+		String t = "\t";
+		StringBuilder sb = new StringBuilder();
+		sb.append("GameRoleInfo:[").append(n);
+		sb.append(t).append("gameRoleId=>").append(gameRoleId).append(n);
+		sb.append(t).append("roleId=>").append(roleId).append(n);
+		sb.append(t).append("ready=>").append(ready).append(n);
+		sb.append(t).append("cards=>").append(cards).append(n);
+		sb.append(t).append("newCard=>").append(newCard).append(n);
+		sb.append(t).append("showCardLists=>").append(showCardLists).append(n);
+		sb.append(t).append("]");
+		return sb.toString();
 	}
 }
