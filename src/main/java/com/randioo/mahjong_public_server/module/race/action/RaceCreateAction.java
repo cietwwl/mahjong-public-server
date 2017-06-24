@@ -24,7 +24,7 @@ public class RaceCreateAction implements IActionSupport {
 
 		MahjongRaceConfigure configure = new MahjongRaceConfigure();
 		configure.raceType = message.getInt();
-		configure.raceName = message.getString();
+//		configure.raceName = message.getString();
 		configure.maxCount = message.getInt();
 		configure.endTime = message.getString();
 		configure.gangScore = message.getInt();
@@ -33,7 +33,7 @@ public class RaceCreateAction implements IActionSupport {
 		configure.catchScore = message.getInt();
 		configure.gangkai = message.getBoolean();
 		configure.minStartScore = message.getInt();
-
+        configure.account = message.getString();
 		message = raceService.createRace(configure);
 		
 		SessionUtils.sc(session, message);

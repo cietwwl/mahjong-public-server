@@ -3,6 +3,8 @@ package com.randioo.mahjong_public_server.protocol;
 message RoleData{
 	optional int32 roleId = 1;
 	optional int32 gameId = 2;
+	optional int32 point = 3;
+	optional int32 sex = 4;
 
 	/*optional string name = 2;
 	optional int32 money = 3;
@@ -12,7 +14,7 @@ message RoleData{
 	optional int32 randiooMoney = 7;*/
 }
 
-message GameConfig{
+message GameConfigData{
 	optional int32 raceType = 1;
 	optional int32 maxCount = 2;
 	optional int32 gangScore = 3;
@@ -45,6 +47,8 @@ message GameRoleData{
 	optional bool ready = 4;
 	optional string headImgUrl = 5;
 	optional int32 money = 6;
+	optional int32 point = 7;
+	optional int32 sex = 8;
 }
 
 enum GameState{
@@ -53,68 +57,67 @@ enum GameState{
 	GAME_START_END = 3;
 }
 
-message CallGangData{
+message CallCardListData{
 	optional int32 callId = 1;
-	optional GangData gangData = 2;
+	optional CardListData cardListData = 2;
 }
 
-message GangData{
-	optional int32 targetSeat = 1;
+message CardListData{
+	optional CardListType cardListType = 1;
 	optional int32 card = 2;
-	optional GangType gangType = 3;
+	optional int32 targetSeat = 3;
+	optional int32 targetCard = 4;
 }
 
-enum GangType{
-	GANG_LIGHT=1;
-	GANG_DARK=2;
-	GANG_ADD=3;
-}
-
-message CallPengData{
-	optional int32 callId = 1;
-	optional PengData pengData = 2;
-}
-
-message PengData{
-	optional int32 targetSeat = 1;
-	optional int32 card = 2;
+enum CardListType{
+	CARD_LIST_TYPE_CHI = 1;
+	CARD_LIST_TYPE_PENG = 2;
+	CARD_LIST_TYPE_GANG_LIGHT = 3;
+	CARD_LIST_TYPE_GANG_DARK = 4;
+	CARD_LIST_TYPE_GANG_ADD = 5;
 }
 
 message CallHuData{
 	optional int32 callId = 1;
-	optional HuData huData = 2;
+	optional RoundCardsData huData = 2;
 }
 
-message HuData{
-	repeated int32 card = 2;
+message RoleRoundOverInfoData{
+	optional GameRoleData gameRoleData = 1;
+	optional RoundCardsData roundCardsData = 2;
+	optional int32 minScore = 3;
+	optional bool gangKai = 4;
+	repeated int32 flyCards = 5;
+	optional OverMethod overMethod = 6;
+	optional int32 roundScore = 7;
 }
 
-message CallChiData{
-	optional int32 callId = 1;
-	optional ChiData chiData = 2;	
+enum OverMethod{
+	OVER_LOSS = 0;
+	OVER_CHONG = 1;
+	OVER_MO_HU =2;
+	OVER_HU = 3;
 }
 
-message ChiData{
-	optional int32 card1 = 2;
-	optional int32 card2 = 3;
-	optional int32 card3 = 4;
+message RoleGameOverInfoData{
+	optional GameRoleData gameRoleData = 1;
+	optional int32 huCount = 2;
+	optional int32 moHuCount = 3;
+	optional int32 zhuaHuCount = 4;
+	optional int32 dianChongCount = 5;
+	optional int32 gameScore = 6;
 }
 
-message GameOverData{
-	optional string name = 1;
-	optional int32 landLordNum = 2;
-	optional int32 farmerNum = 3;
-	optional int32 score = 4;
+message RoundCardsData{	
+	optional int32 huCard = 1;
+	repeated int32 handCards = 2;	
+	optional int32 touchCard = 3;
+	optional int32 targetSeat = 4;
+	repeated CardListData cardListData = 5;
 }
 
 message RecommandPai{
 	repeated int32 pai = 1; 
-}
-
-message Score{
-	optional string name = 1;
-	optional int32 score = 2;
-	optional int32 allScore = 3;
 }
 
 message GameData{

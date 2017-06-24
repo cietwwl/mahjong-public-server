@@ -1,28 +1,27 @@
-package com.randioo.mahjong_public_server.module.match.action;
+package com.randioo.mahjong_public_server.module.fight.action;
 
 import org.apache.mina.core.session.IoSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.randioo.mahjong_public_server.entity.bo.Role;
-import com.randioo.mahjong_public_server.module.match.service.MatchService;
-import com.randioo.mahjong_public_server.protocol.Match.MatchJoinGameRequest;
+import com.randioo.mahjong_public_server.module.fight.service.FightService;
+import com.randioo.mahjong_public_server.protocol.Fight.FightHuRequest;
 import com.randioo.randioo_server_base.annotation.PTAnnotation;
 import com.randioo.randioo_server_base.cache.RoleCache;
 import com.randioo.randioo_server_base.template.IActionSupport;
 
 @Controller
-@PTAnnotation(MatchJoinGameRequest.class)
-public class MatchJoinGameAction implements IActionSupport {
+@PTAnnotation(FightHuRequest.class)
+public class FightHuAction implements IActionSupport {
 
 	@Autowired
-	private MatchService matchService;
+	private FightService fightService;
 
 	@Override
 	public void execute(Object data, IoSession session) {
-		MatchJoinGameRequest request = (MatchJoinGameRequest) data;
+		FightHuRequest request = (FightHuRequest) data;
 		Role role = (Role) RoleCache.getRoleBySession(session);
-		matchService.joinGame(role, request.getLockString());
+		fightService.hu(role, request.getTempGameCount(), request.getCallCardListId());
 	}
-
 }

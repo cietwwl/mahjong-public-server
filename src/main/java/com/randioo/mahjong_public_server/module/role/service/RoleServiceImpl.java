@@ -17,7 +17,7 @@ import com.randioo.mahjong_public_server.protocol.Error.ErrorCode;
 import com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse;
 import com.randioo.mahjong_public_server.protocol.Role.RoleRenameResponse;
 import com.randioo.mahjong_public_server.protocol.ServerMessage.SC;
-import com.randioo.mahjong_public_server.util.HttpConnection;
+import com.randioo.mahjong_public_server.util.HttpConnection2;
 import com.randioo.randioo_server_base.cache.RoleCache;
 import com.randioo.randioo_server_base.config.GlobleConfig;
 import com.randioo.randioo_server_base.config.GlobleConfig.GlobleEnum;
@@ -146,7 +146,7 @@ public class RoleServiceImpl extends ObserveBaseService implements RoleService {
 			int money = -1;
 			String name = "";
 			String headImgUrl = "";
-			HttpConnection connection = new HttpConnection(
+			HttpConnection2 connection = new HttpConnection2(
 			/* "http://manager.app.randioo.com/gateway/MaJiang/getMoney.php?key=f4f3f65d6d804d138043fbbd1843d510&&id=" */
 			"http://10.0.51.6/APPadmin/gateway/MaJiang/getMoney.php?key=f4f3f65d6d804d138043fbbd1843d510&&id=",
 					role.getAccount());

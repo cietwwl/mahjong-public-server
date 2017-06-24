@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ import com.randioo.mahjong_public_server.entity.bo.Role;
 import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
 import com.randioo.mahjong_public_server.entity.po.RoleMatchRule;
 import com.randioo.mahjong_public_server.module.login.service.LoginService;
-import com.randioo.mahjong_public_server.protocol.Entity.GameConfig;
+import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
 import com.randioo.mahjong_public_server.protocol.Entity.GameRoleData;
 import com.randioo.mahjong_public_server.protocol.Entity.GameState;
 import com.randioo.mahjong_public_server.protocol.Entity.GameType;
@@ -24,11 +25,14 @@ import com.randioo.mahjong_public_server.protocol.Error.ErrorCode;
 import com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeReady;
 import com.randioo.mahjong_public_server.protocol.Match.MatchAIResponse;
 import com.randioo.mahjong_public_server.protocol.Match.MatchCreateGameResponse;
+import com.randioo.mahjong_public_server.protocol.Match.MatchJoinAIGameResponse;
 import com.randioo.mahjong_public_server.protocol.Match.MatchJoinGameResponse;
 import com.randioo.mahjong_public_server.protocol.Match.SCMatchJoinGame;
+import com.randioo.mahjong_public_server.protocol.Match.SCMatchMineInfo;
 import com.randioo.mahjong_public_server.protocol.ServerMessage.SC;
 import com.randioo.randioo_server_base.cache.RoleCache;
 import com.randioo.randioo_server_base.db.IdClassCreator;
+import com.randioo.randioo_server_base.lock.CacheLockUtil;
 import com.randioo.randioo_server_base.module.match.MatchHandler;
 import com.randioo.randioo_server_base.module.match.MatchModelService;
 import com.randioo.randioo_server_base.module.match.MatchRule;
@@ -70,7 +74,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 					list.add((RoleMatchRule) matchRule);
 
 				Collections.sort(list);
-				GameConfig config = GameConfig.newBuilder().build();
+				GameConfigData config = GameConfigData.newBuilder().build();
 				Game game = createGame(list.get(0).getRoleId(), config);
 
 				for (MatchRule matchRule : matchMap.values()) {
@@ -101,9 +105,9 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 	}
 
 	@Override
-	public GeneratedMessage createRoom(Role role, GameConfig gameConfig) {
+	public GeneratedMessage createRoom(Role role, GameConfigData gameConfigData) {
 		logger.debug("createRoom -->start");
-		if (!checkConfig(gameConfig)) {
+		if (!checkConfig(gameConfigData)) {
 			return SC
 					.newBuilder()
 					.setMatchCreateGameResponse(
@@ -111,10 +115,10 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 					.build();
 		}
 
-		Game game = this.createGame(role.getRoleId(), gameConfig);
+		Game game = this.createGame(role.getRoleId(), gameConfigData);
 		RoleGameInfo roleGameInfo = game.getRoleIdMap().get(this.getGameRoleId(game.getGameId(), role.getRoleId()));
 
-		GameRoleData myGameRoleData = this.parseGameRoleData(roleGameInfo, game.getGameId());
+		GameRoleData myGameRoleData = this.parseGameRoleData(roleGameInfo, game);
 		logger.debug("createRoom-->end");
 		return SC
 				.newBuilder()
@@ -131,8 +135,8 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 	 * @author wcy 2017年5月26日
 	 */
 	@Override
-	public Game createGame(int roleId, GameConfig gameConfig) {
-		Game game = this.createGameByGameConfig(gameConfig);
+	public Game createGame(int roleId, GameConfigData gameConfigData) {
+		Game game = this.createGameByGameConfig(gameConfigData);
 
 		this.addAccountRole(game, roleId);
 
@@ -140,7 +144,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 	}
 
 	@Override
-	public Game createGameByGameConfig(GameConfig gameConfig) {
+	public Game createGameByGameConfig(GameConfigData gameConfigData) {
 		Game game = new Game();
 		int gameId = idClassCreator.getId(Game.class);
 		game.setGameId(gameId);
@@ -149,7 +153,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 
 		game.setLockString(this.getLockString());
 
-		game.setGameConfig(gameConfig);
+		game.setGameConfig(gameConfigData);
 
 		GameCache.getGameMap().put(gameId, game);
 		GameCache.getGameLockStringMap().put(game.getLockString(), gameId);
@@ -227,50 +231,86 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 	}
 
 	@Override
-	public GeneratedMessage joinGame(Role role, String lockString) {
+	public void joinGame(Role role, String lockString) {
 		Integer gameId = GameCache.getGameLockStringMap().get(lockString);
 		logger.debug("gameid:" + gameId);
 		if (gameId == null) {
-			return SC
-					.newBuilder()
-					.setMatchJoinGameResponse(
-							MatchJoinGameResponse.newBuilder().setErrorCode(ErrorCode.GAME_JOIN_ERROR.getNumber()))
-					.build();
+			SessionUtils.sc(
+					role.getRoleId(),
+					SC.newBuilder()
+							.setMatchJoinGameResponse(
+									MatchJoinGameResponse.newBuilder().setErrorCode(
+											ErrorCode.GAME_JOIN_ERROR.getNumber())).build());
+			return;
 		}
 
 		Game game = GameCache.getGameMap().get(gameId);
 		logger.debug("game:" + game);
 		if (game == null) {
-			return SC
-					.newBuilder()
-					.setMatchJoinGameResponse(
-							MatchJoinGameResponse.newBuilder().setErrorCode(ErrorCode.GAME_JOIN_ERROR.getNumber()))
-					.build();
+			SessionUtils.sc(
+					role.getRoleId(),
+					SC.newBuilder()
+							.setMatchJoinGameResponse(
+									MatchJoinGameResponse.newBuilder().setErrorCode(
+											ErrorCode.GAME_JOIN_ERROR.getNumber())).build());
+			return;
 		}
 		String targetLock = game.getLockString();
 		// 如果锁相同则可以进
 		if (!targetLock.equals(lockString)) {
-			return SC
-					.newBuilder()
-					.setMatchJoinGameResponse(
-							MatchJoinGameResponse.newBuilder().setErrorCode(ErrorCode.MATCH_ERROR_LOCK.getNumber()))
-					.build();
+			SessionUtils.sc(
+					role.getRoleId(),
+					SC.newBuilder()
+							.setMatchJoinGameResponse(
+									MatchJoinGameResponse.newBuilder().setErrorCode(
+											ErrorCode.MATCH_ERROR_LOCK.getNumber())).build());
+			return;
 		}
 
 		int maxCount = game.getGameConfig().getMaxCount();
 		if (game.getRoleIdMap().size() >= maxCount) {
-			return SC
-					.newBuilder()
-					.setMatchJoinGameResponse(
-							MatchJoinGameResponse.newBuilder().setErrorCode(ErrorCode.MATCH_MAX_ROLE_COUNT.getNumber()))
-					.build();
+			SessionUtils.sc(
+					role.getRoleId(),
+					SC.newBuilder()
+							.setMatchJoinGameResponse(
+									MatchJoinGameResponse.newBuilder().setErrorCode(
+											ErrorCode.MATCH_MAX_ROLE_COUNT.getNumber())).build());
+			return;
 		}
 
 		this.joinGame(role, gameId);
 
-		RoleGameInfo roleGameInfo = game.getRoleIdMap().get(this.getGameRoleId(game.getGameId(), role.getRoleId()));
+		String gameRoleId = this.getGameRoleId(game.getGameId(), role.getRoleId());
 
-		GameRoleData myGameRoleData = this.parseGameRoleData(roleGameInfo, game.getGameId());
+		RoleGameInfo roleGameInfo = game.getRoleIdMap().get(gameRoleId);
+		GameRoleData myGameRoleData = this.parseGameRoleData(roleGameInfo, game);
+
+		List<GameRoleData> gameRoleDataList = new ArrayList<>(game.getRoleIdMap().size());
+		for (RoleGameInfo info : game.getRoleIdMap().values()) {
+			GameRoleData gameRoleData = this.parseGameRoleData(info,game);
+			gameRoleDataList.add(gameRoleData);
+		}
+
+		SessionUtils.sc(
+				role.getRoleId(),
+				SC.newBuilder()
+						.setMatchJoinGameResponse(
+								MatchJoinGameResponse.newBuilder().addAllGameRoleData(gameRoleDataList)
+										.setSeat(myGameRoleData.getSeat())).build());
+	}
+
+	@Override
+	public void joinGame(Role role, int gameId) {
+		logger.debug("joinGame" + role.getAccount());
+		Game game = GameCache.getGameMap().get(gameId);
+		logger.debug("game-->" + game);
+		this.addAccountRole(game, role.getRoleId());
+
+		String gameRoleId = this.getGameRoleId(game.getGameId(), role.getRoleId());
+
+		RoleGameInfo roleGameInfo = game.getRoleIdMap().get(gameRoleId);
+
+		GameRoleData myGameRoleData = this.parseGameRoleData(roleGameInfo, game);
 		SC scJoinGame = SC.newBuilder()
 				.setSCMatchJoinGame(SCMatchJoinGame.newBuilder().setGameRoleData(myGameRoleData)).build();
 		// 通知其他人加入房间
@@ -280,24 +320,124 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 			SessionUtils.sc(info.roleId, scJoinGame);
 		}
 
-		List<GameRoleData> gameRoleDataList = new ArrayList<>(game.getRoleIdMap().size());
-		for (RoleGameInfo info : game.getRoleIdMap().values()) {
-			GameRoleData gameRoleData = this.parseGameRoleData(info, game.getGameId());
-			gameRoleDataList.add(gameRoleData);
-		}
-		return SC
-				.newBuilder()
-				.setMatchJoinGameResponse(
-						MatchJoinGameResponse.newBuilder().addAllGameRoleData(gameRoleDataList)
-								.setSeat(myGameRoleData.getSeat()).setId(lockString)).build();
 	}
 
 	@Override
-	public void joinGame(Role role, int gameId) {
-		logger.debug("joinGame" + role.getAccount());
-		Game game = GameCache.getGameMap().get(gameId);
-		logger.debug("game-->" + game);
-		this.addAccountRole(game, role.getRoleId());
+	public void joinAICountGame(Role role, int aiCount) {
+		SessionUtils.sc(role.getRoleId(),
+				SC.newBuilder().setMatchJoinAIGameResponse(MatchJoinAIGameResponse.newBuilder()).build());
+
+		int gameIdCount = 1;
+		boolean joinSuccess = false;
+		while (!joinSuccess) {
+			Lock lock = CacheLockUtil.getLock(Game.class, gameIdCount);
+			try {
+				lock.lock();
+				Game game = GameCache.getGameMap().get(gameIdCount);
+				if (game == null) {
+					GameConfigData gameConfigData = GameConfigData.newBuilder().setMaxCount(4).setEndTime("3:24:00")
+							.build();
+					game = createGame(role.getRoleId(), gameConfigData);
+					String gameRoleId = this.getGameRoleId(game.getGameId(), role.getRoleId());
+					RoleGameInfo roleGameInfo = game.getRoleIdMap().get(gameRoleId);
+					joinSuccess = true;
+
+					SessionUtils.sc(
+							role.getRoleId(),
+							SC.newBuilder()
+									.setSCMatchMineInfo(
+											SCMatchMineInfo.newBuilder().setGameRoleData(
+													this.parseGameRoleData(roleGameInfo, game))).build());
+					SessionUtils.sc(role.getRoleId(),
+							SC.newBuilder().setSCFightNoticeReady(SCFightNoticeReady.newBuilder()).build());
+
+					fillAI(aiCount, game);
+
+				} else {
+					GameConfigData gameConfigData = game.getGameConfig();
+					int gameId = game.getGameId();
+					if (game.getRoleIdMap().size() < gameConfigData.getMaxCount() - aiCount) {
+
+						joinGame(role, gameId);
+						String myGameRoleId = this.getGameRoleId(gameId, role.getRoleId());
+						RoleGameInfo myRoleGameInfo = game.getRoleIdMap().get(myGameRoleId);
+						joinSuccess = true;
+						SessionUtils.sc(
+								role.getRoleId(),
+								SC.newBuilder()
+										.setSCMatchMineInfo(
+												SCMatchMineInfo.newBuilder().setGameRoleData(
+														this.parseGameRoleData(myRoleGameInfo, game))).build());
+
+						SessionUtils.sc(role.getRoleId(),
+								SC.newBuilder().setSCFightNoticeReady(SCFightNoticeReady.newBuilder()).build());
+
+						// 发送给自己别人的信息
+						for (RoleGameInfo roleGameInfo : game.getRoleIdMap().values()) {
+							if (roleGameInfo == myRoleGameInfo)
+								continue;
+
+							GameRoleData gameRoleData = this.parseGameRoleData(roleGameInfo, game);
+							SessionUtils
+									.sc(role.getRoleId(),
+											SC.newBuilder()
+													.setSCMatchJoinGame(
+															SCMatchJoinGame.newBuilder().setGameRoleData(gameRoleData))
+													.build());
+						}
+						// 发送给别人自己的信息
+						GameRoleData myGameRoleData = this.parseGameRoleData(myRoleGameInfo, game);
+						for (RoleGameInfo roleGameInfo : game.getRoleIdMap().values()) {
+							if (roleGameInfo.roleId == myRoleGameInfo.roleId)
+								continue;
+							SessionUtils.sc(
+									roleGameInfo.roleId,
+									SC.newBuilder()
+											.setSCMatchJoinGame(
+													SCMatchJoinGame.newBuilder().setGameRoleData(myGameRoleData))
+											.build());
+						}
+
+						fillAI(aiCount, game);
+
+					} else {
+						gameIdCount++;
+					}
+
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				lock.unlock();
+			}
+
+		}
+
+	}
+
+	private void fillAI(int aiCount, Game game) {
+		GameConfigData gameConfigData = game.getGameConfig();
+		// 检查是否可以加入npc
+		if (game.getRoleIdMap().size() >= gameConfigData.getMaxCount() - aiCount) {
+			// 先检查要发送给多少个真人
+			List<RoleGameInfo> realRoleGameInfos = new ArrayList<>(game.getRoleIdMap().values());
+			for (int i = game.getRoleIdMap().size(); i < gameConfigData.getMaxCount(); i++) {
+				String aiGameRoleId = addAIRole(game);
+
+				RoleGameInfo info = game.getRoleIdMap().get(aiGameRoleId);
+				int index = game.getRoleIdList().indexOf(aiGameRoleId);
+				parseGameRoleData(info, game);
+				GameRoleData AIGameRoleData = GameRoleData.newBuilder().setGameRoleId(info.gameRoleId)
+						.setReady(info.ready).setSeat(index).setName("ROBOT" + info.gameRoleId).build();
+
+				SC scJoinGame = SC.newBuilder()
+						.setSCMatchJoinGame(SCMatchJoinGame.newBuilder().setGameRoleData(AIGameRoleData)).build();
+				for (RoleGameInfo roleGameInfo : realRoleGameInfos) {
+					SessionUtils.sc(roleGameInfo.roleId, scJoinGame);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -314,11 +454,11 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 	@Override
 	public void matchAI(Role role) {
 		int roleId = role.getRoleId();
-		GameConfig config = GameConfig.newBuilder().setMaxCount(4).build();
+		GameConfigData config = GameConfigData.newBuilder().setMaxCount(4).build();
 		Game game = createGame(roleId, config);
 		RoleGameInfo tRoleGameInfo = game.getRoleIdMap().get(this.getGameRoleId(game.getGameId(), role.getRoleId()));
 
-		GameRoleData myGameRoleData = this.parseGameRoleData(tRoleGameInfo, game.getGameId());
+		GameRoleData myGameRoleData = this.parseGameRoleData(tRoleGameInfo, game);
 		SessionUtils.sc(role.getRoleId(),
 				SC.newBuilder().setMatchAIResponse(MatchAIResponse.newBuilder().setGameRoleData(myGameRoleData))
 						.build());
@@ -337,20 +477,26 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 					.setSCMatchJoinGame(SCMatchJoinGame.newBuilder().setGameRoleData(AIGameRoleData)).build();
 			SessionUtils.sc(role.getRoleId(), scJoinGame);
 		}
-		
+
 		SessionUtils.sc(role.getRoleId(), SC.newBuilder().setSCFightNoticeReady(SCFightNoticeReady.newBuilder())
 				.build());
 
 	}
 
-	private GameRoleData parseGameRoleData(RoleGameInfo info, int gameId) {
-		Role role = loginService.getRoleById(info.roleId);
-		String name = role != null ? role.getName() : "";
-
-		Game game = GameCache.getGameMap().get(gameId);
+	@Override
+	public GameRoleData parseGameRoleData(RoleGameInfo info, Game game) {
 		int index = game.getRoleIdList().indexOf(info.gameRoleId);
+
+		Role role = loginService.getRoleById(info.roleId);
+		if (role == null) {
+			GameRoleData AIGameRoleData = GameRoleData.newBuilder().setGameRoleId(info.gameRoleId).setReady(info.ready)
+					.setSeat(index).setName("ROBOT" + info.gameRoleId).build();
+			return AIGameRoleData;
+		}
+
 		return GameRoleData.newBuilder().setGameRoleId(info.gameRoleId).setReady(info.ready).setSeat(index)
-				.setName(name).setHeadImgUrl(role.getHeadImgUrl()).setMoney(role.getMoney()).build();
+				.setName(role.getName()).setHeadImgUrl(role.getHeadImgUrl()).setMoney(role.getMoney())
+				.setSex(role.getSex()).setPoint(role.getPoint()).build();
 	}
 
 	/**
@@ -388,7 +534,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 		return /* "1980" */"111111";
 	}
 
-	public boolean checkConfig(GameConfig gameConfig) {
+	public boolean checkConfig(GameConfigData gameConfigData) {
 		// TODO
 		return true;
 	}

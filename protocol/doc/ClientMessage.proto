@@ -5,7 +5,7 @@ import "Match.proto";
 import "Fight.proto";
 import "MoneyExchange.proto";
 import "Settings.proto";
-
+import "Race.proto";
 
 message CS{
 	optional LoginCheckAccountRequest LoginCheckAccountRequest = 1;
@@ -18,20 +18,23 @@ message CS{
 	optional MatchCreateGameRequest MatchCreateGameRequest = 6;
 	optional MatchJoinGameRequest MatchJoinGameRequest = 7;
 	optional MatchAIRequest MatchAIRequest = 8;
+	optional MatchJoinAIGameRequest MatchJoinAIGameRequest = 9;
 
-	optional FightReadyRequest FightReadyRequest = 9;
-	optional FightExitGameRequest FightExitGameRequest = 10;
-	optional FightAgreeExitGameRequest FightAgreeExitGameRequest = 11;
-	optional FightSendCardRequest FightSendCardRequest = 12;
-	optional FightRecommandRequest FightRecommandRequest = 13;
-	optional FightGetlastRoundRequest FightGetlastRoundRequest = 14;
-	optional FightPengRequest FightPengRequest = 15;
-	optional FightGangRequest FightGangRequest = 16;
-	optional FightHuRequest FightHuRequest = 17;
-	optional FightGuoRequest FightGuoRequest = 18;
+	optional FightReadyRequest FightReadyRequest = 10;
+	optional FightExitGameRequest FightExitGameRequest = 11;
+	optional FightAgreeExitGameRequest FightAgreeExitGameRequest = 12;
+	optional FightSendCardRequest FightSendCardRequest = 13;
+	optional FightRecommandRequest FightRecommandRequest = 14;
+	optional FightGetlastRoundRequest FightGetlastRoundRequest = 15;
+	optional FightPengRequest FightPengRequest = 16;
+	optional FightGangRequest FightGangRequest = 17;
+	optional FightHuRequest FightHuRequest = 18;
+	optional FightGuoRequest FightGuoRequest = 19;
 
-	optional MoneyExchangeRequest MoneyExchangeRequest = 19;
+	optional MoneyExchangeRequest MoneyExchangeRequest = 20;
 
-	optional SettingsRequest SettingsRequest = 20;
-	optional SettingsShowRequest SettingsShowRequest = 21;
-} // 21
+	optional SettingsRequest SettingsRequest = 21;
+	optional SettingsShowRequest SettingsShowRequest = 22;
+
+	optional RaceJoinRaceRequest RaceJoinRaceRequest = 23;
+} // 23

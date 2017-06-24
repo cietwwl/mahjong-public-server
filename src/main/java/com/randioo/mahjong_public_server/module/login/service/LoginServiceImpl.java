@@ -11,6 +11,7 @@ import com.google.protobuf.GeneratedMessage;
 import com.randioo.mahjong_public_server.dao.RoleDao;
 import com.randioo.mahjong_public_server.entity.bo.Role;
 import com.randioo.mahjong_public_server.module.login.LoginConstant;
+import com.randioo.mahjong_public_server.module.race.service.RaceService;
 import com.randioo.mahjong_public_server.module.role.service.RoleService;
 import com.randioo.mahjong_public_server.protocol.Entity.RoleData;
 import com.randioo.mahjong_public_server.protocol.Error.ErrorCode;
@@ -46,6 +47,9 @@ public class LoginServiceImpl extends ObserveBaseService implements LoginService
 
 	@Autowired
 	private RoleService roleService;
+
+	@Autowired
+	private RaceService raceService;
 
 	@Autowired
 	private GameDB gameDB;
@@ -110,12 +114,12 @@ public class LoginServiceImpl extends ObserveBaseService implements LoginService
 
 		@Override
 		public RoleInterface getRoleInterfaceFromDBById(int roleId) {
-			return roleDao.get(null, roleId);
+			return roleDao.get(roleId);
 		}
 
 		@Override
 		public RoleInterface getRoleInterfaceFromDBByAccount(String account) {
-			return roleDao.get(account, 0);
+			return roleDao.getRoleByAccount(account);
 		}
 
 		@Override
@@ -124,6 +128,7 @@ public class LoginServiceImpl extends ObserveBaseService implements LoginService
 			Role role = (Role) roleInterface;
 
 			roleService.roleInit(role);
+			raceService.raceInit(role);
 		}
 
 	}
@@ -235,7 +240,7 @@ public class LoginServiceImpl extends ObserveBaseService implements LoginService
 				.newBuilder()
 				.setRoleId(
 						(Tool.regExpression(role.getAccount(), "[0-9]*") ? Integer.parseInt(role.getAccount()) : role
-								.getRoleId())).build();
+								.getRoleId())).setGameId(role.getGameId()).setPoint(1000).setSex(1).build();
 	}
 
 	@Override

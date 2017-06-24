@@ -1,6 +1,7 @@
 package com.randioo.mahjong_public_server.entity.po;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -34,6 +35,12 @@ public class CardSort {
 		}
 	}
 
+	public void remove(int... cards) {
+		for (int card : cards) {
+			remove(card);
+		}
+	}
+
 	public void remove(List<Integer> cards) {
 		for (int card : cards) {
 			remove(card);
@@ -55,6 +62,14 @@ public class CardSort {
 			cardSort.values.get(i).addAll(this.values.get(i));
 
 		return cardSort;
+	}
+
+	public List<Integer> toArray() {
+		List<Integer> list = new ArrayList<>();
+		for (Set<Integer> set : values)
+			list.addAll(set);
+
+		return list;
 	}
 
 	@Override

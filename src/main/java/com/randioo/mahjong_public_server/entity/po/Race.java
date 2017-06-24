@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Race {
+	/** 比赛id */
+	private int raceId;
 	// 游戏id
 	private int gameId;
 	// 比赛名称
@@ -12,6 +14,8 @@ public class Race {
 	private String endTime;
 	// 玩家队列
 	private List<Integer> roleIdQueue = new ArrayList<>();
+
+	public MahjongRaceConfigure config;
 
 	public List<Integer> getRoleIdQueue() {
 		return roleIdQueue;
@@ -39,5 +43,13 @@ public class Race {
 
 	public void setGameId(int gameId) {
 		this.gameId = gameId;
+	}
+
+	public int getRaceId() {
+		return raceId;
+	}
+
+	public void setRaceId(int raceId) {
+		this.raceId = raceId;
 	}
 }

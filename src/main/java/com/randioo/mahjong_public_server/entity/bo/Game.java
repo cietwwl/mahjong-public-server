@@ -8,7 +8,7 @@ import java.util.Map;
 
 import com.randioo.mahjong_public_server.entity.po.CallCardList;
 import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
-import com.randioo.mahjong_public_server.protocol.Entity.GameConfig;
+import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
 import com.randioo.mahjong_public_server.protocol.Entity.GameState;
 import com.randioo.mahjong_public_server.protocol.Entity.GameType;
 
@@ -25,7 +25,7 @@ public class Game {
 	// 游戏类型
 	private GameType gameType;
 	// 游戏配置
-	private GameConfig gameConfig;
+	private GameConfigData gameConfigData;
 	// 在线玩家数量
 	private int onlineRoleCount;
 	// 玩家id列表，用于换人
@@ -105,12 +105,12 @@ public class Game {
 		this.gameState = gameState;
 	}
 
-	public GameConfig getGameConfig() {
-		return gameConfig;
+	public GameConfigData getGameConfig() {
+		return gameConfigData;
 	}
 
-	public void setGameConfig(GameConfig gameConfig) {
-		this.gameConfig = gameConfig;
+	public void setGameConfig(GameConfigData gameConfigData) {
+		this.gameConfigData = gameConfigData;
 	}
 
 	public List<String> getRoleIdList() {

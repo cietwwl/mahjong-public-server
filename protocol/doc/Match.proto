@@ -11,7 +11,7 @@ message MatchAIResponse{
 }
 
 message MatchCreateGameRequest{
-	optional GameConfig gameConfig = 1;
+	optional GameConfigData gameConfigData = 1;
 }
 
 message MatchCreateGameResponse{
@@ -21,7 +21,6 @@ message MatchCreateGameResponse{
 	optional GameRoleData gameRoleData = 4;
 }
 
-
 message MatchJoinGameRequest{
 	optional string lockString = 1;
 }
@@ -29,10 +28,22 @@ message MatchJoinGameRequest{
 message MatchJoinGameResponse{
 	optional int32 errorCode = 1[default = 1];
 	repeated GameRoleData gameRoleData = 2;
-	optional string id = 3;
-	optional int32 seat = 4;
+	optional int32 seat = 3;
 }
 
 message SCMatchJoinGame{
+	optional GameRoleData gameRoleData = 1;
+}
+
+message MatchJoinAIGameRequest{
+	optional int32 aiCount = 1;
+}
+
+message MatchJoinAIGameResponse{
+	repeated GameRoleData gameRoleData = 2;
+	optional int32 seat = 3;
+}
+
+message SCMatchMineInfo{
 	optional GameRoleData gameRoleData = 1;
 }

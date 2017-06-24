@@ -8,6 +8,7 @@ import com.randioo.mahjong_public_server.entity.po.CardSort;
 
 public class Chi extends AbstractCardList {
 	public int card;
+	public int targetCard;
 
 	@Override
 	public void check(List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList, boolean isMine) {

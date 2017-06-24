@@ -1,0 +1,9 @@
+package com.randioo.mahjong_public_server.protocol;
+
+message RaceJoinRaceRequest{
+	optional int32 race = 1;
+}
+
+message RaceJoinRaceResponse{
+	optional int32 errorCode = 1 [default=1];
+}

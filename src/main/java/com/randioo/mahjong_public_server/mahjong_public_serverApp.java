@@ -1,5 +1,7 @@
 package com.randioo.mahjong_public_server;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +9,8 @@ import java.util.Map;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 
 import com.randioo.mahjong_public_server.handler.BackgroundServerHandler;
+import com.randioo.mahjong_public_server.protocol.ClientMessage.CS;
+import com.randioo.mahjong_public_server.protocol.Race.RaceJoinRaceRequest;
 import com.randioo.randioo_server_base.config.GlobleConfig;
 import com.randioo.randioo_server_base.config.GlobleConfig.GlobleEnum;
 import com.randioo.randioo_server_base.entity.GlobalConfigFunction;
@@ -28,14 +32,41 @@ public class mahjong_public_serverApp {
 
 			@Override
 			public void init(Map<String, Object> map, List<String> list) {
-				int index = list.indexOf("artifical");
-				if (index != -1) {
-					boolean ai = Boolean.parseBoolean(list.get(index + 1));
-					map.put("artifical", ai);
+				{
+					int index = list.indexOf("artifical");
+					if (index != -1) {
+						boolean ai = Boolean.parseBoolean(list.get(index + 1));
+						map.put("artifical", ai);
+					}
 				}
+				{
+					int index = list.indexOf("dispatch");
+					if (index != -1) {
+						boolean dispatch = Boolean.parseBoolean(list.get(index + 1));
+						map.put("dispatch", dispatch);
+					}
+				}
+				{
+					int index = list.indexOf("racedebug");
+					if (index != -1) {
+						boolean dispatch = Boolean.parseBoolean(list.get(index + 1));
+						map.put("racedebug", dispatch);
+					}
+				}
+
 			}
 		});
 		GlobleConfig.init(args);
+//		ByteArrayOutputStream output = new ByteArrayOutputStream();
+//		 try {
+//			CS.newBuilder().setRaceJoinRaceRequest(RaceJoinRaceRequest.newBuilder().setRace("123").setRace2("101")).build().writeDelimitedTo(output);
+//			byte[] bytes = output.toByteArray();
+//			System.out.println(bytes);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		};
+		 
 
 		SensitiveWordDictionary.readAll("./sensitive.txt");
 

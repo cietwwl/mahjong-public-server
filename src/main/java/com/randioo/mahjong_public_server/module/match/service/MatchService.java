@@ -4,7 +4,8 @@ import com.google.protobuf.GeneratedMessage;
 import com.randioo.mahjong_public_server.entity.bo.Game;
 import com.randioo.mahjong_public_server.entity.bo.Role;
 import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
-import com.randioo.mahjong_public_server.protocol.Entity.GameConfig;
+import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
+import com.randioo.mahjong_public_server.protocol.Entity.GameRoleData;
 import com.randioo.randioo_server_base.service.ObserveBaseServiceInterface;
 
 public interface MatchService extends ObserveBaseServiceInterface {
@@ -15,7 +16,7 @@ public interface MatchService extends ObserveBaseServiceInterface {
 	 * @return
 	 * @author wcy 2017年5月25日
 	 */
-	public GeneratedMessage createRoom(Role role, GameConfig gameConfig);
+	public GeneratedMessage createRoom(Role role, GameConfigData gameConfigData);
 
 	/**
 	 * 加入游戏
@@ -25,7 +26,7 @@ public interface MatchService extends ObserveBaseServiceInterface {
 	 * @return
 	 * @author wcy 2017年5月25日
 	 */
-	public GeneratedMessage joinGame(Role role, String lockString);
+	public void joinGame(Role role, String lockString);
 
 	/**
 	 * 获得游戏玩家标识符
@@ -43,10 +44,14 @@ public interface MatchService extends ObserveBaseServiceInterface {
 
 	Role getRoleFromRoleGameInfo(RoleGameInfo info);
 
-	Game createGame(int roleId, GameConfig gameConfig);
+	Game createGame(int roleId, GameConfigData gameConfigData);
 
-	Game createGameByGameConfig(GameConfig gameConfig);
+	Game createGameByGameConfig(GameConfigData gameConfigData);
 
 	void joinGame(Role role, int gameId);
+
+	void joinAICountGame(Role role, int aiCount);
+
+	GameRoleData parseGameRoleData(RoleGameInfo info, Game game);
 
 }

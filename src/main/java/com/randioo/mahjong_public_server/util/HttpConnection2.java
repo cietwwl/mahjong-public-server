@@ -8,8 +8,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class HttpConnection /*extends TimerTask*/{
-	public HttpConnection(String url, String pram){
+public class HttpConnection2{
+	public HttpConnection2(String url, String pram){
 		this.url = url;
 		this.pram = pram;
 	}

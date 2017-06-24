@@ -14,7 +14,7 @@ import com.randioo.mahjong_public_server.entity.bo.Role;
 import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
 import com.randioo.mahjong_public_server.module.fight.service.FightService;
 import com.randioo.mahjong_public_server.module.match.service.MatchService;
-import com.randioo.mahjong_public_server.protocol.Entity.GameConfig;
+import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
 import com.randioo.randioo_server_base.cache.RoleCache;
 import com.randioo.randioo_server_base.utils.ReflectUtils;
 
@@ -69,9 +69,9 @@ public class Test {
 		Role role3 = role("3");
 		Role role4 = role("4");
 
-		GameConfig gameConfig = GameConfig.newBuilder().setMaxCount(4).build();
+		GameConfigData gameConfigData = GameConfigData.newBuilder().setMaxCount(4).build();
 
-		matchService.createRoom(role1, gameConfig);
+		matchService.createRoom(role1, gameConfigData);
 		matchService.joinGame(role2, 1);
 		matchService.joinGame(role3, 1);
 		matchService.joinGame(role4, 1);

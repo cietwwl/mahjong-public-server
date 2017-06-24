@@ -1,6 +1,6 @@
 package com.randioo.mahjong_public_server.entity.po;
 
-public class MahjongRaceConfigure {
+public class MahjongRaceConfigure{
 	/** 比赛类型 */
 	public int raceType;
 	/** 比赛名称 */
@@ -21,4 +21,6 @@ public class MahjongRaceConfigure {
 	public boolean gangkai;
 	/** 底分 */
 	public int minStartScore;
+	
+	public String account ;
 }

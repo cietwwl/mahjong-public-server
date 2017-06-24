@@ -39,15 +39,16 @@ public class Gang extends AbstractCardList {
 				if (cardList instanceof Peng) {
 					Peng peng = (Peng) cardList;
 					// 如果碰过的牌是这张牌，则可以补杠
-					if (peng.card == card) {
+					if (peng.card == card || cardSort.getList().get(0).contains(peng.card)) {
 						Gang gang = new Gang();
 						gang.dark = false;
-						gang.card = card;
+						gang.card = peng.card;
 						gang.peng = peng;
 
 						cardLists.add(gang);
 						break;
 					}
+
 				}
 			}
 		} else {
