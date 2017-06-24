@@ -1,14 +1,12 @@
 package com.randioo.mahjong_public_server.randioo_race_sdk;
 
-import java.util.List;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
-import com.randioo.mahjong_public_server.entity.po.RaceStateInfo;
 import com.randioo.mahjong_public_server.entity.po.RaceRole;
+import com.randioo.mahjong_public_server.entity.po.RaceStateInfo;
 import com.randioo.mahjong_public_server.util.HttpConnnection;
 
 public class RandiooRaceWebSdk {
