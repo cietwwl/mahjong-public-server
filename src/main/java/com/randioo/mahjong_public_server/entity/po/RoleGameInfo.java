@@ -24,9 +24,7 @@ public class RoleGameInfo {
 	/** 自动出牌标记 */
 	public int auto;
 	/** 杠标记 */
-	public boolean gangTag;
-	/** 杠开 */
-	public boolean gangHu;
+	public boolean isGang;
 	/** 分数 */
 	public int score;
 	/** 胡牌记录 */

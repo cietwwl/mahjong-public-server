@@ -59,7 +59,7 @@ public class RandiooRaceWebSdk {
 	public void state(RaceStateInfo raceInfo) {
 		String urlStr = "http://10.0.51.21:8080/game-server-web/accountMahjongRace";
 		try {
-			String param = "&raceId=" + raceInfo.raceId + "&isFinal=" + raceInfo.isFinal;
+			String param = "&raceId=" + raceInfo.raceId + "&isFinal=" + (raceInfo.isFinal ? 1 : 0);
 			// JSONArray accounts = new JSONArray();
 			JSONArray accountsObj = new JSONArray();
 			for (RaceRole seat : raceInfo.accounts) {
@@ -107,7 +107,7 @@ public class RandiooRaceWebSdk {
 				info.accounts.add(account);
 				info.queueAccount.add(queue);
 			}
-			info.isFinal = 0;
+			info.isFinal = false;
 			info.raceId = 1;
 
 			sdk.state(info);

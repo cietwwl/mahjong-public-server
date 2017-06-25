@@ -1,9 +1,8 @@
 package com.randioo.mahjong_public_server.module.race.service;
 
-import java.util.List;
+import java.util.Date;
 import java.util.concurrent.locks.Lock;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,30 +14,31 @@ import com.randioo.mahjong_public_server.entity.po.MahjongRaceConfigure;
 import com.randioo.mahjong_public_server.entity.po.Race;
 import com.randioo.mahjong_public_server.entity.po.RaceRole;
 import com.randioo.mahjong_public_server.entity.po.RaceStateInfo;
-import com.randioo.mahjong_public_server.entity.po.Rank;
+import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
 import com.randioo.mahjong_public_server.entity.po.RoleRaceInfo;
 import com.randioo.mahjong_public_server.module.fight.FightConstant;
 import com.randioo.mahjong_public_server.module.login.service.LoginService;
 import com.randioo.mahjong_public_server.module.match.service.MatchService;
 import com.randioo.mahjong_public_server.module.race.RaceConstant;
 import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
+import com.randioo.mahjong_public_server.protocol.Error.ErrorCode;
+import com.randioo.mahjong_public_server.protocol.Race.RaceJoinRaceResponse;
+import com.randioo.mahjong_public_server.protocol.Race.SCRaceJoinRace;
+import com.randioo.mahjong_public_server.protocol.ServerMessage.SC;
 import com.randioo.mahjong_public_server.randioo_race_sdk.RaceExistResponse;
 import com.randioo.mahjong_public_server.randioo_race_sdk.RandiooRaceWebSdk;
 import com.randioo.randioo_server_base.config.GlobleConfig;
-import com.randioo.randioo_server_base.db.IdClassCreator;
 import com.randioo.randioo_server_base.lock.CacheLockUtil;
-import com.randioo.randioo_server_base.protocol.randioo.Message;
 import com.randioo.randioo_server_base.service.ObserveBaseService;
 import com.randioo.randioo_server_base.template.Observer;
+import com.randioo.randioo_server_base.utils.SessionUtils;
+import com.randioo.randioo_server_base.utils.TimeUtils;
 
 @Service("raceService")
 public class RaceServiceImpl extends ObserveBaseService implements RaceService {
 
 	@Autowired
 	private MatchService matchService;
-
-	@Autowired
-	private IdClassCreator idClassCreator;
 
 	@Autowired
 	private LoginService loginService;
@@ -64,27 +64,6 @@ public class RaceServiceImpl extends ObserveBaseService implements RaceService {
 
 	@Override
 	public void update(Observer observer, String msg, Object... args) {
-		super.update(observer, msg, args);
-
-		if (msg.equals(FightConstant.ROUND_OVER)) {
-			@SuppressWarnings("unchecked")
-			List<Rank> roleList = (List<Rank>) args[0];
-			JSONObject json = new JSONObject(roleList);
-
-			// List<Map.Entry<Integer,Integer>> list = new
-			// ArrayList<Map.Entry<Integer,Integer>>(resultMap.entrySet());
-			// Collections.sort(list,new
-			// Comparator<Map.Entry<Integer,Integer>>() {
-			// //升序排序
-			// public int compare(Entry<Integer, Integer> o1,
-			// Entry<Integer, Integer> o2) {
-			// return o2.getValue()-o1.getValue();
-			// }
-			//
-			// });
-
-		}
-
 		if (msg.equals(RaceConstant.RACE_CREATE)) {
 			Race race = (Race) args[0];
 			Role role = (Role) args[1];
@@ -92,35 +71,21 @@ public class RaceServiceImpl extends ObserveBaseService implements RaceService {
 			this.createGame(race, role);
 		}
 
-		if (msg.equals(RaceConstant.RACE_JOIN_GAME)) {
-			Race race = (Race) args[0];
-
-			this.joinGame(race);
+		if (msg.equals(FightConstant.GAME_OVER)) {
+			Game game = (Game) args[0];
+			this.noticeRaceState(game, true);
 		}
-	}
 
-	@Override
-	public Message createRace(MahjongRaceConfigure configure) {
+		if (msg.equals(FightConstant.ROUND_OVER)) {
+			Game game = (Game) args[0];
+			this.noticeRaceState(game, false);
+		}
 
-		GameConfigData gameConfigData = this.parseGameConfig(configure);
+		if (msg.equals(RaceConstant.RACE_JOIN_GAME)) {
+			Game game = (Game) args[0];
+			this.noticeRaceState(game, false);
+		}
 
-		Game game = matchService.createGameByGameConfig(gameConfigData);
-
-		// 新建一场比赛
-		Race race = createRace(game.getGameId(), configure);
-
-		Message message = new Message();
-		message.setType((short) 1);
-		message.putString(configure.account);
-		message.putInt(1);// success
-		message.putInt(race.getGameId());
-
-		return message;
-	}
-
-	@Override
-	public void raceEnd(int raceId) {
-		RaceCache.getRaceMap().remove(raceId);
 	}
 
 	private GameConfigData parseGameConfig(MahjongRaceConfigure configure) {
@@ -134,18 +99,17 @@ public class RaceServiceImpl extends ObserveBaseService implements RaceService {
 	}
 
 	private MahjongRaceConfigure parseMahjongRaceConfigure(RaceExistResponse raceExistResponse) {
-		return new MahjongRaceConfigure();
-	}
-
-	private Race createRace(int gameId, MahjongRaceConfigure configure) {
-		// 新建一场比赛
-		Race race = new Race();
-		race.setRaceName(configure.raceName);
-		race.setEndTime(configure.endTime);
-		race.setGameId(gameId);
-		RaceCache.getRaceMap().put(race.getGameId(), race);
-
-		return race;
+		MahjongRaceConfigure c = new MahjongRaceConfigure();
+		c.account = raceExistResponse.nickname;
+		c.catchScore = raceExistResponse.flyScore;
+		c.endCatchCount = raceExistResponse.fly;
+		c.catchScore = raceExistResponse.difen;
+		c.endTime = TimeUtils.getHHmmssDateFormat().format(new Date(raceExistResponse.endTime));
+		c.minStartScore = raceExistResponse.difen;
+		c.raceId = raceExistResponse.raceId;
+		c.maxCount = 4;
+		c.onlineCount = raceExistResponse.onlineCount;
+		return c;
 	}
 
 	/**
@@ -167,6 +131,10 @@ public class RaceServiceImpl extends ObserveBaseService implements RaceService {
 
 	@Override
 	public void joinRace(Role role, int raceId) {
+		SessionUtils.sc(role.getRoleId(),
+				SC.newBuilder().setRaceJoinRaceResponse(RaceJoinRaceResponse.newBuilder()).build());
+
+		SCRaceJoinRace.Builder scRaceJoinRaceBuilder = SCRaceJoinRace.newBuilder();
 		Lock lock = CacheLockUtil.getLock(Race.class, raceId);
 		try {
 			lock.lock();
@@ -174,14 +142,15 @@ public class RaceServiceImpl extends ObserveBaseService implements RaceService {
 			RaceExistResponse raceExistResponse = randiooRaceWebSdk.exist(raceId);
 			if (raceExistResponse == null) {
 				// 比赛不存在
+				scRaceJoinRaceBuilder.setErrorCode(ErrorCode.RACE_JOIN_FAILED.getNumber());
 			} else {
 				// 比赛存在则创建比赛
 				Race race = RaceCache.getRaceMap().get(raceId);
 				if (race == null) {
-					race = getRaceById(raceId);
 					MahjongRaceConfigure config = this.parseMahjongRaceConfigure(raceExistResponse);
+					race = getRaceById(config.raceId);
 					// 比赛配置赋值
-					race.config = config;
+					race.setConfig(config);
 					GameConfigData gameConfigData = this.parseGameConfig(config);
 					Game game = matchService.createGameByGameConfig(gameConfigData);
 					this.bindGame2Race(race, game);
@@ -191,40 +160,29 @@ public class RaceServiceImpl extends ObserveBaseService implements RaceService {
 
 				// 游戏已经存在
 				Game game = GameCache.getGameMap().get(race.getGameId());
-
-				// 如果比赛的人小于最大人数并且队伍长度不是0
-				if (game.getRoleIdMap().size() < race.config.maxCount && race.getRoleIdQueue().size() == 0) {
-					matchService.joinGame(role, race.getGameId());
-				} else {
-					race.getRoleIdQueue().add(role.getRoleId());
+				// 先加入到队伍在加入到房间
+				race.getRoleIdQueue().add(role.getRoleId());
+				if (game.getRoleIdMap().size() < race.getConfig().maxCount) {
+					int firstRoleId = race.getRoleIdQueue().remove(0);
+					Role firstRole = loginService.getRoleById(firstRoleId);
+					matchService.joinGame(firstRole, race.getGameId());
 				}
-				notifyObservers(RaceConstant.RACE_JOIN_GAME, race);
+
+				notifyObservers(RaceConstant.RACE_JOIN_GAME, game);
 			}
 
 		} catch (Exception e) {
+			scRaceJoinRaceBuilder.setErrorCode(ErrorCode.RACE_JOIN_FAILED.getNumber());
 			e.printStackTrace();
 		} finally {
 			lock.unlock();
 		}
-
-		// Game game = GameCache.getGameMap().get(gameId);
-		// synchronized (game) {
-		// if (game.getRoleIdMap().keySet().size() < 4) {
-		// matchService.joinGame(role, gameId);
-		// } else {
-		// List<Integer> waitList =
-		// RaceCache.getRaceMap().get(raceId).getRoleIdQueue();
-		// if (game.getRoleIdMap().keySet().size() + waitList.size() <
-		// game.getGameConfig().getMaxCount()) {
-		// waitList.add(role.getRoleId());
-		// }
-		// }
-		// }
-
+		SessionUtils.sc(role.getRoleId(), SC.newBuilder().setSCRaceJoinRace(scRaceJoinRaceBuilder).build());
 	}
 
 	private void bindGame2Race(Race race, Game game) {
 		race.setGameId(game.getGameId());
+		RaceCache.getGameRaceMap().put(race.getGameId(), race);
 	}
 
 	private void createGame(Race race, Role role) {
@@ -233,18 +191,34 @@ public class RaceServiceImpl extends ObserveBaseService implements RaceService {
 		randiooRaceWebSdk.create(raceId, account);
 	}
 
-	private void joinGame(Race race) {
+	private void noticeRaceState(Game game, boolean isFinal) {
+		Race race = RaceCache.getGameRaceMap().get(game.getGameId());
+		if (race == null)
+			return;
 		RaceStateInfo raceStateInfo = new RaceStateInfo();
+		raceStateInfo.raceId = race.getRaceId();
+		raceStateInfo.isFinal = isFinal;
 		for (int roleId : race.getRoleIdQueue()) {
 			Role role = (Role) loginService.getRoleById(roleId);
+			if (role == null)
+				continue;
 			RaceRole raceRoleQueue = new RaceRole();
 			raceRoleQueue.account = role.getAccount();
 			raceRoleQueue.score = role.getRoleRaceInfo().totalRoundScore;
 			raceStateInfo.queueAccount.add(raceRoleQueue);
 		}
-		
-		Game game = GameCache.getGameMap().get(race.getGameId());
-		
+
+		for (String gameRoleId : game.getRoleIdList()) {
+			RoleGameInfo roleGameInfo = game.getRoleIdMap().get(gameRoleId);
+			Role roleSeat = loginService.getRoleById(roleGameInfo.roleId);
+
+			RaceRole raceRole = new RaceRole();
+			raceRole.account = roleSeat.getAccount();
+			raceRole.score = roleSeat.getRoleRaceInfo().totalRoundScore;
+			raceStateInfo.accounts.add(raceRole);
+		}
+
+		randiooRaceWebSdk.state(raceStateInfo);
 	}
 
 }

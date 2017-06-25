@@ -16,9 +16,11 @@ public class Hu extends AbstractCardList {
 	public List<Integer> handCards = new ArrayList<>();
 	public List<CardList> showCardList = new ArrayList<>();
 	public boolean isMine;
+	public boolean gangKai;
 
 	@Override
-	public void check(List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList, boolean isMine) {
+	public void check(List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList,
+			boolean isMine) {
 		this.isMine = isMine;
 		CardSort copySort = cardSort.clone();
 		for (int value : copySort.getList().get(1)) {
@@ -41,6 +43,7 @@ public class Hu extends AbstractCardList {
 							Hu hu = new Hu();
 							List<Integer> list = cardSort.toArray();
 							hu.card = card;
+							hu.isMine = isMine;
 							Lists.removeElementByList(list, Arrays.asList(card));
 							Collections.sort(list);
 							hu.handCards.addAll(list);
@@ -165,7 +168,7 @@ public class Hu extends AbstractCardList {
 
 	@Override
 	public String toString() {
-		return "hu=>" + super.toString();
+		return "cardList:hu=>gangkai=" + gangKai + ",isMine=" + isMine + ",card=" + card + "," + super.toString();
 	}
 
 	@Override

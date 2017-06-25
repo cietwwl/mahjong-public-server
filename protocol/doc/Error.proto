@@ -46,4 +46,7 @@ enum ErrorCode{
 	//战斗
 	FIGHT_TIME_PASS = 30;//时间过期
 	FIGHT_MORE_CARD = 31;//牌多了一张，有问题
-} // 31
+
+	//比赛
+	RACE_JOIN_FAILED = 32;//比赛加入失败
+} // 32

@@ -54,4 +54,6 @@ public interface MatchService extends ObserveBaseServiceInterface {
 
 	GameRoleData parseGameRoleData(RoleGameInfo info, Game game);
 
+	void fillAI(Game game);
+
 }

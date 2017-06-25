@@ -2,7 +2,6 @@ package com.randioo.mahjong_public_server.entity.po.cardlist;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import com.randioo.mahjong_public_server.entity.po.CardSort;
 
@@ -12,8 +11,7 @@ public class Chi extends AbstractCardList {
 
 	@Override
 	public void check(List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList, boolean isMine) {
-		Set<Integer> set = cardSort.getList().get(0);
-
+		
 	}
 
 	@Override

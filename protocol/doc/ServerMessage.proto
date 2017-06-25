@@ -58,4 +58,5 @@ message SC{
 	optional SettingsShowResponse SettingsShowResponse = 43;//设置
 
 	optional RaceJoinRaceResponse RaceJoinRaceResponse = 44;
-} // 44
+	optional SCRaceJoinRace SCRaceJoinRace = 45;
+} // 45

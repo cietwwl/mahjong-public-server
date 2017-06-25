@@ -15,7 +15,7 @@ public class Race {
 	// 玩家队列
 	private List<Integer> roleIdQueue = new ArrayList<>();
 
-	public MahjongRaceConfigure config;
+	private MahjongRaceConfigure config;
 
 	public List<Integer> getRoleIdQueue() {
 		return roleIdQueue;
@@ -51,5 +51,13 @@ public class Race {
 
 	public void setRaceId(int raceId) {
 		this.raceId = raceId;
+	}
+
+	public MahjongRaceConfigure getConfig() {
+		return config;
+	}
+
+	public void setConfig(MahjongRaceConfigure config) {
+		this.config = config;
 	}
 }

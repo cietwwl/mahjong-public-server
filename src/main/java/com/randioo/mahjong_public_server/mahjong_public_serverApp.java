@@ -31,43 +31,15 @@ public class mahjong_public_serverApp {
 		GlobleConfig.initParam(new GlobalConfigFunction() {
 
 			@Override
-			public void init(Map<String, Object> map, List<String> list) {
-				{
-					int index = list.indexOf("artifical");
-					if (index != -1) {
-						boolean ai = Boolean.parseBoolean(list.get(index + 1));
-						map.put("artifical", ai);
-					}
+			public void init(Map<String, Object> map, List<String> list) {				
+				String[] params = {"artifical","dispatch","racedebug","matchai"};
+				for(String param :params){
+					GlobleConfig.initBooleanValue(param, list);					
 				}
-				{
-					int index = list.indexOf("dispatch");
-					if (index != -1) {
-						boolean dispatch = Boolean.parseBoolean(list.get(index + 1));
-						map.put("dispatch", dispatch);
-					}
-				}
-				{
-					int index = list.indexOf("racedebug");
-					if (index != -1) {
-						boolean dispatch = Boolean.parseBoolean(list.get(index + 1));
-						map.put("racedebug", dispatch);
-					}
-				}
-
 			}
 		});
 		GlobleConfig.init(args);
-//		ByteArrayOutputStream output = new ByteArrayOutputStream();
-//		 try {
-//			CS.newBuilder().setRaceJoinRaceRequest(RaceJoinRaceRequest.newBuilder().setRace("123").setRace2("101")).build().writeDelimitedTo(output);
-//			byte[] bytes = output.toByteArray();
-//			System.out.println(bytes);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		};
-		 
-
+		
 		SensitiveWordDictionary.readAll("./sensitive.txt");
 
 		SpringContext.initSpringCtx("ApplicationContext.xml");
@@ -75,8 +47,8 @@ public class mahjong_public_serverApp {
 		((GameServerInit) SpringContext.getBean("gameServerInit")).start();
 
 		BackgroundServerHandler handler = SpringContext.getBean("backgroundServerHandler");
-		WanServer.startServer(new ProtocolCodecFilter(new MessageCodecFactory()), handler, new InetSocketAddress(
-				GlobleConfig.Int(GlobleEnum.PORT) + 10000));
+		WanServer.startServer(new ProtocolCodecFilter(new MessageCodecFactory()), handler,
+				new InetSocketAddress(GlobleConfig.Int(GlobleEnum.PORT) + 10000));
 
 		GlobleConfig.set(GlobleEnum.LOGIN, true);
 
