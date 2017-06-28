@@ -1,8 +1,12 @@
 package com.randioo.mahjong_public_server.module.race.service;
 
+import java.net.InetSocketAddress;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.locks.Lock;
 
+import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +20,11 @@ import com.randioo.mahjong_public_server.entity.po.RaceRole;
 import com.randioo.mahjong_public_server.entity.po.RaceStateInfo;
 import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
 import com.randioo.mahjong_public_server.entity.po.RoleRaceInfo;
+import com.randioo.mahjong_public_server.handler.BackgroundServerHandler;
 import com.randioo.mahjong_public_server.module.fight.FightConstant;
 import com.randioo.mahjong_public_server.module.login.service.LoginService;
 import com.randioo.mahjong_public_server.module.match.service.MatchService;
+import com.randioo.mahjong_public_server.module.match.service.MatchServiceImpl;
 import com.randioo.mahjong_public_server.module.race.RaceConstant;
 import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
 import com.randioo.mahjong_public_server.protocol.Error.ErrorCode;
@@ -28,10 +34,16 @@ import com.randioo.mahjong_public_server.protocol.ServerMessage.SC;
 import com.randioo.mahjong_public_server.randioo_race_sdk.RaceExistResponse;
 import com.randioo.mahjong_public_server.randioo_race_sdk.RandiooRaceWebSdk;
 import com.randioo.randioo_server_base.config.GlobleConfig;
+import com.randioo.randioo_server_base.config.GlobleConfig.GlobleEnum;
+import com.randioo.randioo_server_base.entity.GlobalConfigFunction;
+import com.randioo.randioo_server_base.init.GameServerInit;
 import com.randioo.randioo_server_base.lock.CacheLockUtil;
+import com.randioo.randioo_server_base.net.WanServer;
+import com.randioo.randioo_server_base.protocol.randioo.MessageCodecFactory;
 import com.randioo.randioo_server_base.service.ObserveBaseService;
 import com.randioo.randioo_server_base.template.Observer;
 import com.randioo.randioo_server_base.utils.SessionUtils;
+import com.randioo.randioo_server_base.utils.SpringContext;
 import com.randioo.randioo_server_base.utils.TimeUtils;
 
 @Service("raceService")
@@ -131,8 +143,8 @@ public class RaceServiceImpl extends ObserveBaseService implements RaceService {
 
 	@Override
 	public void joinRace(Role role, int raceId) {
-		SessionUtils.sc(role.getRoleId(),
-				SC.newBuilder().setRaceJoinRaceResponse(RaceJoinRaceResponse.newBuilder()).build());
+		SessionUtils.sc(role.getRoleId(), SC.newBuilder().setRaceJoinRaceResponse(RaceJoinRaceResponse.newBuilder())
+				.build());
 
 		SCRaceJoinRace.Builder scRaceJoinRaceBuilder = SCRaceJoinRace.newBuilder();
 		Lock lock = CacheLockUtil.getLock(Race.class, raceId);
@@ -219,6 +231,57 @@ public class RaceServiceImpl extends ObserveBaseService implements RaceService {
 		}
 
 		randiooRaceWebSdk.state(raceStateInfo);
+	}
+
+	@Override
+	public void kickRace(int raceId, String account) {
+		Race race = RaceCache.getRaceMap().get(raceId);
+		Role role = (Role) loginService.getRoleByAccount(account);
+
+		if (race == null) {
+			return;
+		}
+
+		Lock lock = CacheLockUtil.getLock(Race.class, raceId);
+		try {
+			lock.lock();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			lock.unlock();
+		}
+
+	}
+
+	public static void main(String[] args) {
+
+		GlobleConfig.initParam(new GlobalConfigFunction() {
+
+			@Override
+			public void init(Map<String, Object> map, List<String> list) {
+				String[] params = { "artifical", "dispatch", "racedebug", "matchai" };
+				for (String param : params) {
+					GlobleConfig.initBooleanValue(param, list);
+				}
+			}
+		});
+		GlobleConfig.init("10006", "debug", "artifical", "true", "dispatch", "true", "racedebug", "true", "matchai",
+				"true");
+
+		SpringContext.initSpringCtx("ApplicationContext.xml");
+
+		((GameServerInit) SpringContext.getBean("gameServerInit")).start();
+
+		RaceService raceService = SpringContext.getBean("raceService");
+		Role role = new Role();
+		for (int i = 1; i < 11; i++) {
+			role.setRoleId(i);
+			role.setAccount(i + "");
+			role.setName(i + "");
+			raceService.joinRace(role, 25);
+		}
+
 	}
 
 }

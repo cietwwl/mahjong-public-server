@@ -37,4 +37,5 @@ message CS{
 	optional SettingsShowRequest SettingsShowRequest = 22;
 
 	optional RaceJoinRaceRequest RaceJoinRaceRequest = 23;
-} // 23
+	optional RaceShowQueueRequest RaceShowQueueRequest = 24;
+} // 24

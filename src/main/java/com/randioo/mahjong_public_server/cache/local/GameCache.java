@@ -17,6 +17,7 @@ public class GameCache {
 
 	private static List<Class<? extends CardList>> checkCardListSequence = new ArrayList<>();
 	private static List<Class<? extends CardList>> checkSelfCardList = new ArrayList<>();
+	private static List<Class<? extends CardList>> checkGangCardList = new ArrayList<>();
 	private static Map<Class<? extends CardList>, Function> parseCardListToProtoFunctionMap = new HashMap<>();
 	private static Map<Class<? extends CardList>, Function> addProtoFunctionMap = new HashMap<>();
 
@@ -46,5 +47,9 @@ public class GameCache {
 
 	public static List<Class<? extends CardList>> getCheckSelfCardList() {
 		return checkSelfCardList;
+	}
+
+	public static List<Class<? extends CardList>> getCheckGangCardList() {
+		return checkGangCardList;
 	}
 }

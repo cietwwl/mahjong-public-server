@@ -97,8 +97,9 @@ public class GameServerHandler extends GameServerHandlerAdapter {
 		}
 
 		StringBuilder sb = new StringBuilder();
-		sb.append(TimeUtils.getDetailTimeStr()).append(" [roleId:").append(roleId).append(",account:")
-				.append(roleAccount).append(",name:").append(roleName).append("] ").append(message);
+		sb.append("[").append("game:").append("majiang").append(",").append("roleId:").append(roleId)
+				.append(",account:").append(roleAccount).append(",name:").append(roleName).append("] ")
+				.append(TimeUtils.getDetailTimeStr()).append(message);
 		String output = sb.toString();
 		if (output.length() < 120) {
 			output = output.replaceAll("\n", " ").replace("\t", " ").replace("  ", "");

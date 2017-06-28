@@ -1,4 +1,5 @@
 package com.randioo.mahjong_public_server.protocol;
+import "Entity.proto";
 
 message RaceJoinRaceRequest{
 	optional int32 raceId = 1;
@@ -10,4 +11,20 @@ message RaceJoinRaceResponse{
 
 message SCRaceJoinRace{
 	optional int32 errorCode = 1[default = 1];
+}
+
+
+message RaceShowQueueRequest{
+	optional int32 raceId = 1;
+}
+
+message RaceShowQueueResponse{
+	optional int32 errorCode = 1 [default = 1];
+	repeated AudienceData audienceData = 2;
+	repeated GameRoleData gameRoleData = 3;
+}
+
+message SCRaceQueueChange{
+	repeated AudienceData audienceData = 2;
+	repeated GameRoleData gameRoleData = 3;
 }

@@ -124,3 +124,8 @@ message GameData{
 	optional int32 gameId = 1;
 	repeated GameRoleData gameRoleData = 2;
 }
+
+message AudienceData{
+	optional string name = 1;
+	optional int32 score = 2;
+}

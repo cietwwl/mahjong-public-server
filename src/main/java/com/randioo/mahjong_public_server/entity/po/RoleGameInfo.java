@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.randioo.mahjong_public_server.entity.po.cardlist.CardList;
+import com.randioo.mahjong_public_server.entity.po.cardlist.Gang;
 import com.randioo.mahjong_public_server.protocol.Entity.RoundCardsData;
 
 public class RoleGameInfo {
@@ -29,6 +30,8 @@ public class RoleGameInfo {
 	public int score;
 	/** 胡牌记录 */
 	public RoundCardsData roundCardsData;
+	/** 是否要摸牌 */
+	public Gang qiangGang = null;
 
 	@Override
 	public String toString() {
@@ -43,7 +46,9 @@ public class RoleGameInfo {
 		sb.append(t).append("newCard=>").append(newCard).append(n);
 		sb.append(t).append("showCardLists=>").append(showCardLists).append(n);
 		sb.append(t).append("score=>").append(score).append(n);
+		sb.append(t).append("qiangGang=>").append(qiangGang).append(n);
 		sb.append(t).append("]");
+		
 		return sb.toString();
 	}
 }

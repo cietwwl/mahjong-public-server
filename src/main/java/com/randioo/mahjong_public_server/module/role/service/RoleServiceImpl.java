@@ -87,7 +87,7 @@ public class RoleServiceImpl extends ObserveBaseService implements RoleService {
 	public void newRoleInit(Role role) {
 		// 设置战场的第一章
 		role.setRoleId(idClassCreator.getId(Role.class));
-		role.setName("用户" + role.getRoleId());
+		role.setName(role.getAccount());
 		role.setVolume(50);
 		role.setMusicVolume(50);
 

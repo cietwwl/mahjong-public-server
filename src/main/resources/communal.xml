@@ -54,6 +54,7 @@
 				<ref bean="fightService" />
 				<ref bean="raceService" />
 				<ref bean="closeService" />
+				<ref bean="audienceService" />
 			</list>
 		</property>
 	</bean>

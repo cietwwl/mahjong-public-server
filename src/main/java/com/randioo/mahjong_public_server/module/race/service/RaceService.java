@@ -21,4 +21,13 @@ public interface RaceService extends ObserveBaseServiceInterface {
 	 * @author wcy 2017年6月23日
 	 */
 	void joinRace(Role role, int raceId);
+
+	/**
+	 * 踢出比赛
+	 * 
+	 * @param raceId
+	 * @param account
+	 * @author wcy 2017年6月28日
+	 */
+	void kickRace(int raceId, String account);
 }

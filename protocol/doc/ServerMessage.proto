@@ -59,4 +59,6 @@ message SC{
 
 	optional RaceJoinRaceResponse RaceJoinRaceResponse = 44;
 	optional SCRaceJoinRace SCRaceJoinRace = 45;
-} // 45
+	optional RaceShowQueueResponse RaceShowQueueResponse = 46;
+	optional SCRaceQueueChange SCRaceQueueChange = 47;
+} // 47
