@@ -30,7 +30,7 @@ public class LiteHttpServer {
 		httpServer = HttpServer.create(addr, 0);
 		this.liteHttpHandler = new LiteHttpHandler();
 		httpContext = httpServer.createContext(rootPath, liteHttpHandler);
-		httpContext.getFilters().add(new DefaultFilter());
+		httpContext.getFilters().add(new ParameterFilter());
 		httpServer.setExecutor(Executors.newCachedThreadPool());
 		liteHttpHandler.setLiteHttpServer(this);
 		httpServer.start();

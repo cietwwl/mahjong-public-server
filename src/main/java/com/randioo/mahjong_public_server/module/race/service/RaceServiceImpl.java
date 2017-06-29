@@ -245,7 +245,7 @@ public class RaceServiceImpl extends ObserveBaseService implements RaceService {
 		Lock lock = CacheLockUtil.getLock(Race.class, raceId);
 		try {
 			lock.lock();
-			
+			System.out.println("kick");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

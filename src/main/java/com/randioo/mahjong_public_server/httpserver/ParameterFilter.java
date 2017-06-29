@@ -91,4 +91,8 @@ public class ParameterFilter extends Filter {
 			}
 		}
 	}
+
+	public static void main(String[] args) {
+		
+	}
 }
