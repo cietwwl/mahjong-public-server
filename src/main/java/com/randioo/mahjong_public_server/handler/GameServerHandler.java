@@ -14,6 +14,7 @@ import com.randioo.mahjong_public_server.module.close.service.CloseService;
 import com.randioo.mahjong_public_server.protocol.ClientMessage.CS;
 import com.randioo.randioo_server_base.cache.RoleCache;
 import com.randioo.randioo_server_base.handler.GameServerHandlerAdapter;
+import com.randioo.randioo_server_base.log.HttpLogUtils;
 import com.randioo.randioo_server_base.utils.TimeUtils;
 
 @Component
@@ -69,7 +70,7 @@ public class GameServerHandler extends GameServerHandlerAdapter {
 		CS message = null;
 		try {
 			message = CS.parseDelimitedFrom(input);
-			logger.warn(message.toString());
+			logger.warn(getMessage(message, session));
 			actionDispatcher(message, session);
 		} finally {
 			if (input != null) {
@@ -86,26 +87,13 @@ public class GameServerHandler extends GameServerHandlerAdapter {
 
 	private String getMessage(Object message, IoSession session) {
 		Integer roleId = (Integer) session.getAttribute("roleId");
-		String roleAccount = null;
-		String roleName = null;
+
+		Role role = null;
 		if (roleId != null) {
-			Role role = (Role) RoleCache.getRoleById(roleId);
-			if (role != null) {
-				roleAccount = role.getAccount();
-				roleName = role.getName();
-			}
+			role = (Role) RoleCache.getRoleById(roleId);
 		}
+		return HttpLogUtils.role(role, message);
 
-		StringBuilder sb = new StringBuilder();
-		sb.append("[").append("game:").append("majiang").append(",").append("roleId:").append(roleId)
-				.append(",account:").append(roleAccount).append(",name:").append(roleName).append("] ")
-				.append(TimeUtils.getDetailTimeStr()).append(message);
-		String output = sb.toString();
-		if (output.length() < 120) {
-			output = output.replaceAll("\n", " ").replace("\t", " ").replace("  ", "");
-		}
-
-		return output;
 	}
 
 }

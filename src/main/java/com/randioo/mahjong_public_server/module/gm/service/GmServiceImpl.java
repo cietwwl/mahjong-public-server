@@ -49,7 +49,7 @@ public class GmServiceImpl extends ObserveBaseService implements GmService {
 			public Object apply(Object... params) {
 				GlobleConfig.set(GlobleEnum.LOGIN, false);
 
-				logger.info("port close");
+				loggerinfo("port close");
 
 				everybodyOffline();
 
@@ -66,7 +66,7 @@ public class GmServiceImpl extends ObserveBaseService implements GmService {
 						@Override
 						public Object apply(Object... params) {
 							// 数据保存
-							logger.info("start game all data save");
+							loggerinfo("start game all data save");
 							// 循环性数据存储
 							ExecutorService service = loopSaveData(true, true, 2);
 
@@ -80,7 +80,7 @@ public class GmServiceImpl extends ObserveBaseService implements GmService {
 							// 一次性数据存储
 							onceSaveData();
 
-							logger.info("game all data save SUCCESS");
+							loggerinfo("game all data save SUCCESS");
 							System.exit(0);
 							return null;
 						}
@@ -121,7 +121,7 @@ public class GmServiceImpl extends ObserveBaseService implements GmService {
 								} else if (command.equals("save")) {
 									for (RoleInterface roleInterface : RoleCache.getRoleMap().values()) {
 										closeService.roleDataCache2DB((Role) roleInterface, true);
-										logger.info(roleInterface.getAccount() + " force Save");
+										loggerinfo(roleInterface.getAccount() + " force Save");
 									}
 								}
 							}
@@ -132,8 +132,8 @@ public class GmServiceImpl extends ObserveBaseService implements GmService {
 				}
 
 			});
-			
-//			t.start();
+
+			// t.start();
 
 		}
 	}
@@ -185,12 +185,12 @@ public class GmServiceImpl extends ObserveBaseService implements GmService {
 		try {
 			Role role = (Role) roleInterface;
 			if (mustSave) {
-				logger.info("id:" + role.getRoleId() + ",account:" + role.getAccount() + ",name:" + role.getName()
+				loggerinfo("id:" + role.getRoleId() + ",account:" + role.getAccount() + ",name:" + role.getName()
 						+ "] save success");
 			}
 			closeService.roleDataCache2DB(role, mustSave);
 		} catch (Exception e) {
-			logger.error("Role: " + roleInterface.getRoleId() + " saveError!");
+			loggererror("Role: " + roleInterface.getRoleId() + " saveError!", e);
 			e.printStackTrace();
 		}
 	}

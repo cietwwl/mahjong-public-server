@@ -35,7 +35,14 @@ public class CardSort {
 		}
 	}
 
+	public Set<Integer> get(int index) {
+		return values.get(index);
+	}
+
 	public void remove(int... cards) {
+		if (cards.length == 0)
+			return;
+
 		for (int card : cards) {
 			remove(card);
 		}
@@ -51,7 +58,7 @@ public class CardSort {
 		for (int i = values.size() - 1; i >= 0; i--) {
 			if (values.get(i).contains(card)) {
 				values.remove(card);
-				continue;
+				break;
 			}
 		}
 	}

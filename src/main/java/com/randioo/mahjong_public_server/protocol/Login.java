@@ -1226,6 +1226,13 @@ public final class Login {
     public boolean hasAccount() { return hasAccount; }
     public java.lang.String getAccount() { return account_; }
     
+    // optional string uuid = 2;
+    public static final int UUID_FIELD_NUMBER = 2;
+    private boolean hasUuid;
+    private java.lang.String uuid_ = "";
+    public boolean hasUuid() { return hasUuid; }
+    public java.lang.String getUuid() { return uuid_; }
+    
     private void initFields() {
     }
     public final boolean isInitialized() {
@@ -1237,6 +1244,9 @@ public final class Login {
       getSerializedSize();
       if (hasAccount()) {
         output.writeString(1, getAccount());
+      }
+      if (hasUuid()) {
+        output.writeString(2, getUuid());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1250,6 +1260,10 @@ public final class Login {
       if (hasAccount()) {
         size += com.google.protobuf.CodedOutputStream
           .computeStringSize(1, getAccount());
+      }
+      if (hasUuid()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(2, getUuid());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1412,6 +1426,9 @@ public final class Login {
         if (other.hasAccount()) {
           setAccount(other.getAccount());
         }
+        if (other.hasUuid()) {
+          setUuid(other.getUuid());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1441,6 +1458,10 @@ public final class Login {
               setAccount(input.readString());
               break;
             }
+            case 18: {
+              setUuid(input.readString());
+              break;
+            }
           }
         }
       }
@@ -1464,6 +1485,27 @@ public final class Login {
       public Builder clearAccount() {
         result.hasAccount = false;
         result.account_ = getDefaultInstance().getAccount();
+        return this;
+      }
+      
+      // optional string uuid = 2;
+      public boolean hasUuid() {
+        return result.hasUuid();
+      }
+      public java.lang.String getUuid() {
+        return result.getUuid();
+      }
+      public Builder setUuid(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasUuid = true;
+        result.uuid_ = value;
+        return this;
+      }
+      public Builder clearUuid() {
+        result.hasUuid = false;
+        result.uuid_ = getDefaultInstance().getUuid();
         return this;
       }
       
@@ -1866,6 +1908,251 @@ public final class Login {
     // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.LoginGetRoleDataResponse)
   }
   
+  public static final class SCLoginOtherSide extends
+      com.google.protobuf.GeneratedMessage {
+    // Use SCLoginOtherSide.newBuilder() to construct.
+    private SCLoginOtherSide() {
+      initFields();
+    }
+    private SCLoginOtherSide(boolean noInit) {}
+    
+    private static final SCLoginOtherSide defaultInstance;
+    public static SCLoginOtherSide getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public SCLoginOtherSide getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.randioo.mahjong_public_server.protocol.Login.internal_static_com_randioo_mahjong_public_server_protocol_SCLoginOtherSide_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.randioo.mahjong_public_server.protocol.Login.internal_static_com_randioo_mahjong_public_server_protocol_SCLoginOtherSide_fieldAccessorTable;
+    }
+    
+    private void initFields() {
+    }
+    public final boolean isInitialized() {
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide result;
+      
+      // Construct using com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide();
+        return builder;
+      }
+      
+      protected com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide.getDescriptor();
+      }
+      
+      public com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide getDefaultInstanceForType() {
+        return com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide) {
+          return mergeFrom((com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide other) {
+        if (other == com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.SCLoginOtherSide)
+    }
+    
+    static {
+      defaultInstance = new SCLoginOtherSide(true);
+      com.randioo.mahjong_public_server.protocol.Login.internalForceInit();
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.SCLoginOtherSide)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_randioo_mahjong_public_server_protocol_LoginCheckAccountRequest_descriptor;
   private static
@@ -1896,6 +2183,11 @@ public final class Login {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_randioo_mahjong_public_server_protocol_LoginGetRoleDataResponse_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_randioo_mahjong_public_server_protocol_SCLoginOtherSide_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_randioo_mahjong_public_server_protocol_SCLoginOtherSide_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1911,12 +2203,13 @@ public final class Login {
       "LoginCheckAccountResponse\022\024\n\terrorCode\030\001" +
       " \001(\005:\0011\"7\n\026LoginCreateRoleRequest\022\017\n\007acc" +
       "ount\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\"/\n\027LoginCreateR" +
-      "oleResponse\022\024\n\terrorCode\030\001 \001(\005:\0011\"*\n\027Log" +
-      "inGetRoleDataRequest\022\017\n\007account\030\001 \001(\t\"\214\001" +
-      "\n\030LoginGetRoleDataResponse\022\024\n\terrorCode\030" +
-      "\001 \001(\005:\0011\022\022\n\nserverTime\030\002 \001(\005\022F\n\010roleData",
-      "\030\003 \001(\01324.com.randioo.mahjong_public_serv" +
-      "er.protocol.RoleData"
+      "oleResponse\022\024\n\terrorCode\030\001 \001(\005:\0011\"8\n\027Log" +
+      "inGetRoleDataRequest\022\017\n\007account\030\001 \001(\t\022\014\n" +
+      "\004uuid\030\002 \001(\t\"\214\001\n\030LoginGetRoleDataResponse" +
+      "\022\024\n\terrorCode\030\001 \001(\005:\0011\022\022\n\nserverTime\030\002 \001",
+      "(\005\022F\n\010roleData\030\003 \001(\01324.com.randioo.mahjo" +
+      "ng_public_server.protocol.RoleData\"\022\n\020SC" +
+      "LoginOtherSide"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1960,7 +2253,7 @@ public final class Login {
           internal_static_com_randioo_mahjong_public_server_protocol_LoginGetRoleDataRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_randioo_mahjong_public_server_protocol_LoginGetRoleDataRequest_descriptor,
-              new java.lang.String[] { "Account", },
+              new java.lang.String[] { "Account", "Uuid", },
               com.randioo.mahjong_public_server.protocol.Login.LoginGetRoleDataRequest.class,
               com.randioo.mahjong_public_server.protocol.Login.LoginGetRoleDataRequest.Builder.class);
           internal_static_com_randioo_mahjong_public_server_protocol_LoginGetRoleDataResponse_descriptor =
@@ -1971,6 +2264,14 @@ public final class Login {
               new java.lang.String[] { "ErrorCode", "ServerTime", "RoleData", },
               com.randioo.mahjong_public_server.protocol.Login.LoginGetRoleDataResponse.class,
               com.randioo.mahjong_public_server.protocol.Login.LoginGetRoleDataResponse.Builder.class);
+          internal_static_com_randioo_mahjong_public_server_protocol_SCLoginOtherSide_descriptor =
+            getDescriptor().getMessageTypes().get(6);
+          internal_static_com_randioo_mahjong_public_server_protocol_SCLoginOtherSide_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_randioo_mahjong_public_server_protocol_SCLoginOtherSide_descriptor,
+              new java.lang.String[] { },
+              com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide.class,
+              com.randioo.mahjong_public_server.protocol.Login.SCLoginOtherSide.Builder.class);
           return null;
         }
       };

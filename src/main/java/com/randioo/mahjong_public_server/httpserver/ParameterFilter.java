@@ -26,7 +26,7 @@ public class ParameterFilter extends Filter {
 	public void doFilter(HttpExchange exchange, Chain chain) throws IOException {
 		Map<String, Object> parameters = new HashMap<>();
 		parseGetParameters(exchange, parameters);
-		parsePostParameters(exchange, parameters);
+//		parsePostParameters(exchange, parameters);
 		fillAttribute(exchange, parameters);
 		chain.doFilter(exchange);
 	}

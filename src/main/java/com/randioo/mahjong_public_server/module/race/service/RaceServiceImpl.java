@@ -1,12 +1,10 @@
 package com.randioo.mahjong_public_server.module.race.service;
 
-import java.net.InetSocketAddress;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 
-import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,26 +18,26 @@ import com.randioo.mahjong_public_server.entity.po.RaceRole;
 import com.randioo.mahjong_public_server.entity.po.RaceStateInfo;
 import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
 import com.randioo.mahjong_public_server.entity.po.RoleRaceInfo;
-import com.randioo.mahjong_public_server.handler.BackgroundServerHandler;
 import com.randioo.mahjong_public_server.module.fight.FightConstant;
+import com.randioo.mahjong_public_server.module.fight.service.FightService;
 import com.randioo.mahjong_public_server.module.login.service.LoginService;
 import com.randioo.mahjong_public_server.module.match.service.MatchService;
-import com.randioo.mahjong_public_server.module.match.service.MatchServiceImpl;
 import com.randioo.mahjong_public_server.module.race.RaceConstant;
 import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
+import com.randioo.mahjong_public_server.protocol.Entity.GameRoleData;
 import com.randioo.mahjong_public_server.protocol.Error.ErrorCode;
+import com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeReady;
+import com.randioo.mahjong_public_server.protocol.Match.SCMatchMineInfo;
 import com.randioo.mahjong_public_server.protocol.Race.RaceJoinRaceResponse;
 import com.randioo.mahjong_public_server.protocol.Race.SCRaceJoinRace;
 import com.randioo.mahjong_public_server.protocol.ServerMessage.SC;
 import com.randioo.mahjong_public_server.randioo_race_sdk.RaceExistResponse;
 import com.randioo.mahjong_public_server.randioo_race_sdk.RandiooRaceWebSdk;
 import com.randioo.randioo_server_base.config.GlobleConfig;
-import com.randioo.randioo_server_base.config.GlobleConfig.GlobleEnum;
 import com.randioo.randioo_server_base.entity.GlobalConfigFunction;
 import com.randioo.randioo_server_base.init.GameServerInit;
 import com.randioo.randioo_server_base.lock.CacheLockUtil;
-import com.randioo.randioo_server_base.net.WanServer;
-import com.randioo.randioo_server_base.protocol.randioo.MessageCodecFactory;
+import com.randioo.randioo_server_base.log.HttpLogUtils;
 import com.randioo.randioo_server_base.service.ObserveBaseService;
 import com.randioo.randioo_server_base.template.Observer;
 import com.randioo.randioo_server_base.utils.SessionUtils;
@@ -59,6 +57,15 @@ public class RaceServiceImpl extends ObserveBaseService implements RaceService {
 
 	@Override
 	public void raceInit(Role role) {
+		createRaceInit(role);
+	}
+
+	@Override
+	public void newRaceInit(Role role) {
+		createRaceInit(role);
+	}
+
+	private void createRaceInit(Role role) {
 		RoleRaceInfo roleRaceInfo = new RoleRaceInfo();
 		roleRaceInfo.roleId = role.getRoleId();
 
@@ -143,6 +150,7 @@ public class RaceServiceImpl extends ObserveBaseService implements RaceService {
 
 	@Override
 	public void joinRace(Role role, int raceId) {
+		loggerinfo(role, "race join " + raceId);
 		SessionUtils.sc(role.getRoleId(), SC.newBuilder().setRaceJoinRaceResponse(RaceJoinRaceResponse.newBuilder())
 				.build());
 
@@ -177,7 +185,18 @@ public class RaceServiceImpl extends ObserveBaseService implements RaceService {
 				if (game.getRoleIdMap().size() < race.getConfig().maxCount) {
 					int firstRoleId = race.getRoleIdQueue().remove(0);
 					Role firstRole = loginService.getRoleById(firstRoleId);
+
 					matchService.joinGame(firstRole, race.getGameId());
+					String gameRoleId = matchService.getGameRoleId(game.getGameId(), firstRoleId);
+					RoleGameInfo roleGameInfo = game.getRoleIdMap().get(gameRoleId);
+					GameRoleData gameRoleData = matchService.parseGameRoleData(roleGameInfo, game);
+					SessionUtils.sc(
+							role.getRoleId(),
+							SC.newBuilder()
+									.setSCMatchMineInfo(SCMatchMineInfo.newBuilder().setGameRoleData(gameRoleData))
+									.build());
+					SessionUtils.sc(role.getRoleId(),
+							SC.newBuilder().setSCFightNoticeReady(SCFightNoticeReady.newBuilder()).build());
 				}
 
 				notifyObservers(RaceConstant.RACE_JOIN_GAME, game);
@@ -224,9 +243,11 @@ public class RaceServiceImpl extends ObserveBaseService implements RaceService {
 			RoleGameInfo roleGameInfo = game.getRoleIdMap().get(gameRoleId);
 			Role roleSeat = loginService.getRoleById(roleGameInfo.roleId);
 
+			// TODO
 			RaceRole raceRole = new RaceRole();
+			RoleRaceInfo roleRaceInfo = roleSeat.getRoleRaceInfo();
 			raceRole.account = roleSeat.getAccount();
-			raceRole.score = roleSeat.getRoleRaceInfo().totalRoundScore;
+			raceRole.score = roleRaceInfo.totalRoundScore;
 			raceStateInfo.accounts.add(raceRole);
 		}
 

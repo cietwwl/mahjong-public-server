@@ -22,7 +22,8 @@ public class LoginGetRoleDataAction implements IActionSupport {
 	public void execute(Object data, IoSession session) {
 		LoginGetRoleDataRequest request = (LoginGetRoleDataRequest) data;
 		String account = request.getAccount();
-		GeneratedMessage sc = loginService.getRoleData(account, session);
+		String macAddress = request.getUuid();
+		GeneratedMessage sc = loginService.getRoleData(account, macAddress, session);
 		SessionUtils.sc(session, sc);
 	}
 

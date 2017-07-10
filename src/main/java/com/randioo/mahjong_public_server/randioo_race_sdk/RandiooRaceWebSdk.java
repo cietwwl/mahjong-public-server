@@ -1,5 +1,9 @@
 package com.randioo.mahjong_public_server.randioo_race_sdk;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -8,6 +12,7 @@ import com.google.gson.TypeAdapter;
 import com.randioo.mahjong_public_server.entity.po.RaceRole;
 import com.randioo.mahjong_public_server.entity.po.RaceStateInfo;
 import com.randioo.mahjong_public_server.util.HttpConnnection;
+import com.randioo.randioo_server_base.utils.HttpUtils;
 
 public class RandiooRaceWebSdk {
 
@@ -33,10 +38,18 @@ public class RandiooRaceWebSdk {
 	 */
 	public RaceExistResponse exist(int raceId) {
 		// 需判定判定
-		String urlStr = "http://10.0.51.6/APPadmin/gateway/PhpServices/Hhmajiang/getRoom.php?key=f4f3f65d6d804d138043fbbd1843d510&room="
+		String urlStr = "http://10.0.51.18/APPadmin/gateway/PhpServices/Hhmajiang/getRoom.php?key=f4f3f65d6d804d138043fbbd1843d510&room="
 				+ raceId;
+		urlStr = (debug ? "http://10.0.51.18/APPadmin" : "http://manager.app.randioo.com")
+				+ "/gateway/PhpServices/Hhmajiang/getRoom.php";
+
+		HttpParameter parameter = new HttpParameter();
+		parameter.put("key", "f4f3f65d6d804d138043fbbd1843d510");
+		parameter.put("room", raceId + "");
+
 		try {
-			String result = HttpConnnection.sendMessageGet(urlStr);
+			// String result = HttpConnnection.sendMessageGet(urlStr);
+			String result = HttpUtils.get(urlStr, parameter.getParameterMap());
 			RaceExistResponse response = raceExistResponseAdapter.fromJson(result);
 			return response.errorCode == 1 ? response : null;
 		} catch (Exception e) {
@@ -48,9 +61,16 @@ public class RandiooRaceWebSdk {
 	public void create(int raceId, String createRaceAccount) {
 		String urlStr = "http://10.0.51.21:8080/game-server-web/createMahjongRace" + "?raceId=" + raceId
 				+ "&createRaceAccount=" + createRaceAccount + "&state=" + (debug ? "debug" : "run");
+
+		urlStr = (debug ? "http://10.0.51.21:8080" : "http://localhost:8080") + "/game-server-web/createMahjongRace";
+		HttpParameter parameter = new HttpParameter();
+		parameter.put("raceId", raceId + "");
+		parameter.put("createRaceAccount", createRaceAccount);
+		parameter.put("state", (debug ? "debug" : "run"));
+
 		System.out.println(urlStr);
 		try {
-			System.out.println(HttpConnnection.sendMessageGet(urlStr));
+			HttpUtils.get(urlStr, parameter.getParameterMap());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

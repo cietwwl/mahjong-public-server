@@ -107,7 +107,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 
 	@Override
 	public GeneratedMessage createRoom(Role role, GameConfigData gameConfigData) {
-		logger.debug("createRoom -->start");
+		loggerdebug(role, "createRoom -->start");
 		if (!checkConfig(gameConfigData)) {
 			return SC
 					.newBuilder()
@@ -120,7 +120,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 		RoleGameInfo roleGameInfo = game.getRoleIdMap().get(this.getGameRoleId(game.getGameId(), role.getRoleId()));
 
 		GameRoleData myGameRoleData = this.parseGameRoleData(roleGameInfo, game);
-		logger.debug("createRoom-->end");
+		loggerdebug(role, "createRoom-->end");
 		return SC
 				.newBuilder()
 				.setMatchCreateGameResponse(
@@ -171,7 +171,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 	 */
 	private void addAccountRole(Game game, int roleId) {
 		String gameRoleId = getGameRoleId(game.getGameId(), roleId);
-		logger.debug(gameRoleId);
+		loggerdebug("game=>" + game.getGameId() + "=>" + gameRoleId);
 
 		addRole(game, roleId, gameRoleId);
 	}
@@ -194,7 +194,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 	private void addRole(Game game, int roleId, String gameRoleId) {
 		RoleGameInfo roleGameInfo = this.createRoleGameInfo(roleId, gameRoleId);
 		// roleGameInfo.seatIndex = game.getRoleIdMap().size();
-		logger.debug("addRole" + game.getGameId() + " roleId =" + roleId);
+		loggerdebug("addRole" + game.getGameId() + " roleId =" + roleId);
 		if (roleId != 0) {
 			Role role = (Role) RoleCache.getRoleById(roleId);
 			role.setGameId(game.getGameId());
@@ -234,7 +234,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 	@Override
 	public void joinGame(Role role, String lockString) {
 		Integer gameId = GameCache.getGameLockStringMap().get(lockString);
-		logger.debug("gameid:" + gameId);
+		loggerdebug("gameid:" + gameId + " join game");
 		if (gameId == null) {
 			SessionUtils.sc(
 					role.getRoleId(),
@@ -246,7 +246,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 		}
 
 		Game game = GameCache.getGameMap().get(gameId);
-		logger.debug("game:" + game);
+		loggerdebug("game:" + game);
 		if (game == null) {
 			SessionUtils.sc(
 					role.getRoleId(),
@@ -302,9 +302,9 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 
 	@Override
 	public void joinGame(Role role, int gameId) {
-		logger.debug("joinGame" + role.getAccount());
+		loggerdebug("joinGame" + role.getAccount());
 		Game game = GameCache.getGameMap().get(gameId);
-		logger.debug("game-->" + game);
+		loggerdebug("game-->" + game);
 		this.addAccountRole(game, role.getRoleId());
 
 		String gameRoleId = this.getGameRoleId(game.getGameId(), role.getRoleId());
@@ -495,7 +495,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 			String gameRoleId = addAIRole(game);
 
 			RoleGameInfo info = game.getRoleIdMap().get(gameRoleId);
-			logger.debug(info.toString());
+			loggerdebug(role, info.toString());
 			int index = game.getRoleIdList().indexOf(gameRoleId);
 			GameRoleData AIGameRoleData = GameRoleData.newBuilder().setGameRoleId(info.gameRoleId).setReady(info.ready)
 					.setSeat(index).setName("ROBOT" + info.gameRoleId).build();

@@ -22,9 +22,8 @@ public class CloseServiceImpl extends BaseService implements CloseService {
 
 	@Override
 	public void asynManipulate(Role role) {
-		logger.info("[account:" + role.getAccount() + ",name:" + role.getName() + "] manipulate");
+		loggerinfo(role, "[account:" + role.getAccount() + ",name:" + role.getName() + "] manipulate");
 
-		SessionCache.removeSessionById(role.getRoleId());
 		role.setOfflineTimeStr(TimeUtils.getDetailTimeStr());
 
 		if (!gameDB.isUpdatePoolClose()) {
@@ -43,8 +42,8 @@ public class CloseServiceImpl extends BaseService implements CloseService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("id:" + role.getRoleId() + ",account:" + role.getAccount() + ",name:" + role.getName()
-					+ "] save error");
+			loggererror(role, "id:" + role.getRoleId() + ",account:" + role.getAccount() + ",name:" + role.getName()
+					+ "] save error", e);
 		}
 
 	}

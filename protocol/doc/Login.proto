@@ -20,6 +20,7 @@ message LoginCreateRoleResponse{
 
 message LoginGetRoleDataRequest{
 	optional string account=1;
+	optional string uuid = 2;
 }
 
 message LoginGetRoleDataResponse{
@@ -28,3 +29,6 @@ message LoginGetRoleDataResponse{
 	optional RoleData roleData = 3;
 }
 
+message SCLoginOtherSide{
+	
+}

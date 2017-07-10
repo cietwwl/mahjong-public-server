@@ -32,6 +32,8 @@ public class RoleGameInfo {
 	public RoundCardsData roundCardsData;
 	/** 是否要摸牌 */
 	public Gang qiangGang = null;
+	/** 听的牌 */
+	public List<Integer> tingCards = new ArrayList<>();
 
 	@Override
 	public String toString() {
@@ -48,7 +50,7 @@ public class RoleGameInfo {
 		sb.append(t).append("score=>").append(score).append(n);
 		sb.append(t).append("qiangGang=>").append(qiangGang).append(n);
 		sb.append(t).append("]");
-		
+
 		return sb.toString();
 	}
 }

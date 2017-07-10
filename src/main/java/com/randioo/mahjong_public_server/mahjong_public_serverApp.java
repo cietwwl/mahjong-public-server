@@ -10,7 +10,9 @@ import com.randioo.randioo_server_base.config.GlobleConfig;
 import com.randioo.randioo_server_base.config.GlobleConfig.GlobleEnum;
 import com.randioo.randioo_server_base.entity.GlobalConfigFunction;
 import com.randioo.randioo_server_base.init.GameServerInit;
+import com.randioo.randioo_server_base.log.HttpLogUtils;
 import com.randioo.randioo_server_base.sensitive.SensitiveWordDictionary;
+import com.randioo.randioo_server_base.template.Function;
 import com.randioo.randioo_server_base.utils.SpringContext;
 import com.randioo.randioo_server_base.utils.StringUtils;
 
@@ -21,6 +23,7 @@ import com.randioo.randioo_server_base.utils.StringUtils;
 public class mahjong_public_serverApp {
 	public static void main(String[] args) {
 		StringUtils.printArgs(args);
+
 		GlobleConfig.initParam(new GlobalConfigFunction() {
 
 			@Override
@@ -32,6 +35,7 @@ public class mahjong_public_serverApp {
 			}
 		});
 		GlobleConfig.init(args);
+		HttpLogUtils.setProjectName("public_majiang" + GlobleConfig.Int(GlobleEnum.PORT));
 
 		SensitiveWordDictionary.readAll("./sensitive.txt");
 

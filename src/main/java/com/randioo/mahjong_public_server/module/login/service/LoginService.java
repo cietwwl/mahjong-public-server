@@ -9,11 +9,11 @@ import com.randioo.randioo_server_base.service.ObserveBaseServiceInterface;
 
 public interface LoginService extends ObserveBaseServiceInterface {
 
-	GeneratedMessage getRoleData(String account, IoSession ioSession);
+	GeneratedMessage getRoleData(String account, String macAddress, IoSession ioSession);
 
-	GeneratedMessage creatRole(String account);
-
-	GeneratedMessage login(String account);
+//	GeneratedMessage creatRole(String account);
+//
+//	GeneratedMessage login(String account);
 
 	/**
 	 * 通过id获取玩家

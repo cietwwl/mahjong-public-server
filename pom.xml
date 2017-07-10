@@ -69,7 +69,7 @@
 		<dependency>
 			<groupId>com.randioo</groupId>
 			<artifactId>randioo-server-base</artifactId>
-			<version>5.0.0</version>
+			<version>5.0.1</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 		<dependency>

@@ -5,8 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.randioo.randioo_server_base.log.HttpUtils;
-import com.randioo.randioo_server_base.template.Function;
+import com.randioo.randioo_server_base.utils.HttpUtils;
 
 public class TestHttp {
 	public static void main(String[] args) {
@@ -17,14 +16,8 @@ public class TestHttp {
 		map.get("test").add("wcy");
 
 		try {
-			HttpUtils.get("http://localhost:20006/test", map, new Function() {
-
-				@Override
-				public Object apply(Object... params) {
-					System.out.println(params[0]);
-					return null;
-				}
-			});
+			String resp = HttpUtils.get("http://localhost:20006/majiang/kickRace", map);
+			System.out.println(resp);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
