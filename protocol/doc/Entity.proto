@@ -15,15 +15,16 @@ message RoleData{
 }
 
 message GameConfigData{
-	optional int32 raceType = 1;
-	optional int32 maxCount = 2;
+	optional int32 raceType = 1; 
+	optional int32 maxCount = 2; //默认值为4
 	optional int32 gangScore = 3;
-	optional bool zhuahu = 4;
-	optional int32 endCatchCount = 5;
-	optional int32 catchScore = 6;
-	optional bool gangkai = 7;
-	optional int32 minStartScore = 8;
+	optional bool zhuahu = 4; // 抓胡
+	optional int32 endCatchCount = 5; //是否非苍蝇
+	optional int32 catchScore = 6; //飞苍蝇分数
+	optional bool gangkai = 7; //杠开
+	optional int32 minStartScore = 8; //底分
 	optional string endTime = 9;
+	optional int32 cardNum = 10 ; // 房卡数量
 }
 message PaiNum{
 	optional int32 seat = 1;

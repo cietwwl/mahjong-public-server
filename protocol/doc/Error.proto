@@ -49,4 +49,7 @@ enum ErrorCode{
 
 	//比赛
 	RACE_JOIN_FAILED = 32;//比赛加入失败
-} // 32
+	
+	//燃点币
+	NOT_RANDIOOMONEY_ENOUGH = 33;//燃点币不足
+} // 33

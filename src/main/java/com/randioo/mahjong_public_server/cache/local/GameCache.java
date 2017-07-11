@@ -2,9 +2,11 @@ package com.randioo.mahjong_public_server.cache.local;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.randioo.mahjong_public_server.entity.bo.Game;
 import com.randioo.mahjong_public_server.entity.po.cardlist.CardList;
@@ -20,6 +22,8 @@ public class GameCache {
 	private static List<Class<? extends CardList>> checkGangCardList = new ArrayList<>();
 	private static Map<Class<? extends CardList>, Function> parseCardListToProtoFunctionMap = new HashMap<>();
 	private static Map<Class<? extends CardList>, Function> addProtoFunctionMap = new HashMap<>();
+
+	private static Set<Integer> baiDaCardNumSet = new HashSet<>();
 
 	public static Map<Integer, Game> getGameMap() {
 		return gameMap;
@@ -43,7 +47,7 @@ public class GameCache {
 
 	public static Map<Class<? extends CardList>, Function> getNoticeChooseCardListFunctionMap() {
 		return addProtoFunctionMap;
-	}	
+	}
 
 	public static List<Class<? extends CardList>> getCheckSelfCardList() {
 		return checkSelfCardList;
@@ -51,5 +55,9 @@ public class GameCache {
 
 	public static List<Class<? extends CardList>> getCheckGangCardList() {
 		return checkGangCardList;
+	}
+
+	public static Set<Integer> getBaiDaCardNumSet() {
+		return baiDaCardNumSet;
 	}
 }

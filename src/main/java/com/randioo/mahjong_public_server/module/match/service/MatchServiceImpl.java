@@ -2,6 +2,7 @@ package com.randioo.mahjong_public_server.module.match.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
@@ -31,6 +32,7 @@ import com.randioo.mahjong_public_server.protocol.Match.MatchJoinGameResponse;
 import com.randioo.mahjong_public_server.protocol.Match.SCMatchJoinGame;
 import com.randioo.mahjong_public_server.protocol.Match.SCMatchMineInfo;
 import com.randioo.mahjong_public_server.protocol.ServerMessage.SC;
+import com.randioo.randioo_platform_sdk.RandiooPlatformSdk;
 import com.randioo.randioo_server_base.cache.RoleCache;
 import com.randioo.randioo_server_base.db.IdClassCreator;
 import com.randioo.randioo_server_base.lock.CacheLockUtil;
@@ -56,6 +58,8 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 	@Autowired
 	private RoleDao roleDao;
 
+	private RandiooPlatformSdk randiooPlatformSdk = new RandiooPlatformSdk() ;
+	
 	@Override
 	public void initService() {
 		matchModelService.setMatchHandler(new MatchHandler() {
@@ -115,7 +119,19 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 							MatchCreateGameResponse.newBuilder().setErrorCode(ErrorCode.CREATE_FAILED.getNumber()))
 					.build();
 		}
-
+//		try {
+//			if(randiooPlatformSdk.getAccountInfo(role.getAccount()).randiooMoney>=gameConfigData.getCardNum()*20){
+//				return SC
+//						.newBuilder()
+//						.setMatchCreateGameResponse(
+//								MatchCreateGameResponse.newBuilder().setErrorCode(ErrorCode.NOT_RANDIOOMONEY_ENOUGH.getNumber()))
+//						.build();
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		//没设置 raceType ,gangScore
+		gameConfigData.toBuilder().setMaxCount(4).setEndTime(TimeUtils.getTimeStr(new Date().getTime() +MatchConstant.hours*60*60*1000));
 		Game game = this.createGame(role.getRoleId(), gameConfigData);
 		RoleGameInfo roleGameInfo = game.getRoleIdMap().get(this.getGameRoleId(game.getGameId(), role.getRoleId()));
 

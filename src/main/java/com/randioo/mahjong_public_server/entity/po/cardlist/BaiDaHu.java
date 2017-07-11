@@ -143,44 +143,6 @@ public class BaiDaHu extends Hu {
 		return null;
 	}
 
-	@Override
-	public void checkTing(CardSort cardSort, List<Integer> waitCards) {
-		List<Integer> baidaCards = new ArrayList<>();
-		baidaCards.add(81);
-
-		CardSort copySort = cardSort.clone();
-
-		// 去除所有白搭，并进行存储
-		List<Integer> tempBaiDaCards = new ArrayList<>();
-
-		this.removeBaida(baidaCards, copySort, tempBaiDaCards);
-
-		// 取三
-		CardSort copySort2 = copySort.clone();
-		List<CardList> tempCardList2 = new ArrayList<>();
-
-		this.removePeng(copySort2, tempCardList2);
-		this.removeChi(copySort2, tempCardList2);
-
-		List<Integer> list = copySort2.toArray();
-		if (list.size() == 1) {
-
-		} else if (list.size() == 5) {
-
-		}
-
-		// 取二
-		Set<Integer> list2 = copySort2.get(1);
-		List<Integer> jiangList = new ArrayList<>(list2);
-		if (jiangList.size() >= 2)
-			return;
-
-		for (int jiang : jiangList) {
-
-		}
-
-	}
-
 	/**
 	 * 移除百搭牌
 	 * 
@@ -203,6 +165,48 @@ public class BaiDaHu extends Hu {
 				}
 			}
 		} while (containsBaiDa);
+	}
+
+	@Override
+	public void checkTing(CardSort cardSort, List<Integer> waitCards) {
+		List<Integer> baidaCards = new ArrayList<>();
+		baidaCards.add(81);
+
+		CardSort copySort = cardSort.clone();
+
+		// 去除所有白搭，并进行存储
+		List<Integer> tempBaiDaCards = new ArrayList<>();
+		this.removeBaida(baidaCards, copySort, tempBaiDaCards);
+
+		// 取三
+		CardSort copySort2 = copySort.clone();
+		List<CardList> tempCardList2 = new ArrayList<>();
+
+		this.removePeng(copySort2, tempCardList2);
+		this.removeChi(copySort2, tempCardList2);
+
+		Set<Integer> two = copySort2.get(1);
+
+		// 如果有将，分别拿除，并加入剩余的红中
+		if (copySort2.get(1).size() > 0) {
+			for (int card : two) {
+				CardSort copySort3 = copySort2.clone();
+				// 取出该将牌
+				copySort3.remove(card, card);
+
+			}
+
+		} else {
+			List<? extends CardList> list = get();
+			CardList cardList = list.get(1);
+			
+			
+		}
+
+	}
+	
+	private List<? extends CardList> get(){
+		return new ArrayList<Chi>();
 	}
 
 }

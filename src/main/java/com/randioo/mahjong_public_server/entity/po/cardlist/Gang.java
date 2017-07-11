@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.randioo.mahjong_public_server.cache.local.GameCache;
 import com.randioo.mahjong_public_server.entity.po.CardSort;
 
 public class Gang extends AbstractCardList {
@@ -22,7 +23,7 @@ public class Gang extends AbstractCardList {
 			// 检查暗杠
 			if (hasPeng) {
 				for (int value : set) {
-					if (value == 81)
+					if (GameCache.getBaiDaCardNumSet().contains(value))
 						continue;
 
 					Gang gang = new Gang();
@@ -32,7 +33,7 @@ public class Gang extends AbstractCardList {
 				}
 			}
 			// 拿的牌检查补杠
-			if (card == 81) {
+			if (GameCache.getBaiDaCardNumSet().contains(81)) {
 				return;
 			}
 			for (CardList cardList : showCardList) {
@@ -55,7 +56,7 @@ public class Gang extends AbstractCardList {
 			// 明杠
 			if (hasPeng) {
 				for (int value : set) {
-					if (card == 81 || card != value)
+					if (GameCache.getBaiDaCardNumSet().contains(81) || card != value)
 						continue;
 
 					Gang gang = new Gang();

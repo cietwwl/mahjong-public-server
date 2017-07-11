@@ -779,6 +779,13 @@ public final class Entity {
     public boolean hasEndTime() { return hasEndTime; }
     public java.lang.String getEndTime() { return endTime_; }
     
+    // optional int32 cardNum = 10;
+    public static final int CARDNUM_FIELD_NUMBER = 10;
+    private boolean hasCardNum;
+    private int cardNum_ = 0;
+    public boolean hasCardNum() { return hasCardNum; }
+    public int getCardNum() { return cardNum_; }
+    
     private void initFields() {
     }
     public final boolean isInitialized() {
@@ -814,6 +821,9 @@ public final class Entity {
       }
       if (hasEndTime()) {
         output.writeString(9, getEndTime());
+      }
+      if (hasCardNum()) {
+        output.writeInt32(10, getCardNum());
       }
       getUnknownFields().writeTo(output);
     }
@@ -859,6 +869,10 @@ public final class Entity {
       if (hasEndTime()) {
         size += com.google.protobuf.CodedOutputStream
           .computeStringSize(9, getEndTime());
+      }
+      if (hasCardNum()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(10, getCardNum());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1045,6 +1059,9 @@ public final class Entity {
         if (other.hasEndTime()) {
           setEndTime(other.getEndTime());
         }
+        if (other.hasCardNum()) {
+          setCardNum(other.getCardNum());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1104,6 +1121,10 @@ public final class Entity {
             }
             case 74: {
               setEndTime(input.readString());
+              break;
+            }
+            case 80: {
+              setCardNum(input.readInt32());
               break;
             }
           }
@@ -1273,6 +1294,24 @@ public final class Entity {
       public Builder clearEndTime() {
         result.hasEndTime = false;
         result.endTime_ = getDefaultInstance().getEndTime();
+        return this;
+      }
+      
+      // optional int32 cardNum = 10;
+      public boolean hasCardNum() {
+        return result.hasCardNum();
+      }
+      public int getCardNum() {
+        return result.getCardNum();
+      }
+      public Builder setCardNum(int value) {
+        result.hasCardNum = true;
+        result.cardNum_ = value;
+        return this;
+      }
+      public Builder clearCardNum() {
+        result.hasCardNum = false;
+        result.cardNum_ = 0;
         return this;
       }
       
@@ -6406,58 +6445,58 @@ public final class Entity {
       "\n\014Entity.proto\022*com.randioo.mahjong_publ" +
       "ic_server.protocol\"F\n\010RoleData\022\016\n\006roleId" +
       "\030\001 \001(\005\022\016\n\006gameId\030\002 \001(\005\022\r\n\005point\030\003 \001(\005\022\013\n" +
-      "\003sex\030\004 \001(\005\"\273\001\n\016GameConfigData\022\020\n\010raceTyp" +
+      "\003sex\030\004 \001(\005\"\314\001\n\016GameConfigData\022\020\n\010raceTyp" +
       "e\030\001 \001(\005\022\020\n\010maxCount\030\002 \001(\005\022\021\n\tgangScore\030\003" +
       " \001(\005\022\016\n\006zhuahu\030\004 \001(\010\022\025\n\rendCatchCount\030\005 " +
       "\001(\005\022\022\n\ncatchScore\030\006 \001(\005\022\017\n\007gangkai\030\007 \001(\010" +
       "\022\025\n\rminStartScore\030\010 \001(\005\022\017\n\007endTime\030\t \001(\t" +
-      "\"#\n\006PaiNum\022\014\n\004seat\030\001 \001(\005\022\013\n\003num\030\003 \001(\005\"#\n" +
-      "\006Record\022\014\n\004seat\030\001 \001(\005\022\013\n\003pai\030\002 \003(\005\"\214\001\n\014G",
-      "ameRoleData\022\022\n\ngameRoleId\030\001 \001(\t\022\014\n\004name\030" +
-      "\002 \001(\t\022\014\n\004seat\030\003 \001(\005\022\r\n\005ready\030\004 \001(\010\022\022\n\nhe" +
-      "adImgUrl\030\005 \001(\t\022\r\n\005money\030\006 \001(\005\022\r\n\005point\030\007" +
-      " \001(\005\022\013\n\003sex\030\010 \001(\005\"r\n\020CallCardListData\022\016\n" +
-      "\006callId\030\001 \001(\005\022N\n\014cardListData\030\002 \001(\01328.co" +
-      "m.randioo.mahjong_public_server.protocol" +
-      ".CardListData\"\224\001\n\014CardListData\022N\n\014cardLi" +
-      "stType\030\001 \001(\01628.com.randioo.mahjong_publi" +
-      "c_server.protocol.CardListType\022\014\n\004card\030\002" +
-      " \001(\005\022\022\n\ntargetSeat\030\003 \001(\005\022\022\n\ntargetCard\030\004",
-      " \001(\005\"h\n\nCallHuData\022\016\n\006callId\030\001 \001(\005\022J\n\006hu" +
-      "Data\030\002 \001(\0132:.com.randioo.mahjong_public_" +
-      "server.protocol.RoundCardsData\"\320\002\n\025RoleR" +
-      "oundOverInfoData\022N\n\014gameRoleData\030\001 \001(\01328" +
-      ".com.randioo.mahjong_public_server.proto" +
-      "col.GameRoleData\022R\n\016roundCardsData\030\002 \001(\013" +
-      "2:.com.randioo.mahjong_public_server.pro" +
-      "tocol.RoundCardsData\022\020\n\010minScore\030\003 \001(\005\022\017" +
-      "\n\007gangKai\030\004 \001(\010\022\020\n\010flyCards\030\005 \003(\005\022J\n\nove" +
-      "rMethod\030\006 \001(\01626.com.randioo.mahjong_publ",
-      "ic_server.protocol.OverMethod\022\022\n\nroundSc" +
-      "ore\030\007 \001(\005\"\312\001\n\024RoleGameOverInfoData\022N\n\014ga" +
-      "meRoleData\030\001 \001(\01328.com.randioo.mahjong_p" +
-      "ublic_server.protocol.GameRoleData\022\017\n\007hu" +
-      "Count\030\002 \001(\005\022\021\n\tmoHuCount\030\003 \001(\005\022\023\n\013zhuaHu" +
-      "Count\030\004 \001(\005\022\026\n\016dianChongCount\030\005 \001(\005\022\021\n\tg" +
-      "ameScore\030\006 \001(\005\"\252\001\n\016RoundCardsData\022\016\n\006huC" +
-      "ard\030\001 \001(\005\022\021\n\thandCards\030\002 \003(\005\022\021\n\ttouchCar" +
-      "d\030\003 \001(\005\022\022\n\ntargetSeat\030\004 \001(\005\022N\n\014cardListD" +
-      "ata\030\005 \003(\01328.com.randioo.mahjong_public_s",
-      "erver.protocol.CardListData\"\033\n\014Recommand" +
-      "Pai\022\013\n\003pai\030\001 \003(\005\"j\n\010GameData\022\016\n\006gameId\030\001" +
-      " \001(\005\022N\n\014gameRoleData\030\002 \003(\01328.com.randioo" +
-      ".mahjong_public_server.protocol.GameRole" +
-      "Data\"+\n\014AudienceData\022\014\n\004name\030\001 \001(\t\022\r\n\005sc" +
-      "ore\030\002 \001(\005*5\n\010GameType\022\023\n\017GAME_TYPE_MATCH" +
-      "\020\001\022\024\n\020GAME_TYPE_FRIEND\020\002*M\n\tGameState\022\026\n" +
-      "\022GAME_STATE_PREPARE\020\001\022\024\n\020GAME_START_STAR" +
-      "T\020\002\022\022\n\016GAME_START_END\020\003*\231\001\n\014CardListType" +
-      "\022\026\n\022CARD_LIST_TYPE_CHI\020\001\022\027\n\023CARD_LIST_TY",
-      "PE_PENG\020\002\022\035\n\031CARD_LIST_TYPE_GANG_LIGHT\020\003" +
-      "\022\034\n\030CARD_LIST_TYPE_GANG_DARK\020\004\022\033\n\027CARD_L" +
-      "IST_TYPE_GANG_ADD\020\005*H\n\nOverMethod\022\r\n\tOVE" +
-      "R_LOSS\020\000\022\016\n\nOVER_CHONG\020\001\022\016\n\nOVER_MO_HU\020\002" +
-      "\022\013\n\007OVER_HU\020\003"
+      "\022\017\n\007cardNum\030\n \001(\005\"#\n\006PaiNum\022\014\n\004seat\030\001 \001(" +
+      "\005\022\013\n\003num\030\003 \001(\005\"#\n\006Record\022\014\n\004seat\030\001 \001(\005\022\013",
+      "\n\003pai\030\002 \003(\005\"\214\001\n\014GameRoleData\022\022\n\ngameRole" +
+      "Id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\014\n\004seat\030\003 \001(\005\022\r\n\005" +
+      "ready\030\004 \001(\010\022\022\n\nheadImgUrl\030\005 \001(\t\022\r\n\005money" +
+      "\030\006 \001(\005\022\r\n\005point\030\007 \001(\005\022\013\n\003sex\030\010 \001(\005\"r\n\020Ca" +
+      "llCardListData\022\016\n\006callId\030\001 \001(\005\022N\n\014cardLi" +
+      "stData\030\002 \001(\01328.com.randioo.mahjong_publi" +
+      "c_server.protocol.CardListData\"\224\001\n\014CardL" +
+      "istData\022N\n\014cardListType\030\001 \001(\01628.com.rand" +
+      "ioo.mahjong_public_server.protocol.CardL" +
+      "istType\022\014\n\004card\030\002 \001(\005\022\022\n\ntargetSeat\030\003 \001(",
+      "\005\022\022\n\ntargetCard\030\004 \001(\005\"h\n\nCallHuData\022\016\n\006c" +
+      "allId\030\001 \001(\005\022J\n\006huData\030\002 \001(\0132:.com.randio" +
+      "o.mahjong_public_server.protocol.RoundCa" +
+      "rdsData\"\320\002\n\025RoleRoundOverInfoData\022N\n\014gam" +
+      "eRoleData\030\001 \001(\01328.com.randioo.mahjong_pu" +
+      "blic_server.protocol.GameRoleData\022R\n\016rou" +
+      "ndCardsData\030\002 \001(\0132:.com.randioo.mahjong_" +
+      "public_server.protocol.RoundCardsData\022\020\n" +
+      "\010minScore\030\003 \001(\005\022\017\n\007gangKai\030\004 \001(\010\022\020\n\010flyC" +
+      "ards\030\005 \003(\005\022J\n\noverMethod\030\006 \001(\01626.com.ran",
+      "dioo.mahjong_public_server.protocol.Over" +
+      "Method\022\022\n\nroundScore\030\007 \001(\005\"\312\001\n\024RoleGameO" +
+      "verInfoData\022N\n\014gameRoleData\030\001 \001(\01328.com." +
+      "randioo.mahjong_public_server.protocol.G" +
+      "ameRoleData\022\017\n\007huCount\030\002 \001(\005\022\021\n\tmoHuCoun" +
+      "t\030\003 \001(\005\022\023\n\013zhuaHuCount\030\004 \001(\005\022\026\n\016dianChon" +
+      "gCount\030\005 \001(\005\022\021\n\tgameScore\030\006 \001(\005\"\252\001\n\016Roun" +
+      "dCardsData\022\016\n\006huCard\030\001 \001(\005\022\021\n\thandCards\030" +
+      "\002 \003(\005\022\021\n\ttouchCard\030\003 \001(\005\022\022\n\ntargetSeat\030\004" +
+      " \001(\005\022N\n\014cardListData\030\005 \003(\01328.com.randioo",
+      ".mahjong_public_server.protocol.CardList" +
+      "Data\"\033\n\014RecommandPai\022\013\n\003pai\030\001 \003(\005\"j\n\010Gam" +
+      "eData\022\016\n\006gameId\030\001 \001(\005\022N\n\014gameRoleData\030\002 " +
+      "\003(\01328.com.randioo.mahjong_public_server." +
+      "protocol.GameRoleData\"+\n\014AudienceData\022\014\n" +
+      "\004name\030\001 \001(\t\022\r\n\005score\030\002 \001(\005*5\n\010GameType\022\023" +
+      "\n\017GAME_TYPE_MATCH\020\001\022\024\n\020GAME_TYPE_FRIEND\020" +
+      "\002*M\n\tGameState\022\026\n\022GAME_STATE_PREPARE\020\001\022\024" +
+      "\n\020GAME_START_START\020\002\022\022\n\016GAME_START_END\020\003" +
+      "*\231\001\n\014CardListType\022\026\n\022CARD_LIST_TYPE_CHI\020",
+      "\001\022\027\n\023CARD_LIST_TYPE_PENG\020\002\022\035\n\031CARD_LIST_" +
+      "TYPE_GANG_LIGHT\020\003\022\034\n\030CARD_LIST_TYPE_GANG" +
+      "_DARK\020\004\022\033\n\027CARD_LIST_TYPE_GANG_ADD\020\005*H\n\n" +
+      "OverMethod\022\r\n\tOVER_LOSS\020\000\022\016\n\nOVER_CHONG\020" +
+      "\001\022\016\n\nOVER_MO_HU\020\002\022\013\n\007OVER_HU\020\003"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6477,7 +6516,7 @@ public final class Entity {
           internal_static_com_randioo_mahjong_public_server_protocol_GameConfigData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_randioo_mahjong_public_server_protocol_GameConfigData_descriptor,
-              new java.lang.String[] { "RaceType", "MaxCount", "GangScore", "Zhuahu", "EndCatchCount", "CatchScore", "Gangkai", "MinStartScore", "EndTime", },
+              new java.lang.String[] { "RaceType", "MaxCount", "GangScore", "Zhuahu", "EndCatchCount", "CatchScore", "Gangkai", "MinStartScore", "EndTime", "CardNum", },
               com.randioo.mahjong_public_server.protocol.Entity.GameConfigData.class,
               com.randioo.mahjong_public_server.protocol.Entity.GameConfigData.Builder.class);
           internal_static_com_randioo_mahjong_public_server_protocol_PaiNum_descriptor =

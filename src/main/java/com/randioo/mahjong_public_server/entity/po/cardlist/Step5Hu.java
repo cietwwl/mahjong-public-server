@@ -17,7 +17,7 @@ public class Step5Hu extends Hu {
 		CardSort copySort = cardSort.clone();
 		for (int value : copySort.getList().get(1)) {
 			System.out.println("===============");
-			System.out.println("value->" + value);
+			System.out.println(" value-> " + value);
 			System.out.println("===============");
 			List<Integer> cards = copySort.toArray();
 			Collections.sort(cards);
@@ -149,7 +149,7 @@ public class Step5Hu extends Hu {
 		int j = list.size();
 		for (int i = list.size() - 1; i >= 0; i--) {
 			Set<Integer> set = list.get(i);
-			if (set.contains(81)) {
+			if (set.contains(801)) {
 				break;
 			} else {
 				j--;
@@ -159,8 +159,8 @@ public class Step5Hu extends Hu {
 	}
 
 	@Override
-	public void checkTing(CardSort cardSort,List<Integer> waitCards) {
-	
+	public void checkTing(CardSort cardSort, List<Integer> waitCards) {
+
 	}
 
 	@Override

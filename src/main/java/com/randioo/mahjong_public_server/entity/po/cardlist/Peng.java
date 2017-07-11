@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.randioo.mahjong_public_server.cache.local.GameCache;
 import com.randioo.mahjong_public_server.entity.po.CardSort;
 
 /**
@@ -16,10 +17,10 @@ public class Peng extends AbstractCardList {
 	public int card;
 
 	@Override
-	public void check(List<CardList> cardLists, CardSort cardSort, int card,List<CardList> showCardList,boolean isMine) {
-		if (card == 81)
+	public void check(List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList, boolean isMine) {
+		if (GameCache.getBaiDaCardNumSet().contains(card))
 			return;
-		
+
 		Set<Integer> set = cardSort.getList().get(2);
 		if (set.contains(card)) {
 			Peng peng = new Peng();

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.randioo.mahjong_public_server.entity.po.CallCardList;
 import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
+import com.randioo.mahjong_public_server.entity.po.RoleGameResult;
 import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
 import com.randioo.mahjong_public_server.protocol.Entity.GameState;
 import com.randioo.mahjong_public_server.protocol.Entity.GameType;
@@ -52,6 +53,8 @@ public class Game {
 	private List<CallCardList> huCallCardLists = new ArrayList<>();
 	// 出牌放在桌上的表
 	private Map<Integer, List<Integer>> sendDesktopCardMap = new HashMap<>();
+	// 玩家结果统计
+	private Map<String, RoleGameResult> roleGameOverResultMap = new HashMap<>();
 
 	public int getOnlineRoleCount() {
 		return onlineRoleCount;
@@ -194,6 +197,10 @@ public class Game {
 
 	public List<CallCardList> getHuCallCardLists() {
 		return huCallCardLists;
+	}
+
+	public Map<String, RoleGameResult> getRoleGameOverResultMap() {
+		return roleGameOverResultMap;
 	}
 
 	@Override
