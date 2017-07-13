@@ -48,7 +48,7 @@ public interface FightService extends ObserveBaseServiceInterface {
 
 	void gang(Role role, int gameSendCount, int callCardListId);
 
-	void hu(Role role, int gameSendCount,int callCardListId);
+	void hu(Role role, int gameSendCount, int callCardListId);
 
 	void guo(Role role, int gameSendCount);
 
@@ -59,5 +59,13 @@ public interface FightService extends ObserveBaseServiceInterface {
 	 * @author wcy 2017年6月17日
 	 */
 	CallCardList getPreviousCallCardList(Game game);
+
+	/**
+	 * 获得游戏
+	 * 
+	 * @param gameId
+	 * @return
+	 */
+	Game getGameById(int gameId);
 
 }

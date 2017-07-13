@@ -2197,7 +2197,8 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
 	 * @param gameId
 	 * @return
 	 */
-	private Game getGameById(int gameId) {
+	@Override
+	public Game getGameById(int gameId) {
 		return GameCache.getGameMap().get(gameId);
 	}
 

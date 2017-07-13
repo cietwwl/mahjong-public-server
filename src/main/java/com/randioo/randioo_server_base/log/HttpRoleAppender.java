@@ -27,7 +27,7 @@ public class HttpRoleAppender extends AppenderSkeleton {
 	private String httpLogInfoKey = "logInfo";
 	private String logRoleKey = "roleId:";
 	private String logSplitPrefix = ",";
-	
+
 	private Map<String, List<String>> map = new HashMap<>();
 
 	private ExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
