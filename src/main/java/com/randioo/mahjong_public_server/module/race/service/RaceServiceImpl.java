@@ -111,8 +111,8 @@ public class RaceServiceImpl extends ObserveBaseService implements RaceService {
 		GameConfigData gameConfig = GameConfigData.newBuilder().setZhuahu(configure.zhuahu)
 				.setRaceType(configure.raceType).setMinStartScore(configure.minStartScore)
 				.setMaxCount(configure.maxCount).setGangScore(configure.gangScore).setGangkai(configure.gangkai)
-				.setCatchScore(configure.catchScore).setEndCatchCount(configure.endCatchCount)
-				.setEndTime(configure.endTime).build();
+				.setFlyScore(configure.catchScore).setFlyCount(configure.endCatchCount).setEndTime(configure.endTime)
+				.build();
 
 		return gameConfig;
 	}

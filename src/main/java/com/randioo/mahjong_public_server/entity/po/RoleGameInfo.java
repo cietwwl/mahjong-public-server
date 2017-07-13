@@ -34,6 +34,8 @@ public class RoleGameInfo {
 	public Gang qiangGang = null;
 	/** 听的牌 */
 	public List<Integer> tingCards = new ArrayList<>();
+	/** 回合结果集 */
+	public RoundOverResult roundOverResult = new RoundOverResult();
 
 	@Override
 	public String toString() {

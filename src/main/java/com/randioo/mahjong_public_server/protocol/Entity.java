@@ -8,6 +8,73 @@ public final class Entity {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
+  public enum GameOverMethod
+      implements com.google.protobuf.ProtocolMessageEnum {
+    GAME_OVER_TIME(0, 1),
+    GAME_OVER_ROUND(1, 2),
+    ;
+    
+    
+    public final int getNumber() { return value; }
+    
+    public static GameOverMethod valueOf(int value) {
+      switch (value) {
+        case 1: return GAME_OVER_TIME;
+        case 2: return GAME_OVER_ROUND;
+        default: return null;
+      }
+    }
+    
+    public static com.google.protobuf.Internal.EnumLiteMap<GameOverMethod>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<GameOverMethod>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<GameOverMethod>() {
+            public GameOverMethod findValueByNumber(int number) {
+              return GameOverMethod.valueOf(number)
+    ;        }
+          };
+    
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.randioo.mahjong_public_server.protocol.Entity.getDescriptor().getEnumTypes().get(0);
+    }
+    
+    private static final GameOverMethod[] VALUES = {
+      GAME_OVER_TIME, GAME_OVER_ROUND, 
+    };
+    public static GameOverMethod valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+    private final int index;
+    private final int value;
+    private GameOverMethod(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+    
+    static {
+      com.randioo.mahjong_public_server.protocol.Entity.getDescriptor();
+    }
+    
+    // @@protoc_insertion_point(enum_scope:com.randioo.mahjong_public_server.protocol.GameOverMethod)
+  }
+  
   public enum GameType
       implements com.google.protobuf.ProtocolMessageEnum {
     GAME_TYPE_MATCH(0, 1),
@@ -47,7 +114,7 @@ public final class Entity {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return com.randioo.mahjong_public_server.protocol.Entity.getDescriptor().getEnumTypes().get(0);
+      return com.randioo.mahjong_public_server.protocol.Entity.getDescriptor().getEnumTypes().get(1);
     }
     
     private static final GameType[] VALUES = {
@@ -116,7 +183,7 @@ public final class Entity {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return com.randioo.mahjong_public_server.protocol.Entity.getDescriptor().getEnumTypes().get(1);
+      return com.randioo.mahjong_public_server.protocol.Entity.getDescriptor().getEnumTypes().get(2);
     }
     
     private static final GameState[] VALUES = {
@@ -189,7 +256,7 @@ public final class Entity {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return com.randioo.mahjong_public_server.protocol.Entity.getDescriptor().getEnumTypes().get(2);
+      return com.randioo.mahjong_public_server.protocol.Entity.getDescriptor().getEnumTypes().get(3);
     }
     
     private static final CardListType[] VALUES = {
@@ -260,7 +327,7 @@ public final class Entity {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return com.randioo.mahjong_public_server.protocol.Entity.getDescriptor().getEnumTypes().get(3);
+      return com.randioo.mahjong_public_server.protocol.Entity.getDescriptor().getEnumTypes().get(4);
     }
     
     private static final OverMethod[] VALUES = {
@@ -723,70 +790,111 @@ public final class Entity {
     public boolean hasRaceType() { return hasRaceType; }
     public int getRaceType() { return raceType_; }
     
-    // optional int32 maxCount = 2;
-    public static final int MAXCOUNT_FIELD_NUMBER = 2;
-    private boolean hasMaxCount;
-    private int maxCount_ = 0;
-    public boolean hasMaxCount() { return hasMaxCount; }
-    public int getMaxCount() { return maxCount_; }
+    // optional int32 roundCount = 2;
+    public static final int ROUNDCOUNT_FIELD_NUMBER = 2;
+    private boolean hasRoundCount;
+    private int roundCount_ = 0;
+    public boolean hasRoundCount() { return hasRoundCount; }
+    public int getRoundCount() { return roundCount_; }
     
-    // optional int32 gangScore = 3;
-    public static final int GANGSCORE_FIELD_NUMBER = 3;
-    private boolean hasGangScore;
-    private int gangScore_ = 0;
-    public boolean hasGangScore() { return hasGangScore; }
-    public int getGangScore() { return gangScore_; }
-    
-    // optional bool zhuahu = 4;
-    public static final int ZHUAHU_FIELD_NUMBER = 4;
-    private boolean hasZhuahu;
-    private boolean zhuahu_ = false;
-    public boolean hasZhuahu() { return hasZhuahu; }
-    public boolean getZhuahu() { return zhuahu_; }
-    
-    // optional int32 endCatchCount = 5;
-    public static final int ENDCATCHCOUNT_FIELD_NUMBER = 5;
-    private boolean hasEndCatchCount;
-    private int endCatchCount_ = 0;
-    public boolean hasEndCatchCount() { return hasEndCatchCount; }
-    public int getEndCatchCount() { return endCatchCount_; }
-    
-    // optional int32 catchScore = 6;
-    public static final int CATCHSCORE_FIELD_NUMBER = 6;
-    private boolean hasCatchScore;
-    private int catchScore_ = 0;
-    public boolean hasCatchScore() { return hasCatchScore; }
-    public int getCatchScore() { return catchScore_; }
-    
-    // optional bool gangkai = 7;
-    public static final int GANGKAI_FIELD_NUMBER = 7;
-    private boolean hasGangkai;
-    private boolean gangkai_ = false;
-    public boolean hasGangkai() { return hasGangkai; }
-    public boolean getGangkai() { return gangkai_; }
-    
-    // optional int32 minStartScore = 8;
-    public static final int MINSTARTSCORE_FIELD_NUMBER = 8;
+    // optional int32 minStartScore = 3;
+    public static final int MINSTARTSCORE_FIELD_NUMBER = 3;
     private boolean hasMinStartScore;
     private int minStartScore_ = 0;
     public boolean hasMinStartScore() { return hasMinStartScore; }
     public int getMinStartScore() { return minStartScore_; }
     
-    // optional string endTime = 9;
-    public static final int ENDTIME_FIELD_NUMBER = 9;
+    // optional int32 gangScore = 4;
+    public static final int GANGSCORE_FIELD_NUMBER = 4;
+    private boolean hasGangScore;
+    private int gangScore_ = 0;
+    public boolean hasGangScore() { return hasGangScore; }
+    public int getGangScore() { return gangScore_; }
+    
+    // optional bool zhuahu = 5;
+    public static final int ZHUAHU_FIELD_NUMBER = 5;
+    private boolean hasZhuahu;
+    private boolean zhuahu_ = false;
+    public boolean hasZhuahu() { return hasZhuahu; }
+    public boolean getZhuahu() { return zhuahu_; }
+    
+    // optional bool baidaZhuaHu = 6;
+    public static final int BAIDAZHUAHU_FIELD_NUMBER = 6;
+    private boolean hasBaidaZhuaHu;
+    private boolean baidaZhuaHu_ = false;
+    public boolean hasBaidaZhuaHu() { return hasBaidaZhuaHu; }
+    public boolean getBaidaZhuaHu() { return baidaZhuaHu_; }
+    
+    // optional bool baida4win = 7;
+    public static final int BAIDA4WIN_FIELD_NUMBER = 7;
+    private boolean hasBaida4Win;
+    private boolean baida4Win_ = false;
+    public boolean hasBaida4Win() { return hasBaida4Win; }
+    public boolean getBaida4Win() { return baida4Win_; }
+    
+    // optional int32 flyCount = 8;
+    public static final int FLYCOUNT_FIELD_NUMBER = 8;
+    private boolean hasFlyCount;
+    private int flyCount_ = 0;
+    public boolean hasFlyCount() { return hasFlyCount; }
+    public int getFlyCount() { return flyCount_; }
+    
+    // optional int32 flyScore = 9;
+    public static final int FLYSCORE_FIELD_NUMBER = 9;
+    private boolean hasFlyScore;
+    private int flyScore_ = 0;
+    public boolean hasFlyScore() { return hasFlyScore; }
+    public int getFlyScore() { return flyScore_; }
+    
+    // repeated int32 flyValue = 10;
+    public static final int FLYVALUE_FIELD_NUMBER = 10;
+    private java.util.List<java.lang.Integer> flyValue_ =
+      java.util.Collections.emptyList();
+    public java.util.List<java.lang.Integer> getFlyValueList() {
+      return flyValue_;
+    }
+    public int getFlyValueCount() { return flyValue_.size(); }
+    public int getFlyValue(int index) {
+      return flyValue_.get(index);
+    }
+    
+    // optional bool gangkai = 11;
+    public static final int GANGKAI_FIELD_NUMBER = 11;
+    private boolean hasGangkai;
+    private boolean gangkai_ = false;
+    public boolean hasGangkai() { return hasGangkai; }
+    public boolean getGangkai() { return gangkai_; }
+    
+    // optional .com.randioo.mahjong_public_server.protocol.GameOverMethod gameOverMethod = 12 [default = GAME_OVER_ROUND];
+    public static final int GAMEOVERMETHOD_FIELD_NUMBER = 12;
+    private boolean hasGameOverMethod;
+    private com.randioo.mahjong_public_server.protocol.Entity.GameOverMethod gameOverMethod_;
+    public boolean hasGameOverMethod() { return hasGameOverMethod; }
+    public com.randioo.mahjong_public_server.protocol.Entity.GameOverMethod getGameOverMethod() { return gameOverMethod_; }
+    
+    // optional string endTime = 13;
+    public static final int ENDTIME_FIELD_NUMBER = 13;
     private boolean hasEndTime;
     private java.lang.String endTime_ = "";
     public boolean hasEndTime() { return hasEndTime; }
     public java.lang.String getEndTime() { return endTime_; }
     
-    // optional int32 cardNum = 10;
-    public static final int CARDNUM_FIELD_NUMBER = 10;
+    // optional int32 cardNum = 14;
+    public static final int CARDNUM_FIELD_NUMBER = 14;
     private boolean hasCardNum;
     private int cardNum_ = 0;
     public boolean hasCardNum() { return hasCardNum; }
     public int getCardNum() { return cardNum_; }
     
+    // optional int32 maxCount = 15 [default = 4];
+    public static final int MAXCOUNT_FIELD_NUMBER = 15;
+    private boolean hasMaxCount;
+    private int maxCount_ = 4;
+    public boolean hasMaxCount() { return hasMaxCount; }
+    public int getMaxCount() { return maxCount_; }
+    
     private void initFields() {
+      gameOverMethod_ = com.randioo.mahjong_public_server.protocol.Entity.GameOverMethod.GAME_OVER_ROUND;
     }
     public final boolean isInitialized() {
       return true;
@@ -798,32 +906,47 @@ public final class Entity {
       if (hasRaceType()) {
         output.writeInt32(1, getRaceType());
       }
-      if (hasMaxCount()) {
-        output.writeInt32(2, getMaxCount());
-      }
-      if (hasGangScore()) {
-        output.writeInt32(3, getGangScore());
-      }
-      if (hasZhuahu()) {
-        output.writeBool(4, getZhuahu());
-      }
-      if (hasEndCatchCount()) {
-        output.writeInt32(5, getEndCatchCount());
-      }
-      if (hasCatchScore()) {
-        output.writeInt32(6, getCatchScore());
-      }
-      if (hasGangkai()) {
-        output.writeBool(7, getGangkai());
+      if (hasRoundCount()) {
+        output.writeInt32(2, getRoundCount());
       }
       if (hasMinStartScore()) {
-        output.writeInt32(8, getMinStartScore());
+        output.writeInt32(3, getMinStartScore());
+      }
+      if (hasGangScore()) {
+        output.writeInt32(4, getGangScore());
+      }
+      if (hasZhuahu()) {
+        output.writeBool(5, getZhuahu());
+      }
+      if (hasBaidaZhuaHu()) {
+        output.writeBool(6, getBaidaZhuaHu());
+      }
+      if (hasBaida4Win()) {
+        output.writeBool(7, getBaida4Win());
+      }
+      if (hasFlyCount()) {
+        output.writeInt32(8, getFlyCount());
+      }
+      if (hasFlyScore()) {
+        output.writeInt32(9, getFlyScore());
+      }
+      for (int element : getFlyValueList()) {
+        output.writeInt32(10, element);
+      }
+      if (hasGangkai()) {
+        output.writeBool(11, getGangkai());
+      }
+      if (hasGameOverMethod()) {
+        output.writeEnum(12, getGameOverMethod().getNumber());
       }
       if (hasEndTime()) {
-        output.writeString(9, getEndTime());
+        output.writeString(13, getEndTime());
       }
       if (hasCardNum()) {
-        output.writeInt32(10, getCardNum());
+        output.writeInt32(14, getCardNum());
+      }
+      if (hasMaxCount()) {
+        output.writeInt32(15, getMaxCount());
       }
       getUnknownFields().writeTo(output);
     }
@@ -838,41 +961,66 @@ public final class Entity {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, getRaceType());
       }
-      if (hasMaxCount()) {
+      if (hasRoundCount()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, getMaxCount());
-      }
-      if (hasGangScore()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, getGangScore());
-      }
-      if (hasZhuahu()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(4, getZhuahu());
-      }
-      if (hasEndCatchCount()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, getEndCatchCount());
-      }
-      if (hasCatchScore()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, getCatchScore());
-      }
-      if (hasGangkai()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(7, getGangkai());
+          .computeInt32Size(2, getRoundCount());
       }
       if (hasMinStartScore()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, getMinStartScore());
+          .computeInt32Size(3, getMinStartScore());
+      }
+      if (hasGangScore()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, getGangScore());
+      }
+      if (hasZhuahu()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, getZhuahu());
+      }
+      if (hasBaidaZhuaHu()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(6, getBaidaZhuaHu());
+      }
+      if (hasBaida4Win()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(7, getBaida4Win());
+      }
+      if (hasFlyCount()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, getFlyCount());
+      }
+      if (hasFlyScore()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(9, getFlyScore());
+      }
+      {
+        int dataSize = 0;
+        for (int element : getFlyValueList()) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(element);
+        }
+        size += dataSize;
+        size += 1 * getFlyValueList().size();
+      }
+      if (hasGangkai()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(11, getGangkai());
+      }
+      if (hasGameOverMethod()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(12, getGameOverMethod().getNumber());
       }
       if (hasEndTime()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(9, getEndTime());
+          .computeStringSize(13, getEndTime());
       }
       if (hasCardNum()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(10, getCardNum());
+          .computeInt32Size(14, getCardNum());
+      }
+      if (hasMaxCount()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(15, getMaxCount());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1016,6 +1164,10 @@ public final class Entity {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
         }
+        if (result.flyValue_ != java.util.Collections.EMPTY_LIST) {
+          result.flyValue_ =
+            java.util.Collections.unmodifiableList(result.flyValue_);
+        }
         com.randioo.mahjong_public_server.protocol.Entity.GameConfigData returnMe = result;
         result = null;
         return returnMe;
@@ -1035,8 +1187,11 @@ public final class Entity {
         if (other.hasRaceType()) {
           setRaceType(other.getRaceType());
         }
-        if (other.hasMaxCount()) {
-          setMaxCount(other.getMaxCount());
+        if (other.hasRoundCount()) {
+          setRoundCount(other.getRoundCount());
+        }
+        if (other.hasMinStartScore()) {
+          setMinStartScore(other.getMinStartScore());
         }
         if (other.hasGangScore()) {
           setGangScore(other.getGangScore());
@@ -1044,23 +1199,38 @@ public final class Entity {
         if (other.hasZhuahu()) {
           setZhuahu(other.getZhuahu());
         }
-        if (other.hasEndCatchCount()) {
-          setEndCatchCount(other.getEndCatchCount());
+        if (other.hasBaidaZhuaHu()) {
+          setBaidaZhuaHu(other.getBaidaZhuaHu());
         }
-        if (other.hasCatchScore()) {
-          setCatchScore(other.getCatchScore());
+        if (other.hasBaida4Win()) {
+          setBaida4Win(other.getBaida4Win());
+        }
+        if (other.hasFlyCount()) {
+          setFlyCount(other.getFlyCount());
+        }
+        if (other.hasFlyScore()) {
+          setFlyScore(other.getFlyScore());
+        }
+        if (!other.flyValue_.isEmpty()) {
+          if (result.flyValue_.isEmpty()) {
+            result.flyValue_ = new java.util.ArrayList<java.lang.Integer>();
+          }
+          result.flyValue_.addAll(other.flyValue_);
         }
         if (other.hasGangkai()) {
           setGangkai(other.getGangkai());
         }
-        if (other.hasMinStartScore()) {
-          setMinStartScore(other.getMinStartScore());
+        if (other.hasGameOverMethod()) {
+          setGameOverMethod(other.getGameOverMethod());
         }
         if (other.hasEndTime()) {
           setEndTime(other.getEndTime());
         }
         if (other.hasCardNum()) {
           setCardNum(other.getCardNum());
+        }
+        if (other.hasMaxCount()) {
+          setMaxCount(other.getMaxCount());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1092,39 +1262,74 @@ public final class Entity {
               break;
             }
             case 16: {
-              setMaxCount(input.readInt32());
+              setRoundCount(input.readInt32());
               break;
             }
             case 24: {
-              setGangScore(input.readInt32());
-              break;
-            }
-            case 32: {
-              setZhuahu(input.readBool());
-              break;
-            }
-            case 40: {
-              setEndCatchCount(input.readInt32());
-              break;
-            }
-            case 48: {
-              setCatchScore(input.readInt32());
-              break;
-            }
-            case 56: {
-              setGangkai(input.readBool());
-              break;
-            }
-            case 64: {
               setMinStartScore(input.readInt32());
               break;
             }
-            case 74: {
-              setEndTime(input.readString());
+            case 32: {
+              setGangScore(input.readInt32());
+              break;
+            }
+            case 40: {
+              setZhuahu(input.readBool());
+              break;
+            }
+            case 48: {
+              setBaidaZhuaHu(input.readBool());
+              break;
+            }
+            case 56: {
+              setBaida4Win(input.readBool());
+              break;
+            }
+            case 64: {
+              setFlyCount(input.readInt32());
+              break;
+            }
+            case 72: {
+              setFlyScore(input.readInt32());
               break;
             }
             case 80: {
+              addFlyValue(input.readInt32());
+              break;
+            }
+            case 82: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              while (input.getBytesUntilLimit() > 0) {
+                addFlyValue(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 88: {
+              setGangkai(input.readBool());
+              break;
+            }
+            case 96: {
+              int rawValue = input.readEnum();
+              com.randioo.mahjong_public_server.protocol.Entity.GameOverMethod value = com.randioo.mahjong_public_server.protocol.Entity.GameOverMethod.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(12, rawValue);
+              } else {
+                setGameOverMethod(value);
+              }
+              break;
+            }
+            case 106: {
+              setEndTime(input.readString());
+              break;
+            }
+            case 112: {
               setCardNum(input.readInt32());
+              break;
+            }
+            case 120: {
+              setMaxCount(input.readInt32());
               break;
             }
           }
@@ -1150,115 +1355,25 @@ public final class Entity {
         return this;
       }
       
-      // optional int32 maxCount = 2;
-      public boolean hasMaxCount() {
-        return result.hasMaxCount();
+      // optional int32 roundCount = 2;
+      public boolean hasRoundCount() {
+        return result.hasRoundCount();
       }
-      public int getMaxCount() {
-        return result.getMaxCount();
+      public int getRoundCount() {
+        return result.getRoundCount();
       }
-      public Builder setMaxCount(int value) {
-        result.hasMaxCount = true;
-        result.maxCount_ = value;
+      public Builder setRoundCount(int value) {
+        result.hasRoundCount = true;
+        result.roundCount_ = value;
         return this;
       }
-      public Builder clearMaxCount() {
-        result.hasMaxCount = false;
-        result.maxCount_ = 0;
-        return this;
-      }
-      
-      // optional int32 gangScore = 3;
-      public boolean hasGangScore() {
-        return result.hasGangScore();
-      }
-      public int getGangScore() {
-        return result.getGangScore();
-      }
-      public Builder setGangScore(int value) {
-        result.hasGangScore = true;
-        result.gangScore_ = value;
-        return this;
-      }
-      public Builder clearGangScore() {
-        result.hasGangScore = false;
-        result.gangScore_ = 0;
+      public Builder clearRoundCount() {
+        result.hasRoundCount = false;
+        result.roundCount_ = 0;
         return this;
       }
       
-      // optional bool zhuahu = 4;
-      public boolean hasZhuahu() {
-        return result.hasZhuahu();
-      }
-      public boolean getZhuahu() {
-        return result.getZhuahu();
-      }
-      public Builder setZhuahu(boolean value) {
-        result.hasZhuahu = true;
-        result.zhuahu_ = value;
-        return this;
-      }
-      public Builder clearZhuahu() {
-        result.hasZhuahu = false;
-        result.zhuahu_ = false;
-        return this;
-      }
-      
-      // optional int32 endCatchCount = 5;
-      public boolean hasEndCatchCount() {
-        return result.hasEndCatchCount();
-      }
-      public int getEndCatchCount() {
-        return result.getEndCatchCount();
-      }
-      public Builder setEndCatchCount(int value) {
-        result.hasEndCatchCount = true;
-        result.endCatchCount_ = value;
-        return this;
-      }
-      public Builder clearEndCatchCount() {
-        result.hasEndCatchCount = false;
-        result.endCatchCount_ = 0;
-        return this;
-      }
-      
-      // optional int32 catchScore = 6;
-      public boolean hasCatchScore() {
-        return result.hasCatchScore();
-      }
-      public int getCatchScore() {
-        return result.getCatchScore();
-      }
-      public Builder setCatchScore(int value) {
-        result.hasCatchScore = true;
-        result.catchScore_ = value;
-        return this;
-      }
-      public Builder clearCatchScore() {
-        result.hasCatchScore = false;
-        result.catchScore_ = 0;
-        return this;
-      }
-      
-      // optional bool gangkai = 7;
-      public boolean hasGangkai() {
-        return result.hasGangkai();
-      }
-      public boolean getGangkai() {
-        return result.getGangkai();
-      }
-      public Builder setGangkai(boolean value) {
-        result.hasGangkai = true;
-        result.gangkai_ = value;
-        return this;
-      }
-      public Builder clearGangkai() {
-        result.hasGangkai = false;
-        result.gangkai_ = false;
-        return this;
-      }
-      
-      // optional int32 minStartScore = 8;
+      // optional int32 minStartScore = 3;
       public boolean hasMinStartScore() {
         return result.hasMinStartScore();
       }
@@ -1276,7 +1391,188 @@ public final class Entity {
         return this;
       }
       
-      // optional string endTime = 9;
+      // optional int32 gangScore = 4;
+      public boolean hasGangScore() {
+        return result.hasGangScore();
+      }
+      public int getGangScore() {
+        return result.getGangScore();
+      }
+      public Builder setGangScore(int value) {
+        result.hasGangScore = true;
+        result.gangScore_ = value;
+        return this;
+      }
+      public Builder clearGangScore() {
+        result.hasGangScore = false;
+        result.gangScore_ = 0;
+        return this;
+      }
+      
+      // optional bool zhuahu = 5;
+      public boolean hasZhuahu() {
+        return result.hasZhuahu();
+      }
+      public boolean getZhuahu() {
+        return result.getZhuahu();
+      }
+      public Builder setZhuahu(boolean value) {
+        result.hasZhuahu = true;
+        result.zhuahu_ = value;
+        return this;
+      }
+      public Builder clearZhuahu() {
+        result.hasZhuahu = false;
+        result.zhuahu_ = false;
+        return this;
+      }
+      
+      // optional bool baidaZhuaHu = 6;
+      public boolean hasBaidaZhuaHu() {
+        return result.hasBaidaZhuaHu();
+      }
+      public boolean getBaidaZhuaHu() {
+        return result.getBaidaZhuaHu();
+      }
+      public Builder setBaidaZhuaHu(boolean value) {
+        result.hasBaidaZhuaHu = true;
+        result.baidaZhuaHu_ = value;
+        return this;
+      }
+      public Builder clearBaidaZhuaHu() {
+        result.hasBaidaZhuaHu = false;
+        result.baidaZhuaHu_ = false;
+        return this;
+      }
+      
+      // optional bool baida4win = 7;
+      public boolean hasBaida4Win() {
+        return result.hasBaida4Win();
+      }
+      public boolean getBaida4Win() {
+        return result.getBaida4Win();
+      }
+      public Builder setBaida4Win(boolean value) {
+        result.hasBaida4Win = true;
+        result.baida4Win_ = value;
+        return this;
+      }
+      public Builder clearBaida4Win() {
+        result.hasBaida4Win = false;
+        result.baida4Win_ = false;
+        return this;
+      }
+      
+      // optional int32 flyCount = 8;
+      public boolean hasFlyCount() {
+        return result.hasFlyCount();
+      }
+      public int getFlyCount() {
+        return result.getFlyCount();
+      }
+      public Builder setFlyCount(int value) {
+        result.hasFlyCount = true;
+        result.flyCount_ = value;
+        return this;
+      }
+      public Builder clearFlyCount() {
+        result.hasFlyCount = false;
+        result.flyCount_ = 0;
+        return this;
+      }
+      
+      // optional int32 flyScore = 9;
+      public boolean hasFlyScore() {
+        return result.hasFlyScore();
+      }
+      public int getFlyScore() {
+        return result.getFlyScore();
+      }
+      public Builder setFlyScore(int value) {
+        result.hasFlyScore = true;
+        result.flyScore_ = value;
+        return this;
+      }
+      public Builder clearFlyScore() {
+        result.hasFlyScore = false;
+        result.flyScore_ = 0;
+        return this;
+      }
+      
+      // repeated int32 flyValue = 10;
+      public java.util.List<java.lang.Integer> getFlyValueList() {
+        return java.util.Collections.unmodifiableList(result.flyValue_);
+      }
+      public int getFlyValueCount() {
+        return result.getFlyValueCount();
+      }
+      public int getFlyValue(int index) {
+        return result.getFlyValue(index);
+      }
+      public Builder setFlyValue(int index, int value) {
+        result.flyValue_.set(index, value);
+        return this;
+      }
+      public Builder addFlyValue(int value) {
+        if (result.flyValue_.isEmpty()) {
+          result.flyValue_ = new java.util.ArrayList<java.lang.Integer>();
+        }
+        result.flyValue_.add(value);
+        return this;
+      }
+      public Builder addAllFlyValue(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        if (result.flyValue_.isEmpty()) {
+          result.flyValue_ = new java.util.ArrayList<java.lang.Integer>();
+        }
+        super.addAll(values, result.flyValue_);
+        return this;
+      }
+      public Builder clearFlyValue() {
+        result.flyValue_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // optional bool gangkai = 11;
+      public boolean hasGangkai() {
+        return result.hasGangkai();
+      }
+      public boolean getGangkai() {
+        return result.getGangkai();
+      }
+      public Builder setGangkai(boolean value) {
+        result.hasGangkai = true;
+        result.gangkai_ = value;
+        return this;
+      }
+      public Builder clearGangkai() {
+        result.hasGangkai = false;
+        result.gangkai_ = false;
+        return this;
+      }
+      
+      // optional .com.randioo.mahjong_public_server.protocol.GameOverMethod gameOverMethod = 12 [default = GAME_OVER_ROUND];
+      public boolean hasGameOverMethod() {
+        return result.hasGameOverMethod();
+      }
+      public com.randioo.mahjong_public_server.protocol.Entity.GameOverMethod getGameOverMethod() {
+        return result.getGameOverMethod();
+      }
+      public Builder setGameOverMethod(com.randioo.mahjong_public_server.protocol.Entity.GameOverMethod value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.hasGameOverMethod = true;
+        result.gameOverMethod_ = value;
+        return this;
+      }
+      public Builder clearGameOverMethod() {
+        result.hasGameOverMethod = false;
+        result.gameOverMethod_ = com.randioo.mahjong_public_server.protocol.Entity.GameOverMethod.GAME_OVER_ROUND;
+        return this;
+      }
+      
+      // optional string endTime = 13;
       public boolean hasEndTime() {
         return result.hasEndTime();
       }
@@ -1297,7 +1593,7 @@ public final class Entity {
         return this;
       }
       
-      // optional int32 cardNum = 10;
+      // optional int32 cardNum = 14;
       public boolean hasCardNum() {
         return result.hasCardNum();
       }
@@ -1312,6 +1608,24 @@ public final class Entity {
       public Builder clearCardNum() {
         result.hasCardNum = false;
         result.cardNum_ = 0;
+        return this;
+      }
+      
+      // optional int32 maxCount = 15 [default = 4];
+      public boolean hasMaxCount() {
+        return result.hasMaxCount();
+      }
+      public int getMaxCount() {
+        return result.getMaxCount();
+      }
+      public Builder setMaxCount(int value) {
+        result.hasMaxCount = true;
+        result.maxCount_ = value;
+        return this;
+      }
+      public Builder clearMaxCount() {
+        result.hasMaxCount = false;
+        result.maxCount_ = 4;
         return this;
       }
       
@@ -6445,58 +6759,64 @@ public final class Entity {
       "\n\014Entity.proto\022*com.randioo.mahjong_publ" +
       "ic_server.protocol\"F\n\010RoleData\022\016\n\006roleId" +
       "\030\001 \001(\005\022\016\n\006gameId\030\002 \001(\005\022\r\n\005point\030\003 \001(\005\022\013\n" +
-      "\003sex\030\004 \001(\005\"\314\001\n\016GameConfigData\022\020\n\010raceTyp" +
-      "e\030\001 \001(\005\022\020\n\010maxCount\030\002 \001(\005\022\021\n\tgangScore\030\003" +
-      " \001(\005\022\016\n\006zhuahu\030\004 \001(\010\022\025\n\rendCatchCount\030\005 " +
-      "\001(\005\022\022\n\ncatchScore\030\006 \001(\005\022\017\n\007gangkai\030\007 \001(\010" +
-      "\022\025\n\rminStartScore\030\010 \001(\005\022\017\n\007endTime\030\t \001(\t" +
-      "\022\017\n\007cardNum\030\n \001(\005\"#\n\006PaiNum\022\014\n\004seat\030\001 \001(" +
-      "\005\022\013\n\003num\030\003 \001(\005\"#\n\006Record\022\014\n\004seat\030\001 \001(\005\022\013",
-      "\n\003pai\030\002 \003(\005\"\214\001\n\014GameRoleData\022\022\n\ngameRole" +
-      "Id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\014\n\004seat\030\003 \001(\005\022\r\n\005" +
-      "ready\030\004 \001(\010\022\022\n\nheadImgUrl\030\005 \001(\t\022\r\n\005money" +
-      "\030\006 \001(\005\022\r\n\005point\030\007 \001(\005\022\013\n\003sex\030\010 \001(\005\"r\n\020Ca" +
-      "llCardListData\022\016\n\006callId\030\001 \001(\005\022N\n\014cardLi" +
-      "stData\030\002 \001(\01328.com.randioo.mahjong_publi" +
-      "c_server.protocol.CardListData\"\224\001\n\014CardL" +
-      "istData\022N\n\014cardListType\030\001 \001(\01628.com.rand" +
-      "ioo.mahjong_public_server.protocol.CardL" +
-      "istType\022\014\n\004card\030\002 \001(\005\022\022\n\ntargetSeat\030\003 \001(",
-      "\005\022\022\n\ntargetCard\030\004 \001(\005\"h\n\nCallHuData\022\016\n\006c" +
-      "allId\030\001 \001(\005\022J\n\006huData\030\002 \001(\0132:.com.randio" +
-      "o.mahjong_public_server.protocol.RoundCa" +
-      "rdsData\"\320\002\n\025RoleRoundOverInfoData\022N\n\014gam" +
-      "eRoleData\030\001 \001(\01328.com.randioo.mahjong_pu" +
-      "blic_server.protocol.GameRoleData\022R\n\016rou" +
-      "ndCardsData\030\002 \001(\0132:.com.randioo.mahjong_" +
-      "public_server.protocol.RoundCardsData\022\020\n" +
-      "\010minScore\030\003 \001(\005\022\017\n\007gangKai\030\004 \001(\010\022\020\n\010flyC" +
-      "ards\030\005 \003(\005\022J\n\noverMethod\030\006 \001(\01626.com.ran",
-      "dioo.mahjong_public_server.protocol.Over" +
-      "Method\022\022\n\nroundScore\030\007 \001(\005\"\312\001\n\024RoleGameO" +
-      "verInfoData\022N\n\014gameRoleData\030\001 \001(\01328.com." +
-      "randioo.mahjong_public_server.protocol.G" +
-      "ameRoleData\022\017\n\007huCount\030\002 \001(\005\022\021\n\tmoHuCoun" +
-      "t\030\003 \001(\005\022\023\n\013zhuaHuCount\030\004 \001(\005\022\026\n\016dianChon" +
-      "gCount\030\005 \001(\005\022\021\n\tgameScore\030\006 \001(\005\"\252\001\n\016Roun" +
-      "dCardsData\022\016\n\006huCard\030\001 \001(\005\022\021\n\thandCards\030" +
-      "\002 \003(\005\022\021\n\ttouchCard\030\003 \001(\005\022\022\n\ntargetSeat\030\004" +
-      " \001(\005\022N\n\014cardListData\030\005 \003(\01328.com.randioo",
-      ".mahjong_public_server.protocol.CardList" +
-      "Data\"\033\n\014RecommandPai\022\013\n\003pai\030\001 \003(\005\"j\n\010Gam" +
-      "eData\022\016\n\006gameId\030\001 \001(\005\022N\n\014gameRoleData\030\002 " +
-      "\003(\01328.com.randioo.mahjong_public_server." +
-      "protocol.GameRoleData\"+\n\014AudienceData\022\014\n" +
-      "\004name\030\001 \001(\t\022\r\n\005score\030\002 \001(\005*5\n\010GameType\022\023" +
-      "\n\017GAME_TYPE_MATCH\020\001\022\024\n\020GAME_TYPE_FRIEND\020" +
-      "\002*M\n\tGameState\022\026\n\022GAME_STATE_PREPARE\020\001\022\024" +
-      "\n\020GAME_START_START\020\002\022\022\n\016GAME_START_END\020\003" +
-      "*\231\001\n\014CardListType\022\026\n\022CARD_LIST_TYPE_CHI\020",
-      "\001\022\027\n\023CARD_LIST_TYPE_PENG\020\002\022\035\n\031CARD_LIST_" +
-      "TYPE_GANG_LIGHT\020\003\022\034\n\030CARD_LIST_TYPE_GANG" +
-      "_DARK\020\004\022\033\n\027CARD_LIST_TYPE_GANG_ADD\020\005*H\n\n" +
-      "OverMethod\022\r\n\tOVER_LOSS\020\000\022\016\n\nOVER_CHONG\020" +
-      "\001\022\016\n\nOVER_MO_HU\020\002\022\013\n\007OVER_HU\020\003"
+      "\003sex\030\004 \001(\005\"\373\002\n\016GameConfigData\022\020\n\010raceTyp" +
+      "e\030\001 \001(\005\022\022\n\nroundCount\030\002 \001(\005\022\025\n\rminStartS" +
+      "core\030\003 \001(\005\022\021\n\tgangScore\030\004 \001(\005\022\016\n\006zhuahu\030" +
+      "\005 \001(\010\022\023\n\013baidaZhuaHu\030\006 \001(\010\022\021\n\tbaida4win\030" +
+      "\007 \001(\010\022\020\n\010flyCount\030\010 \001(\005\022\020\n\010flyScore\030\t \001(" +
+      "\005\022\020\n\010flyValue\030\n \003(\005\022\017\n\007gangkai\030\013 \001(\010\022c\n\016" +
+      "gameOverMethod\030\014 \001(\0162:.com.randioo.mahjo",
+      "ng_public_server.protocol.GameOverMethod" +
+      ":\017GAME_OVER_ROUND\022\017\n\007endTime\030\r \001(\t\022\017\n\007ca" +
+      "rdNum\030\016 \001(\005\022\023\n\010maxCount\030\017 \001(\005:\0014\"#\n\006PaiN" +
+      "um\022\014\n\004seat\030\001 \001(\005\022\013\n\003num\030\003 \001(\005\"#\n\006Record\022" +
+      "\014\n\004seat\030\001 \001(\005\022\013\n\003pai\030\002 \003(\005\"\214\001\n\014GameRoleD" +
+      "ata\022\022\n\ngameRoleId\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\014\n" +
+      "\004seat\030\003 \001(\005\022\r\n\005ready\030\004 \001(\010\022\022\n\nheadImgUrl" +
+      "\030\005 \001(\t\022\r\n\005money\030\006 \001(\005\022\r\n\005point\030\007 \001(\005\022\013\n\003" +
+      "sex\030\010 \001(\005\"r\n\020CallCardListData\022\016\n\006callId\030" +
+      "\001 \001(\005\022N\n\014cardListData\030\002 \001(\01328.com.randio",
+      "o.mahjong_public_server.protocol.CardLis" +
+      "tData\"\224\001\n\014CardListData\022N\n\014cardListType\030\001" +
+      " \001(\01628.com.randioo.mahjong_public_server" +
+      ".protocol.CardListType\022\014\n\004card\030\002 \001(\005\022\022\n\n" +
+      "targetSeat\030\003 \001(\005\022\022\n\ntargetCard\030\004 \001(\005\"h\n\n" +
+      "CallHuData\022\016\n\006callId\030\001 \001(\005\022J\n\006huData\030\002 \001" +
+      "(\0132:.com.randioo.mahjong_public_server.p" +
+      "rotocol.RoundCardsData\"\320\002\n\025RoleRoundOver" +
+      "InfoData\022N\n\014gameRoleData\030\001 \001(\01328.com.ran" +
+      "dioo.mahjong_public_server.protocol.Game",
+      "RoleData\022R\n\016roundCardsData\030\002 \001(\0132:.com.r" +
+      "andioo.mahjong_public_server.protocol.Ro" +
+      "undCardsData\022\020\n\010minScore\030\003 \001(\005\022\017\n\007gangKa" +
+      "i\030\004 \001(\010\022\020\n\010flyCards\030\005 \003(\005\022J\n\noverMethod\030" +
+      "\006 \001(\01626.com.randioo.mahjong_public_serve" +
+      "r.protocol.OverMethod\022\022\n\nroundScore\030\007 \001(" +
+      "\005\"\312\001\n\024RoleGameOverInfoData\022N\n\014gameRoleDa" +
+      "ta\030\001 \001(\01328.com.randioo.mahjong_public_se" +
+      "rver.protocol.GameRoleData\022\017\n\007huCount\030\002 " +
+      "\001(\005\022\021\n\tmoHuCount\030\003 \001(\005\022\023\n\013zhuaHuCount\030\004 ",
+      "\001(\005\022\026\n\016dianChongCount\030\005 \001(\005\022\021\n\tgameScore" +
+      "\030\006 \001(\005\"\252\001\n\016RoundCardsData\022\016\n\006huCard\030\001 \001(" +
+      "\005\022\021\n\thandCards\030\002 \003(\005\022\021\n\ttouchCard\030\003 \001(\005\022" +
+      "\022\n\ntargetSeat\030\004 \001(\005\022N\n\014cardListData\030\005 \003(" +
+      "\01328.com.randioo.mahjong_public_server.pr" +
+      "otocol.CardListData\"\033\n\014RecommandPai\022\013\n\003p" +
+      "ai\030\001 \003(\005\"j\n\010GameData\022\016\n\006gameId\030\001 \001(\005\022N\n\014" +
+      "gameRoleData\030\002 \003(\01328.com.randioo.mahjong" +
+      "_public_server.protocol.GameRoleData\"+\n\014" +
+      "AudienceData\022\014\n\004name\030\001 \001(\t\022\r\n\005score\030\002 \001(",
+      "\005*9\n\016GameOverMethod\022\022\n\016GAME_OVER_TIME\020\001\022" +
+      "\023\n\017GAME_OVER_ROUND\020\002*5\n\010GameType\022\023\n\017GAME" +
+      "_TYPE_MATCH\020\001\022\024\n\020GAME_TYPE_FRIEND\020\002*M\n\tG" +
+      "ameState\022\026\n\022GAME_STATE_PREPARE\020\001\022\024\n\020GAME" +
+      "_START_START\020\002\022\022\n\016GAME_START_END\020\003*\231\001\n\014C" +
+      "ardListType\022\026\n\022CARD_LIST_TYPE_CHI\020\001\022\027\n\023C" +
+      "ARD_LIST_TYPE_PENG\020\002\022\035\n\031CARD_LIST_TYPE_G" +
+      "ANG_LIGHT\020\003\022\034\n\030CARD_LIST_TYPE_GANG_DARK\020" +
+      "\004\022\033\n\027CARD_LIST_TYPE_GANG_ADD\020\005*H\n\nOverMe" +
+      "thod\022\r\n\tOVER_LOSS\020\000\022\016\n\nOVER_CHONG\020\001\022\016\n\nO",
+      "VER_MO_HU\020\002\022\013\n\007OVER_HU\020\003"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6516,7 +6836,7 @@ public final class Entity {
           internal_static_com_randioo_mahjong_public_server_protocol_GameConfigData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_randioo_mahjong_public_server_protocol_GameConfigData_descriptor,
-              new java.lang.String[] { "RaceType", "MaxCount", "GangScore", "Zhuahu", "EndCatchCount", "CatchScore", "Gangkai", "MinStartScore", "EndTime", "CardNum", },
+              new java.lang.String[] { "RaceType", "RoundCount", "MinStartScore", "GangScore", "Zhuahu", "BaidaZhuaHu", "Baida4Win", "FlyCount", "FlyScore", "FlyValue", "Gangkai", "GameOverMethod", "EndTime", "CardNum", "MaxCount", },
               com.randioo.mahjong_public_server.protocol.Entity.GameConfigData.class,
               com.randioo.mahjong_public_server.protocol.Entity.GameConfigData.Builder.class);
           internal_static_com_randioo_mahjong_public_server_protocol_PaiNum_descriptor =

@@ -8,10 +8,11 @@ import java.util.Map;
 
 import com.randioo.mahjong_public_server.entity.po.CallCardList;
 import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
-import com.randioo.mahjong_public_server.entity.po.RoleGameResult;
+import com.randioo.mahjong_public_server.entity.po.GameOverResult;
 import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
 import com.randioo.mahjong_public_server.protocol.Entity.GameState;
 import com.randioo.mahjong_public_server.protocol.Entity.GameType;
+import com.randioo.mahjong_public_server.util.key.Key;
 
 public class Game {
 	private int gameId;
@@ -20,7 +21,7 @@ public class Game {
 	// 房主id
 	private int masterRoleId;
 	// 房间锁
-	private String lockString;
+	private Key lockKey;
 	// 游戏开始
 	private GameState gameState;
 	// 游戏类型
@@ -54,7 +55,7 @@ public class Game {
 	// 出牌放在桌上的表
 	private Map<Integer, List<Integer>> sendDesktopCardMap = new HashMap<>();
 	// 玩家结果统计
-	private Map<String, RoleGameResult> roleGameOverResultMap = new HashMap<>();
+	private Map<String, GameOverResult> statisticResultMap = new HashMap<>();
 
 	public int getOnlineRoleCount() {
 		return onlineRoleCount;
@@ -84,12 +85,12 @@ public class Game {
 		this.masterRoleId = masterRoleId;
 	}
 
-	public String getLockString() {
-		return lockString;
+	public Key getLockKey() {
+		return lockKey;
 	}
 
-	public void setLockString(String lockString) {
-		this.lockString = lockString;
+	public void setLockKey(Key lockKey) {
+		this.lockKey = lockKey;
 	}
 
 	public GameType getGameType() {
@@ -199,8 +200,8 @@ public class Game {
 		return huCallCardLists;
 	}
 
-	public Map<String, RoleGameResult> getRoleGameOverResultMap() {
-		return roleGameOverResultMap;
+	public Map<String, GameOverResult> getStatisticResultMap() {
+		return statisticResultMap;
 	}
 
 	@Override

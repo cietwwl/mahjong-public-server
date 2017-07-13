@@ -96,7 +96,7 @@ public class GmServiceImpl extends ObserveBaseService implements GmService {
 
 		// 命令关闭信号
 		try {
-			System.out.println(Platform.getOS());
+			loggerinfo(Platform.getOS().toString());
 			if (Platform.getOS() == OS.WIN)
 				SignalTrigger.setSignCallback("INT", function);
 			else if (Platform.getOS() == OS.LINUX)

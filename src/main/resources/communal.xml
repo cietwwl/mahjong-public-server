@@ -67,4 +67,7 @@
 
 	<!-- 匹配模块 -->
 	<bean id="matchModelService" class="com.randioo.randioo_server_base.module.match.MatchModelServiceImpl"></bean>
+
+	<!-- 钥匙库 -->
+	<bean id="keyStore" class="com.randioo.mahjong_public_server.util.key.KeyStore"></bean>
 </beans>

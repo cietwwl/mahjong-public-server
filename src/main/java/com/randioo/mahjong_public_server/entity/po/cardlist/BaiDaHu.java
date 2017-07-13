@@ -3,124 +3,124 @@ package com.randioo.mahjong_public_server.entity.po.cardlist;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import com.randioo.mahjong_public_server.entity.po.CardSort;
 import com.randioo.mahjong_public_server.util.Lists;
 
 public class BaiDaHu extends Hu {
 
-	@Override
-	public void check(List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList, boolean isMine) {
-		List<Integer> baidaCards = new ArrayList<>();
-		baidaCards.add(81);
+	public boolean checkBaiDa(CardSort cardSort) {
+		// TODO 从配置加载 有四个红中时是否直接胡
+		boolean config = true;
+		CardSort cardSort1 = cardSort.clone();
 
-		CardSort copySort = cardSort.clone();
+		int baiDaCount = cardSort1.count(801); // 红中个数
+		if (config) {
+			if (baiDaCount == 4)
+				return true;
+		}
+		// 移除红中
+		cardSort1.removeAll(801);
 
-		// 去除所有白搭，并进行存储
-		List<Integer> tempBaiDaCards = new ArrayList<>();
+		System.out.println("移除红中后");
+		System.out.println(cardSort1);
 
-		List<Set<Integer>> list = copySort.getList();
-
-		boolean containsBaiDa;// 是否包含百搭
-		do {
-			containsBaiDa = false;
-			Set<Integer> cards = list.get(0);
-			// 遍历所有百搭牌
-			for (int baidaCard : baidaCards) {
-				if (cards.contains(baidaCard)) {
-					tempBaiDaCards.add(baidaCard);
-					cards.add(baidaCard);
-					containsBaiDa = true;
-				}
-			}
-		} while (containsBaiDa);
-
-		// 取三
-		CardSort copySort2 = copySort.clone();
+		// 挑3
+		CardSort copySort2 = cardSort1.clone();
 		List<CardList> tempCardList2 = new ArrayList<>();
 
-		this.removePeng(copySort2, tempCardList2);
-		this.removeChi(copySort2, tempCardList2);
+		removePeng(copySort2, tempCardList2);
+		removeChi(copySort2, tempCardList2);
 
-		CardSort copySort3 = copySort.clone();
+		CardSort copySort3 = cardSort1.clone();
 		List<CardList> tempCardList3 = new ArrayList<>();
 
-		this.removeChi(copySort3, tempCardList3);
-		this.removePeng(copySort3, tempCardList3);
+		removeChi(copySort3, tempCardList3);
+		removePeng(copySort3, tempCardList3);
 
-	}
+		CardSort tempCardSort = copySort2.sumCard() <= copySort3.sumCard() ? copySort2 : copySort3;
 
-	private boolean ChiPeng(List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList,
-			boolean isMine) {
-		CardSort copySort3 = cardSort.clone();
-		List<CardList> tempCardList3 = new ArrayList<>();
-		this.removeChi(copySort3, tempCardList3);
-		this.removePeng(copySort3, tempCardList3);
+		System.out.println("挑3后");
+		System.out.println("2    " + copySort2);
+		System.out.println("3    " + copySort3);
+		// 计算需要百搭的个数
 
-		Set<Integer> set0 = copySort3.get(0);
-		if (set0.size() == 0) {
-			this.extractedHu(cardLists, cardSort, card, showCardList, isMine);
+		// 二连 个数
+		int lianCount = 0;
 
-			return true;
+		for (Set<Integer> set : tempCardSort.getList()) {
+			List<Integer> list = new ArrayList<>(set);
+			for (int i = 0; i < list.size() - 1; i++) {
+				if (list.get(i) + 1 == list.get(i + 1)) {
+					lianCount++;
+
+					// 删除一组 二连
+					set.remove(list.get(i));
+					set.remove(list.get(i) + 1);
+				}
+			}
 		}
+		System.out.println("移除二连后");
+		System.out.println(tempCardSort);
 
-		return false;
+		// 纯对 个数
+		int duiCount = 0;
+
+		List<Integer> list1 = new ArrayList<>();
+		list1.addAll(tempCardSort.get(0)); // 第一行set
+		List<Integer> list2 = new ArrayList<>();
+		list2.addAll(tempCardSort.get(1)); // 第二行set
+
+		for (Integer v : list1) {
+			if (list2.contains(v)) {
+				duiCount++;
+				// 删除对数
+				tempCardSort.removeAll(v);
+			}
+		}
+		System.out.println("移除纯对后");
+		System.out.println(tempCardSort);
+
+		// 单数个数
+		int danCount = tempCardSort.sumCard();
+
+		int needBaiDa = lianCount + duiCount > 0 ? danCount * 2 + duiCount - 1 : danCount * 2 - 1;
+
+		return baiDaCount >= needBaiDa ? true : false;
 	}
 
-	private void extractedHu(List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList,
+	@Override
+	public void check(List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList,
 			boolean isMine) {
-		List<Integer> list = cardSort.toArray();
+		List<Integer> baidaCards = new ArrayList<>();
+		baidaCards.add(801);
 
-		BaiDaHu hu = new BaiDaHu();
-		hu.card = card;
-		hu.isMine = isMine;
-		Lists.removeElementByList(list, Arrays.asList(card));
-		Collections.sort(list);
-		hu.handCards.addAll(list);
-		hu.showCardList.addAll(showCardList);
-		cardLists.add(hu);
-	}
+		this.checkBaiDa(cardSort);
 
-	private boolean PengChi(List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList,
-			boolean isMine) {
-		CardSort copySort3 = cardSort.clone();
-		List<CardList> tempCardList3 = new ArrayList<>();
-		this.removePeng(copySort3, tempCardList3);
-		this.removeChi(copySort3, tempCardList3);
-
-		Set<Integer> set0 = copySort3.get(0);
-		if (set0.size() == 0)
-			return true;
-		return false;
 	}
 
 	private void removeChi(CardSort copySort2, List<CardList> tempCardList) {
 		Set<Integer> set = copySort2.get(0);
-		boolean containsChi = false;
-		do {
-			containsChi = false;
 
-			List<Integer> values = new ArrayList<>(set);
-			if (values.size() == 0) {
-				break;
-			}
-			int card1 = values.get(0);
+		List<Integer> values = new ArrayList<>(set);
+		for (int i = 0; i < values.size(); i++) {
+
+			int card1 = values.get(i);
 			int card2 = card1 + 1;
 			int card3 = card2 + 1;
-
 			if (set.contains(card2) && set.contains(card3)) {
 				Chi chi = new Chi();
 				chi.card = card1;
-				containsChi = true;
 
 				tempCardList.add(chi);
+				copySort2.remove(card1, card2, card3);
+				i += 1; // 如果满足，直接跳过2个数
 			}
-
-			copySort2.remove(card1, card2, card3);
-
-		} while (containsChi);
+		}
 	}
 
 	private void removePeng(CardSort copySort2, List<CardList> tempCardList) {
@@ -139,74 +139,48 @@ public class BaiDaHu extends Hu {
 	}
 
 	@Override
-	public List<Integer> getCards() {
-		return null;
-	}
-
-	/**
-	 * 移除百搭牌
-	 * 
-	 * @param baidaCards
-	 * @param copySort
-	 * @param tempBaiDaCards
-	 * @author wcy 2017年7月10日
-	 */
-	private void removeBaida(List<Integer> baidaCards, CardSort copySort, List<Integer> tempBaiDaCards) {
-		boolean containsBaiDa;// 是否包含百搭
-		do {
-			containsBaiDa = false;
-			Set<Integer> cards = copySort.get(0);
-			// 遍历所有百搭牌
-			for (int baidaCard : baidaCards) {
-				if (cards.contains(baidaCard)) {
-					tempBaiDaCards.add(baidaCard);
-					cards.add(baidaCard);
-					containsBaiDa = true;
-				}
-			}
-		} while (containsBaiDa);
-	}
-
-	@Override
 	public void checkTing(CardSort cardSort, List<Integer> waitCards) {
-		List<Integer> baidaCards = new ArrayList<>();
-		baidaCards.add(81);
+		List<Integer> tryCards = new ArrayList<>();
+		int start = 100;
+		// 把所有牌加入 tryCards
+		for (int i = 1; i <= 9; i++) {
+			tryCards.add(start + i);
+			for (int j = 2; j <= 3; j++)
+				tryCards.add(start * j + i);
+		}
+		tryCards.add(801); // 加入红中
 
-		CardSort copySort = cardSort.clone();
-
-		// 去除所有白搭，并进行存储
-		List<Integer> tempBaiDaCards = new ArrayList<>();
-		this.removeBaida(baidaCards, copySort, tempBaiDaCards);
-
-		// 取三
-		CardSort copySort2 = copySort.clone();
-		List<CardList> tempCardList2 = new ArrayList<>();
-
-		this.removePeng(copySort2, tempCardList2);
-		this.removeChi(copySort2, tempCardList2);
-
-		Set<Integer> two = copySort2.get(1);
-
-		// 如果有将，分别拿除，并加入剩余的红中
-		if (copySort2.get(1).size() > 0) {
-			for (int card : two) {
-				CardSort copySort3 = copySort2.clone();
-				// 取出该将牌
-				copySort3.remove(card, card);
-
-			}
-
-		} else {
-			List<? extends CardList> list = get();
-			CardList cardList = list.get(1);
-			
-			
+		for (Integer i : tryCards) {
+			cardSort.addCard(i);
+			if (this.checkBaiDa(cardSort))
+				waitCards.add(i);
 		}
 
 	}
-	
-	private List<? extends CardList> get(){
-		return new ArrayList<Chi>();
+
+	public static void main(String[] args) {
+		// List<Integer> list1 = Arrays.asList(104, 104, 105, 106);
+		// List<Integer> list2 = Arrays.asList(102, 103, 104, 801);
+		// List<Integer> list2 = Arrays.asList(202, 206, 104, 801);
+		// List<Integer> list3 = Arrays.asList(104, 204, 205, 206);
+		// List<Integer> list4 = Arrays.asList(302, 303);
+		//
+		// CardSort cardSort = new CardSort(4);
+		//
+		// cardSort.fillCardSort(list1);
+		// cardSort.fillCardSort(list2);
+		// cardSort.fillCardSort(list3);
+		// cardSort.fillCardSort(list4);
+		// System.out.println(cardSort);
+		Hu hu = new BaiDaHu();
+		hu.checkTing(null, null);
+
+	}
+
+	@Override
+	public List<Integer> getCards() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

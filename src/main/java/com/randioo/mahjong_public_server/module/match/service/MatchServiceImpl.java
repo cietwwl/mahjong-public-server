@@ -32,7 +32,9 @@ import com.randioo.mahjong_public_server.protocol.Match.MatchJoinGameResponse;
 import com.randioo.mahjong_public_server.protocol.Match.SCMatchJoinGame;
 import com.randioo.mahjong_public_server.protocol.Match.SCMatchMineInfo;
 import com.randioo.mahjong_public_server.protocol.ServerMessage.SC;
-import com.randioo.randioo_platform_sdk.RandiooPlatformSdk;
+import com.randioo.mahjong_public_server.util.key.Key;
+import com.randioo.mahjong_public_server.util.key.KeyStore;
+import com.randioo.mahjong_public_server.util.key.RoomKey;
 import com.randioo.randioo_server_base.cache.RoleCache;
 import com.randioo.randioo_server_base.db.IdClassCreator;
 import com.randioo.randioo_server_base.lock.CacheLockUtil;
@@ -58,8 +60,18 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 	@Autowired
 	private RoleDao roleDao;
 
-	private RandiooPlatformSdk randiooPlatformSdk = new RandiooPlatformSdk() ;
-	
+	@Autowired
+	private KeyStore keyStore;
+
+	@Override
+	public void init() {
+		for (int i = 100000; i < 888888; i++) {
+			Key key = new RoomKey();
+			key.setValue(i);
+			keyStore.putKey(key);
+		}
+	}
+
 	@Override
 	public void initService() {
 		matchModelService.setMatchHandler(new MatchHandler() {
@@ -119,20 +131,24 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 							MatchCreateGameResponse.newBuilder().setErrorCode(ErrorCode.CREATE_FAILED.getNumber()))
 					.build();
 		}
-//		try {
-//			if(randiooPlatformSdk.getAccountInfo(role.getAccount()).randiooMoney>=gameConfigData.getCardNum()*20){
-//				return SC
-//						.newBuilder()
-//						.setMatchCreateGameResponse(
-//								MatchCreateGameResponse.newBuilder().setErrorCode(ErrorCode.NOT_RANDIOOMONEY_ENOUGH.getNumber()))
-//						.build();
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		//没设置 raceType ,gangScore
-		gameConfigData.toBuilder().setMaxCount(4).setEndTime(TimeUtils.getTimeStr(new Date().getTime() +MatchConstant.hours*60*60*1000));
-		Game game = this.createGame(role.getRoleId(), gameConfigData);
+		// try {
+		// if(randiooPlatformSdk.getAccountInfo(role.getAccount()).randiooMoney>=gameConfigData.getCardNum()*20){
+		// return SC
+		// .newBuilder()
+		// .setMatchCreateGameResponse(
+		// MatchCreateGameResponse.newBuilder().setErrorCode(ErrorCode.NOT_RANDIOOMONEY_ENOUGH.getNumber()))
+		// .build();
+		// }
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		// 没设置 raceType ,gangScore
+		// gameConfigData.toBuilder().setMaxCount(4).setEndTime(TimeUtils.getTimeStr(new
+		// Date().getTime() +MatchConstant.hours*60*60*1000)).build();
+		GameConfigData gameConfigData2 = gameConfigData.toBuilder().setMaxCount(4)
+				.setEndTime(TimeUtils.getTimeStr(new Date().getTime() + MatchConstant.hours * 60 * 60 * 1000)).build();
+
+		Game game = this.createGame(role.getRoleId(), gameConfigData2);
 		RoleGameInfo roleGameInfo = game.getRoleIdMap().get(this.getGameRoleId(game.getGameId(), role.getRoleId()));
 
 		GameRoleData myGameRoleData = this.parseGameRoleData(roleGameInfo, game);
@@ -140,7 +156,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 		return SC
 				.newBuilder()
 				.setMatchCreateGameResponse(
-						MatchCreateGameResponse.newBuilder().setId(game.getLockString())
+						MatchCreateGameResponse.newBuilder().setId(game.getLockKey().getValue() + "")
 								.setGameRoleData(myGameRoleData)).build();
 	}
 
@@ -168,12 +184,15 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 		game.setGameType(GameType.GAME_TYPE_FRIEND);
 		game.setGameState(GameState.GAME_STATE_PREPARE);
 
-		game.setLockString(this.getLockString());
-
 		game.setGameConfig(gameConfigData);
 
+		// 获得钥匙
+		RoomKey key = (RoomKey) this.getLockKey();
+		key.setGameId(gameId);
+		game.setLockKey(key);
+		
 		GameCache.getGameMap().put(gameId, game);
-		GameCache.getGameLockStringMap().put(game.getLockString(), gameId);
+		GameCache.getGameLockStringMap().put(getLockString(key), gameId);
 
 		return game;
 	}
@@ -272,7 +291,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 											ErrorCode.GAME_JOIN_ERROR.getNumber())).build());
 			return;
 		}
-		String targetLock = game.getLockString();
+		String targetLock = this.getLockString(game.getLockKey());
 		// 如果锁相同则可以进
 		if (!targetLock.equals(lockString)) {
 			SessionUtils.sc(
@@ -573,8 +592,13 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 		return gameId + "_0_" + aiCount;
 	}
 
-	private String getLockString() {
-		return /* "1980" */"111111";
+	private Key getLockKey() {
+		return keyStore.getRandomKey();
+	}
+
+	@Override
+	public String getLockString(Key key) {
+		return key.getValue() + "";
 	}
 
 	public boolean checkConfig(GameConfigData gameConfigData) {

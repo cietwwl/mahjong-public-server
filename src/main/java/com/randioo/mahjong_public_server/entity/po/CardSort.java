@@ -1,6 +1,7 @@
 package com.randioo.mahjong_public_server.entity.po;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -56,10 +57,52 @@ public class CardSort {
 	public void remove(int card) {
 		for (int i = values.size() - 1; i >= 0; i--) {
 			if (values.get(i).contains(card)) {
-				values.remove(card);
+				values.get(i).remove(card);
 				break;
 			}
 		}
+	}
+
+	/**
+	 * 移除某一张牌的所有
+	 * 
+	 * @param card
+	 */
+	public void removeAll(int card) {
+		for (int i = 0; i < values.size(); i++) {
+			Set<Integer> set = values.get(i);
+			if (set.contains(card)) {
+				set.remove(card);
+			}
+		}
+	}
+
+	/**
+	 * 统计某一张牌的个数
+	 * 
+	 * @param card
+	 * @return
+	 */
+	public int count(int card) {
+		int count = 0;
+		for (int i = 0; i < values.size(); i++) {
+			if (values.get(i).contains(card))
+				count++;
+		}
+		return count;
+	}
+
+	/**
+	 * 所有牌数
+	 * 
+	 * @return
+	 */
+	public int sumCard() {
+		int sum = 0;
+		for (Set<Integer> set : values)
+			sum += set.size();
+
+		return sum;
 	}
 
 	public CardSort clone() {

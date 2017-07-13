@@ -12,6 +12,8 @@ public abstract class Hu extends AbstractCardList {
 	public List<CardList> showCardList = new ArrayList<>();
 	public boolean isMine;
 	public boolean gangKai;
+	public boolean gangChong;
+	public int gangChongTargetSeat;
 
 	public abstract void checkTing(CardSort cardSort, List<Integer> waitCards);
 }

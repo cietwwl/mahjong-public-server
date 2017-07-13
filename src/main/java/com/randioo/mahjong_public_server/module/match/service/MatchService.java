@@ -6,6 +6,7 @@ import com.randioo.mahjong_public_server.entity.bo.Role;
 import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
 import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
 import com.randioo.mahjong_public_server.protocol.Entity.GameRoleData;
+import com.randioo.mahjong_public_server.util.key.Key;
 import com.randioo.randioo_server_base.service.ObserveBaseServiceInterface;
 
 public interface MatchService extends ObserveBaseServiceInterface {
@@ -55,5 +56,14 @@ public interface MatchService extends ObserveBaseServiceInterface {
 	GameRoleData parseGameRoleData(RoleGameInfo info, Game game);
 
 	void fillAI(Game game);
+
+	/**
+	 * 获得钥匙的房间字符串
+	 * 
+	 * @param key
+	 * @return
+	 * @author wcy 2017年7月13日
+	 */
+	String getLockString(Key key);
 
 }

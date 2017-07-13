@@ -12,6 +12,18 @@ public class FightConstant {
 	public static final String FIGHT_NOTICE_SEND_CARD = "fight_notice_send_card";
 	public static final String FIGHT_GANG_PENG_HU = "fight_gang_peng_hu";
 	public static final String FIGHT_READY = "fight_ready";
+	public static final String FIGHT_GANG_MING = "fight_gang_ming";
+	public static final String FIGHT_GANG_ADD = "fight_gang_add";
+	public static final String FIGHT_GANG_DARK = "fight_gang_dark";
+
+	public static final String FIGHT_OVER = "fight_over_hu";
+	public static final String FIGHT_OVER_MO = "fight_over_hu";
+	public static final String FIGHT_OVER_CHONG = "fight_over_hu";
+	
+	public static final String FIGHT_GANG_KAI = "fight_gang_kai";
+	public static final String FIGHT_GANG_CHONG = "fight_gang_chong";
+	
+	public static final String FIGHT_FLY = "fight_fly";
 
 	public static final int SCORE_3 = 3;
 
@@ -23,13 +35,11 @@ public class FightConstant {
 	public static final int PENG = 2;
 	public static final int GANE = 3;
 	public static final int HU = 4;
-	
+
 	public static final int GANG_LIGHT = 1;
 	public static final int GANG_DARK = 2;
 	public static final int GANG_ADD = 3;
 
-
-	
 
 
 }

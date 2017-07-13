@@ -16,15 +16,25 @@ message RoleData{
 
 message GameConfigData{
 	optional int32 raceType = 1; 
-	optional int32 maxCount = 2; //默认值为4
-	optional int32 gangScore = 3;
-	optional bool zhuahu = 4; // 抓胡
-	optional int32 endCatchCount = 5; //是否非苍蝇
-	optional int32 catchScore = 6; //飞苍蝇分数
-	optional bool gangkai = 7; //杠开
-	optional int32 minStartScore = 8; //底分
-	optional string endTime = 9;
-	optional int32 cardNum = 10 ; // 房卡数量
+	optional int32 roundCount = 2;//局数
+	optional int32 minStartScore = 3; //底分
+	optional int32 gangScore = 4;//杠的分数
+	optional bool zhuahu = 5; // 是否可以抓胡
+	optional bool baidaZhuaHu = 6;//白搭在手是否可以抓胡
+	optional bool baida4win=7;//四红中(白搭)获胜
+	optional int32 flyCount = 8; //苍蝇数量
+	optional int32 flyScore = 9; //飞苍蝇分数
+	repeated int32 flyValue = 10;//苍蝇的值
+	optional bool gangkai = 11; //杠开
+	optional GameOverMethod gameOverMethod = 12[default=GAME_OVER_ROUND];//游戏结束方式
+	optional string endTime = 13; //结束时间
+	optional int32 cardNum = 14; // 房卡数量
+	optional int32 maxCount = 15 [default=4];//默认值为4
+}
+/**游戏结束的方式*/
+enum GameOverMethod{
+	GAME_OVER_TIME=1;
+	GAME_OVER_ROUND=2;
 }
 message PaiNum{
 	optional int32 seat = 1;
