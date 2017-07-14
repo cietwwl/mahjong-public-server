@@ -8,11 +8,12 @@ import java.util.List;
 import java.util.Set;
 
 import com.randioo.mahjong_public_server.entity.po.CardSort;
+import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
 import com.randioo.mahjong_public_server.util.Lists;
 
 public class Step5Hu extends Hu {
 	@Override
-	public void check(List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList, boolean isMine) {
+	public void check(GameConfigData gameConfigData,List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList, boolean isMine) {
 		this.isMine = isMine;
 		CardSort copySort = cardSort.clone();
 		for (int value : copySort.getList().get(1)) {

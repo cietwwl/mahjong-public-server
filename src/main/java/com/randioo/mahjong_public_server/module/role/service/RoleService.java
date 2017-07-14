@@ -15,7 +15,24 @@ public interface RoleService extends ObserveBaseServiceInterface {
 	public void setHeadimgUrl(Role role, String headimgUrl);
 
 	public void setRandiooMoney(Role role, int randiooMoney);
-	
+
 	GeneratedMessage getRoleData(String account);
+
+	/**
+	 * 增加燃点币
+	 * 
+	 * @param role
+	 * @param money
+	 * @return
+	 * @author wcy 2017年7月14日
+	 */
+	boolean addRandiooMoney(Role role, int money);
+
+	/**
+	 * 
+	 * @param role
+	 * @author wcy 2017年7月14日
+	 */
+	void initRoleDataFromHttp(Role role);
 
 }

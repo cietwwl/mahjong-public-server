@@ -29,6 +29,7 @@ import com.randioo.mahjong_public_server.protocol.Match.MatchAIResponse;
 import com.randioo.mahjong_public_server.protocol.Match.MatchCreateGameResponse;
 import com.randioo.mahjong_public_server.protocol.Match.MatchJoinAIGameResponse;
 import com.randioo.mahjong_public_server.protocol.Match.MatchJoinGameResponse;
+import com.randioo.mahjong_public_server.protocol.Match.SCMatchCreateGame;
 import com.randioo.mahjong_public_server.protocol.Match.SCMatchJoinGame;
 import com.randioo.mahjong_public_server.protocol.Match.SCMatchMineInfo;
 import com.randioo.mahjong_public_server.protocol.ServerMessage.SC;
@@ -122,14 +123,16 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 	}
 
 	@Override
-	public GeneratedMessage createRoom(Role role, GameConfigData gameConfigData) {
+	public void createRoom(Role role, GameConfigData gameConfigData) {
 		loggerdebug(role, "createRoom -->start");
 		if (!checkConfig(gameConfigData)) {
-			return SC
+			SC sc = SC
 					.newBuilder()
 					.setMatchCreateGameResponse(
 							MatchCreateGameResponse.newBuilder().setErrorCode(ErrorCode.CREATE_FAILED.getNumber()))
 					.build();
+			SessionUtils.sc(role.getRoleId(), sc);
+			return;
 		}
 		// try {
 		// if(randiooPlatformSdk.getAccountInfo(role.getAccount()).randiooMoney>=gameConfigData.getCardNum()*20){
@@ -153,11 +156,22 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 
 		GameRoleData myGameRoleData = this.parseGameRoleData(roleGameInfo, game);
 		loggerdebug(role, "createRoom-->end");
-		return SC
+		SC sc = SC
 				.newBuilder()
 				.setMatchCreateGameResponse(
 						MatchCreateGameResponse.newBuilder().setId(game.getLockKey().getValue() + "")
 								.setGameRoleData(myGameRoleData)).build();
+
+		SessionUtils.sc(
+				role.getRoleId(),
+				SC.newBuilder()
+						.setSCMatchCreateGame(
+								SCMatchCreateGame.newBuilder().setLockString(getLockString(game.getLockKey()))
+										.setGameId(String.valueOf(game.getGameId())).setGameRoleData(myGameRoleData)
+										.setRoomType(GameType.GAME_TYPE_FRIEND.getNumber())
+										.setRoundNum(gameConfigData2.getRoundCount())).build());
+		SessionUtils.sc(role.getRoleId(), sc);
+
 	}
 
 	/**
@@ -183,14 +197,14 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 		game.setGameId(gameId);
 		game.setGameType(GameType.GAME_TYPE_FRIEND);
 		game.setGameState(GameState.GAME_STATE_PREPARE);
-
+		game.setFinshRoundCount(0);
 		game.setGameConfig(gameConfigData);
 
 		// 获得钥匙
 		RoomKey key = (RoomKey) this.getLockKey();
 		key.setGameId(gameId);
 		game.setLockKey(key);
-		
+
 		GameCache.getGameMap().put(gameId, game);
 		GameCache.getGameLockStringMap().put(getLockString(key), gameId);
 
@@ -511,6 +525,16 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 		matchRule.setMatchTime(TimeUtils.getNowTime());
 		matchModelService.matchRole(matchRule);
 		return null;
+	}
+
+	@Override
+	public void cancelMatch(Role role) {
+
+	}
+
+	@Override
+	public void serviceCancelMatch(Role role) {
+
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.randioo.mahjong_public_server.entity.po.cardlist.CardList;
 import com.randioo.mahjong_public_server.entity.po.cardlist.Gang;
+import com.randioo.mahjong_public_server.protocol.Entity.FightVoteApplyExit;
 import com.randioo.mahjong_public_server.protocol.Entity.RoundCardsData;
 
 public class RoleGameInfo {
@@ -36,6 +37,10 @@ public class RoleGameInfo {
 	public List<Integer> tingCards = new ArrayList<>();
 	/** 回合结果集 */
 	public RoundOverResult roundOverResult = new RoundOverResult();
+	/** 申请退出投票 */
+	public FightVoteApplyExit vote;	
+	/** 申请退出时间 */
+	public int lastRejectedExitTime;
 
 	@Override
 	public String toString() {

@@ -70,4 +70,7 @@
 
 	<!-- 钥匙库 -->
 	<bean id="keyStore" class="com.randioo.mahjong_public_server.util.key.KeyStore"></bean>
+
+	<!-- 燃点平台包 -->
+	<bean id="randiooPlatformSdk" class="com.randioo.randioo_platform_sdk.RandiooPlatformSdk"></bean>
 </beans>

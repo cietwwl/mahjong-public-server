@@ -1,17 +1,39 @@
 package com.randioo.mahjong_public_server.module.fight.service;
 
-import com.google.protobuf.GeneratedMessage;
 import com.randioo.mahjong_public_server.entity.bo.Game;
 import com.randioo.mahjong_public_server.entity.bo.Role;
 import com.randioo.mahjong_public_server.entity.po.CallCardList;
+import com.randioo.mahjong_public_server.protocol.Entity.FightVoteApplyExit;
 import com.randioo.randioo_server_base.service.ObserveBaseServiceInterface;
 
 public interface FightService extends ObserveBaseServiceInterface {
 	public void readyGame(Role role);
 
-	GeneratedMessage exitGame(Role role);
+	/**
+	 * 退出游戏
+	 * 
+	 * @param role
+	 * @author wcy 2017年7月14日
+	 */
+	void exitGame(Role role);
 
-	GeneratedMessage agreeExit(Role role, boolean agree);
+	/**
+	 * 申请退出游戏
+	 * 
+	 * @param role
+	 * @author wcy 2017年7月14日
+	 */
+	void applyExitGame(Role role);
+
+	/**
+	 * 同意退出
+	 * 
+	 * @param role
+	 * @param vote
+	 * @param voteId
+	 * @author wcy 2017年7月14日
+	 */
+	void agreeExit(Role role, FightVoteApplyExit vote, int voteId);
 
 	/**
 	 * 真实玩家出牌
@@ -44,12 +66,43 @@ public interface FightService extends ObserveBaseServiceInterface {
 	 */
 	void touchCard(Game game);
 
+	/**
+	 * 碰
+	 * 
+	 * @param role
+	 * @param gameSendCount
+	 * @param callCardListId
+	 * @author wcy 2017年7月14日
+	 */
 	void peng(Role role, int gameSendCount, int callCardListId);
 
+	/**
+	 * 杠
+	 * 
+	 * @param role
+	 * @param gameSendCount
+	 * @param callCardListId
+	 * @author wcy 2017年7月14日
+	 */
 	void gang(Role role, int gameSendCount, int callCardListId);
 
+	/**
+	 * 胡
+	 * 
+	 * @param role
+	 * @param gameSendCount
+	 * @param callCardListId
+	 * @author wcy 2017年7月14日
+	 */
 	void hu(Role role, int gameSendCount, int callCardListId);
 
+	/**
+	 * 过
+	 * 
+	 * @param role
+	 * @param gameSendCount
+	 * @author wcy 2017年7月14日
+	 */
 	void guo(Role role, int gameSendCount);
 
 	/**
@@ -67,5 +120,21 @@ public interface FightService extends ObserveBaseServiceInterface {
 	 * @return
 	 */
 	Game getGameById(int gameId);
+
+	/**
+	 * 战斗断开
+	 * 
+	 * @param role
+	 * @author wcy 2017年7月14日
+	 */
+	void disconnect(Role role);
+
+	/**
+	 * 重连
+	 * 
+	 * @param role
+	 * @author wcy 2017年7月14日
+	 */
+	void rejoin(Role role);
 
 }

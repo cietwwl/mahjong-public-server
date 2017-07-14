@@ -17,7 +17,7 @@ public interface MatchService extends ObserveBaseServiceInterface {
 	 * @return
 	 * @author wcy 2017年5月25日
 	 */
-	public GeneratedMessage createRoom(Role role, GameConfigData gameConfigData);
+	public void createRoom(Role role, GameConfigData gameConfigData);
 
 	/**
 	 * 加入游戏
@@ -65,5 +65,21 @@ public interface MatchService extends ObserveBaseServiceInterface {
 	 * @author wcy 2017年7月13日
 	 */
 	String getLockString(Key key);
+
+	/**
+	 * 取消匹配
+	 * 
+	 * @param role
+	 * @author wcy 2017年7月14日
+	 */
+	void cancelMatch(Role role);
+
+	/**
+	 * 取消匹配服务接口
+	 * 
+	 * @param role
+	 * @author wcy 2017年7月14日
+	 */
+	void serviceCancelMatch(Role role);
 
 }

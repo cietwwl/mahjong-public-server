@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.randioo.mahjong_public_server.entity.po.CallCardList;
-import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
 import com.randioo.mahjong_public_server.entity.po.GameOverResult;
+import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
+import com.randioo.mahjong_public_server.protocol.Entity.FightVoteApplyExit;
 import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
 import com.randioo.mahjong_public_server.protocol.Entity.GameState;
 import com.randioo.mahjong_public_server.protocol.Entity.GameType;
@@ -44,6 +45,8 @@ public class Game {
 	private int sendCardTime;
 	// 庄家的玩家id
 	private int zhuangSeat = -1;
+	// 以及打完的回合数
+	private int finshRoundCount;
 	// 剩余的牌
 	private List<Integer> remainCards = new ArrayList<>();
 	// 桌上的牌<索引id,出牌的列表>
@@ -56,6 +59,24 @@ public class Game {
 	private Map<Integer, List<Integer>> sendDesktopCardMap = new HashMap<>();
 	// 玩家结果统计
 	private Map<String, GameOverResult> statisticResultMap = new HashMap<>();
+	// 申请退出的玩家
+	private String applyExitGameRoleId;
+	// 申请退出的次数
+	private int applyExitId;
+	// 表决表
+	private Map<String, FightVoteApplyExit> voteMap = new HashMap<>();
+	// 是否结算
+	private boolean isSaveData = false;
+	// 燃点币
+	private int randiooMoney;
+
+	public int getFinshRoundCount() {
+		return finshRoundCount;
+	}
+
+	public void setFinshRoundCount(int finshRoundCount) {
+		this.finshRoundCount = finshRoundCount;
+	}
 
 	public int getOnlineRoleCount() {
 		return onlineRoleCount;
@@ -204,6 +225,42 @@ public class Game {
 		return statisticResultMap;
 	}
 
+	public String getApplyExitGameRoleId() {
+		return applyExitGameRoleId;
+	}
+
+	public void setApplyExitGameRoleId(String applyExitGameRoleId) {
+		this.applyExitGameRoleId = applyExitGameRoleId;
+	}
+
+	public int getApplyExitId() {
+		return applyExitId;
+	}
+
+	public void setApplyExitId(int applyExitId) {
+		this.applyExitId = applyExitId;
+	}
+
+	public Map<String, FightVoteApplyExit> getVoteMap() {
+		return voteMap;
+	}
+
+	public boolean isSaveData() {
+		return isSaveData;
+	}
+
+	public void setSaveData(boolean isSaveData) {
+		this.isSaveData = isSaveData;
+	}
+
+	public int getRandiooMoney() {
+		return randiooMoney;
+	}
+
+	public void setRandiooMoney(int randiooMoney) {
+		this.randiooMoney = randiooMoney;
+	}
+
 	@Override
 	public String toString() {
 		String n = System.getProperty("line.separator");
@@ -230,4 +287,5 @@ public class Game {
 		sb.append(t).append("]").append(n);
 		return sb.toString();
 	}
+
 }

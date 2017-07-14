@@ -2,8 +2,6 @@ package com.randioo.mahjong_public_server.module.role.service;
 
 import java.util.regex.Pattern;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +15,13 @@ import com.randioo.mahjong_public_server.protocol.Error.ErrorCode;
 import com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse;
 import com.randioo.mahjong_public_server.protocol.Role.RoleRenameResponse;
 import com.randioo.mahjong_public_server.protocol.ServerMessage.SC;
-import com.randioo.mahjong_public_server.util.HttpConnection2;
+import com.randioo.randioo_platform_sdk.RandiooPlatformSdk;
+import com.randioo.randioo_platform_sdk.entity.AccountInfo;
+import com.randioo.randioo_platform_sdk.exception.AccountErrorException;
 import com.randioo.randioo_server_base.cache.RoleCache;
 import com.randioo.randioo_server_base.config.GlobleConfig;
 import com.randioo.randioo_server_base.config.GlobleConfig.GlobleEnum;
 import com.randioo.randioo_server_base.db.IdClassCreator;
-import com.randioo.randioo_server_base.error.HttpConnectException;
 import com.randioo.randioo_server_base.module.role.RoleHandler;
 import com.randioo.randioo_server_base.module.role.RoleModelService;
 import com.randioo.randioo_server_base.sensitive.SensitiveWordDictionary;
@@ -44,6 +43,9 @@ public class RoleServiceImpl extends ObserveBaseService implements RoleService {
 
 	@Autowired
 	private LoginService loginService;
+
+	@Autowired
+	private RandiooPlatformSdk randiooPlatformSdk;
 
 	@Override
 	public void init() {
@@ -81,6 +83,13 @@ public class RoleServiceImpl extends ObserveBaseService implements RoleService {
 
 			}
 		});
+	}
+
+	@Override
+	public void initService() {
+		if (GlobleConfig.Boolean(GlobleEnum.DEBUG)) {
+			randiooPlatformSdk.setDebug(true);
+		}
 	}
 
 	@Override
@@ -136,52 +145,44 @@ public class RoleServiceImpl extends ObserveBaseService implements RoleService {
 		role.setRandiooMoney(randiooMoney);
 	}
 
+	@Override
 	public void initRoleDataFromHttp(Role role) {
-		boolean debug = true;
-		if (debug) {
-			role.setName("guest" + role.getRoleId());
-			role.setHeadImgUrl("ui://h24q1ml0x7tz13m");
-			role.setRandiooMoney(100);
-		} else {
-			int money = -1;
-			String name = "";
-			String headImgUrl = "";
-			HttpConnection2 connection = new HttpConnection2(
-			/* "http://manager.app.randioo.com/gateway/MaJiang/getMoney.php?key=f4f3f65d6d804d138043fbbd1843d510&&id=" */
-			"http://10.0.51.6/APPadmin/gateway/MaJiang/getMoney.php?key=f4f3f65d6d804d138043fbbd1843d510&&id=",
-					role.getAccount());
-			connection.connect();
-			String result = connection.result;
-			System.out.println("json:" + result);
-			if (result == null)
-				throw new HttpConnectException();
 
-			try {
-				JSONObject obj = new JSONObject(result);
-				money = obj.getInt("randioo_money");
-				if (money != -1) {
-					name = obj.getString("nickname");
-					headImgUrl = obj.getString("headimgurl");
-					if (headImgUrl.equals("null")) {
-						headImgUrl = null;
-					}
-				}
+		String name = null;
+		String headImgUrl = null;
+		int money = -1;
+		int sex = 0;
 
-			} catch (JSONException e) {
-				if (GlobleConfig.Boolean(GlobleEnum.DEBUG))
-					e.printStackTrace();
-				else
-					throw new HttpConnectException();
-			}
-
-			if (money == -1)
-				money = 100;
-
-			role.setName(StringUtils.isNullOrEmpty(name) ? "guest" + role.getRoleId() : name);
-			System.out.println("@@@" + headImgUrl + (headImgUrl == null));
-			role.setHeadImgUrl(StringUtils.isNullOrEmpty(headImgUrl) ? "ui://h24q1ml0x7tz13m" : headImgUrl);
-			role.setRandiooMoney(money);
+		try {
+			AccountInfo accountInfo = randiooPlatformSdk.getAccountInfo(role.getAccount());
+			name = accountInfo.nickName;
+			headImgUrl = accountInfo.headImgUrl;
+			money = accountInfo.randiooMoney;
+			sex = accountInfo.sex;
+		} catch (AccountErrorException e) {
+			loggererror("account " + role.getAccount() + " not on platform");
+		} catch (Exception e) {
+			loggererror("randiooPlatformSdk get account error ", e);
 		}
+		if (money == -1)
+			money = 0;
+
+		role.setName(StringUtils.isNullOrEmpty(name) ? "guest" + role.getRoleId() : name);
+		role.setHeadImgUrl(StringUtils.isNullOrEmpty(headImgUrl) ? "ui://h24q1ml0x7tz13m" : headImgUrl);
+		role.setRandiooMoney(money);
+		role.setSex(sex);
+	}
+
+	@Override
+	public boolean addRandiooMoney(Role role, int money) {
+		try {
+			randiooPlatformSdk.addMoney(role.getAccount(), money);
+			role.setRandiooMoney(role.getRandiooMoney() + money);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override

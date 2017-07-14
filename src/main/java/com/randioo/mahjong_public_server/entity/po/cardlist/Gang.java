@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.randioo.mahjong_public_server.cache.local.GameCache;
 import com.randioo.mahjong_public_server.entity.po.CardSort;
+import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
 
 public class Gang extends AbstractCardList {
 	public int card;
@@ -13,7 +14,7 @@ public class Gang extends AbstractCardList {
 	public Peng peng = null;
 
 	@Override
-	public void check(List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList,
+	public void check(GameConfigData gameConfigData,List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList,
 			boolean isTouch) {
 		Set<Integer> set = cardSort.getList().get(3);
 		boolean hasPeng = set.size() > 0;

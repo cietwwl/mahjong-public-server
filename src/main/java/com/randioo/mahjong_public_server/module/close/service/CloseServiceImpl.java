@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.randioo.mahjong_public_server.entity.bo.Role;
+import com.randioo.mahjong_public_server.module.fight.service.FightService;
 import com.randioo.mahjong_public_server.module.login.service.LoginService;
-import com.randioo.randioo_server_base.cache.SessionCache;
+import com.randioo.mahjong_public_server.module.match.service.MatchService;
 import com.randioo.randioo_server_base.db.GameDB;
 import com.randioo.randioo_server_base.service.BaseService;
 import com.randioo.randioo_server_base.template.EntityRunnable;
@@ -18,6 +19,12 @@ public class CloseServiceImpl extends BaseService implements CloseService {
 	private LoginService loginService;
 
 	@Autowired
+	private FightService fightService;
+
+	@Autowired
+	private MatchService matchService;
+
+	@Autowired
 	private GameDB gameDB;
 
 	@Override
@@ -25,7 +32,9 @@ public class CloseServiceImpl extends BaseService implements CloseService {
 		loggerinfo(role, "[account:" + role.getAccount() + ",name:" + role.getName() + "] manipulate");
 
 		role.setOfflineTimeStr(TimeUtils.getDetailTimeStr());
-
+		matchService.serviceCancelMatch(role);
+		fightService.disconnect(role);
+		
 		if (!gameDB.isUpdatePoolClose()) {
 			gameDB.getUpdatePool().submit(new EntityRunnable<Role>(role) {
 				@Override
@@ -45,7 +54,6 @@ public class CloseServiceImpl extends BaseService implements CloseService {
 			loggererror(role, "id:" + role.getRoleId() + ",account:" + role.getAccount() + ",name:" + role.getName()
 					+ "] save error", e);
 		}
-
 	}
 
 }

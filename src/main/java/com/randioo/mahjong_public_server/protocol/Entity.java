@@ -355,6 +355,75 @@ public final class Entity {
     // @@protoc_insertion_point(enum_scope:com.randioo.mahjong_public_server.protocol.OverMethod)
   }
   
+  public enum FightVoteApplyExit
+      implements com.google.protobuf.ProtocolMessageEnum {
+    VOTE_IDLE(0, 0),
+    VOTE_AGREE(1, 1),
+    VOTE_REJECT(2, 2),
+    ;
+    
+    
+    public final int getNumber() { return value; }
+    
+    public static FightVoteApplyExit valueOf(int value) {
+      switch (value) {
+        case 0: return VOTE_IDLE;
+        case 1: return VOTE_AGREE;
+        case 2: return VOTE_REJECT;
+        default: return null;
+      }
+    }
+    
+    public static com.google.protobuf.Internal.EnumLiteMap<FightVoteApplyExit>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<FightVoteApplyExit>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<FightVoteApplyExit>() {
+            public FightVoteApplyExit findValueByNumber(int number) {
+              return FightVoteApplyExit.valueOf(number)
+    ;        }
+          };
+    
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.randioo.mahjong_public_server.protocol.Entity.getDescriptor().getEnumTypes().get(5);
+    }
+    
+    private static final FightVoteApplyExit[] VALUES = {
+      VOTE_IDLE, VOTE_AGREE, VOTE_REJECT, 
+    };
+    public static FightVoteApplyExit valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+    private final int index;
+    private final int value;
+    private FightVoteApplyExit(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+    
+    static {
+      com.randioo.mahjong_public_server.protocol.Entity.getDescriptor();
+    }
+    
+    // @@protoc_insertion_point(enum_scope:com.randioo.mahjong_public_server.protocol.FightVoteApplyExit)
+  }
+  
   public static final class RoleData extends
       com.google.protobuf.GeneratedMessage {
     // Use RoleData.newBuilder() to construct.
@@ -6816,7 +6885,9 @@ public final class Entity {
       "ANG_LIGHT\020\003\022\034\n\030CARD_LIST_TYPE_GANG_DARK\020" +
       "\004\022\033\n\027CARD_LIST_TYPE_GANG_ADD\020\005*H\n\nOverMe" +
       "thod\022\r\n\tOVER_LOSS\020\000\022\016\n\nOVER_CHONG\020\001\022\016\n\nO",
-      "VER_MO_HU\020\002\022\013\n\007OVER_HU\020\003"
+      "VER_MO_HU\020\002\022\013\n\007OVER_HU\020\003*D\n\022FightVoteApp" +
+      "lyExit\022\r\n\tVOTE_IDLE\020\000\022\016\n\nVOTE_AGREE\020\001\022\017\n" +
+      "\013VOTE_REJECT\020\002"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

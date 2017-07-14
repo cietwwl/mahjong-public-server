@@ -2,19 +2,18 @@ package com.randioo.mahjong_public_server.entity.po.cardlist;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 import com.randioo.mahjong_public_server.entity.po.CardSort;
+import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
 import com.randioo.mahjong_public_server.util.Lists;
 
 public class BaiDaHu extends Hu {
 
 	public boolean checkBaiDa(CardSort cardSort) {
 		// TODO 从配置加载 有四个红中时是否直接胡
+
 		boolean config = true;
 		CardSort cardSort1 = cardSort.clone();
 
@@ -25,9 +24,6 @@ public class BaiDaHu extends Hu {
 		}
 		// 移除红中
 		cardSort1.removeAll(801);
-
-		System.out.println("移除红中后");
-		System.out.println(cardSort1);
 
 		// 挑3
 		CardSort copySort2 = cardSort1.clone();
@@ -44,9 +40,6 @@ public class BaiDaHu extends Hu {
 
 		CardSort tempCardSort = copySort2.sumCard() <= copySort3.sumCard() ? copySort2 : copySort3;
 
-		System.out.println("挑3后");
-		System.out.println("2    " + copySort2);
-		System.out.println("3    " + copySort3);
 		// 计算需要百搭的个数
 
 		// 二连 个数
@@ -64,9 +57,6 @@ public class BaiDaHu extends Hu {
 				}
 			}
 		}
-		System.out.println("移除二连后");
-		System.out.println(tempCardSort);
-
 		// 纯对 个数
 		int duiCount = 0;
 
@@ -82,24 +72,30 @@ public class BaiDaHu extends Hu {
 				tempCardSort.removeAll(v);
 			}
 		}
-		System.out.println("移除纯对后");
-		System.out.println(tempCardSort);
 
 		// 单数个数
 		int danCount = tempCardSort.sumCard();
 
 		int needBaiDa = lianCount + duiCount > 0 ? danCount * 2 + duiCount - 1 : danCount * 2 - 1;
-
 		return baiDaCount >= needBaiDa ? true : false;
 	}
 
 	@Override
-	public void check(List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList,
-			boolean isMine) {
+	public void check(GameConfigData gameConfigData,List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList, boolean isMine) {
+		System.out.println("biaduhu checking .......");
 		List<Integer> baidaCards = new ArrayList<>();
 		baidaCards.add(801);
 
-		this.checkBaiDa(cardSort);
+		if (this.checkBaiDa(cardSort)) {
+			List<Integer> list = cardSort.toArray();
+			Lists.removeElementByList(list, Arrays.asList(card));
+			BaiDaHu hu = new BaiDaHu();
+			hu.isMine = isMine;
+			hu.card = card;
+			hu.showCardList.addAll(showCardList);
+			hu.handCards.addAll(list);
+			cardLists.add(hu);
+		}
 
 	}
 
@@ -159,21 +155,21 @@ public class BaiDaHu extends Hu {
 	}
 
 	public static void main(String[] args) {
-		// List<Integer> list1 = Arrays.asList(104, 104, 105, 106);
-		// List<Integer> list2 = Arrays.asList(102, 103, 104, 801);
+		List<Integer> list1 = Arrays.asList(101, 101, 101, 102);
+		List<Integer> list2 = Arrays.asList(102, 102, 201, 201);
 		// List<Integer> list2 = Arrays.asList(202, 206, 104, 801);
-		// List<Integer> list3 = Arrays.asList(104, 204, 205, 206);
-		// List<Integer> list4 = Arrays.asList(302, 303);
+		List<Integer> list3 = Arrays.asList(201, 203, 203, 203);
+		List<Integer> list4 = Arrays.asList(103, 801);
 		//
-		// CardSort cardSort = new CardSort(4);
+		CardSort cardSort = new CardSort(4);
 		//
-		// cardSort.fillCardSort(list1);
-		// cardSort.fillCardSort(list2);
-		// cardSort.fillCardSort(list3);
-		// cardSort.fillCardSort(list4);
-		// System.out.println(cardSort);
-		Hu hu = new BaiDaHu();
-		hu.checkTing(null, null);
+		cardSort.fillCardSort(list1);
+		cardSort.fillCardSort(list2);
+		cardSort.fillCardSort(list3);
+		cardSort.fillCardSort(list4);
+		System.out.println(cardSort);
+		BaiDaHu hu = new BaiDaHu();
+		System.out.println(hu.checkBaiDa(cardSort));
 
 	}
 

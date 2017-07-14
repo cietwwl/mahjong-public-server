@@ -11,6 +11,13 @@ message FightExitGameResponse{//
 	optional int32 errorCode = 1 [default = 1];
 }
 
+message FightApplyExitGameRequest{
+	
+}
+
+message FightApplyExitGameResponse{
+	optional int32 errorCode = 1 [default = 1];
+}
 
 message SCFightExitGame{//
 	optional int32 seat = 1;
@@ -19,10 +26,12 @@ message SCFightExitGame{//
 message SCFightApplyExitGame{//
 	optional string name = 1;
 	optional int32 countDown = 2;
+	optional int32 applyExitId = 3;
 }
 
 message FightAgreeExitGameRequest{//
-	optional bool agree = 1[default = true];
+	optional FightVoteApplyExit fightVoteApplyExit = 1;
+	optional int32 applyExitId = 2;//申请的id
 }
 
 message FightAgreeExitGameResponse{//
@@ -31,6 +40,11 @@ message FightAgreeExitGameResponse{//
 
 message SCAgreeExitGame{//
 	optional string name = 1;
+}
+
+message SCFightApplyExitResult{
+	repeated string rejectName = 1;
+	repeated string agreeName = 2;
 }
 
 message SCFightGameDismiss{//
@@ -184,5 +198,9 @@ message SCFightGuo{
 }
 
 message SCFightPointSeat{
+	optional int32 seat = 1;
+}
+
+message SCFightDisconnect{
 	optional int32 seat = 1;
 }

@@ -140,3 +140,9 @@ message AudienceData{
 	optional string name = 1;
 	optional int32 score = 2;
 }
+
+enum FightVoteApplyExit{
+	VOTE_IDLE = 0;
+	VOTE_AGREE = 1;
+	VOTE_REJECT = 2;
+}

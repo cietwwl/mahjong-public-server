@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.randioo.mahjong_public_server.entity.po.CardSort;
+import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
 
 public class Chi extends AbstractCardList {
 	public int card;
 	public int targetCard;
 
 	@Override
-	public void check(List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList, boolean isMine) {
+	public void check(GameConfigData gameConfigData,List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList, boolean isMine) {
 		
 	}
 

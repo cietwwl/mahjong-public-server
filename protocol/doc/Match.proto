@@ -47,3 +47,11 @@ message MatchJoinAIGameResponse{
 message SCMatchMineInfo{
 	optional GameRoleData gameRoleData = 1;
 }
+
+message SCMatchCreateGame{
+	optional string lockString = 1;
+	optional string gameId = 2;
+	optional int32 roomType = 3;
+	optional int32 roundNum = 4;
+	optional GameRoleData gameRoleData = 5;
+}

@@ -22,20 +22,21 @@ message CS{
 
 	optional FightReadyRequest FightReadyRequest = 10;
 	optional FightExitGameRequest FightExitGameRequest = 11;
-	optional FightAgreeExitGameRequest FightAgreeExitGameRequest = 12;
-	optional FightSendCardRequest FightSendCardRequest = 13;
-	optional FightRecommandRequest FightRecommandRequest = 14;
-	optional FightGetlastRoundRequest FightGetlastRoundRequest = 15;
-	optional FightPengRequest FightPengRequest = 16;
-	optional FightGangRequest FightGangRequest = 17;
-	optional FightHuRequest FightHuRequest = 18;
-	optional FightGuoRequest FightGuoRequest = 19;
+	optional FightApplyExitGameRequest FightApplyExitGameRequest = 12;//申请退出
+	optional FightAgreeExitGameRequest FightAgreeExitGameRequest = 13;
+	optional FightSendCardRequest FightSendCardRequest = 14;
+	optional FightRecommandRequest FightRecommandRequest = 15;
+	optional FightGetlastRoundRequest FightGetlastRoundRequest = 16;
+	optional FightPengRequest FightPengRequest = 17;
+	optional FightGangRequest FightGangRequest = 18;
+	optional FightHuRequest FightHuRequest = 19;
+	optional FightGuoRequest FightGuoRequest = 20;
 
-	optional MoneyExchangeRequest MoneyExchangeRequest = 20;
+	optional MoneyExchangeRequest MoneyExchangeRequest = 21;
 
-	optional SettingsRequest SettingsRequest = 21;
-	optional SettingsShowRequest SettingsShowRequest = 22;
+	optional SettingsRequest SettingsRequest = 22;
+	optional SettingsShowRequest SettingsShowRequest = 23;
 
-	optional RaceJoinRaceRequest RaceJoinRaceRequest = 23;
-	optional RaceShowQueueRequest RaceShowQueueRequest = 24;
-} // 24
+	optional RaceJoinRaceRequest RaceJoinRaceRequest = 24;
+	optional RaceShowQueueRequest RaceShowQueueRequest = 25;
+} // 25

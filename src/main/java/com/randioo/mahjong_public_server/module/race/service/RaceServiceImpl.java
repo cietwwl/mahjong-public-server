@@ -90,7 +90,7 @@ public class RaceServiceImpl extends ObserveBaseService implements RaceService {
 			this.createGame(race, role);
 		}
 
-		if (msg.equals(FightConstant.GAME_OVER)) {
+		if (msg.equals(FightConstant.FIGHT_GAME_OVER)) {
 			Game game = (Game) args[0];
 			this.noticeRaceState(game, true);
 		}

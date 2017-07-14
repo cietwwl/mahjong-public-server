@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.randioo.mahjong_public_server.cache.local.GameCache;
 import com.randioo.mahjong_public_server.entity.po.CardSort;
+import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
 
 /**
  * 三个相同
@@ -17,7 +18,7 @@ public class Peng extends AbstractCardList {
 	public int card;
 
 	@Override
-	public void check(List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList, boolean isMine) {
+	public void check(GameConfigData gameConfigData,List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList, boolean isMine) {
 		if (GameCache.getBaiDaCardNumSet().contains(card))
 			return;
 
