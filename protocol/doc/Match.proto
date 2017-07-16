@@ -2,14 +2,6 @@ package com.randioo.mahjong_public_server.protocol;
 
 import "Entity.proto";
 
-message MatchAIRequest{
-}
-
-message MatchAIResponse{
-	optional int32 errorCode = 1[default =1];
-	optional GameRoleData gameRoleData = 2;
-}
-
 message MatchCreateGameRequest{
 	optional GameConfigData gameConfigData = 1;
 }

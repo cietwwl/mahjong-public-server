@@ -41,17 +41,11 @@ public interface MatchService extends ObserveBaseServiceInterface {
 
 	GeneratedMessage match(Role role);
 
-	void matchAI(Role role);
-
-	Role getRoleFromRoleGameInfo(RoleGameInfo info);
-
 	Game createGame(int roleId, GameConfigData gameConfigData);
 
 	Game createGameByGameConfig(GameConfigData gameConfigData);
 
 	void joinGame(Role role, int gameId);
-
-	void joinAICountGame(Role role, int aiCount);
 
 	GameRoleData parseGameRoleData(RoleGameInfo info, Game game);
 

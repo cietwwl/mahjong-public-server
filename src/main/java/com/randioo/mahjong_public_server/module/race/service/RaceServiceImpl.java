@@ -122,7 +122,7 @@ public class RaceServiceImpl extends ObserveBaseService implements RaceService {
 		c.account = raceExistResponse.nickname;
 		c.catchScore = raceExistResponse.flyScore;
 		c.endCatchCount = raceExistResponse.fly;
-		c.endTime = TimeUtils.getHHmmssDateFormat().format(new Date(raceExistResponse.endTime));
+		c.endTime = TimeUtils.get_HHmmss_DateFormat().format(new Date(raceExistResponse.endTime));
 		c.minStartScore = raceExistResponse.difen;
 		c.raceId = raceExistResponse.raceId;
 		c.maxCount = 4;

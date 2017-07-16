@@ -46,7 +46,7 @@ public class Game {
 	// 庄家的玩家id
 	private int zhuangSeat = -1;
 	// 以及打完的回合数
-	private int finshRoundCount;
+	private int finishRoundCount;
 	// 剩余的牌
 	private List<Integer> remainCards = new ArrayList<>();
 	// 桌上的牌<索引id,出牌的列表>
@@ -70,12 +70,12 @@ public class Game {
 	// 燃点币
 	private int randiooMoney;
 
-	public int getFinshRoundCount() {
-		return finshRoundCount;
+	public int getFinishRoundCount() {
+		return finishRoundCount;
 	}
 
-	public void setFinshRoundCount(int finshRoundCount) {
-		this.finshRoundCount = finshRoundCount;
+	public void setFinishRoundCount(int finishRoundCount) {
+		this.finishRoundCount = finishRoundCount;
 	}
 
 	public int getOnlineRoleCount() {
