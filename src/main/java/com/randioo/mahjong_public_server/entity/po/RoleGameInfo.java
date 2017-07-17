@@ -3,10 +3,12 @@ package com.randioo.mahjong_public_server.entity.po;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.randioo.mahjong_public_server.entity.bo.VideoData;
 import com.randioo.mahjong_public_server.entity.po.cardlist.CardList;
 import com.randioo.mahjong_public_server.entity.po.cardlist.Gang;
 import com.randioo.mahjong_public_server.protocol.Entity.FightVoteApplyExit;
 import com.randioo.mahjong_public_server.protocol.Entity.RoundCardsData;
+import com.randioo.mahjong_public_server.protocol.ServerMessage.SC;
 
 public class RoleGameInfo {
 	/** 游戏中的玩家id */
@@ -37,10 +39,19 @@ public class RoleGameInfo {
 	public List<Integer> tingCards = new ArrayList<>();
 	/** 回合结果集 */
 	public RoundOverResult roundOverResult = new RoundOverResult();
-	/** 申请退出投票 */
-	public FightVoteApplyExit vote;	
+	public VideoData videoData = new VideoData();
 	/** 申请退出时间 */
 	public int lastRejectedExitTime;
+
+	public List<SC> getCurrentSCList(int finishRound) {
+		List<SC> list = null;
+		if (finishRound + 2 > videoData.getScList().size()) {
+			list = new ArrayList<>();
+			videoData.getScList().add(list);
+		}
+		list = videoData.getScList().get(finishRound + 1);
+		return list;
+	}
 
 	@Override
 	public String toString() {

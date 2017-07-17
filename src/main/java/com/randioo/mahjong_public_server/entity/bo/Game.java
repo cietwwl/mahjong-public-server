@@ -14,6 +14,7 @@ import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
 import com.randioo.mahjong_public_server.protocol.Entity.GameState;
 import com.randioo.mahjong_public_server.protocol.Entity.GameType;
 import com.randioo.mahjong_public_server.util.key.Key;
+import com.randioo.mahjong_public_server.util.vote.VoteBox;
 
 public class Game {
 	private int gameId;
@@ -59,16 +60,16 @@ public class Game {
 	private Map<Integer, List<Integer>> sendDesktopCardMap = new HashMap<>();
 	// 玩家结果统计
 	private Map<String, GameOverResult> statisticResultMap = new HashMap<>();
-	// 申请退出的玩家
-	private String applyExitGameRoleId;
-	// 申请退出的次数
-	private int applyExitId;
-	// 表决表
-	private Map<String, FightVoteApplyExit> voteMap = new HashMap<>();
 	// 是否结算
 	private boolean isSaveData = false;
 	// 燃点币
 	private int randiooMoney;
+
+	private VoteBox voteBox = new VoteBox();
+
+	public VoteBox getVoteBox() {
+		return voteBox;
+	}
 
 	public int getFinishRoundCount() {
 		return finishRoundCount;
@@ -223,26 +224,6 @@ public class Game {
 
 	public Map<String, GameOverResult> getStatisticResultMap() {
 		return statisticResultMap;
-	}
-
-	public String getApplyExitGameRoleId() {
-		return applyExitGameRoleId;
-	}
-
-	public void setApplyExitGameRoleId(String applyExitGameRoleId) {
-		this.applyExitGameRoleId = applyExitGameRoleId;
-	}
-
-	public int getApplyExitId() {
-		return applyExitId;
-	}
-
-	public void setApplyExitId(int applyExitId) {
-		this.applyExitId = applyExitId;
-	}
-
-	public Map<String, FightVoteApplyExit> getVoteMap() {
-		return voteMap;
 	}
 
 	public boolean isSaveData() {

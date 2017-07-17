@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.randioo.mahjong_public_server.dao.VideoDao">
+	<!-- insert -->
+	<insert id="insert">
+		insert into video(
+			roleId,
+			gameId,
+			data,
+			time
+		) values(
+			#{roleId},
+			#{gameId},			
+			#{data},
+			now()
+		)
+	</insert>
+
+	<!-- select -->
+	<select id="get" resultType="videoData">
+		select * from video
+		<where>
+			roleId=#{roleId}
+			AND time > date_sub(curdate(),interval 7 day);
+		</where>
+	</select>
+	<!-- select -->
+	<select id="getById" resultType="videoData">
+		select * from video
+		<where>
+			ID=#{ID}
+			AND time > date_sub(curdate(),interval 7 day);
+		</where>
+	</select>
+</mapper>

@@ -29,6 +29,8 @@ public class FightConstant {
 	
 	public static final String FIGHT_FLY = "fight_fly";
 
+	public static final String FIGHT_CANCEL_GAME = "fight_cancel_game";
+	
 	public static final int SCORE_3 = 3;
 
 	public static final int SEND_CARD_WAIT_TIME = 30;
@@ -48,6 +50,8 @@ public class FightConstant {
 	public static final int GAME_OVER = 2;
 	public static final int GAME_CONTINUE = 3;
 
+
+	public static final String FIGHT_RECORD_SC = "record_sc"; //记录推送
 
 
 

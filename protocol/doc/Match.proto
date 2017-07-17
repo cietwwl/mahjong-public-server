@@ -19,21 +19,10 @@ message MatchJoinGameRequest{
 
 message MatchJoinGameResponse{
 	optional int32 errorCode = 1[default = 1];
-	repeated GameRoleData gameRoleData = 2;
-	optional int32 seat = 3;
 }
 
 message SCMatchJoinGame{
 	optional GameRoleData gameRoleData = 1;
-}
-
-message MatchJoinAIGameRequest{
-	optional int32 aiCount = 1;
-}
-
-message MatchJoinAIGameResponse{
-	repeated GameRoleData gameRoleData = 2;
-	optional int32 seat = 3;
 }
 
 message SCMatchMineInfo{
