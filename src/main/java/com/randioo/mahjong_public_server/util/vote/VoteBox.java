@@ -55,7 +55,7 @@ public class VoteBox {
 	 * @author wcy 2017年7月17日
 	 */
 	public int applyVote(String applyer) {
-		if (applyer == null)
+		if (this.applyer == null)
 			this.applyer = applyer;
 
 		return voteTimes;

@@ -292,8 +292,16 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
 			RoleGameInfo info = (RoleGameInfo) args[1];
 			SC sc = (SC) args[2];
 			Game game = this.getGameById(gameId);
+			FightVoteApplyExit vote = null;
+			if(info.gameRoleId.contains("_1")){
+				vote = FightVoteApplyExit.VOTE_AGREE;
+			}else if(info.gameRoleId.contains("_0")){
+				vote = FightVoteApplyExit.VOTE_REJECT;
+			}else if(info.gameRoleId.contains("_2")){
+				vote = FightVoteApplyExit.VOTE_REJECT;
+			}
 			this.voteApplyExit(game, info.gameRoleId, sc.getSCFightApplyExitGame().getApplyExitId(),
-					FightVoteApplyExit.VOTE_AGREE);
+					vote);
 		}
 	}
 
@@ -737,7 +745,8 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
 				// 游戏结束
 				this.cancelGame(game);
 			} else if (voteResult == VoteResult.REJECT) {
-				game.getRoleIdMap().get(voteBox.getApplyer()).lastRejectedExitTime = TimeUtils.getNowTime();
+				RoleGameInfo applyerInfo = game.getRoleIdMap().get(voteBox.getApplyer());
+				applyerInfo.lastRejectedExitTime = TimeUtils.getNowTime();
 			}
 		}
 	}
