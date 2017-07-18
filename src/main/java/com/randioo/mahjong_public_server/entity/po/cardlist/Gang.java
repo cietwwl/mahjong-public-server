@@ -16,6 +16,7 @@ public class Gang extends AbstractCardList {
 	@Override
 	public void check(GameConfigData gameConfigData,List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList,
 			boolean isTouch) {
+		int baida = 801;
 		Set<Integer> set = cardSort.getList().get(3);
 		boolean hasPeng = set.size() > 0;
 
@@ -34,7 +35,7 @@ public class Gang extends AbstractCardList {
 				}
 			}
 			// 拿的牌检查补杠
-			if (GameCache.getBaiDaCardNumSet().contains(81)) {
+			if (GameCache.getBaiDaCardNumSet().contains(baida)) {
 				return;
 			}
 			for (CardList cardList : showCardList) {
@@ -57,7 +58,7 @@ public class Gang extends AbstractCardList {
 			// 明杠
 			if (hasPeng) {
 				for (int value : set) {
-					if (GameCache.getBaiDaCardNumSet().contains(81) || card != value)
+					if (GameCache.getBaiDaCardNumSet().contains(baida) || card != value)
 						continue;
 
 					Gang gang = new Gang();

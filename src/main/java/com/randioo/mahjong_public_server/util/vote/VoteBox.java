@@ -69,6 +69,10 @@ public class VoteBox {
 		voteTimes++;
 	}
 
+	public int getVoteId() {
+		return voteTimes;
+	}
+
 	public void vote(String joiner, boolean vote, int voteId) {
 		if (voteId != voteTimes)
 			return;

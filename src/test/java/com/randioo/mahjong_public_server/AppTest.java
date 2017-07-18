@@ -1,4 +1,4 @@
-package com.randioo.shanghaimajiang_server;
+package com.randioo.mahjong_public_server;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

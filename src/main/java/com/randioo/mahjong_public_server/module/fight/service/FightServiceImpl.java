@@ -10,17 +10,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import org.apache.mina.core.session.IoSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.randioo.mahjong_public_server.cache.local.GameCache;
 import com.randioo.mahjong_public_server.cache.local.RaceCache;
 import com.randioo.mahjong_public_server.cache.local.VideoCache;
-import com.randioo.mahjong_public_server.dao.VideoDao;
 import com.randioo.mahjong_public_server.entity.bo.Game;
 import com.randioo.mahjong_public_server.entity.bo.Role;
-import com.randioo.mahjong_public_server.entity.bo.VideoData;
 import com.randioo.mahjong_public_server.entity.po.AIChooseCallCardListTimeEvent;
 import com.randioo.mahjong_public_server.entity.po.AISendCardTimeEvent;
 import com.randioo.mahjong_public_server.entity.po.CallCardList;
@@ -34,13 +31,13 @@ import com.randioo.mahjong_public_server.entity.po.cardlist.Chi;
 import com.randioo.mahjong_public_server.entity.po.cardlist.Gang;
 import com.randioo.mahjong_public_server.entity.po.cardlist.Hu;
 import com.randioo.mahjong_public_server.entity.po.cardlist.Peng;
+import com.randioo.mahjong_public_server.entity.po.cardlist.Step5Hu;
 import com.randioo.mahjong_public_server.module.fight.FightConstant;
 import com.randioo.mahjong_public_server.module.login.service.LoginService;
 import com.randioo.mahjong_public_server.module.match.MatchConstant;
 import com.randioo.mahjong_public_server.module.match.service.MatchService;
 import com.randioo.mahjong_public_server.module.match.service.MatchServiceImpl;
 import com.randioo.mahjong_public_server.module.role.service.RoleService;
-import com.randioo.mahjong_public_server.module.video.service.VideoService;
 import com.randioo.mahjong_public_server.protocol.Entity.CallCardListData;
 import com.randioo.mahjong_public_server.protocol.Entity.CallHuData;
 import com.randioo.mahjong_public_server.protocol.Entity.CardListData;
@@ -51,13 +48,11 @@ import com.randioo.mahjong_public_server.protocol.Entity.GameOverMethod;
 import com.randioo.mahjong_public_server.protocol.Entity.GameRoleData;
 import com.randioo.mahjong_public_server.protocol.Entity.GameState;
 import com.randioo.mahjong_public_server.protocol.Entity.GameType;
-import com.randioo.mahjong_public_server.protocol.Entity.GameVideoData;
 import com.randioo.mahjong_public_server.protocol.Entity.OverMethod;
 import com.randioo.mahjong_public_server.protocol.Entity.PaiNum;
 import com.randioo.mahjong_public_server.protocol.Entity.RoleGameOverInfoData;
 import com.randioo.mahjong_public_server.protocol.Entity.RoleRoundOverInfoData;
 import com.randioo.mahjong_public_server.protocol.Entity.RoundCardsData;
-import com.randioo.mahjong_public_server.protocol.Entity.RoundVideoData;
 import com.randioo.mahjong_public_server.protocol.Error.ErrorCode;
 import com.randioo.mahjong_public_server.protocol.Fight.FightAgreeExitGameResponse;
 import com.randioo.mahjong_public_server.protocol.Fight.FightApplyExitGameResponse;
@@ -90,20 +85,16 @@ import com.randioo.mahjong_public_server.protocol.Fight.SCFightTouchCard;
 import com.randioo.mahjong_public_server.protocol.ServerMessage.SC;
 import com.randioo.mahjong_public_server.util.CardTools;
 import com.randioo.mahjong_public_server.util.Lists;
-import com.randioo.mahjong_public_server.util.VideoUtils;
 import com.randioo.mahjong_public_server.util.key.Key;
 import com.randioo.mahjong_public_server.util.vote.VoteBox;
 import com.randioo.mahjong_public_server.util.vote.VoteBox.VoteResult;
 import com.randioo.randioo_server_base.cache.RoleCache;
-import com.randioo.randioo_server_base.cache.SessionCache;
 import com.randioo.randioo_server_base.config.GlobleConfig;
 import com.randioo.randioo_server_base.config.GlobleConfig.GlobleEnum;
-import com.randioo.randioo_server_base.db.GameDB;
 import com.randioo.randioo_server_base.entity.GlobalConfigFunction;
 import com.randioo.randioo_server_base.scheduler.EventScheduler;
 import com.randioo.randioo_server_base.scheduler.TimeEvent;
 import com.randioo.randioo_server_base.service.ObserveBaseService;
-import com.randioo.randioo_server_base.template.EntityRunnable;
 import com.randioo.randioo_server_base.template.Function;
 import com.randioo.randioo_server_base.template.Observer;
 import com.randioo.randioo_server_base.utils.RandomUtils;
@@ -127,16 +118,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
 	@Autowired
 	private RoleService roleService;
 
-	@Autowired
-	private GameDB gameDB;
-
-	@Autowired
-	private VideoDao videoDao;
-
 	private Scanner in = new Scanner(System.in);
-
-	@Autowired
-	private VideoService videoService;
 
 	@Override
 	public void init() {
@@ -155,7 +137,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
 		cardLists.put(Gang.class, ReflectUtils.newInstance(Gang.class));
 		cardLists.put(Peng.class, ReflectUtils.newInstance(Peng.class));
 		cardLists.put(Chi.class, ReflectUtils.newInstance(Chi.class));
-		cardLists.put(Hu.class, ReflectUtils.newInstance(BaiDaHu.class));
+		cardLists.put(Hu.class, ReflectUtils.newInstance(Step5Hu.class));
 
 		GameCache.getCheckCardListSequence().add(Hu.class);
 		GameCache.getCheckCardListSequence().add(Gang.class);
@@ -238,19 +220,6 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
 
 	@Override
 	public void update(Observer observer, String msg, Object... args) {
-		if (msg.equals(FightConstant.APPLY_LEAVE)) {
-			RoleGameInfo info = (RoleGameInfo) args[1];
-			Role role = (Role) args[0];
-			FightVoteApplyExit fightVoteApplyExit = (FightVoteApplyExit) args[1];
-			int voteId = (int) args[2];
-			if (info.roleId == 0) {
-				agreeExit(role, fightVoteApplyExit, voteId);
-			}
-		}
-		// if (msg.equals(FightConstant.NEXT_GAME_ROLE_SEND_CARD)) {
-		// int gameId = (int) args[0];
-		// this.checkAutoAI(gameId);
-		// }
 
 		if (msg.equals(FightConstant.FIGHT_NOTICE_SEND_CARD)) {
 			int gameId = (int) args[0];
@@ -293,15 +262,14 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
 			SC sc = (SC) args[2];
 			Game game = this.getGameById(gameId);
 			FightVoteApplyExit vote = null;
-			if(info.gameRoleId.contains("_1")){
+			if (info.gameRoleId.contains("_1"))
+				vote = FightVoteApplyExit.VOTE_REJECT;
+			else if (info.gameRoleId.contains("_0"))
 				vote = FightVoteApplyExit.VOTE_AGREE;
-			}else if(info.gameRoleId.contains("_0")){
-				vote = FightVoteApplyExit.VOTE_REJECT;
-			}else if(info.gameRoleId.contains("_2")){
-				vote = FightVoteApplyExit.VOTE_REJECT;
-			}
-			this.voteApplyExit(game, info.gameRoleId, sc.getSCFightApplyExitGame().getApplyExitId(),
-					vote);
+			else if (info.gameRoleId.contains("_2"))
+				vote = FightVoteApplyExit.VOTE_AGREE;
+
+			this.voteApplyExit(game, info.gameRoleId, sc.getSCFightApplyExitGame().getApplyExitId(), vote);
 		}
 	}
 
@@ -716,7 +684,11 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
 	 */
 	private void voteApplyExit(Game game, String voteGameRoleId, int applyExitId, FightVoteApplyExit vote) {
 		VoteBox voteBox = game.getVoteBox();
+		if (voteBox.getVoteId() != applyExitId)
+			return;
 		synchronized (game) {
+			if (voteBox.getVoteId() != applyExitId)
+				return;
 			if (vote == FightVoteApplyExit.VOTE_AGREE) {
 				voteBox.vote(voteGameRoleId, true, applyExitId);
 			} else if (vote == FightVoteApplyExit.VOTE_REJECT) {
@@ -734,11 +706,11 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
 				Role role = (Role) RoleCache.getRoleById(roleGameInfo.roleId);
 				String name = role == null ? "ROBOT" + game.getRoleIdList().indexOf(key) : role.getName();
 
-				if (value) {
+				if (value)
 					builder.addAgreeName(name);
-				} else {
+				else
 					builder.addRejectName(name);
-				}
+
 			}
 			this.sendAllSeatSC(game, SC.newBuilder().setSCFightApplyExitResult(builder).build());
 			if (voteResult == VoteResult.PASS) {
@@ -1903,7 +1875,9 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
 
 					RoleRoundOverInfoData.Builder builder = RoleRoundOverInfoData.newBuilder()
 							.setGameRoleData(gameRoleData).setRoundCardsData(gameCardsData).setMinScore(minScore)
-							.setGangKai(hu.gangKai).setOverMethod(overMethod).addAllFlyCards(flys);
+							.setGangKai(hu.gangKai).setOverMethod(overMethod).addAllFlyCards(flys)
+							// TODO 回合分数不能在第一次循环中赋值，这个要改
+							.setRoundScore(roleGameInfo.roundOverResult.score);
 					scFightRoundOverBuilder.addRoleRoundOverInfoData(builder);
 				}
 			}
@@ -1997,36 +1971,6 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
 		this.sendAllSeatSC(game, SC.newBuilder().setSCFightGameOver(scFightGameOver).build());
 
 		this.notifyObservers(FightConstant.FIGHT_GAME_OVER, scFightGameOver);
-	}
-
-	/**
-	 * 保存 录像
-	 * 
-	 * @param game
-	 */
-
-	private void savaVideo(Game game) {
-		for (RoleGameInfo info : game.getRoleIdMap().values()) {
-			GameVideoData.Builder gameVideoData = GameVideoData.newBuilder();
-			for (List<SC> list : info.videoData.getScList()) {
-				RoundVideoData.Builder roundVideoData = RoundVideoData.newBuilder();
-				for (SC sc : list) {
-					roundVideoData.addSc(sc.toByteString());
-				}
-				gameVideoData.addRoundVideoData(roundVideoData);
-			}
-
-			VideoUtils.toVideoData(info, gameVideoData.build().toByteArray());
-
-			gameDB.getInsertPool().execute(new EntityRunnable<VideoData>(info.videoData) {
-
-				@Override
-				public void run(VideoData entity) {
-					videoDao.insert(entity);
-				}
-			});
-
-		}
 	}
 
 	/**
