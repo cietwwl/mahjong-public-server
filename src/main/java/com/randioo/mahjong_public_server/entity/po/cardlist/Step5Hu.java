@@ -13,7 +13,8 @@ import com.randioo.mahjong_public_server.util.Lists;
 
 public class Step5Hu extends Hu {
 	@Override
-	public void check(GameConfigData gameConfigData,List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList, boolean isMine) {
+	public void check(GameConfigData gameConfigData, List<CardList> cardLists, CardSort cardSort, int card,
+			List<CardList> showCardList, boolean isMine) {
 		this.isMine = isMine;
 		CardSort copySort = cardSort.clone();
 		for (int value : copySort.getList().get(1)) {
@@ -100,6 +101,9 @@ public class Step5Hu extends Hu {
 	}
 
 	private boolean step3(List<Integer> cards) {
+		if (cards.size() < 3)
+			return false;
+		
 		int card1 = cards.get(0);
 		int card2 = cards.get(1);
 		int card3 = cards.get(2);
