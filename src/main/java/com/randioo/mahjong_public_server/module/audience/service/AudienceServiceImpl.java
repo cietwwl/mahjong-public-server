@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.randioo.mahjong_public_server.cache.local.RaceCache;
+import com.randioo.mahjong_public_server.entity.bo.Game;
 import com.randioo.mahjong_public_server.entity.po.Race;
 import com.randioo.mahjong_public_server.module.fight.FightConstant;
 import com.randioo.mahjong_public_server.module.fight.service.FightService;
@@ -42,9 +43,9 @@ public class AudienceServiceImpl extends ObserveBaseService implements AudienceS
 
 		if (msg.equals(FightConstant.FIGHT_READY)) {
 			SC scFightReady = (SC) args[0];
-			int gameId = (int) args[1];
+			Game game = (Game) args[1];
 
-			observer_fightReady(scFightReady, gameId);
+			observer_fightReady(scFightReady, game.getGameId());
 		}
 	}
 

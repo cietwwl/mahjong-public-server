@@ -68,6 +68,8 @@ message SC{
 	optional SCRaceJoinRace SCRaceJoinRace = 50;
 	optional RaceShowQueueResponse RaceShowQueueResponse = 51;
 	optional SCRaceQueueChange SCRaceQueueChange = 52;
-
 	
-} // 52
+	optional FightRejoinResponse FightRejoinResponse = 53;//断线重连
+    optional SCFightRejoin SCFightRejoin = 54;//推送重连人
+    optional SCFightFinishRejoin SCFightFinishRejoin = 55;//重连完成
+} // 55

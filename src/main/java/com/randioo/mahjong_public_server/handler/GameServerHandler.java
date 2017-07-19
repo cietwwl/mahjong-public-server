@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.randioo.mahjong_public_server.entity.bo.Role;
 import com.randioo.mahjong_public_server.module.close.service.CloseService;
 import com.randioo.mahjong_public_server.protocol.ClientMessage.CS;
+import com.randioo.mahjong_public_server.protocol.Heart.SCHeart;
 import com.randioo.randioo_server_base.cache.RoleCache;
 import com.randioo.randioo_server_base.handler.GameServerHandlerAdapter;
 import com.randioo.randioo_server_base.log.HttpLogUtils;
@@ -82,6 +83,8 @@ public class GameServerHandler extends GameServerHandlerAdapter {
 
 	@Override
 	public void messageSent(IoSession session, Object message) throws Exception {
+		if (message.toString().contains(SCHeart.class.getSimpleName()))
+			return;
 		logger.warn(getMessage(message, session));
 	}
 

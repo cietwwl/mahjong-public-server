@@ -41,4 +41,5 @@ message CS{
 	optional RaceJoinRaceRequest RaceJoinRaceRequest = 23;
 	optional RaceShowQueueRequest RaceShowQueueRequest = 24;
 
-} // 24
+	optional FightRejoinRequest FightRejoinRequest = 25;//断线重连
+} // 25

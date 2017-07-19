@@ -40,16 +40,22 @@ public class RoleGameInfo {
 	/** 回合结果集 */
 	public RoundOverResult roundOverResult = new RoundOverResult();
 	public VideoData videoData = new VideoData();
+	/***/
+	public List<SC> roundSCList = new ArrayList<>();
 	/** 申请退出时间 */
 	public int lastRejectedExitTime;
 
 	public List<SC> getCurrentSCList(int finishRound) {
 		List<SC> list = null;
-		if (finishRound + 2 > videoData.getScList().size()) {
+		if(videoData.getScList() == null){
+			List<List<SC>> scList = new ArrayList<>();
+			videoData.setScList(scList);
+		}
+		if (finishRound + 1 > videoData.getScList().size()) {
 			list = new ArrayList<>();
 			videoData.getScList().add(list);
 		}
-		list = videoData.getScList().get(finishRound + 1);
+		list = videoData.getScList().get(finishRound);
 		return list;
 	}
 

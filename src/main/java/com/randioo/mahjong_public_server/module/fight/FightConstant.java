@@ -11,7 +11,7 @@ public class FightConstant {
 	public static final String FIGHT_NOTICE_SEND_CARD = "fight_notice_send_card";
 	public static final String FIGHT_GANG_PENG_HU = "fight_gang_peng_hu";
 	public static final String FIGHT_APPLY_LEAVE = "fight_apply_leave";
-	public static final String FIGHT_READY = "fight_ready";
+	public static final String FIGHT_READY = "fight_ready"; //准备
 	public static final String FIGHT_GAME_EXIT = "fight_exit_game";
 	
 	
@@ -51,7 +51,17 @@ public class FightConstant {
 
 
 	public static final String FIGHT_RECORD_SC = "record_sc"; //记录推送
-
-
-
+	
+	public static final String FIGHT_START = "start"; //开始游戏
+	public static final String FIGHT_TOUCH_CARD = "touch_card";//摸牌
+	public static final String FIGHT_SEND_CARD = "send_card"; //出牌
+	public static final String FIGHT_COUNT_DOWN = "count_down"; //倒计绿时
+	public static final String FIGHT_POINT_SEAT = "point_seat";//座位指绿针
+	public static final String FIGHT_VOTE_APPLY_EXIT= "vote_exit";//投票退出
+	
+	public static final String FIGHT_GANG = "gang"; //杠
+	public static final String FIGHT_PENG = "peng"; //碰
+	public static final String FIGHT_HU = "hu"; //胡
+	public static final String FIGHT_GUO= "guo"; //过
+	
 }

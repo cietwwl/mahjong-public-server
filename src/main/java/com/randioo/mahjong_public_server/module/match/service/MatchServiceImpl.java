@@ -396,8 +396,10 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 				.build());
 
 		for (RoleGameInfo info : game.getRoleIdMap().values()) {
-			if (role.getRoleId() == info.roleId)
+			if (role.getRoleId() == info.roleId){
+				this.notifyObservers(MatchConstant.JOIN_GAME, scJoinGame, gameId, info);
 				continue;
+			}
 
 			// 通知自己当前房间里面其他玩家的信息
 			GameRoleData gameRoleData = this.parseGameRoleData(info, game);
@@ -431,7 +433,9 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 					.setSCMatchJoinGame(SCMatchJoinGame.newBuilder().setGameRoleData(AIGameRoleData)).build();
 			for (RoleGameInfo roleGameInfo : realRoleGameInfos) {
 				SessionUtils.sc(roleGameInfo.roleId, scJoinGame);
+				this.notifyObservers(MatchConstant.JOIN_GAME, scJoinGame, game.getGameId(), info);
 			}
+			
 		}
 	}
 

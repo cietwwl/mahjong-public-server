@@ -8,46 +8,39 @@ public final class Test {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public static final class TestRenameRequest extends
+  public static final class TestRequest extends
       com.google.protobuf.GeneratedMessage {
-    // Use TestRenameRequest.newBuilder() to construct.
-    private TestRenameRequest() {
+    // Use TestRequest.newBuilder() to construct.
+    private TestRequest() {
       initFields();
     }
-    private TestRenameRequest(boolean noInit) {}
+    private TestRequest(boolean noInit) {}
     
-    private static final TestRenameRequest defaultInstance;
-    public static TestRenameRequest getDefaultInstance() {
+    private static final TestRequest defaultInstance;
+    public static TestRequest getDefaultInstance() {
       return defaultInstance;
     }
     
-    public TestRenameRequest getDefaultInstanceForType() {
+    public TestRequest getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.randioo.mahjong_public_server.protocol.Test.internal_static_com_randioo_mahjong_public_server_protocol_TestRenameRequest_descriptor;
+      return com.randioo.mahjong_public_server.protocol.Test.internal_static_com_randioo_mahjong_public_server_protocol_TestRequest_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.randioo.mahjong_public_server.protocol.Test.internal_static_com_randioo_mahjong_public_server_protocol_TestRenameRequest_fieldAccessorTable;
+      return com.randioo.mahjong_public_server.protocol.Test.internal_static_com_randioo_mahjong_public_server_protocol_TestRequest_fieldAccessorTable;
     }
     
-    // optional string race = 1;
-    public static final int RACE_FIELD_NUMBER = 1;
-    private boolean hasRace;
-    private java.lang.String race_ = "";
-    public boolean hasRace() { return hasRace; }
-    public java.lang.String getRace() { return race_; }
-    
-    // optional string race2 = 2;
-    public static final int RACE2_FIELD_NUMBER = 2;
-    private boolean hasRace2;
-    private java.lang.String race2_ = "";
-    public boolean hasRace2() { return hasRace2; }
-    public java.lang.String getRace2() { return race2_; }
+    // optional int32 test = 1;
+    public static final int TEST_FIELD_NUMBER = 1;
+    private boolean hasTest;
+    private int test_ = 0;
+    public boolean hasTest() { return hasTest; }
+    public int getTest() { return test_; }
     
     private void initFields() {
     }
@@ -58,11 +51,8 @@ public final class Test {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (hasRace()) {
-        output.writeString(1, getRace());
-      }
-      if (hasRace2()) {
-        output.writeString(2, getRace2());
+      if (hasTest()) {
+        output.writeInt32(1, getTest());
       }
       getUnknownFields().writeTo(output);
     }
@@ -73,54 +63,50 @@ public final class Test {
       if (size != -1) return size;
     
       size = 0;
-      if (hasRace()) {
+      if (hasTest()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(1, getRace());
-      }
-      if (hasRace2()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(2, getRace2());
+          .computeInt32Size(1, getTest());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
     }
     
-    public static com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Test.TestRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Test.TestRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest parseFrom(byte[] data)
+    public static com.randioo.mahjong_public_server.protocol.Test.TestRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Test.TestRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest parseFrom(java.io.InputStream input)
+    public static com.randioo.mahjong_public_server.protocol.Test.TestRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Test.TestRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest parseDelimitedFrom(java.io.InputStream input)
+    public static com.randioo.mahjong_public_server.protocol.Test.TestRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -129,7 +115,7 @@ public final class Test {
         return null;
       }
     }
-    public static com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest parseDelimitedFrom(
+    public static com.randioo.mahjong_public_server.protocol.Test.TestRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -140,12 +126,12 @@ public final class Test {
         return null;
       }
     }
-    public static com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Test.TestRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Test.TestRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -155,25 +141,25 @@ public final class Test {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest prototype) {
+    public static Builder newBuilder(com.randioo.mahjong_public_server.protocol.Test.TestRequest prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
-      private com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest result;
+      private com.randioo.mahjong_public_server.protocol.Test.TestRequest result;
       
-      // Construct using com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest.newBuilder()
+      // Construct using com.randioo.mahjong_public_server.protocol.Test.TestRequest.newBuilder()
       private Builder() {}
       
       private static Builder create() {
         Builder builder = new Builder();
-        builder.result = new com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest();
+        builder.result = new com.randioo.mahjong_public_server.protocol.Test.TestRequest();
         return builder;
       }
       
-      protected com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest internalGetResult() {
+      protected com.randioo.mahjong_public_server.protocol.Test.TestRequest internalGetResult() {
         return result;
       }
       
@@ -182,7 +168,7 @@ public final class Test {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
         }
-        result = new com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest();
+        result = new com.randioo.mahjong_public_server.protocol.Test.TestRequest();
         return this;
       }
       
@@ -192,24 +178,24 @@ public final class Test {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest.getDescriptor();
+        return com.randioo.mahjong_public_server.protocol.Test.TestRequest.getDescriptor();
       }
       
-      public com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest getDefaultInstanceForType() {
-        return com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest.getDefaultInstance();
+      public com.randioo.mahjong_public_server.protocol.Test.TestRequest getDefaultInstanceForType() {
+        return com.randioo.mahjong_public_server.protocol.Test.TestRequest.getDefaultInstance();
       }
       
       public boolean isInitialized() {
         return result.isInitialized();
       }
-      public com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest build() {
+      public com.randioo.mahjong_public_server.protocol.Test.TestRequest build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return buildPartial();
       }
       
-      private com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest buildParsed()
+      private com.randioo.mahjong_public_server.protocol.Test.TestRequest buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
         if (!isInitialized()) {
           throw newUninitializedMessageException(
@@ -218,32 +204,29 @@ public final class Test {
         return buildPartial();
       }
       
-      public com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest buildPartial() {
+      public com.randioo.mahjong_public_server.protocol.Test.TestRequest buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
         }
-        com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest returnMe = result;
+        com.randioo.mahjong_public_server.protocol.Test.TestRequest returnMe = result;
         result = null;
         return returnMe;
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest) {
-          return mergeFrom((com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest)other);
+        if (other instanceof com.randioo.mahjong_public_server.protocol.Test.TestRequest) {
+          return mergeFrom((com.randioo.mahjong_public_server.protocol.Test.TestRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest other) {
-        if (other == com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest.getDefaultInstance()) return this;
-        if (other.hasRace()) {
-          setRace(other.getRace());
-        }
-        if (other.hasRace2()) {
-          setRace2(other.getRace2());
+      public Builder mergeFrom(com.randioo.mahjong_public_server.protocol.Test.TestRequest other) {
+        if (other == com.randioo.mahjong_public_server.protocol.Test.TestRequest.getDefaultInstance()) return this;
+        if (other.hasTest()) {
+          setTest(other.getTest());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -270,12 +253,8 @@ public final class Test {
               }
               break;
             }
-            case 10: {
-              setRace(input.readString());
-              break;
-            }
-            case 18: {
-              setRace2(input.readString());
+            case 8: {
+              setTest(input.readInt32());
               break;
             }
           }
@@ -283,85 +262,61 @@ public final class Test {
       }
       
       
-      // optional string race = 1;
-      public boolean hasRace() {
-        return result.hasRace();
+      // optional int32 test = 1;
+      public boolean hasTest() {
+        return result.hasTest();
       }
-      public java.lang.String getRace() {
-        return result.getRace();
+      public int getTest() {
+        return result.getTest();
       }
-      public Builder setRace(java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  result.hasRace = true;
-        result.race_ = value;
+      public Builder setTest(int value) {
+        result.hasTest = true;
+        result.test_ = value;
         return this;
       }
-      public Builder clearRace() {
-        result.hasRace = false;
-        result.race_ = getDefaultInstance().getRace();
+      public Builder clearTest() {
+        result.hasTest = false;
+        result.test_ = 0;
         return this;
       }
       
-      // optional string race2 = 2;
-      public boolean hasRace2() {
-        return result.hasRace2();
-      }
-      public java.lang.String getRace2() {
-        return result.getRace2();
-      }
-      public Builder setRace2(java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  result.hasRace2 = true;
-        result.race2_ = value;
-        return this;
-      }
-      public Builder clearRace2() {
-        result.hasRace2 = false;
-        result.race2_ = getDefaultInstance().getRace2();
-        return this;
-      }
-      
-      // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.TestRenameRequest)
+      // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.TestRequest)
     }
     
     static {
-      defaultInstance = new TestRenameRequest(true);
+      defaultInstance = new TestRequest(true);
       com.randioo.mahjong_public_server.protocol.Test.internalForceInit();
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.TestRenameRequest)
+    // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.TestRequest)
   }
   
-  public static final class TestRenameResponse extends
+  public static final class TestResponse extends
       com.google.protobuf.GeneratedMessage {
-    // Use TestRenameResponse.newBuilder() to construct.
-    private TestRenameResponse() {
+    // Use TestResponse.newBuilder() to construct.
+    private TestResponse() {
       initFields();
     }
-    private TestRenameResponse(boolean noInit) {}
+    private TestResponse(boolean noInit) {}
     
-    private static final TestRenameResponse defaultInstance;
-    public static TestRenameResponse getDefaultInstance() {
+    private static final TestResponse defaultInstance;
+    public static TestResponse getDefaultInstance() {
       return defaultInstance;
     }
     
-    public TestRenameResponse getDefaultInstanceForType() {
+    public TestResponse getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.randioo.mahjong_public_server.protocol.Test.internal_static_com_randioo_mahjong_public_server_protocol_TestRenameResponse_descriptor;
+      return com.randioo.mahjong_public_server.protocol.Test.internal_static_com_randioo_mahjong_public_server_protocol_TestResponse_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.randioo.mahjong_public_server.protocol.Test.internal_static_com_randioo_mahjong_public_server_protocol_TestRenameResponse_fieldAccessorTable;
+      return com.randioo.mahjong_public_server.protocol.Test.internal_static_com_randioo_mahjong_public_server_protocol_TestResponse_fieldAccessorTable;
     }
     
     // optional int32 errorCode = 1 [default = 1];
@@ -401,41 +356,41 @@ public final class Test {
       return size;
     }
     
-    public static com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Test.TestResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Test.TestResponse parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse parseFrom(byte[] data)
+    public static com.randioo.mahjong_public_server.protocol.Test.TestResponse parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Test.TestResponse parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse parseFrom(java.io.InputStream input)
+    public static com.randioo.mahjong_public_server.protocol.Test.TestResponse parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Test.TestResponse parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse parseDelimitedFrom(java.io.InputStream input)
+    public static com.randioo.mahjong_public_server.protocol.Test.TestResponse parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -444,7 +399,7 @@ public final class Test {
         return null;
       }
     }
-    public static com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse parseDelimitedFrom(
+    public static com.randioo.mahjong_public_server.protocol.Test.TestResponse parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -455,12 +410,12 @@ public final class Test {
         return null;
       }
     }
-    public static com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Test.TestResponse parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse parseFrom(
+    public static com.randioo.mahjong_public_server.protocol.Test.TestResponse parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -470,25 +425,25 @@ public final class Test {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse prototype) {
+    public static Builder newBuilder(com.randioo.mahjong_public_server.protocol.Test.TestResponse prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
-      private com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse result;
+      private com.randioo.mahjong_public_server.protocol.Test.TestResponse result;
       
-      // Construct using com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse.newBuilder()
+      // Construct using com.randioo.mahjong_public_server.protocol.Test.TestResponse.newBuilder()
       private Builder() {}
       
       private static Builder create() {
         Builder builder = new Builder();
-        builder.result = new com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse();
+        builder.result = new com.randioo.mahjong_public_server.protocol.Test.TestResponse();
         return builder;
       }
       
-      protected com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse internalGetResult() {
+      protected com.randioo.mahjong_public_server.protocol.Test.TestResponse internalGetResult() {
         return result;
       }
       
@@ -497,7 +452,7 @@ public final class Test {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
         }
-        result = new com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse();
+        result = new com.randioo.mahjong_public_server.protocol.Test.TestResponse();
         return this;
       }
       
@@ -507,24 +462,24 @@ public final class Test {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse.getDescriptor();
+        return com.randioo.mahjong_public_server.protocol.Test.TestResponse.getDescriptor();
       }
       
-      public com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse getDefaultInstanceForType() {
-        return com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse.getDefaultInstance();
+      public com.randioo.mahjong_public_server.protocol.Test.TestResponse getDefaultInstanceForType() {
+        return com.randioo.mahjong_public_server.protocol.Test.TestResponse.getDefaultInstance();
       }
       
       public boolean isInitialized() {
         return result.isInitialized();
       }
-      public com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse build() {
+      public com.randioo.mahjong_public_server.protocol.Test.TestResponse build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return buildPartial();
       }
       
-      private com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse buildParsed()
+      private com.randioo.mahjong_public_server.protocol.Test.TestResponse buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
         if (!isInitialized()) {
           throw newUninitializedMessageException(
@@ -533,27 +488,27 @@ public final class Test {
         return buildPartial();
       }
       
-      public com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse buildPartial() {
+      public com.randioo.mahjong_public_server.protocol.Test.TestResponse buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
         }
-        com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse returnMe = result;
+        com.randioo.mahjong_public_server.protocol.Test.TestResponse returnMe = result;
         result = null;
         return returnMe;
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse) {
-          return mergeFrom((com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse)other);
+        if (other instanceof com.randioo.mahjong_public_server.protocol.Test.TestResponse) {
+          return mergeFrom((com.randioo.mahjong_public_server.protocol.Test.TestResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse other) {
-        if (other == com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.randioo.mahjong_public_server.protocol.Test.TestResponse other) {
+        if (other == com.randioo.mahjong_public_server.protocol.Test.TestResponse.getDefaultInstance()) return this;
         if (other.hasErrorCode()) {
           setErrorCode(other.getErrorCode());
         }
@@ -609,28 +564,28 @@ public final class Test {
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.TestRenameResponse)
+      // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.TestResponse)
     }
     
     static {
-      defaultInstance = new TestRenameResponse(true);
+      defaultInstance = new TestResponse(true);
       com.randioo.mahjong_public_server.protocol.Test.internalForceInit();
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.TestRenameResponse)
+    // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.TestResponse)
   }
   
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_randioo_mahjong_public_server_protocol_TestRenameRequest_descriptor;
+    internal_static_com_randioo_mahjong_public_server_protocol_TestRequest_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_randioo_mahjong_public_server_protocol_TestRenameRequest_fieldAccessorTable;
+      internal_static_com_randioo_mahjong_public_server_protocol_TestRequest_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_randioo_mahjong_public_server_protocol_TestRenameResponse_descriptor;
+    internal_static_com_randioo_mahjong_public_server_protocol_TestResponse_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_randioo_mahjong_public_server_protocol_TestRenameResponse_fieldAccessorTable;
+      internal_static_com_randioo_mahjong_public_server_protocol_TestResponse_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -641,32 +596,31 @@ public final class Test {
   static {
     java.lang.String[] descriptorData = {
       "\n\nTest.proto\022*com.randioo.mahjong_public" +
-      "_server.protocol\032\014Entity.proto\"0\n\021TestRe" +
-      "nameRequest\022\014\n\004race\030\001 \001(\t\022\r\n\005race2\030\002 \001(\t" +
-      "\"*\n\022TestRenameResponse\022\024\n\terrorCode\030\001 \001(" +
-      "\005:\0011"
+      "_server.protocol\032\014Entity.proto\"\033\n\013TestRe" +
+      "quest\022\014\n\004test\030\001 \001(\005\"$\n\014TestResponse\022\024\n\te" +
+      "rrorCode\030\001 \001(\005:\0011"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
             com.google.protobuf.Descriptors.FileDescriptor root) {
           descriptor = root;
-          internal_static_com_randioo_mahjong_public_server_protocol_TestRenameRequest_descriptor =
+          internal_static_com_randioo_mahjong_public_server_protocol_TestRequest_descriptor =
             getDescriptor().getMessageTypes().get(0);
-          internal_static_com_randioo_mahjong_public_server_protocol_TestRenameRequest_fieldAccessorTable = new
+          internal_static_com_randioo_mahjong_public_server_protocol_TestRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_randioo_mahjong_public_server_protocol_TestRenameRequest_descriptor,
-              new java.lang.String[] { "Race", "Race2", },
-              com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest.class,
-              com.randioo.mahjong_public_server.protocol.Test.TestRenameRequest.Builder.class);
-          internal_static_com_randioo_mahjong_public_server_protocol_TestRenameResponse_descriptor =
+              internal_static_com_randioo_mahjong_public_server_protocol_TestRequest_descriptor,
+              new java.lang.String[] { "Test", },
+              com.randioo.mahjong_public_server.protocol.Test.TestRequest.class,
+              com.randioo.mahjong_public_server.protocol.Test.TestRequest.Builder.class);
+          internal_static_com_randioo_mahjong_public_server_protocol_TestResponse_descriptor =
             getDescriptor().getMessageTypes().get(1);
-          internal_static_com_randioo_mahjong_public_server_protocol_TestRenameResponse_fieldAccessorTable = new
+          internal_static_com_randioo_mahjong_public_server_protocol_TestResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_randioo_mahjong_public_server_protocol_TestRenameResponse_descriptor,
+              internal_static_com_randioo_mahjong_public_server_protocol_TestResponse_descriptor,
               new java.lang.String[] { "ErrorCode", },
-              com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse.class,
-              com.randioo.mahjong_public_server.protocol.Test.TestRenameResponse.Builder.class);
+              com.randioo.mahjong_public_server.protocol.Test.TestResponse.class,
+              com.randioo.mahjong_public_server.protocol.Test.TestResponse.Builder.class);
           return null;
         }
       };

@@ -1351,6 +1351,13 @@ public final class Match {
     public boolean hasGameRoleData() { return hasGameRoleData; }
     public com.randioo.mahjong_public_server.protocol.Entity.GameRoleData getGameRoleData() { return gameRoleData_; }
     
+    // optional string lockString = 2;
+    public static final int LOCKSTRING_FIELD_NUMBER = 2;
+    private boolean hasLockString;
+    private java.lang.String lockString_ = "";
+    public boolean hasLockString() { return hasLockString; }
+    public java.lang.String getLockString() { return lockString_; }
+    
     private void initFields() {
       gameRoleData_ = com.randioo.mahjong_public_server.protocol.Entity.GameRoleData.getDefaultInstance();
     }
@@ -1364,6 +1371,9 @@ public final class Match {
       if (hasGameRoleData()) {
         output.writeMessage(1, getGameRoleData());
       }
+      if (hasLockString()) {
+        output.writeString(2, getLockString());
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -1376,6 +1386,10 @@ public final class Match {
       if (hasGameRoleData()) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getGameRoleData());
+      }
+      if (hasLockString()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(2, getLockString());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1538,6 +1552,9 @@ public final class Match {
         if (other.hasGameRoleData()) {
           mergeGameRoleData(other.getGameRoleData());
         }
+        if (other.hasLockString()) {
+          setLockString(other.getLockString());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1570,6 +1587,10 @@ public final class Match {
               }
               input.readMessage(subBuilder, extensionRegistry);
               setGameRoleData(subBuilder.buildPartial());
+              break;
+            }
+            case 18: {
+              setLockString(input.readString());
               break;
             }
           }
@@ -1611,6 +1632,27 @@ public final class Match {
       public Builder clearGameRoleData() {
         result.hasGameRoleData = false;
         result.gameRoleData_ = com.randioo.mahjong_public_server.protocol.Entity.GameRoleData.getDefaultInstance();
+        return this;
+      }
+      
+      // optional string lockString = 2;
+      public boolean hasLockString() {
+        return result.hasLockString();
+      }
+      public java.lang.String getLockString() {
+        return result.getLockString();
+      }
+      public Builder setLockString(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasLockString = true;
+        result.lockString_ = value;
+        return this;
+      }
+      public Builder clearLockString() {
+        result.hasLockString = false;
+        result.lockString_ = getDefaultInstance().getLockString();
         return this;
       }
       
@@ -2460,17 +2502,17 @@ public final class Match {
       "\01328.com.randioo.mahjong_public_server.pr" +
       "otocol.GameRoleData\"*\n\024MatchJoinGameRequ" +
       "est\022\022\n\nlockString\030\001 \001(\t\"-\n\025MatchJoinGame",
-      "Response\022\024\n\terrorCode\030\001 \001(\005:\0011\"a\n\017SCMatc" +
+      "Response\022\024\n\terrorCode\030\001 \001(\005:\0011\"u\n\017SCMatc" +
       "hJoinGame\022N\n\014gameRoleData\030\001 \001(\01328.com.ra" +
       "ndioo.mahjong_public_server.protocol.Gam" +
-      "eRoleData\"a\n\017SCMatchMineInfo\022N\n\014gameRole" +
-      "Data\030\001 \001(\01328.com.randioo.mahjong_public_" +
-      "server.protocol.GameRoleData\"\253\001\n\021SCMatch" +
-      "CreateGame\022\022\n\nlockString\030\001 \001(\t\022\016\n\006gameId" +
-      "\030\002 \001(\t\022\020\n\010roomType\030\003 \001(\005\022\020\n\010roundNum\030\004 \001" +
-      "(\005\022N\n\014gameRoleData\030\005 \001(\01328.com.randioo.m" +
-      "ahjong_public_server.protocol.GameRoleDa",
-      "ta"
+      "eRoleData\022\022\n\nlockString\030\002 \001(\t\"a\n\017SCMatch" +
+      "MineInfo\022N\n\014gameRoleData\030\001 \001(\01328.com.ran" +
+      "dioo.mahjong_public_server.protocol.Game" +
+      "RoleData\"\253\001\n\021SCMatchCreateGame\022\022\n\nlockSt" +
+      "ring\030\001 \001(\t\022\016\n\006gameId\030\002 \001(\t\022\020\n\010roomType\030\003" +
+      " \001(\005\022\020\n\010roundNum\030\004 \001(\005\022N\n\014gameRoleData\030\005" +
+      " \001(\01328.com.randioo.mahjong_public_server",
+      ".protocol.GameRoleData"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2514,7 +2556,7 @@ public final class Match {
           internal_static_com_randioo_mahjong_public_server_protocol_SCMatchJoinGame_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_randioo_mahjong_public_server_protocol_SCMatchJoinGame_descriptor,
-              new java.lang.String[] { "GameRoleData", },
+              new java.lang.String[] { "GameRoleData", "LockString", },
               com.randioo.mahjong_public_server.protocol.Match.SCMatchJoinGame.class,
               com.randioo.mahjong_public_server.protocol.Match.SCMatchJoinGame.Builder.class);
           internal_static_com_randioo_mahjong_public_server_protocol_SCMatchMineInfo_descriptor =

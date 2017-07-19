@@ -41,38 +41,119 @@ public class VideoServiceImpl extends ObserveBaseService implements VideoService
 
 	@Override
 	public void initService() {
-		matchService.addObserver(this);
-		// fightService.addObserver(this);
+	
 	}
 
+	// 所有执行的操作
+	private void allRecord(Object... args) {
+		SC sc = (SC) args[0];
+		Game game = (Game) args[1];
+		for (RoleGameInfo roleGameInfo : game.getRoleIdMap().values()) {
+			List<SC> list = roleGameInfo.getCurrentSCList(game
+					.getFinishRoundCount() + 1); // 此时玩家进入游戏时，认为
+			list.add(sc);
+			roleGameInfo.roundSCList.add(sc);
+		}
+	}
+    
+	// 所有执行的操作
+		private void OnlyOneRecord(Object... args) {
+			SC sc = (SC) args[0];
+			Game game = (Game) args[1];
+			RoleGameInfo Info = (RoleGameInfo) args[2];
+			Info.roundSCList.add(sc);
+			for (RoleGameInfo roleGameInfo : game.getRoleIdMap().values()) {
+				List<SC> list = roleGameInfo.getCurrentSCList(game.getFinishRoundCount() + 1); // 此时玩家进入游戏时，认为
+				list.add(sc);
+			}
+		}
 	@Override
 	public void update(Observer observer, String msg, Object... args) {
+		//开始游戏
+		if (FightConstant.FIGHT_START.equals(msg)) {
+			OnlyOneRecord(args);
+		}
+		//摸牌
+		if (FightConstant.FIGHT_TOUCH_CARD.equals(msg)) {
+			OnlyOneRecord(args);
+		}
+		//出牌
+		if (FightConstant.FIGHT_SEND_CARD.equals(msg)) {
+			allRecord(args);
+		}
+		//通知出牌
+		if (FightConstant.FIGHT_NOTICE_SEND_CARD.equals(msg)) {
+			allRecord(args);
+		}
+		//倒计绿时
+		if (FightConstant.FIGHT_COUNT_DOWN.equals(msg)) {
+			allRecord(args);
+		}
+		//座位指绿针
+		if (FightConstant.FIGHT_POINT_SEAT.equals(msg)) {
+			allRecord(args);
+		}
+		//投票退出
+		if (FightConstant.FIGHT_VOTE_APPLY_EXIT.equals(msg)) {
+		}
+		//杠
+		if (FightConstant.FIGHT_GANG.equals(msg)) {
+			allRecord(args);
+		}
+		//碰
+		if (FightConstant.FIGHT_PENG.equals(msg)) {
+			allRecord(args);
+		}
+		//胡
+		if (FightConstant.FIGHT_HU.equals(msg)) {
+			allRecord(args);
+		}
+		//过
+		if (FightConstant.FIGHT_GUO.equals(msg)) {
+		}
 		if (FightConstant.FIGHT_READY.equals(msg)) {
+			
 			SC sc = (SC) args[0];
-			int gameId = (int) args[1];
-			Game game = fightService.getGameById(gameId);
+			Game game = (Game) args[1];
+			for (RoleGameInfo roleGameInfo : game.getRoleIdMap().values()) {
+				List<SC> list = roleGameInfo.getCurrentSCList(game.getFinishRoundCount() + 1); // 此时玩家进入游戏时，认为
+				list.add(sc);
+				
+				roleGameInfo.roundSCList.add(sc);
+			}
 		}
 		if (MatchConstant.JOIN_GAME.equals(msg)) {
 			SC sc = (SC) args[0];
 			int gameId = (int) args[1];
 			RoleGameInfo info = (RoleGameInfo) args[2];
 			Game game = fightService.getGameById(gameId);
-			List<SC> list = info.getCurrentSCList(game.getFinishRoundCount()); // 此时玩家进入游戏时，认为
-																				// finishRound为-1
-			list.add(sc);
+			for (RoleGameInfo roleGameInfo : game.getRoleIdMap().values()) {
+				List<SC> list = roleGameInfo.getCurrentSCList(game
+						.getFinishRoundCount()); // 此时玩家进入游戏时，认为
+				list.add(sc);
+				roleGameInfo.roundSCList.add(sc);
+			}
 		}
-		if (FightConstant.FIGHT_RECORD_SC.equals(msg)) {
+		if(FightConstant.ROUND_OVER.equals(msg)) {
 			SC sc = (SC) args[0];
-			int gameId = (int) args[1];
-			RoleGameInfo info = (RoleGameInfo) args[2];
-			Game game = fightService.getGameById(gameId);
-			List<SC> list = info.getCurrentSCList(game.getFinishRoundCount() + 1); // 此时玩家进入游戏时，认为
-																					// finishRound为-1
-			list.add(sc);
+			Game game = (Game) args[1];
+			for (RoleGameInfo roleGameInfo : game.getRoleIdMap().values()) {
+				List<SC> list = roleGameInfo.getCurrentSCList(game.getFinishRoundCount() + 1); // 此时玩家进入游戏时，认为
+				list.add(sc);
+				roleGameInfo.roundSCList.clear();
+			}
 		}
-
+		
+		if (FightConstant.FIGHT_RECORD_SC.equals(msg)) {
+		}
+         
 		if (FightConstant.FIGHT_GAME_OVER.equals(msg)) {
-			Game game = (Game) args[0];
+			SC sc = (SC) args[0];
+			Game game = (Game) args[1];
+			for (RoleGameInfo roleGameInfo : game.getRoleIdMap().values()) {
+				List<SC> list = roleGameInfo.getCurrentSCList(game.getFinishRoundCount() + 1); // 此时玩家进入游戏时，认为
+				list.add(sc);
+			}
 			this.saveVideo(game);
 		}
 
