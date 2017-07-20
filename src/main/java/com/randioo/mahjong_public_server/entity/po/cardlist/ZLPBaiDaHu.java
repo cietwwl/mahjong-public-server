@@ -16,24 +16,11 @@ public class ZLPBaiDaHu extends Hu {
 
 		Set<Integer> baiDaHu = new HashSet<>();
 		baiDaHu.add(801);
-		// 1.先去除所有的碰
+		//1.克隆牌组
 		CardSort cardSort1 = cardSort.clone();
-		List<Integer> pengStoreNums = new ArrayList<>(cardSort1.get(2).size());
-		List<Integer> pengNums = new ArrayList<>(cardSort1.get(2));
-		for (int num : pengNums) {
-			if (baiDaHu.contains(num))
-				continue;
-
-			pengStoreNums.add(num);
-			cardSort.remove(num, num, num);
-		}
-
-		List<Integer> cards = cardSort1.toArray();
-		Collections.sort(cards);
 		
-		for(int i = 0;i<cards.size();i++){
-			
-		}
+		//2.去除所有的白搭
+		int baiDaCount = cardSort1.removeAll(801);
 	}
 
 	@Override

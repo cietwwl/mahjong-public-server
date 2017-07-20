@@ -68,13 +68,16 @@ public class CardSort {
 	 * 
 	 * @param card
 	 */
-	public void removeAll(int card) {
+	public int removeAll(int card) {
+		int count = 0;
 		for (int i = 0; i < values.size(); i++) {
 			Set<Integer> set = values.get(i);
 			if (set.contains(card)) {
 				set.remove(card);
+				count++;
 			}
 		}
+		return count;
 	}
 
 	/**
