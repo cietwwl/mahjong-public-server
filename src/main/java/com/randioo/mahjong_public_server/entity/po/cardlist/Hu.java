@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.randioo.mahjong_public_server.entity.po.CardSort;
+import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
 
 public abstract class Hu extends AbstractCardList {
 
@@ -15,5 +16,5 @@ public abstract class Hu extends AbstractCardList {
 	public boolean gangChong;
 	public int gangChongTargetSeat;
 
-	public abstract void checkTing(CardSort cardSort, List<Integer> waitCards);
+	public abstract void checkTing(CardSort cardSort, List<Integer> waitCards,GameConfigData gameConfigData);
 }

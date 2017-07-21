@@ -1,6 +1,6 @@
 package com.randioo.mahjong_public_server.util;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lists {
@@ -32,18 +32,116 @@ public class Lists {
 			}
 		}
 	}
-	
-	public static void main(String[] args) {
-		List<Integer> list = new ArrayList<>();
-		list.add(14);
-		list.add(14);
-		list.add(14);
-		list.add(14);
-		List<Integer> removeList = new ArrayList<>();
-		removeList.add(14);
-		removeList.add(14);
-		removeList.add(14);
-		removeElementByList(list, removeList);
-		System.out.println(list);
+
+	/**
+	 * 从数组指定位置查找是否存在一个值
+	 * 
+	 * @param arr
+	 * @param startIndex
+	 * @param endIndex
+	 * @param value
+	 * @return
+	 * @author wcy 2017年7月21日
+	 */
+	public static <T> boolean contains(List<T> arr, int startIndex, int endIndex, Object o) {
+		return indexOf(arr, startIndex, endIndex, o) >= 0;
 	}
+
+	/**
+	 * 返回列表中某值的数量
+	 * 
+	 * @param arr
+	 * @param startIndex
+	 * @param endIndex
+	 * @param o
+	 * @return
+	 * @author wcy 2017年7月21日
+	 */
+	public static <T> int containsCount(List<T> arr, Object o) {
+		return containsCount(arr, 0, arr.size(), o);
+	}
+
+	/**
+	 * 返回列表中指定位置某值的数量
+	 * 
+	 * @param arr
+	 * @param startIndex
+	 * @param endIndex
+	 * @param o
+	 * @return
+	 * @author wcy 2017年7月21日
+	 */
+	public static <T> int containsCount(List<T> arr, int startIndex, int endIndex, Object o) {
+		int count = 0;
+		for (int i = startIndex; i < endIndex;) {
+			int index = indexOf(arr, i, endIndex, o);
+
+			if (index == -1)
+				break;
+			
+			i = index + 1;
+			count++;
+
+		}
+		return count;
+	}
+
+	/**
+	 * 从数组指定位置返回一个值的索引,不存在返回-1
+	 * 
+	 * @param arr
+	 * @param startIndex
+	 * @param endIndex
+	 * @param o
+	 * @return
+	 * @author wcy 2017年7月21日
+	 */
+	public static <T> int indexOf(List<T> arr, int startIndex, int endIndex, Object o) {
+		if (startIndex < 0 || endIndex > arr.size() || startIndex > endIndex)
+			throw new RuntimeException("index out of bounds");
+
+		if (o == null) {
+			for (int i = startIndex; i < endIndex; i++)
+				if (arr.get(i) == null)
+					return i;
+		} else {
+			for (int i = startIndex; i < endIndex; i++)
+				if (o.equals(arr.get(i)))
+					return i;
+		}
+
+		return -1;
+	}
+
+	/**
+	 * 移除所有的指定的索引
+	 * 
+	 * @param sources
+	 * @param indexList
+	 * @author wcy 2017年7月21日
+	 */
+	public static <T> void removeAllIndex(List<T> sources, List<Integer> indexList) {
+		Collections.sort(indexList);
+
+		int temp = -1;
+		int i = sources.size() - 1;
+		for (int j = indexList.size() - 1; j >= 0;) {
+			int index = indexList.get(j);
+			if (index == temp) {
+				j--;
+				continue;
+			}
+			for (; i >= 0; i--) {
+				if (index > i)
+					continue;
+				if (index == i) {
+					temp = index;
+					sources.remove(i);
+					j--;
+					break;
+				}
+			}
+		}
+	}
+
 }

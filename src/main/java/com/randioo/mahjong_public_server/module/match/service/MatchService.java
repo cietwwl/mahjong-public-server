@@ -1,5 +1,7 @@
 package com.randioo.mahjong_public_server.module.match.service;
 
+import org.apache.mina.core.session.IoSession;
+
 import com.google.protobuf.GeneratedMessage;
 import com.randioo.mahjong_public_server.entity.bo.Game;
 import com.randioo.mahjong_public_server.entity.bo.Role;
@@ -75,5 +77,7 @@ public interface MatchService extends ObserveBaseServiceInterface {
 	 * @author wcy 2017年7月14日
 	 */
 	void serviceCancelMatch(Role role);
+	
+	void checkRoom(String roomId,IoSession session);
 
 }

@@ -23,6 +23,7 @@ message MatchJoinGameResponse{
 
 message SCMatchJoinGame{
 	optional GameRoleData gameRoleData = 1;
+	optional bool isMe = 2;
 }
 
 message SCMatchMineInfo{
@@ -35,4 +36,13 @@ message SCMatchCreateGame{
 	optional int32 roomType = 3;
 	optional int32 roundNum = 4;
 	optional GameRoleData gameRoleData = 5;
+}
+
+message MatchCheckRoomRequest{
+	optional string roomId =1;
+	
+}
+
+message MatchCheckRoomResponse{
+	optional bool exist = 1;
 }

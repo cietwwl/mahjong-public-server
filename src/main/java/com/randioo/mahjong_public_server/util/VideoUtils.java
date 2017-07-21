@@ -13,26 +13,28 @@ import com.randioo.mahjong_public_server.protocol.ServerMessage.SC;
 import com.randioo.randioo_server_base.cache.RoleCache;
 
 public class VideoUtils {
-//	public static void parseVideo(VideoData data){
-//		try {
-//			return video.parseFrom(data.getVideo());
-//		} catch (InvalidProtocolBufferException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			return null;
-//		}
-//		
-//	}
-	public static void parseVideoData(VideoData data){
+	// public static void parseVideo(VideoData data){
+	// try {
+	// return video.parseFrom(data.getVideo());
+	// } catch (InvalidProtocolBufferException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// return null;
+	// }
+	//
+	// }
+	public static void parseVideoData(VideoData data) {
 		try {
-			if(data.getScList()==null){
+			if (data.getScList() == null) {
 				List<List<SC>> scList = new ArrayList<>();
 				data.setScList(scList);
-		    }
-			GameVideoData  gameVideoData = GameVideoData.parseFrom(data.getData());
-			for(int i = 0 ; i<gameVideoData.getRoundVideoDataCount();i++){
+			}
+			GameVideoData gameVideoData = GameVideoData.parseFrom(data
+					.getData());
+			for (int i = 0; i < gameVideoData.getRoundVideoDataCount(); i++) {
 				List<SC> list = new ArrayList<>();
-				for(ByteString  byteString:gameVideoData.getRoundVideoData(i).getScList()){
+				for (ByteString byteString : gameVideoData.getRoundVideoData(i)
+						.getScList()) {
 					list.add(SC.parseFrom(byteString));
 				}
 				data.getScList().add(list);
@@ -41,13 +43,16 @@ public class VideoUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}  
-	public static void toVideoData(RoleGameInfo info,byte[] data){
-		VideoData videoData = info.videoData ;
+	}
+
+	public static void toVideoData(RoleGameInfo info, byte[] data) {
+		VideoData videoData = info.videoData;
 		videoData.setRoleId(info.roleId);
-		Role role = (Role) RoleCache.getRoleMap().get(info.roleId);
-		videoData.setGameId(role.getGameId());
+		Role role = null;
+		if (info.roleId != 0) {
+			role = (Role) RoleCache.getRoleMap().get(info.roleId);
+			videoData.setGameId(role.getGameId());
+		}
 		videoData.setData(data);
 	}
-	
 }

@@ -2,6 +2,7 @@ package com.randioo.mahjong_public_server.entity.po.cardlist;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -12,77 +13,162 @@ import com.randioo.mahjong_public_server.util.Lists;
 public class BaiDaHu extends Hu {
 
 	public boolean checkBaiDa(CardSort cardSort) {
-		// TODO 从配置加载 有四个红中时是否直接胡
-
-		boolean config = true;
-		CardSort cardSort1 = cardSort.clone();
-
-		int baiDaCount = cardSort1.count(801); // 红中个数
-		if (config) {
-			if (baiDaCount == 4)
-				return true;
-		}
-		// 移除红中
-		cardSort1.removeAll(801);
-
-		// 挑3
-		CardSort copySort2 = cardSort1.clone();
-		List<CardList> tempCardList2 = new ArrayList<>();
-
-		removePeng(copySort2, tempCardList2);
-		removeChi(copySort2, tempCardList2);
-
-		CardSort copySort3 = cardSort1.clone();
-		List<CardList> tempCardList3 = new ArrayList<>();
-
-		removeChi(copySort3, tempCardList3);
-		removePeng(copySort3, tempCardList3);
-
-		CardSort tempCardSort = copySort2.sumCard() <= copySort3.sumCard() ? copySort2 : copySort3;
-
-		// 计算需要百搭的个数
-
-		// 二连 个数
-		int lianCount = 0;
-
-		for (Set<Integer> set : tempCardSort.getList()) {
-			List<Integer> list = new ArrayList<>(set);
-			for (int i = 0; i < list.size() - 1; i++) {
-				if (list.get(i) + 1 == list.get(i + 1)) {
-					lianCount++;
-
-					// 删除一组 二连
-					set.remove(list.get(i));
-					set.remove(list.get(i) + 1);
+		List<Integer> list = cardSort.toArray();
+		Collections.sort(list);
+		for (int i = 0; i < list.size() - 1; i++) {
+			Integer card1 = list.get(i);
+			if (Collections.frequency(list, card1) >= 2) {
+				List<Integer> list2 = new ArrayList<>(list);
+				list2.remove(card1);
+				list2.remove(card1);
+				System.out.println("=================>");
+				System.out.println("删除了对子: " + card1);
+				System.out.println(list2);
+				System.out.println("=================>");
+				if (check3n(list2)) {
+					System.out.println("成功");
+					return true;
+				}
+			} else {
+				if (Collections.frequency(list, 801) > 0) { // 有百搭
+					List<Integer> list2 = new ArrayList<>(list);
+					list2.remove(card1);
+					list2.remove(new Integer(801));
+					System.out.println("删除了普通和百搭: " + card1);
+					System.out.println(list2);
+					if (check3n(list2)) {
+						System.out.println("成功");
+						return true;
+					}
 				}
 			}
 		}
-		// 纯对 个数
-		int duiCount = 0;
+		return false;
 
-		List<Integer> list1 = new ArrayList<>();
-		list1.addAll(tempCardSort.get(0)); // 第一行set
-		List<Integer> list2 = new ArrayList<>();
-		list2.addAll(tempCardSort.get(1)); // 第二行set
+	}
 
-		for (Integer v : list1) {
-			if (list2.contains(v)) {
-				duiCount++;
-				// 删除对数
-				tempCardSort.removeAll(v);
+	public boolean check3n(List<Integer> cards) {
+
+		if (cards.size() == 0)
+			return true;
+
+		List<Integer> temp = new ArrayList<>(cards);
+		if (removeChi(cards)) {
+			if (check3n(cards)) {
+				return true;
 			}
 		}
+		cards = temp;
+		if (removePeng(cards)) {
+			if (check3n(cards)) {
+				return true;
+			}
+		}
+		return false;
 
-		// 单数个数
-		int danCount = tempCardSort.sumCard();
+	}
 
-		int needBaiDa = lianCount + duiCount > 0 ? danCount * 2 + duiCount - 1 : danCount * 2 - 1;
-		return baiDaCount >= needBaiDa ? true : false;
+	public boolean removeChi(List<Integer> cards) {
+		int baidaCount = Collections.frequency(cards, 801);
+		Integer baida = new Integer(801);
+		for (int i = 0; i < cards.size(); i++) {
+			Integer card1 = cards.get(i);
+			Integer card2 = card1 + 1;
+			Integer card3 = card2 + 1;
+			if (cards.contains(card2) && cards.contains(card3)) {
+				cards.remove(card1);
+				cards.remove(card2);
+				cards.remove(card3);
+				System.out.printf("remove: %d %d %d", card1, card2, card3);
+				System.out.println();
+				System.out.println(cards);
+				return true;
+			}
+		}
+		if (baidaCount >= 1) {
+			for (int i = 0; i < cards.size(); i++) {
+				Integer card1 = cards.get(i);
+				Integer card2 = card1 + 1;
+				Integer card3 = card1 + 2;
+				/**
+				 * 1 2 801 去除9 10 801 和 8 9 801的情况
+				 */
+				if (cards.contains(card2)) {
+					cards.remove(card1);
+					cards.remove(card2);
+					cards.remove(baida);
+					System.out.printf("remove: %d %d %d", card1, card2, baida);
+					System.out.println();
+					System.out.println(cards);
+					return true;
+				} else if (cards.contains(card3)) { // 1 801 3
+					cards.remove(card1);
+					cards.remove(card3);
+					cards.remove(baida);
+					System.out.printf("remove: %d %d %d", card1, card3, baida);
+					System.out.println();
+					System.out.println(cards);
+					return true;
+				}
+			}
+		}
+		if (baidaCount >= 2) {
+			cards.remove(0);
+			cards.remove(baida);
+			cards.remove(baida);
+			System.out.println("移除1个顺子和2个801");
+			System.out.println(cards);
+			return true;
+		}
+		if (baidaCount >= 3) {
+			cards.remove(baida);
+			cards.remove(baida);
+			cards.remove(baida);
+			System.out.println("移除0个顺子和3个801");
+			System.out.println(cards);
+			return true;
+		}
+		return false;
+	}
+
+	public boolean removePeng(List<Integer> cards) {
+		CardSort cardSort = new CardSort(4);
+		cardSort.fillCardSort(cards);
+
+		int baidaCount = cardSort.count(801);
+		if (!cardSort.get(2).isEmpty()) { // 有3个一样的
+			Integer card = cardSort.get(2).iterator().next();
+			cards.remove(card);
+			cards.remove(card);
+			cards.remove(card);
+			System.out.printf("remove: %d %d %d", card, card, card);
+			System.out.println();
+			System.out.println(cards);
+
+			return true;
+		} else if (!cardSort.get(1).isEmpty()) { // 有两个一样的
+			if (baidaCount <= 0) {
+				return false;
+			} else {
+				Integer card = cardSort.get(1).iterator().next();
+				cards.remove(card);
+				cards.remove(card);
+				cards.remove(new Integer(801));
+				System.out.printf("remove: %d %d %d", card, card, 801);
+				System.out.println();
+				System.out.println(cards);
+
+				return true;
+			}
+		}
+		return false;
+
 	}
 
 	@Override
-	public void check(GameConfigData gameConfigData,List<CardList> cardLists, CardSort cardSort, int card, List<CardList> showCardList, boolean isMine) {
-		System.out.println("biaduhu checking .......");
+	public void check(GameConfigData gameConfigData, List<CardList> cardLists, CardSort cardSort, int card,
+			List<CardList> showCardList, boolean isMine) {
+
 		List<Integer> baidaCards = new ArrayList<>();
 		baidaCards.add(801);
 
@@ -99,77 +185,81 @@ public class BaiDaHu extends Hu {
 
 	}
 
-	private void removeChi(CardSort copySort2, List<CardList> tempCardList) {
-		Set<Integer> set = copySort2.get(0);
-
-		List<Integer> values = new ArrayList<>(set);
-		for (int i = 0; i < values.size(); i++) {
-
-			int card1 = values.get(i);
-			int card2 = card1 + 1;
-			int card3 = card2 + 1;
-			if (set.contains(card2) && set.contains(card3)) {
-				Chi chi = new Chi();
-				chi.card = card1;
-
-				tempCardList.add(chi);
-				copySort2.remove(card1, card2, card3);
-				i += 1; // 如果满足，直接跳过2个数
-			}
-		}
-	}
-
-	private void removePeng(CardSort copySort2, List<CardList> tempCardList) {
-		Set<Integer> set2 = copySort2.get(2);
-		for (int value : set2) {
-			Peng peng = new Peng();
-			peng.card = value;
-
-			tempCardList.add(peng);
-		}
-
-		List<Integer> cards = new ArrayList<>(set2);
-		for (int c : cards) {
-			copySort2.remove(c, c, c);
-		}
-	}
-
 	@Override
-	public void checkTing(CardSort cardSort, List<Integer> waitCards) {
+	public void checkTing(CardSort cardSort, List<Integer> waitCards, GameConfigData gameConfigData) {
 		List<Integer> tryCards = new ArrayList<>();
 		int start = 100;
-		// 把所有牌加入 tryCards
+		// 把所有牌型加入 tryCards
 		for (int i = 1; i <= 9; i++) {
-			tryCards.add(start + i);
-			for (int j = 2; j <= 3; j++)
-				tryCards.add(start * j + i);
+			int card = start + i;
+			if (cardSort.count(card) < 4) { // 没超过四张才能加入
+				tryCards.add(card);
+			}
+			for (int j = 2; j <= 3; j++) {
+				card = start * j + i;
+				if (cardSort.count(card) < 4) {
+					tryCards.add(card);
+				}
+			}
 		}
-		tryCards.add(801); // 加入红中
+		if (cardSort.count(801) < 4) {
+			tryCards.add(801);
+		}
 
 		for (Integer i : tryCards) {
 			cardSort.addCard(i);
-			if (this.checkBaiDa(cardSort))
+			System.out.println("加入了" + i);
+			if (this.checkBaiDa(cardSort)) {
 				waitCards.add(i);
+			}
+			cardSort.remove(i);
 		}
+		System.out.println("res:  " + waitCards);
+	}
 
+	public void removeCards(List<Integer> cards, Integer... delCards) {
+		for (Integer card : delCards) {
+			cards.remove(card);
+		}
 	}
 
 	public static void main(String[] args) {
-		List<Integer> list1 = Arrays.asList(101, 101, 101, 102);
-		List<Integer> list2 = Arrays.asList(102, 102, 201, 201);
-		// List<Integer> list2 = Arrays.asList(202, 206, 104, 801);
-		List<Integer> list3 = Arrays.asList(201, 203, 203, 203);
-		List<Integer> list4 = Arrays.asList(103, 801);
+		// 1 2 2 3 4 4 5 6 7 7 8 9 9
+		// 1,2,4,4,6,7,7,7,8,9,9
+		// List<Integer> list1 = Arrays.asList(101, 101, 101, 103);
+		// List<Integer> list2 = Arrays.asList(103, 105, 106, 108);
+		// List<Integer> list3 = Arrays.asList(108, 108, 109);
+		// List<Integer> list4 = Arrays.asList(109, 801, 801);
+
+		// List<Integer> list1 = Arrays.asList(101, 102, 104, 104);
+		// List<Integer> list2 = Arrays.asList(106, 107, 107, 107);
+		// List<Integer> list3 = Arrays.asList(108, 109, 109);
+		// List<Integer> list4 = Arrays.asList(801, 801);
 		//
+
+		List<Integer> list1 = Arrays.asList(101, 103, 104, 106);
+		List<Integer> list2 = Arrays.asList(107, 107, 108, 108);
+		List<Integer> list3 = Arrays.asList(109, 201, 203, 801);
+		List<Integer> list4 = Arrays.asList(801, 801);
+
 		CardSort cardSort = new CardSort(4);
-		//
+
 		cardSort.fillCardSort(list1);
 		cardSort.fillCardSort(list2);
 		cardSort.fillCardSort(list3);
 		cardSort.fillCardSort(list4);
-		System.out.println(cardSort);
 		BaiDaHu hu = new BaiDaHu();
-		System.out.println(hu.checkBaiDa(cardSort));
+		List<Integer> list = cardSort.toArray();
+		Collections.sort(list);
+		System.out.println(list);
+
+		long start = System.currentTimeMillis();
+		List<Integer> waitList = new ArrayList<>();
+		hu.checkBaiDa(cardSort);
+		// hu.checkTing(cardSort, waitList, null);
+		// System.out.println(hu.checkBaiDa(cardSort));
+		long end = System.currentTimeMillis();
+		System.out.println(end - start);
 
 	}
 

@@ -163,10 +163,7 @@ public class Step5Hu extends Hu {
 		return j;
 	}
 
-	@Override
-	public void checkTing(CardSort cardSort, List<Integer> waitCards) {
-
-	}
+	
 
 	@Override
 	public String toString() {
@@ -182,7 +179,7 @@ public class Step5Hu extends Hu {
 		List<CardList> cardLists = new ArrayList<>();
 		Step5Hu hu = new Step5Hu();
 		CardSort cardSort = new CardSort(4);
-		List<Integer> list = Arrays.asList(11, 12, 13, 14, 15, 21, 32, 11, 12, 21, 32, 81, 81, 32);
+		List<Integer> list = Arrays.asList(101, 102, 102, 103, 104, 104, 105, 106, 107, 107, 108, 109, 109, 801);
 		// List<Integer> list = Arrays.asList(11, 12, 13, 14, 15, 21, 32, 11,
 		// 12, 21, 32, 12, 21, 32);
 		cardSort.fillCardSort(list);
@@ -199,7 +196,7 @@ public class Step5Hu extends Hu {
 		array1.add(12);
 		array1.add(13);
 
-		// hu.check(cardLists, cardSort, 0, null, false);
+		 hu.check(null,cardLists, cardSort, 0, null, false);
 		// System.out.println(cardLists);
 	}
 
@@ -216,6 +213,12 @@ public class Step5Hu extends Hu {
 		// 11,11,12,12,12
 		List<Integer> change = new ArrayList<>();
 
+	}
+
+	@Override
+	public void checkTing(CardSort cardSort, List<Integer> waitCards, GameConfigData gameConfigData) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

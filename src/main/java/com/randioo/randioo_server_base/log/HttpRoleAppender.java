@@ -100,7 +100,7 @@ public class HttpRoleAppender extends AppenderSkeleton {
 				try {
 					HttpUtils.post(url, map);
 				} catch (ConnectException e) {
-					System.out.println("log server unavailable");
+					//System.out.println("log server unavailable");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

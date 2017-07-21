@@ -72,4 +72,6 @@ message SC{
 	optional FightRejoinResponse FightRejoinResponse = 53;//断线重连
     optional SCFightRejoin SCFightRejoin = 54;//推送重连人
     optional SCFightFinishRejoin SCFightFinishRejoin = 55;//重连完成
-} // 55
+
+	optional MatchCheckRoomResponse MatchCheckRoomResponse = 56;// 检查房间号
+} // 56
