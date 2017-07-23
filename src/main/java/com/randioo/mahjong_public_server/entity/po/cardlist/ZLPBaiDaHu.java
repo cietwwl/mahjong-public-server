@@ -21,10 +21,25 @@ public class ZLPBaiDaHu extends Hu {
 		Set<Integer> baiDaHu = new HashSet<>();
 		baiDaHu.add(801);
 
-		this.checkHu(gameConfigData, cardSort);
+		boolean hasHu = this.checkHu(gameConfigData, cardSort);
+		if (!hasHu)
+			return;
+
+		// 这个胡是zlp想出来的，我只是负责实现，如果出现问题请找他改进算法
+		ZLPBaiDaHu hu = new ZLPBaiDaHu();
+		List<Integer> list = cardSort.toArray();
+		hu.card = card;
+		hu.isMine = isMine;
+		Lists.removeElementByList(list, Arrays.asList(card));
+		Collections.sort(list);
+		hu.handCards.addAll(list);
+		hu.showCardList.addAll(showCardList);
+
+		cardLists.add(hu);
+
 	}
 
-	private void checkHu(GameConfigData gameConfigData, CardSort cardSort) {
+	private boolean checkHu(GameConfigData gameConfigData, CardSort cardSort) {
 		// 1.克隆牌组
 		CardSort cardSort1 = cardSort.clone();
 
@@ -59,6 +74,7 @@ public class ZLPBaiDaHu extends Hu {
 				if (checkOnlyJiangCards(baiDaCountRef, cloneCards)) {
 					// 可以胡
 					System.out.println("hu");
+					return true;
 				}
 			}
 
@@ -95,6 +111,7 @@ public class ZLPBaiDaHu extends Hu {
 				if (checkOnlyJiangCards(baiDaCountRef, cloneCards)) {
 					// 可以胡
 					System.out.println("hu");
+					return true;
 				}
 			}
 		}
@@ -117,6 +134,7 @@ public class ZLPBaiDaHu extends Hu {
 				System.out.println("remain=" + cloneCards);
 				if (checkOnlyJiangCards(baiDaCountRef, cloneCards)) {
 					System.out.println("hu");
+					return true;
 				}
 			}
 		}
@@ -142,9 +160,12 @@ public class ZLPBaiDaHu extends Hu {
 
 				if (checkOnlyJiangCards(baiDaCountRef, cloneCards)) {
 					System.out.println("hu");
+					return true;
 				}
 			}
 		}
+
+		return false;
 	}
 
 	private boolean checkOnlyJiangCards(Ref<Integer> baiDaCountRef, List<Integer> cloneCards) {
@@ -246,7 +267,8 @@ public class ZLPBaiDaHu extends Hu {
 	 * 找到没有使用过的指定对象索引
 	 * 
 	 * @param cards
-	 * @param indexSet 使用过的对象索引
+	 * @param indexSet
+	 *            使用过的对象索引
 	 * @param startIndex
 	 * @param card
 	 * @return

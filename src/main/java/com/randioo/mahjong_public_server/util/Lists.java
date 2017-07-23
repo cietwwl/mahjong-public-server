@@ -1,5 +1,6 @@
 package com.randioo.mahjong_public_server.util;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,6 +15,36 @@ public class Lists {
 	public static void fillList(List<Integer> list, int[] arr) {
 		for (int i : arr)
 			list.add(i);
+	}
+
+	/**
+	 * 变为动态数组
+	 * 
+	 * @param arr
+	 * @return
+	 */
+	public static <T> List<T> asDynamicList(T[] arr) {
+		return asDynamicList(arr, 0, arr.length);
+	}
+
+	/**
+	 * 变为动态数组
+	 * 
+	 * @param arr
+	 * @param startIndex
+	 * @param endIndex
+	 * @return
+	 */
+	public static <T> List<T> asDynamicList(T[] arr, int startIndex, int endIndex) {
+		List<T> list = new ArrayList<>();
+
+		if (startIndex > endIndex || startIndex < 0 || endIndex > arr.length)
+			throw new ArrayIndexOutOfBoundsException();
+
+		for (int i = startIndex; i < endIndex; i++)
+			list.add(arr[i]);
+
+		return list;
 	}
 
 	/**
@@ -78,7 +109,7 @@ public class Lists {
 
 			if (index == -1)
 				break;
-			
+
 			i = index + 1;
 			count++;
 
