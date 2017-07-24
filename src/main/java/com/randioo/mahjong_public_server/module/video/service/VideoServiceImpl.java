@@ -41,7 +41,7 @@ public class VideoServiceImpl extends ObserveBaseService implements VideoService
 
 	@Override
 	public void initService() {
-	
+		fightService.addObserver(this);
 	}
 
 	// 所有执行的操作

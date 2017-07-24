@@ -29,12 +29,15 @@ public class CloseServiceImpl extends BaseService implements CloseService {
 
 	@Override
 	public void asynManipulate(Role role) {
+		if (role == null)
+			return;
+		
 		loggerinfo(role, "[account:" + role.getAccount() + ",name:" + role.getName() + "] manipulate");
 
 		role.setOfflineTimeStr(TimeUtils.getDetailTimeStr());
 		matchService.serviceCancelMatch(role);
 		fightService.disconnect(role);
-		
+
 		if (!gameDB.isUpdatePoolClose()) {
 			gameDB.getUpdatePool().submit(new EntityRunnable<Role>(role) {
 				@Override

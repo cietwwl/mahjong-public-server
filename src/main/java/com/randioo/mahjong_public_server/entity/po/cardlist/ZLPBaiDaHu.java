@@ -168,13 +168,28 @@ public class ZLPBaiDaHu extends Hu {
 		return false;
 	}
 
-	private boolean checkOnlyJiangCards(Ref<Integer> baiDaCountRef, List<Integer> cloneCards) {
+	/**
+	 * 检查是否只剩下将牌
+	 * 
+	 * @param baiDaCountRef
+	 * @param remainCards
+	 * @return
+	 * @author wcy 2017年7月24日
+	 */
+	private boolean checkOnlyJiangCards(Ref<Integer> baiDaCountRef, List<Integer> remainCards) {
+		// 百搭牌数量
 		int baiDaCount = baiDaCountRef.get();
-		if ((baiDaCount + cloneCards.size()) != 2)
+		if ((baiDaCount + remainCards.size()) != 2)
 			return false;
 
+		int card1 = remainCards.get(0);
+		int card2 = remainCards.get(1);
+		if (remainCards.size() == 2 && card1 == card2) {
+			return true;
+		}
+
 		if (baiDaCount == 0) {
-			if (cloneCards.get(0) != cloneCards.get(1))
+			if (remainCards.get(0) != remainCards.get(1))
 				return false;
 		}
 		return true;
@@ -267,8 +282,7 @@ public class ZLPBaiDaHu extends Hu {
 	 * 找到没有使用过的指定对象索引
 	 * 
 	 * @param cards
-	 * @param indexSet
-	 *            使用过的对象索引
+	 * @param indexSet 使用过的对象索引
 	 * @param startIndex
 	 * @param card
 	 * @return
@@ -401,7 +415,12 @@ public class ZLPBaiDaHu extends Hu {
 		// List<Integer> cards = Arrays.asList(101, 102, 103, 801, 801, 201,
 		// 302, 101, 102, 201, 302, 801, 801, 302);
 
-		List<Integer> cards = Arrays.asList(101, 102, 104, 104, 104, 107, 107, 108, 108, 201, 203, 801, 801, 801);
+		// List<Integer> cards = Arrays.asList(101, 102, 104, 104, 104, 107,
+		// 107, 108, 108, 201, 203, 801, 801, 801);
+		List<Integer> cards = Arrays.asList(103, 104, 105, 205, 205, 206, 801, 206);
+		// List<Integer> cards =
+		// Arrays.asList(208,208,208,106,106,106,108,109,302,302,801,801,801,207);
+		//
 		cardSort.fillCardSort(cards);
 
 		long start = System.currentTimeMillis();

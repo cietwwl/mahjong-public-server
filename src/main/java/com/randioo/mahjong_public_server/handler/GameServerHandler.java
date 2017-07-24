@@ -14,6 +14,7 @@ import com.randioo.mahjong_public_server.module.close.service.CloseService;
 import com.randioo.mahjong_public_server.protocol.ClientMessage.CS;
 import com.randioo.mahjong_public_server.protocol.Heart.SCHeart;
 import com.randioo.randioo_server_base.cache.RoleCache;
+import com.randioo.randioo_server_base.cache.SessionCache;
 import com.randioo.randioo_server_base.handler.GameServerHandlerAdapter;
 import com.randioo.randioo_server_base.log.HttpLogUtils;
 import com.randioo.randioo_server_base.utils.TimeUtils;
@@ -38,11 +39,16 @@ public class GameServerHandler extends GameServerHandlerAdapter {
 	@Override
 	public void sessionClosed(IoSession session) throws Exception {
 		logger.info("roleId:" + session.getAttribute("roleId") + " sessionClosed");
-		Role role = (Role) RoleCache.getRoleBySession(session);
 
+		Role role = (Role) RoleCache.getRoleBySession(session);
 		try {
-			if (role != null)
+			if (role != null) {
+				IoSession currentSession = SessionCache.getSessionById(role.getRoleId());
+				if (session != currentSession)
+					return;
+
 				closeService.asynManipulate(role);
+			}
 
 		} catch (Exception e) {
 			logger.error("sessionClosed error:", e);

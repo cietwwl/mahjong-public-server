@@ -104,8 +104,9 @@ message SCFightStart{//
 	optional int32 seat = 6; // 位置
 }
 
-message SCFightRoundOver{	
-	repeated RoleRoundOverInfoData roleRoundOverInfoData = 1;
+message SCFightRoundOver{
+	repeated int32 flyCards = 1;
+	repeated RoleRoundOverInfoData roleRoundOverInfoData = 2;
 }
 
 message SCFightGameOver{

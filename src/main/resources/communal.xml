@@ -65,6 +65,7 @@
 				<ref bean="raceService" />
 				<ref bean="closeService" />
 				<ref bean="audienceService" />
+				<ref bean="videoService" />
 			</list>
 		</property>
 	</bean>

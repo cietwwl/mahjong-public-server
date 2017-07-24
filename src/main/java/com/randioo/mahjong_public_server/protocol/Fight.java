@@ -7028,8 +7028,20 @@ public final class Fight {
       return com.randioo.mahjong_public_server.protocol.Fight.internal_static_com_randioo_mahjong_public_server_protocol_SCFightRoundOver_fieldAccessorTable;
     }
     
-    // repeated .com.randioo.mahjong_public_server.protocol.RoleRoundOverInfoData roleRoundOverInfoData = 1;
-    public static final int ROLEROUNDOVERINFODATA_FIELD_NUMBER = 1;
+    // repeated int32 flyCards = 1;
+    public static final int FLYCARDS_FIELD_NUMBER = 1;
+    private java.util.List<java.lang.Integer> flyCards_ =
+      java.util.Collections.emptyList();
+    public java.util.List<java.lang.Integer> getFlyCardsList() {
+      return flyCards_;
+    }
+    public int getFlyCardsCount() { return flyCards_.size(); }
+    public int getFlyCards(int index) {
+      return flyCards_.get(index);
+    }
+    
+    // repeated .com.randioo.mahjong_public_server.protocol.RoleRoundOverInfoData roleRoundOverInfoData = 2;
+    public static final int ROLEROUNDOVERINFODATA_FIELD_NUMBER = 2;
     private java.util.List<com.randioo.mahjong_public_server.protocol.Entity.RoleRoundOverInfoData> roleRoundOverInfoData_ =
       java.util.Collections.emptyList();
     public java.util.List<com.randioo.mahjong_public_server.protocol.Entity.RoleRoundOverInfoData> getRoleRoundOverInfoDataList() {
@@ -7049,8 +7061,11 @@ public final class Fight {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
+      for (int element : getFlyCardsList()) {
+        output.writeInt32(1, element);
+      }
       for (com.randioo.mahjong_public_server.protocol.Entity.RoleRoundOverInfoData element : getRoleRoundOverInfoDataList()) {
-        output.writeMessage(1, element);
+        output.writeMessage(2, element);
       }
       getUnknownFields().writeTo(output);
     }
@@ -7061,9 +7076,18 @@ public final class Fight {
       if (size != -1) return size;
     
       size = 0;
+      {
+        int dataSize = 0;
+        for (int element : getFlyCardsList()) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(element);
+        }
+        size += dataSize;
+        size += 1 * getFlyCardsList().size();
+      }
       for (com.randioo.mahjong_public_server.protocol.Entity.RoleRoundOverInfoData element : getRoleRoundOverInfoDataList()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, element);
+          .computeMessageSize(2, element);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7207,6 +7231,10 @@ public final class Fight {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
         }
+        if (result.flyCards_ != java.util.Collections.EMPTY_LIST) {
+          result.flyCards_ =
+            java.util.Collections.unmodifiableList(result.flyCards_);
+        }
         if (result.roleRoundOverInfoData_ != java.util.Collections.EMPTY_LIST) {
           result.roleRoundOverInfoData_ =
             java.util.Collections.unmodifiableList(result.roleRoundOverInfoData_);
@@ -7227,6 +7255,12 @@ public final class Fight {
       
       public Builder mergeFrom(com.randioo.mahjong_public_server.protocol.Fight.SCFightRoundOver other) {
         if (other == com.randioo.mahjong_public_server.protocol.Fight.SCFightRoundOver.getDefaultInstance()) return this;
+        if (!other.flyCards_.isEmpty()) {
+          if (result.flyCards_.isEmpty()) {
+            result.flyCards_ = new java.util.ArrayList<java.lang.Integer>();
+          }
+          result.flyCards_.addAll(other.flyCards_);
+        }
         if (!other.roleRoundOverInfoData_.isEmpty()) {
           if (result.roleRoundOverInfoData_.isEmpty()) {
             result.roleRoundOverInfoData_ = new java.util.ArrayList<com.randioo.mahjong_public_server.protocol.Entity.RoleRoundOverInfoData>();
@@ -7258,7 +7292,20 @@ public final class Fight {
               }
               break;
             }
+            case 8: {
+              addFlyCards(input.readInt32());
+              break;
+            }
             case 10: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              while (input.getBytesUntilLimit() > 0) {
+                addFlyCards(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 18: {
               com.randioo.mahjong_public_server.protocol.Entity.RoleRoundOverInfoData.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Entity.RoleRoundOverInfoData.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addRoleRoundOverInfoData(subBuilder.buildPartial());
@@ -7269,7 +7316,41 @@ public final class Fight {
       }
       
       
-      // repeated .com.randioo.mahjong_public_server.protocol.RoleRoundOverInfoData roleRoundOverInfoData = 1;
+      // repeated int32 flyCards = 1;
+      public java.util.List<java.lang.Integer> getFlyCardsList() {
+        return java.util.Collections.unmodifiableList(result.flyCards_);
+      }
+      public int getFlyCardsCount() {
+        return result.getFlyCardsCount();
+      }
+      public int getFlyCards(int index) {
+        return result.getFlyCards(index);
+      }
+      public Builder setFlyCards(int index, int value) {
+        result.flyCards_.set(index, value);
+        return this;
+      }
+      public Builder addFlyCards(int value) {
+        if (result.flyCards_.isEmpty()) {
+          result.flyCards_ = new java.util.ArrayList<java.lang.Integer>();
+        }
+        result.flyCards_.add(value);
+        return this;
+      }
+      public Builder addAllFlyCards(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        if (result.flyCards_.isEmpty()) {
+          result.flyCards_ = new java.util.ArrayList<java.lang.Integer>();
+        }
+        super.addAll(values, result.flyCards_);
+        return this;
+      }
+      public Builder clearFlyCards() {
+        result.flyCards_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // repeated .com.randioo.mahjong_public_server.protocol.RoleRoundOverInfoData roleRoundOverInfoData = 2;
       public java.util.List<com.randioo.mahjong_public_server.protocol.Entity.RoleRoundOverInfoData> getRoleRoundOverInfoDataList() {
         return java.util.Collections.unmodifiableList(result.roleRoundOverInfoData_);
       }
@@ -14802,47 +14883,47 @@ public final class Fight {
       "\013\n\003pai\030\001 \003(\005\022\r\n\005times\030\002 \001(\005\022B\n\006PaiNum\030\003 " +
       "\003(\01322.com.randioo.mahjong_public_server." +
       "protocol.PaiNum\022\027\n\017remainCardCount\030\004 \001(\005" +
-      "\022\022\n\nzhuangSeat\030\005 \001(\005\022\014\n\004seat\030\006 \001(\005\"t\n\020SC" +
-      "FightRoundOver\022`\n\025roleRoundOverInfoData\030" +
-      "\001 \003(\0132A.com.randioo.mahjong_public_serve" +
-      "r.protocol.RoleRoundOverInfoData\"q\n\017SCFi" +
-      "ghtGameOver\022^\n\024roleGameOverInfoData\030\001 \003(",
-      "\0132@.com.randioo.mahjong_public_server.pr" +
-      "otocol.RoleGameOverInfoData\"%\n\025SCFightNo" +
-      "ticeSendCard\022\014\n\004seat\030\001 \001(\005\"@\n\024FightSendC" +
-      "ardRequest\022\014\n\004card\030\001 \001(\005\022\032\n\013isTouchCard\030" +
-      "\002 \001(\010:\005false\"-\n\025FightSendCardResponse\022\024\n" +
-      "\terrorCode\030\001 \001(\005:\0011\"B\n\017SCFightSendCard\022\014" +
-      "\n\004card\030\001 \001(\005\022\014\n\004seat\030\002 \001(\005\022\023\n\013isTouchCar" +
-      "d\030\003 \001(\010\"L\n\020SCFightTouchCard\022\014\n\004seat\030\001 \001(" +
-      "\005\022\021\n\ttouchCard\030\002 \001(\005\022\027\n\017remainCardCount\030" +
-      "\003 \001(\005\"\346\001\n\033SCFightNoticeChooseCardList\022J\n",
-      "\ncallHuData\030\001 \003(\01326.com.randioo.mahjong_" +
-      "public_server.protocol.CallHuData\022V\n\020cal" +
-      "lCardListData\030\002 \003(\0132<.com.randioo.mahjon" +
-      "g_public_server.protocol.CallCardListDat" +
-      "a\022\014\n\004seat\030\003 \001(\005\022\025\n\rtempGameCount\030\004 \001(\005\"%" +
-      "\n\020SCFightCountdown\022\021\n\tcountdown\030\001 \001(\005\"A\n" +
-      "\020FightPengRequest\022\025\n\rtempGameCount\030\001 \001(\005" +
-      "\022\026\n\016callCardListId\030\002 \001(\005\")\n\021FightPengRes" +
-      "ponse\022\024\n\terrorCode\030\001 \001(\005:\0011\"o\n\017SCFightCa" +
-      "rdList\022\014\n\004seat\030\001 \001(\005\022N\n\014cardListData\030\002 \001",
-      "(\01328.com.randioo.mahjong_public_server.p" +
-      "rotocol.CardListData\"A\n\020FightGangRequest" +
-      "\022\025\n\rtempGameCount\030\001 \001(\005\022\026\n\016callCardListI" +
-      "d\030\002 \001(\005\")\n\021FightGangResponse\022\024\n\terrorCod" +
-      "e\030\001 \001(\005:\0011\"?\n\016FightHuRequest\022\025\n\rtempGame" +
-      "Count\030\001 \001(\005\022\026\n\016callCardListId\030\002 \001(\005\"\'\n\017F" +
-      "ightHuResponse\022\024\n\terrorCode\030\001 \001(\005:\0011\"e\n\t" +
-      "SCFightHu\022\014\n\004seat\030\001 \001(\005\022J\n\006huData\030\002 \001(\0132" +
-      ":.com.randioo.mahjong_public_server.prot" +
-      "ocol.RoundCardsData\"(\n\017FightGuoRequest\022\025",
-      "\n\rtempGameCount\030\001 \001(\005\"(\n\020FightGuoRespons" +
-      "e\022\024\n\terrorCode\030\001 \001(\005:\0011\"\032\n\nSCFightGuo\022\014\n" +
-      "\004seat\030\001 \001(\005\" \n\020SCFightPointSeat\022\014\n\004seat\030" +
-      "\001 \001(\005\"!\n\021SCFightDisconnect\022\014\n\004seat\030\001 \001(\005" +
-      "\"\037\n\rSCFightRejoin\022\016\n\006seated\030\001 \001(\005\"\025\n\023SCF" +
-      "ightFinishRejoin"
+      "\022\022\n\nzhuangSeat\030\005 \001(\005\022\014\n\004seat\030\006 \001(\005\"\206\001\n\020S" +
+      "CFightRoundOver\022\020\n\010flyCards\030\001 \003(\005\022`\n\025rol" +
+      "eRoundOverInfoData\030\002 \003(\0132A.com.randioo.m" +
+      "ahjong_public_server.protocol.RoleRoundO" +
+      "verInfoData\"q\n\017SCFightGameOver\022^\n\024roleGa",
+      "meOverInfoData\030\001 \003(\0132@.com.randioo.mahjo" +
+      "ng_public_server.protocol.RoleGameOverIn" +
+      "foData\"%\n\025SCFightNoticeSendCard\022\014\n\004seat\030" +
+      "\001 \001(\005\"@\n\024FightSendCardRequest\022\014\n\004card\030\001 " +
+      "\001(\005\022\032\n\013isTouchCard\030\002 \001(\010:\005false\"-\n\025Fight" +
+      "SendCardResponse\022\024\n\terrorCode\030\001 \001(\005:\0011\"B" +
+      "\n\017SCFightSendCard\022\014\n\004card\030\001 \001(\005\022\014\n\004seat\030" +
+      "\002 \001(\005\022\023\n\013isTouchCard\030\003 \001(\010\"L\n\020SCFightTou" +
+      "chCard\022\014\n\004seat\030\001 \001(\005\022\021\n\ttouchCard\030\002 \001(\005\022" +
+      "\027\n\017remainCardCount\030\003 \001(\005\"\346\001\n\033SCFightNoti",
+      "ceChooseCardList\022J\n\ncallHuData\030\001 \003(\01326.c" +
+      "om.randioo.mahjong_public_server.protoco" +
+      "l.CallHuData\022V\n\020callCardListData\030\002 \003(\0132<" +
+      ".com.randioo.mahjong_public_server.proto" +
+      "col.CallCardListData\022\014\n\004seat\030\003 \001(\005\022\025\n\rte" +
+      "mpGameCount\030\004 \001(\005\"%\n\020SCFightCountdown\022\021\n" +
+      "\tcountdown\030\001 \001(\005\"A\n\020FightPengRequest\022\025\n\r" +
+      "tempGameCount\030\001 \001(\005\022\026\n\016callCardListId\030\002 " +
+      "\001(\005\")\n\021FightPengResponse\022\024\n\terrorCode\030\001 " +
+      "\001(\005:\0011\"o\n\017SCFightCardList\022\014\n\004seat\030\001 \001(\005\022",
+      "N\n\014cardListData\030\002 \001(\01328.com.randioo.mahj" +
+      "ong_public_server.protocol.CardListData\"" +
+      "A\n\020FightGangRequest\022\025\n\rtempGameCount\030\001 \001" +
+      "(\005\022\026\n\016callCardListId\030\002 \001(\005\")\n\021FightGangR" +
+      "esponse\022\024\n\terrorCode\030\001 \001(\005:\0011\"?\n\016FightHu" +
+      "Request\022\025\n\rtempGameCount\030\001 \001(\005\022\026\n\016callCa" +
+      "rdListId\030\002 \001(\005\"\'\n\017FightHuResponse\022\024\n\terr" +
+      "orCode\030\001 \001(\005:\0011\"e\n\tSCFightHu\022\014\n\004seat\030\001 \001" +
+      "(\005\022J\n\006huData\030\002 \001(\0132:.com.randioo.mahjong" +
+      "_public_server.protocol.RoundCardsData\"(",
+      "\n\017FightGuoRequest\022\025\n\rtempGameCount\030\001 \001(\005" +
+      "\"(\n\020FightGuoResponse\022\024\n\terrorCode\030\001 \001(\005:" +
+      "\0011\"\032\n\nSCFightGuo\022\014\n\004seat\030\001 \001(\005\" \n\020SCFigh" +
+      "tPointSeat\022\014\n\004seat\030\001 \001(\005\"!\n\021SCFightDisco" +
+      "nnect\022\014\n\004seat\030\001 \001(\005\"\037\n\rSCFightRejoin\022\016\n\006" +
+      "seated\030\001 \001(\005\"\025\n\023SCFightFinishRejoin"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -15038,7 +15119,7 @@ public final class Fight {
           internal_static_com_randioo_mahjong_public_server_protocol_SCFightRoundOver_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_randioo_mahjong_public_server_protocol_SCFightRoundOver_descriptor,
-              new java.lang.String[] { "RoleRoundOverInfoData", },
+              new java.lang.String[] { "FlyCards", "RoleRoundOverInfoData", },
               com.randioo.mahjong_public_server.protocol.Fight.SCFightRoundOver.class,
               com.randioo.mahjong_public_server.protocol.Fight.SCFightRoundOver.Builder.class);
           internal_static_com_randioo_mahjong_public_server_protocol_SCFightGameOver_descriptor =
