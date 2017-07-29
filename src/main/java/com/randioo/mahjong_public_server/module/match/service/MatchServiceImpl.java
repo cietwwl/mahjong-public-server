@@ -21,7 +21,7 @@ import com.randioo.mahjong_public_server.entity.bo.Role;
 import com.randioo.mahjong_public_server.entity.bo.VideoData;
 import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
 import com.randioo.mahjong_public_server.entity.po.RoleMatchRule;
-import com.randioo.mahjong_public_server.module.GlobelConstant;
+import com.randioo.mahjong_public_server.module.ServiceConstant;
 import com.randioo.mahjong_public_server.module.login.service.LoginService;
 import com.randioo.mahjong_public_server.module.match.MatchConstant;
 import com.randioo.mahjong_public_server.module.video.service.VideoService;
@@ -526,7 +526,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
             int index = game.getRoleIdList().indexOf(aiGameRoleId);
             this.parseGameRoleData(info, game);
             GameRoleData AIGameRoleData = GameRoleData.newBuilder().setGameRoleId(info.gameRoleId).setReady(info.ready)
-                    .setSeat(index).setName(GlobelConstant.ROBOT_NAME + info.gameRoleId).build();
+                    .setSeat(index).setName(ServiceConstant.ROBOT_PREFIX_NAME + info.gameRoleId).build();
 
             SC scJoinGame = SC.newBuilder()
                     .setSCMatchJoinGame(SCMatchJoinGame.newBuilder().setGameRoleData(AIGameRoleData)).build();
@@ -572,7 +572,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 
         if (role == null) {
             GameRoleData aIGameRoleData = GameRoleData.newBuilder().setGameRoleId(info.gameRoleId).setReady(ready)
-                    .setSeat(index).setName(GlobelConstant.ROBOT_NAME + info.gameRoleId).build();
+                    .setSeat(index).setName(ServiceConstant.ROBOT_PREFIX_NAME + info.gameRoleId).build();
             return aIGameRoleData;
         }
 

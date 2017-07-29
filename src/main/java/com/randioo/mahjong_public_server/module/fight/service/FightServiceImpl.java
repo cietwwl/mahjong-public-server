@@ -14,6 +14,7 @@ import org.apache.mina.core.session.IoSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.randioo.mahjong_public_server.GlobleConstant;
 import com.randioo.mahjong_public_server.cache.local.GameCache;
 import com.randioo.mahjong_public_server.cache.local.RaceCache;
 import com.randioo.mahjong_public_server.cache.local.VideoCache;
@@ -32,7 +33,7 @@ import com.randioo.mahjong_public_server.entity.po.cardlist.Gang;
 import com.randioo.mahjong_public_server.entity.po.cardlist.Hu;
 import com.randioo.mahjong_public_server.entity.po.cardlist.Peng;
 import com.randioo.mahjong_public_server.entity.po.cardlist.Step5Hu;
-import com.randioo.mahjong_public_server.module.GlobelConstant;
+import com.randioo.mahjong_public_server.module.ServiceConstant;
 import com.randioo.mahjong_public_server.module.fight.FightConstant;
 import com.randioo.mahjong_public_server.module.login.service.LoginService;
 import com.randioo.mahjong_public_server.module.match.service.MatchService;
@@ -320,7 +321,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
             notifyObservers(FightConstant.FIGHT_READY, scFightReady, game);
         }
 
-        boolean matchAI = GlobleConfig.Boolean("matchai");
+        boolean matchAI = GlobleConfig.Boolean(GlobleConstant.ARGS_MATCH_AI);
         // 检查是否全部都准备完毕,全部准备完毕
         if (matchAI ? this.checkAllReadyAI(game) : this.checkAllReady(game)) {
             loggerinfo("game=>" + game.getGameId() + "=>startGame");
@@ -496,7 +497,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
         List<Integer> remainCards = game.getRemainCards();
         Lists.fillList(remainCards, CardTools.CARDS);
 
-        if (GlobleConfig.Boolean("dispatch")) {
+        if (GlobleConfig.Boolean(GlobleConstant.ARGS_DISPATCH)) {
             this.dispatchCardDebug(game);
         } else {
             this.dispatchCardRandom(game);
@@ -728,7 +729,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
                 boolean value = entrySet.getValue();
                 RoleGameInfo roleGameInfo = game.getRoleIdMap().get(key);
                 Role role = (Role) RoleCache.getRoleById(roleGameInfo.roleId);
-                String name = role == null ? GlobelConstant.ROBOT_NAME + game.getRoleIdList().indexOf(key) : role
+                String name = role == null ? ServiceConstant.ROBOT_PREFIX_NAME + game.getRoleIdList().indexOf(key) : role
                         .getName();
 
                 if (value)
@@ -899,7 +900,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
         List<Integer> remainCards = game.getRemainCards();
         if (remainCards.size() > 0) {
 
-            if (GlobleConfig.Boolean("artifical")) {
+            if (GlobleConfig.Boolean(GlobleConstant.ARGS_ARTIFICAL)) {
                 final int finalSeat = seat;
                 final Game finalGame = game;
                 final RoleGameInfo finalRoleGameInfo = roleGameInfo;
@@ -1015,7 +1016,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
             return;
         }
         try {
-            if (GlobleConfig.Boolean("artifical")) {
+            if (GlobleConfig.Boolean(GlobleConstant.ARGS_ARTIFICAL)) {
                 final Game finalGame = game;
                 final RoleGameInfo finalNextRoleGameInfo = nextRoleGameInfo;
                 Thread t = new Thread(new Runnable() {
@@ -1188,7 +1189,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
         if (tempRoleGameInfo.roleId != 0) {
             return;
         }
-        if (GlobleConfig.Boolean("artifical")) {
+        if (GlobleConfig.Boolean(GlobleConstant.ARGS_ARTIFICAL)) {
             final int finalSeat = seat;
             final Game finalGame = game;
             final RoleGameInfo finalRoleGameInfo = tempRoleGameInfo;

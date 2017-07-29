@@ -30,46 +30,50 @@ import com.randioo.randioo_server_base.utils.StringUtils;
  *
  */
 public class mahjong_public_serverApp {
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		StringUtils.printArgs(args);
+        StringUtils.printArgs(args);
 
-		GlobleConfig.initParam(new GlobalConfigFunction() {
+        GlobleConfig.initParam(new GlobalConfigFunction() {
 
-			@Override
-			public void init(Map<String, Object> map, List<String> list) {
-				String[] params = { "artifical", "dispatch", "racedebug", "matchai" };
-				for (String param : params) {
-					GlobleConfig.initBooleanValue(param, list);
-				}
-			}
-		});
-		GlobleConfig.init(args);
-		HttpLogUtils.setProjectName("public_majiang" + GlobleConfig.Int(GlobleEnum.PORT));
+            @Override
+            public void init(Map<String, Object> map, List<String> list) {
+                String[] params = { 
+                        GlobleConstant.ARGS_ARTIFICAL,
+                        GlobleConstant.ARGS_DISPATCH,
+                        GlobleConstant.ARGS_RACE_DEBUG,
+                        GlobleConstant.ARGS_MATCH_AI };
+                for (String param : params) {
+                    GlobleConfig.initBooleanValue(param, list);
+                }
+            }
+        });
+        GlobleConfig.init(args);
+        HttpLogUtils.setProjectName(GlobleConstant.LOGGER_PROJECT_NAME + GlobleConfig.Int(GlobleEnum.PORT));
 
-		SensitiveWordDictionary.readAll("./sensitive.txt");
+        SensitiveWordDictionary.readAll("./sensitive.txt");
 
-		SpringContext.initSpringCtx("ApplicationContext.xml");
+        SpringContext.initSpringCtx("ApplicationContext.xml");
 
-		GameServerInit gameServerInit = ((GameServerInit) SpringContext.getBean("gameServerInit"));
+        GameServerInit gameServerInit = ((GameServerInit) SpringContext.getBean("gameServerInit"));
 
-//		gameServerInit.setKeepAliveFilter(new KeepAliveFilter(new ProtoHeartFactory(CS.class, SC.class),
-//				IdleStatus.READER_IDLE, (HeartTimeOutHandler) SpringContext.getBean("heartTimeOutHandler"), 3, 5));
-		gameServerInit.start();
+        gameServerInit.setKeepAliveFilter(new KeepAliveFilter(new ProtoHeartFactory(CS.class, SC.class),
+                IdleStatus.READER_IDLE, (HeartTimeOutHandler) SpringContext.getBean("heartTimeOutHandler"), 3, 5));
+        gameServerInit.start();
 
-		LiteHttpServer server = new LiteHttpServer();
-		server.setPort(GlobleConfig.Int(GlobleEnum.PORT) + 10000);
-		server.setRootPath("/majiang");
-		server.addLiteServlet("/kickRace", (LiteServlet) SpringContext.getBean("startServlet"));
-		try {
-			server.init();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        LiteHttpServer server = new LiteHttpServer();
+        server.setPort(GlobleConfig.Int(GlobleEnum.PORT) + 10000);
+        server.setRootPath("/majiang");
+        server.addLiteServlet("/kickRace", (LiteServlet) SpringContext.getBean("startServlet"));
+        try {
+            server.init();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-		GlobleConfig.set(GlobleEnum.LOGIN, true);
+        GlobleConfig.set(GlobleEnum.LOGIN, true);
 
-		// ((Test)SpringContext.getBean("test")).fuck();
+        // ((Test)SpringContext.getBean("test")).fuck();
 
-	}
+    }
 }
