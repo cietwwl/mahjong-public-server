@@ -35,29 +35,29 @@ message SC{
 	optional FightApplyExitGameResponse FightApplyExitGameResponse = 20;
 	optional SCFightApplyExitGame SCFightApplyExitGame = 21;//某玩家申请游戏退出
 	optional FightAgreeExitGameResponse FightAgreeExitGameResponse = 22;//同意游戏退出
-	optional SCFightGameDismiss SCFightGameDismiss = 23;//游戏解散
+	optional SCFightClearRoomId SCFightClearRoomId = 23;//清除房间号
 	optional SCFightLoadResource SCFightLoadResource = 24;//游戏资源加载(用于匹配)
 	optional SCFightNoticeSendCard SCFightNoticeSendCard = 25;//通知出牌
 	optional FightSendCardResponse FightSendCardResponse = 26;
 	optional SCFightSendCard SCFightSendCard = 27;
-	optional SCAgreeExitGame SCAgreeExitGame = 28;
-	optional SCFightRoundOver SCFightRoundOver = 29;
-	optional FightRecommandResponse FightRecommandResponse = 30;
-	optional SCFightGameOver SCFightGameOver = 31;
-	optional FightGetlastRoundResponse FightGetlastRoundResponse = 32;
-	optional SCFightTouchCard SCFightTouchCard = 33;//摸一张牌
-	optional SCFightNoticeChooseCardList SCFightNoticeChooseCardList = 34;//通知所有人的杠碰胡
-	optional FightPengResponse FightPengResponse = 35;
-	optional FightGangResponse FightGangResponse = 36;
-	optional FightHuResponse FightHuResponse = 37;
-	optional SCFightHu SCFightHu = 38;
-	optional FightGuoResponse FightGuoResponse = 39;
-	optional SCFightGuo SCFightGuo = 40;
-	optional SCFightCountdown SCFightCountdown = 41;
-	optional SCFightCardList SCFightCardList = 42;
-	optional SCFightPointSeat SCFightPointSeat = 43;
-	optional SCFightApplyExitResult SCFightApplyExitResult = 44;//申请退出的结果
-	optional SCFightDisconnect SCFightDisconnect = 45;//通知玩家断连
+	optional SCFightRoundOver SCFightRoundOver = 28;
+	optional FightRecommandResponse FightRecommandResponse = 29;
+	optional SCFightGameOver SCFightGameOver = 30;
+	optional FightGetlastRoundResponse FightGetlastRoundResponse = 31;
+	optional SCFightTouchCard SCFightTouchCard = 32;//摸一张牌
+	optional SCFightNoticeChooseCardList SCFightNoticeChooseCardList = 33;//通知所有人的杠碰胡
+	optional FightPengResponse FightPengResponse = 34;
+	optional FightGangResponse FightGangResponse = 35;
+	optional FightHuResponse FightHuResponse = 36;
+	optional SCFightHu SCFightHu = 37;
+	optional FightGuoResponse FightGuoResponse = 38;
+	optional SCFightGuo SCFightGuo = 39;
+	optional SCFightCountdown SCFightCountdown = 40;
+	optional SCFightCardList SCFightCardList = 41;
+	optional SCFightPointSeat SCFightPointSeat = 42;
+	optional SCFightApplyExitResult SCFightApplyExitResult = 43;//申请退出的结果
+	optional SCFightDisconnect SCFightDisconnect = 44;//通知玩家断连
+	optional FightChiResponse FightChiResponse = 45;//吃的响应
 
 	optional MoneyExchangeResponse MoneyExchangeResponse = 46;//燃点币游戏币（欢乐豆）互换
 	
@@ -68,10 +68,6 @@ message SC{
 	optional SCRaceJoinRace SCRaceJoinRace = 50;
 	optional RaceShowQueueResponse RaceShowQueueResponse = 51;
 	optional SCRaceQueueChange SCRaceQueueChange = 52;
-	
-	optional FightRejoinResponse FightRejoinResponse = 53;//断线重连
-    optional SCFightRejoin SCFightRejoin = 54;//推送重连人
-    optional SCFightFinishRejoin SCFightFinishRejoin = 55;//重连完成
 
-	optional MatchCheckRoomResponse MatchCheckRoomResponse = 56;// 检查房间号
-} // 56
+	optional MatchCheckRoomResponse MatchCheckRoomResponse = 53;// 检查房间号
+} // 53

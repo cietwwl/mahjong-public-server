@@ -135,6 +135,6 @@ public interface FightService extends ObserveBaseServiceInterface {
 	 * @param role
 	 * @author wcy 2017年7月14日
 	 */
-	void rejoin(Role role);
+//	void rejoin(Role role);
 
 }

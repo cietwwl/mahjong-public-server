@@ -33,14 +33,13 @@ message CS{
 	optional FightGangRequest FightGangRequest = 18;
 	optional FightHuRequest FightHuRequest = 19;
 	optional FightGuoRequest FightGuoRequest = 20;
+	optional FightChiRequest FightChiRequest = 21;//吃的请求
 
-	optional MoneyExchangeRequest MoneyExchangeRequest = 21;
+	optional MoneyExchangeRequest MoneyExchangeRequest = 22;
 
-	optional SettingsRequest SettingsRequest = 22;
-	optional SettingsShowRequest SettingsShowRequest = 23;
+	optional SettingsRequest SettingsRequest = 23;
+	optional SettingsShowRequest SettingsShowRequest = 24;
 
-	optional RaceJoinRaceRequest RaceJoinRaceRequest = 24;
-	optional RaceShowQueueRequest RaceShowQueueRequest = 25;
-
-	optional FightRejoinRequest FightRejoinRequest = 26;//断线重连
+	optional RaceJoinRaceRequest RaceJoinRaceRequest = 25;
+	optional RaceShowQueueRequest RaceShowQueueRequest = 26;
 } // 26

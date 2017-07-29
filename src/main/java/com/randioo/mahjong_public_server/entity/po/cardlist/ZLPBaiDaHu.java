@@ -40,6 +40,7 @@ public class ZLPBaiDaHu extends Hu {
 	}
 
 	private boolean checkHu(GameConfigData gameConfigData, CardSort cardSort) {
+		boolean debug = true;
 		// 1.克隆牌组
 		CardSort cardSort1 = cardSort.clone();
 
@@ -74,7 +75,8 @@ public class ZLPBaiDaHu extends Hu {
 				if (checkOnlyJiangCards(baiDaCountRef, cloneCards)) {
 					// 可以胡
 					System.out.println("hu");
-					return true;
+					if (debug)
+						return true;
 				}
 			}
 
@@ -111,7 +113,8 @@ public class ZLPBaiDaHu extends Hu {
 				if (checkOnlyJiangCards(baiDaCountRef, cloneCards)) {
 					// 可以胡
 					System.out.println("hu");
-					return true;
+					if (debug)
+						return true;
 				}
 			}
 		}
@@ -134,7 +137,8 @@ public class ZLPBaiDaHu extends Hu {
 				System.out.println("remain=" + cloneCards);
 				if (checkOnlyJiangCards(baiDaCountRef, cloneCards)) {
 					System.out.println("hu");
-					return true;
+					if (debug)
+						return true;
 				}
 			}
 		}
@@ -160,7 +164,8 @@ public class ZLPBaiDaHu extends Hu {
 
 				if (checkOnlyJiangCards(baiDaCountRef, cloneCards)) {
 					System.out.println("hu");
-					return true;
+					if (debug)
+						return true;
 				}
 			}
 		}
@@ -182,16 +187,15 @@ public class ZLPBaiDaHu extends Hu {
 		if ((baiDaCount + remainCards.size()) != 2)
 			return false;
 
-		int card1 = remainCards.get(0);
-		int card2 = remainCards.get(1);
-		if (remainCards.size() == 2 && card1 == card2) {
-			return true;
+		// 如果剩余两张牌，比较一下之间的大小
+		if (remainCards.size() == 2) {
+			int card1 = remainCards.get(0);
+			int card2 = remainCards.get(1);
+			if (card1 == card2) {
+				return true;
+			}
 		}
 
-		if (baiDaCount == 0) {
-			if (remainCards.get(0) != remainCards.get(1))
-				return false;
-		}
 		return true;
 	}
 
@@ -237,9 +241,12 @@ public class ZLPBaiDaHu extends Hu {
 				continue;
 			int c1 = cards.get(i);
 
-			// 超出边界则直接跳过
-			if ((c1 + 2) % 100 >= 10)
-				continue;
+			// // 超出边界则直接跳过
+			// if ((c1 + 1) % 100 >= 10)
+			// continue;
+			//
+			// if ((c1 - 1) % 100 >= 10)
+			// continue;
 
 			int c2Index = findUnuseCardIndex(cards, indexSet, i, endIndex, c1 + 1);
 			int c3Index = findUnuseCardIndex(cards, indexSet, i, endIndex, c1 + 2);
@@ -417,14 +424,15 @@ public class ZLPBaiDaHu extends Hu {
 
 		// List<Integer> cards = Arrays.asList(101, 102, 104, 104, 104, 107,
 		// 107, 108, 108, 201, 203, 801, 801, 801);
-		List<Integer> cards = Arrays.asList(103, 104, 105, 205, 205, 206, 801, 206);
-		// List<Integer> cards =
-		// Arrays.asList(208,208,208,106,106,106,108,109,302,302,801,801,801,207);
-		//
+		// List<Integer> cards = Arrays.asList(103, 104, 105, 205, 205, 206,
+		// 801, 206);
+//		List<Integer> cards = Arrays.asList(108, 109, 302, 302, 801, 801, 801, 207);
+		List<Integer> cards = Arrays.asList(108, 109, 201, 202, 203, 203,203, 801);
+
 		cardSort.fillCardSort(cards);
 
 		long start = System.currentTimeMillis();
-		hu.check(null, null, cardSort, 0, null, false);
+		hu.checkHu(null, cardSort);
 		long end = System.currentTimeMillis();
 		System.out.println(end - start);
 	}

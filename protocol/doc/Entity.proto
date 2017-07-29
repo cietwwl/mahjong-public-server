@@ -2,9 +2,10 @@ package com.randioo.mahjong_public_server.protocol;
 
 message RoleData{
 	optional int32 roleId = 1;
-	optional int32 gameId = 2;
+	optional string roomId = 2;
 	optional int32 point = 3;
 	optional int32 sex = 4;
+	optional int32 serverTime = 5;
 
 	/*optional string name = 2;
 	optional int32 money = 3;
@@ -130,7 +131,7 @@ message RecommandPai{
 }
 
 message GameData{
-	optional int32 gameId = 1;
+	optional string roomId = 1;
 	repeated GameRoleData gameRoleData = 2;
 }
 

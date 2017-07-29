@@ -8,11 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.protobuf.GeneratedMessage;
+import com.randioo.mahjong_public_server.cache.local.GameCache;
 import com.randioo.mahjong_public_server.dao.RoleDao;
+import com.randioo.mahjong_public_server.entity.bo.Game;
 import com.randioo.mahjong_public_server.entity.bo.Role;
 import com.randioo.mahjong_public_server.module.login.LoginConstant;
+import com.randioo.mahjong_public_server.module.match.service.MatchService;
 import com.randioo.mahjong_public_server.module.race.service.RaceService;
 import com.randioo.mahjong_public_server.module.role.service.RoleService;
+import com.randioo.mahjong_public_server.protocol.Entity.GameState;
 import com.randioo.mahjong_public_server.protocol.Entity.RoleData;
 import com.randioo.mahjong_public_server.protocol.Error.ErrorCode;
 import com.randioo.mahjong_public_server.protocol.Login.LoginGetRoleDataResponse;
@@ -32,244 +36,184 @@ import com.randioo.randioo_server_base.template.EntityRunnable;
 import com.randioo.randioo_server_base.template.Ref;
 import com.randioo.randioo_server_base.utils.SessionUtils;
 import com.randioo.randioo_server_base.utils.StringUtils;
-import com.randioo.randioo_server_base.utils.TimeUtils;
 
 @Service("loginService")
 public class LoginServiceImpl extends ObserveBaseService implements LoginService {
 
-	@Autowired
-	private RoleDao roleDao;
+    @Autowired
+    private RoleDao roleDao;
 
-	@Autowired
-	private LoginModelService loginModelService;
+    @Autowired
+    private LoginModelService loginModelService;
 
-	@Autowired
-	private RoleService roleService;
+    @Autowired
+    private RoleService roleService;
 
-	@Autowired
-	private RaceService raceService;
+    @Autowired
+    private RaceService raceService;
 
-	@Autowired
-	private GameDB gameDB;
+    @Autowired
+    private GameDB gameDB;
 
-	@Override
-	public void init() {
-		// 初始化所有已经有过的帐号和昵称
-		add(RoleCache.getNameSet(), roleDao.getAllNames());
-		add(RoleCache.getAccountSet(), roleDao.getAllAccounts());
+    @Autowired
+    private MatchService matchService;
 
-		loginModelService.setLoginHandler(new LoginHandlerImpl());
-	}
+    @Override
+    public void init() {
+        // 初始化所有已经有过的帐号和昵称
+        add(RoleCache.getNameSet(), roleDao.getAllNames());
+        add(RoleCache.getAccountSet(), roleDao.getAllAccounts());
 
-	@Override
-	public void initService() {
-		loggerinfo("initService");
-	}
+        loginModelService.setLoginHandler(new LoginHandlerImpl());
+    }
 
-	private void add(Map<String, String> map, List<String> list) {
-		for (String str : list) {
-			map.put(str, str);
-		}
-	}
+    @Override
+    public void initService() {
+        loggerinfo("initService");
+    }
 
-	private class LoginHandlerImpl implements LoginHandler {
+    private void add(Map<String, String> map, List<String> list) {
+        for (String str : list) {
+            map.put(str, str);
+        }
+    }
 
-		@Override
-		public RoleInterface getRoleInterfaceFromDBById(int roleId) {
-			return roleDao.get(roleId);
-		}
+    private class LoginHandlerImpl implements LoginHandler {
 
-		@Override
-		public RoleInterface getRoleInterfaceFromDBByAccount(String account) {
-			return roleDao.getRoleByAccount(account);
-		}
+        @Override
+        public RoleInterface getRoleInterfaceFromDBById(int roleId) {
+            return roleDao.get(roleId);
+        }
 
-		@Override
-		public void loginRoleModuleDataInit(RoleInterface roleInterface) {
-			// 将数据库中的数据放入缓存中
-			Role role = (Role) roleInterface;
+        @Override
+        public RoleInterface getRoleInterfaceFromDBByAccount(String account) {
+            return roleDao.getRoleByAccount(account);
+        }
 
-			roleService.roleInit(role);
-			raceService.raceInit(role);
-		}
+        @Override
+        public void loginRoleModuleDataInit(RoleInterface roleInterface) {
+            // 将数据库中的数据放入缓存中
+            Role role = (Role) roleInterface;
 
-		@Override
-		public boolean createRoleCheckAccount(LoginInfo info, Ref<Integer> errorCode) {
-			// 账号姓名不可为空
-			if (StringUtils.isNullOrEmpty(info.getAccount())) {
-				errorCode.set(LoginConstant.CREATE_ROLE_NAME_SENSITIVE);
-				return false;
-			}
+            roleService.roleInit(role);
+            raceService.raceInit(role);
+        }
 
-			return true;
-		}
+        @Override
+        public boolean createRoleCheckAccount(LoginInfo info, Ref<Integer> errorCode) {
+            // 账号姓名不可为空
+            if (StringUtils.isNullOrEmpty(info.getAccount())) {
+                errorCode.set(LoginConstant.CREATE_ROLE_NAME_SENSITIVE);
+                return false;
+            }
 
-		@Override
-		public RoleInterface createRole(LoginInfo loginInfo) {
-			String account = loginInfo.getAccount();
-			// 用户数据
-			// 创建用户
-			Role role = new Role();
-			role.setAccount(account);
+            return true;
+        }
 
-			roleService.newRoleInit(role);
-			raceService.newRaceInit(role);
+        @Override
+        public RoleInterface createRole(LoginInfo loginInfo) {
+            String account = loginInfo.getAccount();
+            // 用户数据
+            // 创建用户
+            Role role = new Role();
+            role.setAccount(account);
 
-			gameDB.getInsertPool().submit(new EntityRunnable<Role>(role) {
+            roleService.newRoleInit(role);
+            raceService.newRaceInit(role);
 
-				@Override
-				public void run(Role entity) {
-					try {
-						roleDao.insert(entity);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
-			return role;
-		}
+            gameDB.getInsertPool().submit(new EntityRunnable<Role>(role) {
 
-		@Override
-		public Facility saveFacility(Facility facility) {
-			return null;
-		}
+                @Override
+                public void run(Role entity) {
+                    try {
+                        roleDao.insert(entity);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            return role;
+        }
 
-		@Override
-		public void noticeOtherPlaceLogin(Facility oldFacility) {
-			IoSession session = oldFacility.getSession();
-			SessionUtils.sc(session, SC.newBuilder().setSCLoginOtherSide(SCLoginOtherSide.newBuilder()).build());
-		}
+        @Override
+        public Facility saveFacility(Facility facility) {
+            return null;
+        }
 
-		@Override
-		public Facility getFacilityFromDB(int roleId, String macAddress) {
-			return null;
-		}
+        @Override
+        public void noticeOtherPlaceLogin(Facility oldFacility) {
+            IoSession session = oldFacility.getSession();
+            SessionUtils.sc(session, SC.newBuilder().setSCLoginOtherSide(SCLoginOtherSide.newBuilder()).build());
+        }
 
-	}
+        @Override
+        public Facility getFacilityFromDB(int roleId, String macAddress) {
+            return null;
+        }
 
-	@Override
-	public GeneratedMessage getRoleData(String account, String macAddress, IoSession ioSession) {
-		LoginInfo loginInfo = new LoginInfo();
-		loginInfo.setAccount(account);
-		loginInfo.setMacAddress(macAddress);
+    }
 
-		Ref<Integer> errorCode = new Ref<>();
+    @Override
+    public GeneratedMessage getRoleData(String account, String macAddress, IoSession ioSession) {
+        LoginInfo loginInfo = new LoginInfo();
+        loginInfo.setAccount(account);
+        loginInfo.setMacAddress(macAddress);
 
-		RoleInterface roleInterface = loginModelService.getRoleData(loginInfo, errorCode, ioSession);
+        Ref<Integer> errorCode = new Ref<>();
 
-		if (roleInterface != null) {
-			Role role = (Role) roleInterface;
+        RoleInterface roleInterface = loginModelService.getRoleData(loginInfo, errorCode, ioSession);
 
-			return SC
-					.newBuilder()
-					.setLoginGetRoleDataResponse(
-							LoginGetRoleDataResponse.newBuilder().setServerTime(TimeUtils.getNowTime())
-									.setRoleData(getRoleData(role))).build();
-		}
+        if (roleInterface != null) {
+            Role role = (Role) roleInterface;
 
-		ErrorCode errorEnum = null;
-		switch (errorCode.get()) {
-		case LoginModelConstant.GET_ROLE_DATA_NOT_EXIST:
-			errorEnum = ErrorCode.NO_ROLE_DATA;
-			break;
-		case LoginModelConstant.GET_ROLE_DATA_IN_LOGIN:
-			errorEnum = ErrorCode.IN_LOGIN;
-			break;
-		}
-		SC sc = SC.newBuilder()
-				.setLoginGetRoleDataResponse(LoginGetRoleDataResponse.newBuilder().setErrorCode(errorEnum.getNumber()))
-				.build();
+            return SC.newBuilder()
+                    .setLoginGetRoleDataResponse(LoginGetRoleDataResponse.newBuilder().setRoleData(getRoleData(role)))
+                    .build();
+        }
 
-		return sc;
-	}
+        ErrorCode errorEnum = null;
+        switch (errorCode.get()) {
+        case LoginModelConstant.GET_ROLE_DATA_NOT_EXIST:
+            errorEnum = ErrorCode.NO_ROLE_DATA;
+            break;
+        case LoginModelConstant.GET_ROLE_DATA_IN_LOGIN:
+            errorEnum = ErrorCode.IN_LOGIN;
+            break;
+        }
+        SC sc = SC.newBuilder()
+                .setLoginGetRoleDataResponse(LoginGetRoleDataResponse.newBuilder().setErrorCode(errorEnum.getNumber()))
+                .build();
 
-	// @Override
-	// public GeneratedMessage creatRole(String account) {
-	// LoginCreateInfo loginCreateInfo = new LoginCreateInfo();
-	// loginCreateInfo.setAccount(account);
-	// Ref<Integer> errorCode = new Ref<>();
-	// boolean result = loginModelService.createRole(loginCreateInfo,
-	// errorCode);
-	// if (result) {
-	// return
-	// SC.newBuilder().setLoginCreateRoleResponse(LoginCreateRoleResponse.newBuilder()).build();
-	// }
-	//
-	// ErrorCode errorEnum = null;
-	// switch (errorCode.get()) {
-	// case LoginModelConstant.CREATE_ROLE_EXIST:
-	// errorEnum = ErrorCode.EXIST_ROLE;
-	// break;
-	// case LoginModelConstant.CREATE_ROLE_FAILED:
-	// errorEnum = ErrorCode.CREATE_FAILED;
-	// break;
-	// case LoginConstant.CREATE_ROLE_NAME_SENSITIVE:
-	// errorEnum = ErrorCode.NAME_SENSITIVE;
-	// break;
-	// case LoginConstant.CREATE_ROLE_NAME_REPEATED:
-	// errorEnum = ErrorCode.NAME_REPEATED;
-	// break;
-	// case LoginConstant.CREATE_ROLE_NAME_TOO_LONG:
-	// errorEnum = ErrorCode.NAME_TOO_LONG;
-	// break;
-	// }
-	//
-	// return SC.newBuilder()
-	// .setLoginCreateRoleResponse(LoginCreateRoleResponse.newBuilder().setErrorCode(errorEnum.getNumber()))
-	// .build();
-	// }
+        return sc;
+    }
 
-	// @Override
-	// public GeneratedMessage login(String account) {
-	// LoginInfo info = new LoginInfo();
-	// info.setAccount(account);
-	// if (!GlobleConfig.Boolean(GlobleEnum.LOGIN)) {
-	// return SC
-	// .newBuilder()
-	// .setLoginCheckAccountResponse(
-	// LoginCheckAccountResponse.newBuilder().setErrorCode(ErrorCode.REJECT_LOGIN.getNumber()))
-	// .build();
-	// }
-	//
-	// boolean isNewAccount = loginModelService.login(info);
-	//
-	// return SC
-	// .newBuilder()
-	// .setLoginCheckAccountResponse(
-	// LoginCheckAccountResponse.newBuilder().setErrorCode(
-	// isNewAccount ? ErrorCode.NO_ROLE_ACCOUNT.getNumber() :
-	// ErrorCode.OK.getNumber()))
-	// .build();
-	// }
+    @Override
+    public RoleData getRoleData(Role role) {
+        roleService.roleInit(role);
 
-	@Override
-	public RoleData getRoleData(Role role) {
-		roleService.roleInit(role);
-		// RoleData.Builder roleDataBuilder = RoleData
-		// .newBuilder()
-		// .setRoleId(
-		// (Tool.regExpression(role.getAccount(), "[0-9]*") ?
-		// Integer.parseInt(role.getAccount()) : role
-		// .getRoleId())).setName(role.getName()).setMoney(role.getMoney())
-		// .setMusicVolume(role.getMusicVolume()).setVolume(role.getVolume())
-		// .setRandiooMoney(role.getRandiooMoney()).setHeadImgUrl(role.getHeadImgUrl());
+        int roleId = Tool.regExpression(role.getAccount(), "[0-9]*") ? Integer.parseInt(role.getAccount()) : role
+                .getRoleId();
+        Game game = GameCache.getGameMap().get(role.getGameId());
+        // 游戏不存在或游戏已经结束,钥匙不存在
+        String lockString = game == null || game.getGameState() == GameState.GAME_START_END ? null : matchService
+                .getLockString(game.getLockKey());
+        RoleData.Builder builder = RoleData.newBuilder().setRoleId(roleId).setPoint(1000).setSex(1);
 
-		return RoleData
-				.newBuilder()
-				.setRoleId(
-						(Tool.regExpression(role.getAccount(), "[0-9]*") ? Integer.parseInt(role.getAccount()) : role
-								.getRoleId())).setGameId(role.getGameId()).setPoint(1000).setSex(1).build();
-	}
+        if (lockString != null)
+            builder.setRoomId(lockString);
 
-	@Override
-	public Role getRoleById(int roleId) {
-		RoleInterface roleInterface = loginModelService.getRoleInterfaceById(roleId);
-		return roleInterface == null ? null : (Role) roleInterface;
-	}
+        return builder.build();
+    }
 
-	@Override
-	public Role getRoleByAccount(String account) {
-		RoleInterface roleInterface = loginModelService.getRoleInterfaceByAccount(account);
-		return roleInterface == null ? null : (Role) roleInterface;
-	}
+    @Override
+    public Role getRoleById(int roleId) {
+        RoleInterface roleInterface = loginModelService.getRoleInterfaceById(roleId);
+        return roleInterface == null ? null : (Role) roleInterface;
+    }
+
+    @Override
+    public Role getRoleByAccount(String account) {
+        RoleInterface roleInterface = loginModelService.getRoleInterfaceByAccount(account);
+        return roleInterface == null ? null : (Role) roleInterface;
+    }
 }

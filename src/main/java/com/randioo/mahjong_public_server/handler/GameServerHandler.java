@@ -15,9 +15,9 @@ import com.randioo.mahjong_public_server.protocol.ClientMessage.CS;
 import com.randioo.mahjong_public_server.protocol.Heart.SCHeart;
 import com.randioo.randioo_server_base.cache.RoleCache;
 import com.randioo.randioo_server_base.cache.SessionCache;
+import com.randioo.randioo_server_base.error.ActionSupportFakeException;
 import com.randioo.randioo_server_base.handler.GameServerHandlerAdapter;
 import com.randioo.randioo_server_base.log.HttpLogUtils;
-import com.randioo.randioo_server_base.utils.TimeUtils;
 
 @Component
 public class GameServerHandler extends GameServerHandlerAdapter {
@@ -71,14 +71,18 @@ public class GameServerHandler extends GameServerHandlerAdapter {
 
 	@Override
 	public void messageReceived(IoSession session, Object messageObj) throws Exception {
-
 		InputStream input = (InputStream) messageObj;
 
 		CS message = null;
 		try {
 			message = CS.parseDelimitedFrom(input);
+			System.out.println(message);
 			logger.warn(getMessage(message, session));
-			actionDispatcher(message, session);
+			try{
+			    actionDispatcher(message, session);			    
+			}catch(ActionSupportFakeException e){
+			    e.printStackTrace();
+			}
 		} finally {
 			if (input != null) {
 				input.close();

@@ -1555,15 +1555,8 @@ public final class Login {
     public boolean hasErrorCode() { return hasErrorCode; }
     public int getErrorCode() { return errorCode_; }
     
-    // optional int32 serverTime = 2;
-    public static final int SERVERTIME_FIELD_NUMBER = 2;
-    private boolean hasServerTime;
-    private int serverTime_ = 0;
-    public boolean hasServerTime() { return hasServerTime; }
-    public int getServerTime() { return serverTime_; }
-    
-    // optional .com.randioo.mahjong_public_server.protocol.RoleData roleData = 3;
-    public static final int ROLEDATA_FIELD_NUMBER = 3;
+    // optional .com.randioo.mahjong_public_server.protocol.RoleData roleData = 2;
+    public static final int ROLEDATA_FIELD_NUMBER = 2;
     private boolean hasRoleData;
     private com.randioo.mahjong_public_server.protocol.Entity.RoleData roleData_;
     public boolean hasRoleData() { return hasRoleData; }
@@ -1582,11 +1575,8 @@ public final class Login {
       if (hasErrorCode()) {
         output.writeInt32(1, getErrorCode());
       }
-      if (hasServerTime()) {
-        output.writeInt32(2, getServerTime());
-      }
       if (hasRoleData()) {
-        output.writeMessage(3, getRoleData());
+        output.writeMessage(2, getRoleData());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1601,13 +1591,9 @@ public final class Login {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, getErrorCode());
       }
-      if (hasServerTime()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, getServerTime());
-      }
       if (hasRoleData()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getRoleData());
+          .computeMessageSize(2, getRoleData());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1770,9 +1756,6 @@ public final class Login {
         if (other.hasErrorCode()) {
           setErrorCode(other.getErrorCode());
         }
-        if (other.hasServerTime()) {
-          setServerTime(other.getServerTime());
-        }
         if (other.hasRoleData()) {
           mergeRoleData(other.getRoleData());
         }
@@ -1805,11 +1788,7 @@ public final class Login {
               setErrorCode(input.readInt32());
               break;
             }
-            case 16: {
-              setServerTime(input.readInt32());
-              break;
-            }
-            case 26: {
+            case 18: {
               com.randioo.mahjong_public_server.protocol.Entity.RoleData.Builder subBuilder = com.randioo.mahjong_public_server.protocol.Entity.RoleData.newBuilder();
               if (hasRoleData()) {
                 subBuilder.mergeFrom(getRoleData());
@@ -1841,25 +1820,7 @@ public final class Login {
         return this;
       }
       
-      // optional int32 serverTime = 2;
-      public boolean hasServerTime() {
-        return result.hasServerTime();
-      }
-      public int getServerTime() {
-        return result.getServerTime();
-      }
-      public Builder setServerTime(int value) {
-        result.hasServerTime = true;
-        result.serverTime_ = value;
-        return this;
-      }
-      public Builder clearServerTime() {
-        result.hasServerTime = false;
-        result.serverTime_ = 0;
-        return this;
-      }
-      
-      // optional .com.randioo.mahjong_public_server.protocol.RoleData roleData = 3;
+      // optional .com.randioo.mahjong_public_server.protocol.RoleData roleData = 2;
       public boolean hasRoleData() {
         return result.hasRoleData();
       }
@@ -2205,11 +2166,10 @@ public final class Login {
       "ount\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\"/\n\027LoginCreateR" +
       "oleResponse\022\024\n\terrorCode\030\001 \001(\005:\0011\"8\n\027Log" +
       "inGetRoleDataRequest\022\017\n\007account\030\001 \001(\t\022\014\n" +
-      "\004uuid\030\002 \001(\t\"\214\001\n\030LoginGetRoleDataResponse" +
-      "\022\024\n\terrorCode\030\001 \001(\005:\0011\022\022\n\nserverTime\030\002 \001",
-      "(\005\022F\n\010roleData\030\003 \001(\01324.com.randioo.mahjo" +
-      "ng_public_server.protocol.RoleData\"\022\n\020SC" +
-      "LoginOtherSide"
+      "\004uuid\030\002 \001(\t\"x\n\030LoginGetRoleDataResponse\022" +
+      "\024\n\terrorCode\030\001 \001(\005:\0011\022F\n\010roleData\030\002 \001(\0132",
+      "4.com.randioo.mahjong_public_server.prot" +
+      "ocol.RoleData\"\022\n\020SCLoginOtherSide"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2261,7 +2221,7 @@ public final class Login {
           internal_static_com_randioo_mahjong_public_server_protocol_LoginGetRoleDataResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_randioo_mahjong_public_server_protocol_LoginGetRoleDataResponse_descriptor,
-              new java.lang.String[] { "ErrorCode", "ServerTime", "RoleData", },
+              new java.lang.String[] { "ErrorCode", "RoleData", },
               com.randioo.mahjong_public_server.protocol.Login.LoginGetRoleDataResponse.class,
               com.randioo.mahjong_public_server.protocol.Login.LoginGetRoleDataResponse.Builder.class);
           internal_static_com_randioo_mahjong_public_server_protocol_SCLoginOtherSide_descriptor =

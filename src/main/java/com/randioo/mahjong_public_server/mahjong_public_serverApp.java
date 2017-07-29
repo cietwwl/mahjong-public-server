@@ -53,8 +53,8 @@ public class mahjong_public_serverApp {
 
 		GameServerInit gameServerInit = ((GameServerInit) SpringContext.getBean("gameServerInit"));
 
-		gameServerInit.setKeepAliveFilter(new KeepAliveFilter(new ProtoHeartFactory(CS.class, SC.class),
-				IdleStatus.READER_IDLE, (HeartTimeOutHandler) SpringContext.getBean("heartTimeOutHandler"), 3, 5));
+//		gameServerInit.setKeepAliveFilter(new KeepAliveFilter(new ProtoHeartFactory(CS.class, SC.class),
+//				IdleStatus.READER_IDLE, (HeartTimeOutHandler) SpringContext.getBean("heartTimeOutHandler"), 3, 5));
 		gameServerInit.start();
 
 		LiteHttpServer server = new LiteHttpServer();

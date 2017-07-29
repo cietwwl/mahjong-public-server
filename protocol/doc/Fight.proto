@@ -7,7 +7,7 @@ message FightExitGameRequest{//
 	
 }
 
-message FightExitGameResponse{//
+message FightExitGameResponse{
 	optional int32 errorCode = 1 [default = 1];
 }
 
@@ -38,16 +38,12 @@ message FightAgreeExitGameResponse{//
 	optional int32 errorCode = 1 [default = 1];
 }
 
-message SCAgreeExitGame{//
-	optional string name = 1;
-}
-
 message SCFightApplyExitResult{
 	repeated string rejectName = 1;
 	repeated string agreeName = 2;
 }
 
-message SCFightGameDismiss{//
+message SCFightClearRoomId{
 	
 }
 
@@ -78,15 +74,6 @@ message FightGetlastRoundResponse{
 	repeated Record records = 2;
 }
 
-message FightRejoinRequest{
-}
-
-message FightRejoinResponse{
-	optional int32 errorCode = 1[default = 1];
-	optional RoundVideoData RoundVideoData = 2 ; //所有推送数据
-    optional string lockString = 3 ; //房间号
-}
-
 message FightRecommandRequest{
 }
 
@@ -107,6 +94,8 @@ message SCFightStart{//
 message SCFightRoundOver{
 	repeated int32 flyCards = 1;
 	repeated RoleRoundOverInfoData roleRoundOverInfoData = 2;
+	//剩余没有打的局数
+	optional int32 remainRoundCount = 3;
 }
 
 message SCFightGameOver{
@@ -197,16 +186,20 @@ message SCFightGuo{
 	optional int32 seat = 1;
 }
 
+message FightChiRequest{
+	optional int32 tempGameCount = 1;
+	optional int32 callCardListId = 2;
+}
+
+message FightChiResponse{
+	optional int32 errorCode = 1[default=1];
+}
+
 message SCFightPointSeat{
 	optional int32 seat = 1;
+	optional int32 tempGameCount = 2;
 }
 
 message SCFightDisconnect{
 	optional int32 seat = 1;
-}
-
-message SCFightRejoin{
-	optional int32 seated = 1;
-}
-message SCFightFinishRejoin{
 }

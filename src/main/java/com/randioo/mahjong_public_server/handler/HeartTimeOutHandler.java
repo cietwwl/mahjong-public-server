@@ -23,7 +23,7 @@ public class HeartTimeOutHandler implements KeepAliveRequestTimeoutHandler {
 		Role role = (Role)RoleCache.getRoleBySession(arg1);
 		closeService.asynManipulate(role);
 		
-		arg1.close(true);
+//		arg1.close(true);
 	}
 
 }
