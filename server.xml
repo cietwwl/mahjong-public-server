@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server>
+	<param type="int" key="port">10006</param>
+	<param type="boolean" key="debug">true</param>
+	<param type="boolean" key="gm">true</param>
+	<param type="boolean" key="artificial">true</param>
+	<param type="boolean" key="matchai">true</param>
+	<param type="boolean" key="dispatch">true</param>
+	<param type="boolean" key="racedebug">true</param>
+	<param type="string" key="project">public_majiang</param>
+</server>

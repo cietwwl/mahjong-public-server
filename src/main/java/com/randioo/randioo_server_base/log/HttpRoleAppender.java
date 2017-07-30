@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.AppenderSkeleton;
@@ -50,7 +51,10 @@ public class HttpRoleAppender extends AppenderSkeleton {
 		map.put(httpKey, new ArrayList<String>(1));
 		map.get(httpKey).add(httpKeyValue);
 
-		map.put(httpGameKey, new ArrayList<String>(1));
+		List<String> gameList = new ArrayList<>(1);
+		gameList.add(HttpLogUtils.projectName);
+
+		map.put(httpGameKey, gameList);
 		map.put(httpRoleKey, new ArrayList<String>(1));
 		map.put(httpLogInfoKey, new ArrayList<String>(1));
 	}
@@ -73,12 +77,6 @@ public class HttpRoleAppender extends AppenderSkeleton {
 			public void run(LoggingEvent loggingevent) {
 				String value = loggingevent.getMessage().toString();
 				String message = value.replace("\n", "");
-				{
-					List<String> list = map.get(httpGameKey);
-					list.clear();
-					list.add(HttpLogUtils.projectName);
-				}
-
 				{
 					List<String> list = map.get(httpRoleKey);
 					list.clear();
