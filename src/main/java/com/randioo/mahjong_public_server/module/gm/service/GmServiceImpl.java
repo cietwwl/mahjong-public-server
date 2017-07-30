@@ -11,12 +11,14 @@ import org.apache.mina.core.session.IoSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.randioo.mahjong_public_server.GlobleConstant;
 import com.randioo.mahjong_public_server.entity.bo.Role;
 import com.randioo.mahjong_public_server.module.close.service.CloseService;
 import com.randioo.randioo_server_base.cache.RoleCache;
 import com.randioo.randioo_server_base.cache.SessionCache;
 import com.randioo.randioo_server_base.config.GlobleConfig;
 import com.randioo.randioo_server_base.config.GlobleConfig.GlobleEnum;
+import com.randioo.randioo_server_base.config.GlobleMap;
 import com.randioo.randioo_server_base.db.GameDB;
 import com.randioo.randioo_server_base.entity.RoleInterface;
 import com.randioo.randioo_server_base.platform.Platform;
@@ -47,7 +49,7 @@ public class GmServiceImpl extends ObserveBaseService implements GmService {
 
 			@Override
 			public Object apply(Object... params) {
-				GlobleConfig.set(GlobleEnum.LOGIN, false);
+				GlobleMap.putParam(GlobleConstant.ARGS_LOGIN, false);
 
 				loggerinfo("port close");
 

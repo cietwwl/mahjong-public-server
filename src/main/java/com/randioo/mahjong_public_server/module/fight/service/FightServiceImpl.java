@@ -92,6 +92,8 @@ import com.randioo.randioo_server_base.cache.RoleCache;
 import com.randioo.randioo_server_base.cache.SessionCache;
 import com.randioo.randioo_server_base.config.GlobleConfig;
 import com.randioo.randioo_server_base.config.GlobleConfig.GlobleEnum;
+import com.randioo.randioo_server_base.config.GlobleMap;
+import com.randioo.randioo_server_base.config.GlobleXmlLoader;
 import com.randioo.randioo_server_base.entity.GlobalConfigFunction;
 import com.randioo.randioo_server_base.init.GameServerInit;
 import com.randioo.randioo_server_base.log.HttpLogUtils;
@@ -321,7 +323,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
             notifyObservers(FightConstant.FIGHT_READY, scFightReady, game);
         }
 
-        boolean matchAI = GlobleConfig.Boolean(GlobleConstant.ARGS_MATCH_AI);
+        boolean matchAI = GlobleMap.Boolean(GlobleConstant.ARGS_MATCH_AI);
         // 检查是否全部都准备完毕,全部准备完毕
         if (matchAI ? this.checkAllReadyAI(game) : this.checkAllReady(game)) {
             loggerinfo("game=>" + game.getGameId() + "=>startGame");
@@ -481,7 +483,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
      * @param gameId
      */
     private void checkZhuang(Game game) {
-        boolean debug = GlobleConfig.Boolean(GlobleEnum.DEBUG);
+        boolean debug = GlobleMap.Boolean(GlobleConstant.ARGS_DEBUG);
         int zhuangGameRoleId = game.getZhuangSeat();
         // 如果没有庄家，则随机一个
         if (zhuangGameRoleId == -1) {
@@ -497,7 +499,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
         List<Integer> remainCards = game.getRemainCards();
         Lists.fillList(remainCards, CardTools.CARDS);
 
-        if (GlobleConfig.Boolean(GlobleConstant.ARGS_DISPATCH)) {
+        if (GlobleMap.Boolean(GlobleConstant.ARGS_DISPATCH)) {
             this.dispatchCardDebug(game);
         } else {
             this.dispatchCardRandom(game);
@@ -900,7 +902,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
         List<Integer> remainCards = game.getRemainCards();
         if (remainCards.size() > 0) {
 
-            if (GlobleConfig.Boolean(GlobleConstant.ARGS_ARTIFICAL)) {
+            if (GlobleMap.Boolean(GlobleConstant.ARGS_ARTIFICIAL)) {
                 final int finalSeat = seat;
                 final Game finalGame = game;
                 final RoleGameInfo finalRoleGameInfo = roleGameInfo;
@@ -1016,7 +1018,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
             return;
         }
         try {
-            if (GlobleConfig.Boolean(GlobleConstant.ARGS_ARTIFICAL)) {
+            if (GlobleMap.Boolean(GlobleConstant.ARGS_ARTIFICIAL)) {
                 final Game finalGame = game;
                 final RoleGameInfo finalNextRoleGameInfo = nextRoleGameInfo;
                 Thread t = new Thread(new Runnable() {
@@ -1189,7 +1191,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
         if (tempRoleGameInfo.roleId != 0) {
             return;
         }
-        if (GlobleConfig.Boolean(GlobleConstant.ARGS_ARTIFICAL)) {
+        if (GlobleMap.Boolean(GlobleConstant.ARGS_ARTIFICIAL)) {
             final int finalSeat = seat;
             final Game finalGame = game;
             final RoleGameInfo finalRoleGameInfo = tempRoleGameInfo;
@@ -2636,21 +2638,14 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
 
     public static void main(String[] args) {
 
-        GlobleConfig.initParam(new GlobalConfigFunction() {
+    	GlobleXmlLoader.init("./server.xml");
 
-            @Override
-            public void init(Map<String, Object> map, List<String> list) {
-                String[] params = { "artifical", "dispatch", "racedebug", "matchai" };
-                for (String param : params) {
-                    GlobleConfig.initBooleanValue(param, list);
-                }
-            }
-        });
+		GlobleMap.putParam(GlobleConstant.ARGS_PORT, Integer.parseInt(args[0]));
+		GlobleMap.putParam(GlobleConstant.ARGS_LOGIN, false);
 
-        GlobleConfig.init("10006", "debug", "artifical", "true", "dispatch", "true", "racedebug", "true", "matchai",
-                "true");
-
-        HttpLogUtils.setProjectName("public_majiang" + GlobleConfig.Int(GlobleEnum.PORT));
+		String projectName = GlobleMap.String(GlobleConstant.LOGGER_PROJECT_NAME)
+				+ GlobleMap.Int(GlobleConstant.ARGS_PORT);
+		HttpLogUtils.setProjectName(projectName);
 
         SensitiveWordDictionary.readAll("./sensitive.txt");
 
