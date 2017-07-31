@@ -3,7 +3,7 @@
 	<param type="int" key="port">10006</param>
 	<param type="boolean" key="debug">true</param>
 	<param type="boolean" key="gm">true</param>
-	<param type="boolean" key="artificial">true</param>
+	<param type="boolean" key="artificial">false</param>
 	<param type="boolean" key="matchai">true</param>
 	<param type="boolean" key="dispatch">true</param>
 	<param type="boolean" key="racedebug">true</param>

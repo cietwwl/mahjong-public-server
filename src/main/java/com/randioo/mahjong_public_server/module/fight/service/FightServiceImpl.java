@@ -27,14 +27,14 @@ import com.randioo.mahjong_public_server.entity.po.CardSort;
 import com.randioo.mahjong_public_server.entity.po.GameOverResult;
 import com.randioo.mahjong_public_server.entity.po.Race;
 import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
-import com.randioo.mahjong_public_server.entity.po.cardlist.CardList;
-import com.randioo.mahjong_public_server.entity.po.cardlist.Chi;
-import com.randioo.mahjong_public_server.entity.po.cardlist.Gang;
-import com.randioo.mahjong_public_server.entity.po.cardlist.Hu;
-import com.randioo.mahjong_public_server.entity.po.cardlist.Peng;
-import com.randioo.mahjong_public_server.entity.po.cardlist.Step5Hu;
 import com.randioo.mahjong_public_server.module.ServiceConstant;
 import com.randioo.mahjong_public_server.module.fight.FightConstant;
+import com.randioo.mahjong_public_server.module.fight.component.cardlist.CardList;
+import com.randioo.mahjong_public_server.module.fight.component.cardlist.Chi;
+import com.randioo.mahjong_public_server.module.fight.component.cardlist.Gang;
+import com.randioo.mahjong_public_server.module.fight.component.cardlist.Hu;
+import com.randioo.mahjong_public_server.module.fight.component.cardlist.Peng;
+import com.randioo.mahjong_public_server.module.fight.component.cardlist.Step5Hu;
 import com.randioo.mahjong_public_server.module.login.service.LoginService;
 import com.randioo.mahjong_public_server.module.match.service.MatchService;
 import com.randioo.mahjong_public_server.module.role.service.RoleService;
@@ -90,11 +90,8 @@ import com.randioo.mahjong_public_server.util.vote.VoteBox;
 import com.randioo.mahjong_public_server.util.vote.VoteBox.VoteResult;
 import com.randioo.randioo_server_base.cache.RoleCache;
 import com.randioo.randioo_server_base.cache.SessionCache;
-import com.randioo.randioo_server_base.config.GlobleConfig;
-import com.randioo.randioo_server_base.config.GlobleConfig.GlobleEnum;
 import com.randioo.randioo_server_base.config.GlobleMap;
 import com.randioo.randioo_server_base.config.GlobleXmlLoader;
-import com.randioo.randioo_server_base.entity.GlobalConfigFunction;
 import com.randioo.randioo_server_base.init.GameServerInit;
 import com.randioo.randioo_server_base.log.HttpLogUtils;
 import com.randioo.randioo_server_base.scheduler.EventScheduler;
@@ -2643,7 +2640,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
 		GlobleMap.putParam(GlobleConstant.ARGS_PORT, Integer.parseInt(args[0]));
 		GlobleMap.putParam(GlobleConstant.ARGS_LOGIN, false);
 
-		String projectName = GlobleMap.String(GlobleConstant.LOGGER_PROJECT_NAME)
+		String projectName = GlobleMap.String(GlobleConstant.ARGS_PROJECT_NAME)
 				+ GlobleMap.Int(GlobleConstant.ARGS_PORT);
 		HttpLogUtils.setProjectName(projectName);
 

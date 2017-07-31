@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.randioo.mahjong_public_server.entity.bo.VideoData;
-import com.randioo.mahjong_public_server.entity.po.cardlist.CardList;
-import com.randioo.mahjong_public_server.entity.po.cardlist.Gang;
+import com.randioo.mahjong_public_server.module.fight.component.cardlist.CardList;
+import com.randioo.mahjong_public_server.module.fight.component.cardlist.Gang;
 import com.randioo.mahjong_public_server.protocol.Entity.RoundCardsData;
 import com.randioo.mahjong_public_server.protocol.ServerMessage.SC;
 

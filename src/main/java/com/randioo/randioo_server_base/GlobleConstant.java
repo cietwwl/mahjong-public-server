@@ -7,4 +7,6 @@ public class GlobleConstant {
 	public static final String ARGS_DEBUG = "debug";
 	/** gm */
 	public static final String ARGS_GM = "gm";
+	/**项目名*/
+	public static final String ARGS_PROJECT_NAME="project";
 }

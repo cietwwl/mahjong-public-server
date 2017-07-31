@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.randioo.mahjong_public_server.entity.bo.Game;
-import com.randioo.mahjong_public_server.entity.po.cardlist.CardList;
+import com.randioo.mahjong_public_server.module.fight.component.cardlist.CardList;
 import com.randioo.randioo_server_base.template.Function;
 
 public class GameCache {

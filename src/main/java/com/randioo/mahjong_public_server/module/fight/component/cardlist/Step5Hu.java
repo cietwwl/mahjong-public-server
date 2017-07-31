@@ -1,4 +1,4 @@
-package com.randioo.mahjong_public_server.entity.po.cardlist;
+package com.randioo.mahjong_public_server.module.fight.component.cardlist;
 
 import java.util.ArrayList;
 import java.util.Arrays;
