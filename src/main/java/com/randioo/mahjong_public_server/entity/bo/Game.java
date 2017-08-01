@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.randioo.mahjong_public_server.entity.po.CallCardList;
-import com.randioo.mahjong_public_server.entity.po.GameOverResult;
 import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
+import com.randioo.mahjong_public_server.module.fight.component.score.round.GameOverResult;
 import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
 import com.randioo.mahjong_public_server.protocol.Entity.GameState;
 import com.randioo.mahjong_public_server.protocol.Entity.GameType;

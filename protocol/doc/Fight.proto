@@ -89,6 +89,7 @@ message SCFightStart{//
 	optional int32 remainCardCount = 4;
 	optional int32 zhuangSeat = 5;
 	optional int32 seat = 6; // 位置
+	repeated int32 flower = 7;//花牌
 }
 
 message SCFightRoundOver{
@@ -202,4 +203,8 @@ message SCFightPointSeat{
 
 message SCFightDisconnect{
 	optional int32 seat = 1;
+}
+
+message SCFightScore{
+	repeated ScoreData scoreData = 1;
 }

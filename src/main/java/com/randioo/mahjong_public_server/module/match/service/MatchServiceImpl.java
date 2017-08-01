@@ -572,13 +572,16 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 
         if (role == null) {
             GameRoleData aIGameRoleData = GameRoleData.newBuilder().setGameRoleId(info.gameRoleId).setReady(ready)
-                    .setSeat(index).setName(ServiceConstant.ROBOT_PREFIX_NAME + info.gameRoleId).build();
+                    .setSeat(index).setName(ServiceConstant.ROBOT_PREFIX_NAME + info.gameRoleId).setOnline(true)
+                    .build();
             return aIGameRoleData;
         }
+        IoSession session = SessionCache.getSessionById(info.roleId);
+        boolean offline = session == null || session.isConnected();
 
         return GameRoleData.newBuilder().setGameRoleId(info.gameRoleId).setReady(ready).setSeat(index)
                 .setName(role.getName()).setHeadImgUrl(role.getHeadImgUrl()).setMoney(role.getMoney())
-                .setSex(role.getSex()).setPoint(role.getPoint()).build();
+                .setSex(role.getSex()).setPoint(role.getPoint()).setOnline(offline).build();
     }
 
     /**

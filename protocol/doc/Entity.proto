@@ -40,6 +40,11 @@ message PaiNum{
 	optional int32 num = 3;
 }
 
+message ScoreData{
+	optional int32 seat = 1;
+	optional int32 score = 2;
+}
+
 message Record{
 	optional int32 seat = 1;
 	repeated int32 pai = 2;
@@ -59,6 +64,7 @@ message GameRoleData{
 	optional int32 money = 6;
 	optional int32 point = 7;
 	optional int32 sex = 8;
+	optional bool online = 9;
 }
 
 enum GameState{
@@ -124,6 +130,7 @@ message RoundCardsData{
 	optional int32 touchCard = 3;
 	optional int32 targetSeat = 4;
 	repeated CardListData cardListData = 5;
+	repeated int32 flower = 6;
 }
 
 message RecommandPai{

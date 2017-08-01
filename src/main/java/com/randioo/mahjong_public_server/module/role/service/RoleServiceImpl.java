@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.protobuf.GeneratedMessage;
+import com.randioo.mahjong_public_server.GlobleConstant;
 import com.randioo.mahjong_public_server.dao.RoleDao;
 import com.randioo.mahjong_public_server.entity.bo.Role;
 import com.randioo.mahjong_public_server.module.ServiceConstant;
@@ -20,7 +21,6 @@ import com.randioo.mahjong_public_server.protocol.ServerMessage.SC;
 import com.randioo.randioo_platform_sdk.RandiooPlatformSdk;
 import com.randioo.randioo_platform_sdk.entity.AccountInfo;
 import com.randioo.randioo_platform_sdk.exception.AccountErrorException;
-import com.randioo.randioo_server_base.GlobleConstant;
 import com.randioo.randioo_server_base.cache.RoleCache;
 import com.randioo.randioo_server_base.config.GlobleMap;
 import com.randioo.randioo_server_base.db.IdClassCreator;
@@ -89,7 +89,7 @@ public class RoleServiceImpl extends ObserveBaseService implements RoleService {
 
 	@Override
 	public void initService() {
-		randiooPlatformSdk.setDebug(GlobleMap.Boolean(GlobleConstant.ARGS_DEBUG));
+		randiooPlatformSdk.setDebug(GlobleMap.Boolean(GlobleConstant.ARGS_PLATFORM));
 	}
 
 	@Override

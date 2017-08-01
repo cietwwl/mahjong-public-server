@@ -76,6 +76,10 @@ public class VideoServiceImpl extends ObserveBaseService implements VideoService
         if (FightConstant.FIGHT_START.equals(msg)) {
             OnlyOneRecord(args);
         }
+        
+        if(FightConstant.FIGHT_SCORE.equals(msg)){
+            allRecord(args);
+        }
         // 摸牌
         if (FightConstant.FIGHT_TOUCH_CARD.equals(msg)) {
             OnlyOneRecord(args);

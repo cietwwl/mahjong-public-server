@@ -18,6 +18,8 @@ public class GlobleConstant extends com.randioo.randioo_server_base.GlobleConsta
     public static final String ARGS_RACE_DEBUG = "racedebug";
     /** 登录开关 */
     public static final String ARGS_LOGIN = "login";
+    /**平台接口调试开关*/
+    public static final String ARGS_PLATFORM = "platform";
 
     public static final String TRUE = "true";
     public static final String FALSE = "false";

@@ -63,4 +63,6 @@ public class FightConstant {
     public static final String FIGHT_HU = "hu"; // 胡
     public static final String FIGHT_GUO = "guo"; // 过
 
+    public static final String FIGHT_SCORE = "fight_score";// 分数改变
+
 }

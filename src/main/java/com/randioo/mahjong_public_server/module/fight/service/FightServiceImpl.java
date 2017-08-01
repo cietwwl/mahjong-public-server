@@ -24,7 +24,6 @@ import com.randioo.mahjong_public_server.entity.po.AIChooseCallCardListTimeEvent
 import com.randioo.mahjong_public_server.entity.po.AISendCardTimeEvent;
 import com.randioo.mahjong_public_server.entity.po.CallCardList;
 import com.randioo.mahjong_public_server.entity.po.CardSort;
-import com.randioo.mahjong_public_server.entity.po.GameOverResult;
 import com.randioo.mahjong_public_server.entity.po.Race;
 import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
 import com.randioo.mahjong_public_server.module.ServiceConstant;
@@ -34,7 +33,13 @@ import com.randioo.mahjong_public_server.module.fight.component.cardlist.Chi;
 import com.randioo.mahjong_public_server.module.fight.component.cardlist.Gang;
 import com.randioo.mahjong_public_server.module.fight.component.cardlist.Hu;
 import com.randioo.mahjong_public_server.module.fight.component.cardlist.Peng;
-import com.randioo.mahjong_public_server.module.fight.component.cardlist.Step5Hu;
+import com.randioo.mahjong_public_server.module.fight.component.cardlist.ZLPBaiDaHu;
+import com.randioo.mahjong_public_server.module.fight.component.fly.FlyChecker;
+import com.randioo.mahjong_public_server.module.fight.component.fly.FlyResult;
+import com.randioo.mahjong_public_server.module.fight.component.score.round.GameOverResult;
+import com.randioo.mahjong_public_server.module.fight.component.score.round.RoundOverCalculator;
+import com.randioo.mahjong_public_server.module.fight.component.score.round.RoundOverParameter;
+import com.randioo.mahjong_public_server.module.fight.component.score.round.RoundOverResult;
 import com.randioo.mahjong_public_server.module.login.service.LoginService;
 import com.randioo.mahjong_public_server.module.match.service.MatchService;
 import com.randioo.mahjong_public_server.module.role.service.RoleService;
@@ -54,6 +59,7 @@ import com.randioo.mahjong_public_server.protocol.Entity.PaiNum;
 import com.randioo.mahjong_public_server.protocol.Entity.RoleGameOverInfoData;
 import com.randioo.mahjong_public_server.protocol.Entity.RoleRoundOverInfoData;
 import com.randioo.mahjong_public_server.protocol.Entity.RoundCardsData;
+import com.randioo.mahjong_public_server.protocol.Entity.ScoreData;
 import com.randioo.mahjong_public_server.protocol.Error.ErrorCode;
 import com.randioo.mahjong_public_server.protocol.Fight.FightAgreeExitGameResponse;
 import com.randioo.mahjong_public_server.protocol.Fight.FightApplyExitGameResponse;
@@ -79,6 +85,7 @@ import com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeSendCard;
 import com.randioo.mahjong_public_server.protocol.Fight.SCFightPointSeat;
 import com.randioo.mahjong_public_server.protocol.Fight.SCFightReady;
 import com.randioo.mahjong_public_server.protocol.Fight.SCFightRoundOver;
+import com.randioo.mahjong_public_server.protocol.Fight.SCFightScore;
 import com.randioo.mahjong_public_server.protocol.Fight.SCFightSendCard;
 import com.randioo.mahjong_public_server.protocol.Fight.SCFightStart;
 import com.randioo.mahjong_public_server.protocol.Fight.SCFightTouchCard;
@@ -125,6 +132,12 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
     @Autowired
     private VideoService videoService;
 
+    @Autowired
+    private FlyChecker flyChecker;
+
+    @Autowired
+    private RoundOverCalculator roundOverCalculator;
+
     private Scanner in = new Scanner(System.in);
 
     @Override
@@ -144,7 +157,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
         cardLists.put(Gang.class, ReflectUtils.newInstance(Gang.class));
         cardLists.put(Peng.class, ReflectUtils.newInstance(Peng.class));
         cardLists.put(Chi.class, ReflectUtils.newInstance(Chi.class));
-        cardLists.put(Hu.class, ReflectUtils.newInstance(Step5Hu.class));
+        cardLists.put(Hu.class, ReflectUtils.newInstance(ZLPBaiDaHu.class));
 
         GameCache.getCheckCardListSequence().add(Hu.class);
         GameCache.getCheckCardListSequence().add(Gang.class);
@@ -361,6 +374,12 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
         return true;
     }
 
+    /*
+     * (non-Javadoc)
+     * @see
+     * com.randioo.mahjong_public_server.module.fight.service.FightService#gameStart
+     * (com.randioo.mahjong_public_server.entity.bo.Game)
+     */
     @Override
     public void gameStart(Game game) {
         loggerinfo("gameStart=>game:" + game.getGameId());
@@ -376,16 +395,23 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
         // 设置出牌玩家索引
         game.setCurrentRoleIdIndex(game.getZhuangSeat());
 
+        // 每个人的分数
+        SCFightScore.Builder scFightScoreBuilder = SCFightScore.newBuilder();
         // 设置每个人的座位和卡牌的数量
         SCFightStart.Builder scFightStartBuilder = SCFightStart.newBuilder();
         for (int i = 0; i < gameConfigData.getMaxCount(); i++) {
             RoleGameInfo gameRoleInfo = game.getRoleIdMap().get(game.getRoleIdList().get(i));
             scFightStartBuilder.addPaiNum(PaiNum.newBuilder().setSeat(i).setNum(gameRoleInfo.cards.size()));
+
+            // 准备一下所有人的分数
+            GameOverResult gameOverResult = game.getStatisticResultMap().get(gameRoleInfo.gameRoleId);
+            scFightScoreBuilder.addScoreData(ScoreData.newBuilder().setScore(gameOverResult.score).setSeat(i));
         }
 
         scFightStartBuilder.setTimes(game.getMultiple());
         scFightStartBuilder.setRemainCardCount(game.getRemainCards().size());
         scFightStartBuilder.setZhuangSeat(game.getZhuangSeat());
+
         // 发送给每个玩家
         for (RoleGameInfo roleGameInfo : game.getRoleIdMap().values()) {
             SC sc = SC.newBuilder().setSCFightStart(scFightStartBuilder.clone().addAllPai(roleGameInfo.cards)).build();
@@ -394,6 +420,11 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
 
             notifyObservers(FightConstant.FIGHT_START, sc, game, roleGameInfo);
         }
+
+        // 通知一下所有人的分数
+        SC fightScoreSC = SC.newBuilder().setSCFightScore(scFightScoreBuilder).build();
+        this.sendAllSeatSC(game, fightScoreSC);
+        this.notifyObservers(FightConstant.FIGHT_SCORE, fightScoreSC, game);
 
         // 庄家发一张牌
         this.touchCard(game);
@@ -718,7 +749,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
                 voteBox.vote(voteGameRoleId, false, applyExitId);
             }
         }
-        
+
         VoteResult voteResult = voteBox.getResult();
 
         if (voteResult == VoteResult.PASS || voteResult == VoteResult.REJECT) {
@@ -764,7 +795,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
         }
         game.setGameState(GameState.GAME_START_END);
 
-        this.roundOver(game, false);
+        this.roundOver2(game, false);
         this.gameOver(game);
 
         this.notifyObservers(FightConstant.FIGHT_CANCEL_GAME, game);
@@ -850,7 +881,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
                 agreeExitCount++;
                 continue;
             }
-
+            // 不是申请人
             if (roleInfo.roleId != applyRoleId) {
                 IoSession session = SessionCache.getSessionById(roleInfo.roleId);
                 String gameRoleId = matchService.getGameRoleId(game.getGameId(), roleInfo.roleId);
@@ -912,7 +943,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
                 });
                 t.start();
             } else {
-                roleGameInfo.newCard = remainCards.remove(0);
+                roleGameInfo.newCard = remainCards.remove(RandomUtils.getRandomNum(remainCards.size()));
                 touchCardProcess2(game, seat, roleGameInfo);
             }
         } else {// 牌出完了，则游戏结束
@@ -1846,7 +1877,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
 
         boolean isGameOver = isGameOver(game);
         game.setGameState(isGameOver ? GameState.GAME_START_END : GameState.GAME_STATE_PREPARE);
-        this.roundOver(game, true);
+        this.roundOver2(game, true);
         if (isGameOver) {
             this.gameOver(game);
         } else {
@@ -1893,22 +1924,23 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
     private void roundOver(Game game, boolean checkHu) {
         SCFightRoundOver.Builder scFightRoundOverBuilder = SCFightRoundOver.newBuilder();
         GameConfigData config = game.getGameConfig();
-        // 剩余几局没有打
-        int remainRoundCount = config.getMaxCount() - game.getFinishRoundCount();
+        // 剩余几局没有打,如果要检查胡,才有剩余次数
+        int remainRoundCount = checkHu ? config.getMaxCount() - game.getFinishRoundCount() : 0;
         scFightRoundOverBuilder.setRemainRoundCount(remainRoundCount);
         int minScore = config.getMinStartScore();
 
         List<RoleRoundOverInfoData.Builder> roleRoundOverInfoDataBuilderList = new ArrayList<>(game.getRoleIdList()
                 .size());
 
-        int flyScore = 0;
-        List<Integer> flys = new ArrayList<>();
+        FlyResult flyResult = new FlyResult();
         // 抓苍蝇
         if (checkHu) {
-            flys.addAll(this.getFlys(game));
-            flyScore = this.getFlyScore(game, flys);
-            scFightRoundOverBuilder.addAllFlyCards(flys);
+            flyResult = flyChecker.calculateFlys(game);
+            scFightRoundOverBuilder.addAllFlyCards(flyResult.getTouchCards());
         }
+
+        int flyScore = flyResult.getScore();
+        List<Integer> resultFlys = flyResult.getResultFlys();
 
         for (int i = 0; i < game.getRoleIdList().size(); i++) {
             RoleGameInfo roleGameInfo = this.getRoleGameInfoBySeat(game, i);
@@ -1955,7 +1987,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
 
                     RoleRoundOverInfoData.Builder builder = RoleRoundOverInfoData.newBuilder()
                             .setGameRoleData(gameRoleData).setRoundCardsData(gameCardsData).setMinScore(minScore)
-                            .setGangKai(hu.gangKai).setOverMethod(overMethod).addAllFlyCards(flys);
+                            .setGangKai(hu.gangKai).setOverMethod(overMethod).addAllFlyCards(resultFlys);
 
                     roleRoundOverInfoDataBuilderList.add(builder);
                 }
@@ -2021,44 +2053,109 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
         notifyObservers(FightConstant.ROUND_OVER, scFightRoundOverSC, game, checkHu);
     }
 
-    /**
-     * 获得苍蝇的分数
-     * 
-     * @param game
-     * @param flys
-     * @return
-     * @author wcy 2017年7月14日
-     */
-    private int getFlyScore(Game game, List<Integer> flys) {
-        GameConfigData gameConfigData = game.getGameConfig();
-
-        int flyScore = gameConfigData.getFlyScore();
-        List<Integer> flyValueList = gameConfigData.getFlyValueList();
-        int sum = 0;
-        for (Integer i : flys) {
-            if (flyValueList.contains(i %= 10))
-                sum++;
-        }
-
-        return sum * flyScore;
+    private boolean overMethodIsHu(OverMethod overMethod) {
+        return overMethod != OverMethod.OVER_HU || overMethod != OverMethod.OVER_MO_HU;
     }
 
-    private List<Integer> getFlys(Game game) {
+    private void roundOver2(Game game, boolean checkHu) {
+        SCFightRoundOver.Builder scFightRoundOverBuilder = SCFightRoundOver.newBuilder();
         GameConfigData config = game.getGameConfig();
-        int catchCount = config.getFlyCount();
-        if (catchCount == 0)
-            return new ArrayList<>();
-        List<Integer> flys = new ArrayList<>(catchCount);
-        for (int j = 0; j < catchCount; j++) {
-            // 没苍蝇就算了
-            try {
-                int flyCard = game.getRemainCards().remove(0);
-                flys.add(flyCard);
-            } catch (Exception e) {
-                break;
-            }
+        // 剩余几局没有打,如果要检查胡,才有剩余次数
+        int remainRoundCount = checkHu ? config.getMaxCount() - game.getFinishRoundCount() : 0;
+        scFightRoundOverBuilder.setRemainRoundCount(remainRoundCount);
+        int minScore = config.getMinStartScore();
+
+        FlyResult flyResult = new FlyResult();
+        // 抓苍蝇
+        if (checkHu) {
+            flyResult = flyChecker.calculateFlys(game);
+            scFightRoundOverBuilder.addAllFlyCards(flyResult.getTouchCards());
         }
-        return flys;
+
+        int flyScore = flyResult.getScore();
+        List<Integer> resultFlys = flyResult.getResultFlys();
+
+        // 初始化结分器
+        RoundOverParameter roundOverParameter = new RoundOverParameter();
+        roundOverParameter.setCheckHu(checkHu);
+        roundOverParameter.setFlyScore(flyScore);
+        roundOverParameter.setMinScore(minScore);
+        roundOverParameter.getHuCallCardList().addAll(game.getHuCallCardLists());
+        roundOverParameter.getRoleIdList().addAll(game.getRoleIdList());
+
+        SCFightScore.Builder scFightScoreBuilder = SCFightScore.newBuilder();
+
+        Map<Integer, RoundOverResult> roundOverResultMap = roundOverCalculator.getRoundOverResults(roundOverParameter);
+        for (int i = 0; i < game.getRoleIdList().size(); i++) {
+            RoleGameInfo roleGameInfo = this.getRoleGameInfoBySeat(game, i);
+            RoundOverResult roundOverResult = roundOverResultMap.get(i);
+
+            GameRoleData gameRoleData = matchService.parseGameRoleData(roleGameInfo, game);
+            RoundCardsData gameCardsData = this.parseRoundCardsData(game, roleGameInfo);
+
+            RoleRoundOverInfoData.Builder roleRoundOverInfoBuilder = RoleRoundOverInfoData.newBuilder()
+                    .setGameRoleData(gameRoleData).setRoundCardsData(gameCardsData).setMinScore(minScore)
+                    .setOverMethod(roundOverResult.overMethod);
+
+            // 获得总结分对象
+            this.checkGameOverResult(game, roleGameInfo);
+            GameOverResult gameOverResult = game.getStatisticResultMap().get(roleGameInfo.gameRoleId);
+
+            // 是否结局是胡
+            if (this.overMethodIsHu(roundOverResult.overMethod)) {
+                roleRoundOverInfoBuilder.setGangKai(roundOverResult.gangKai).addAllFlyCards(resultFlys);
+            }
+
+            switch (roundOverResult.overMethod) {
+            case OVER_CHONG:
+                gameOverResult.dianChong++;
+                break;
+            case OVER_HU:
+                gameOverResult.huCount++;
+                break;
+            case OVER_LOSS:
+                break;
+            case OVER_MO_HU:
+                gameOverResult.moHuCount++;
+                break;
+            default:
+                break;
+
+            }
+
+            // 设置回合分数
+            roleRoundOverInfoBuilder.setRoundScore(roundOverResult.score);
+
+            scFightRoundOverBuilder.addRoleRoundOverInfoData(roleRoundOverInfoBuilder);
+            // 玩家回合分数
+            roleGameInfo.roundOverResult.score += roundOverResult.score;
+
+            // 二次结分汇总
+            gameOverResult.score += roleGameInfo.roundOverResult.score;
+
+            scFightScoreBuilder.addScoreData(ScoreData.newBuilder().setSeat(i).setScore(gameOverResult.score));
+        }
+
+        SC scFightRoundOverSC = SC.newBuilder().setSCFightRoundOver(scFightRoundOverBuilder).build();
+        SC scFightScoreSC = SC.newBuilder().setSCFightScore(scFightScoreBuilder).build();
+
+        // 所有人发结算通知
+        this.sendAllSeatSC(game, scFightRoundOverSC);
+
+        // 所有人发送分数通知
+        this.sendAllSeatSC(game, scFightScoreSC);
+
+        this.notifyObservers(FightConstant.ROUND_OVER, scFightRoundOverSC, game, checkHu);
+        this.notifyObservers(FightConstant.FIGHT_SCORE, scFightScoreSC, game);
+
+    }
+
+    private void checkGameOverResult(Game game, RoleGameInfo roleGameInfo) {
+        Map<String, GameOverResult> resultMap = game.getStatisticResultMap();
+        if (!resultMap.containsKey(roleGameInfo.gameRoleId)) {
+            GameOverResult result = this.createRoleGameResult(roleGameInfo);
+            resultMap.put(roleGameInfo.gameRoleId, result);
+        }
     }
 
     /**
@@ -2178,7 +2275,7 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
         // 设置当前的出牌
         this.jumpCardSeat(game);
 
-        // 通知所有人,此人出的牌绿
+        // 通知所有人,此人出的牌
         this.sendAllSeatSC(
                 game,
                 SC.newBuilder()
@@ -2191,27 +2288,29 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
                         .setSCFightSendCard(
                                 SCFightSendCard.newBuilder().setSeat(game.getCurrentRoleIdIndex()).setCard(card)
                                         .setIsTouchCard(isSendTouchCard)).build(), game);
-        // 如果有摸得牌还在要加入到手牌绿
+        // 如果有摸得牌还在要加入到手牌
         if (!isSendTouchCard) {
             this.newCardAdd2Cards(roleGameInfo);
         }
 
-        // 清空临时列表绿
+        // 清空临时列表
         game.getCallCardLists().clear();
         game.getHuCallCardLists().clear();
 
-        // 保存场上除了本人的杠碰胡绿
-        for (int index = 0; index < game.getRoleIdList().size(); index++) {
-            // 自己不能碰自己绿
-            if (index == game.getCurrentRoleIdIndex())
-                continue;
+        // 不是白搭牌才能杠碰胡
+        boolean isBaiDaCard = GameCache.getBaiDaCardNumSet().contains(card);
+        if (!isBaiDaCard) {
+            // 保存场上除了本人的杠碰胡
+            for (int index = 0; index < game.getRoleIdList().size(); index++) {
+                // 自己不能碰自己
+                if (index == game.getCurrentRoleIdIndex())
+                    continue;
 
-            this.checkOtherCallCardList(game, index, card, GameCache.getCheckCardListSequence());
+                this.checkOtherCallCardList(game, index, card, GameCache.getCheckCardListSequence());
+            }
         }
 
-        // 先检查听牌绿
-        this.checkTing(game, gameRoleId);
-        // 其他人杠碰胡过或下一个人绿
+        // 其他人杠碰胡过或下一个人
         this.otherRoleGangPengHuOrNextOne(game);
 
     }
@@ -2545,6 +2644,9 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
             return;
 
         Game game = this.getGameById(gameId);
+        if (game == null) {
+            return;
+        }
         String gameRoleId = matchService.getGameRoleId(game.getGameId(), role.getRoleId());
 
         SC sc = SC.newBuilder()
@@ -2635,14 +2737,14 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
 
     public static void main(String[] args) {
 
-    	GlobleXmlLoader.init("./server.xml");
+        GlobleXmlLoader.init("./server.xml");
 
-		GlobleMap.putParam(GlobleConstant.ARGS_PORT, Integer.parseInt(args[0]));
-		GlobleMap.putParam(GlobleConstant.ARGS_LOGIN, false);
+        GlobleMap.putParam(GlobleConstant.ARGS_PORT, Integer.parseInt(args[0]));
+        GlobleMap.putParam(GlobleConstant.ARGS_LOGIN, false);
 
-		String projectName = GlobleMap.String(GlobleConstant.ARGS_PROJECT_NAME)
-				+ GlobleMap.Int(GlobleConstant.ARGS_PORT);
-		HttpLogUtils.setProjectName(projectName);
+        String projectName = GlobleMap.String(GlobleConstant.ARGS_PROJECT_NAME)
+                + GlobleMap.Int(GlobleConstant.ARGS_PORT);
+        HttpLogUtils.setProjectName(projectName);
 
         SensitiveWordDictionary.readAll("./sensitive.txt");
 
