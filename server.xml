@@ -3,11 +3,21 @@
 	<param type="int" key="port">10006</param>
 	<param type="boolean" key="debug">false</param>
 	<param type="boolean" key="gm">true</param>
+	<!-- 人工出牌 -->
 	<param type="boolean" key="artificial">false</param>
 	<param type="boolean" key="matchai">true</param>
+	<!-- 发指定牌 -->
 	<param type="boolean" key="dispatch">false</param>
+	<!-- 庄家 -->
+	<param type="boolean" key="zhuang">false</param>
 	<param type="boolean" key="racedebug">false</param>
+
+	<!-- 平台 -->
 	<!-- 平台接口调试 -->
-	<param type="boolean" key="platform">false</param>
+	<param type="boolean" key="platform">true</param>
+	<!-- 平台游戏包名 -->
+	<param type="string" key="platformPackageName">com.randioo.RDMJZhongHua</param>
+
+
 	<param type="string" key="project">public_majiang</param>
 </server>

@@ -19,16 +19,21 @@ message GameConfigData{
 	optional int32 raceType = 1; 
 	optional int32 roundCount = 2;//局数
 	optional int32 minStartScore = 3; //底分
-	optional int32 gangScore = 4;//杠的分数
-	optional bool baidaZhuaHu = 5;//红中在手是否可以抓胡
-	optional bool baida4win=6;//四红中(白搭)获胜
-	optional int32 flyCount =7; //苍蝇数量
-	optional int32 flyScore = 8; //飞苍蝇分数
-	repeated int32 flyValue = 9;//苍蝇的值
-	optional GameOverMethod gameOverMethod = 10[default=GAME_OVER_ROUND];//游戏结束方式
-	optional string endTime = 11; //结束时间
-	optional int32 cardNum = 12; // 房卡数量
-	optional int32 maxCount = 13 [default=4];//默认值为4
+	optional int32 hua = 4; // 花
+	optional int32 gangScore = 5;//杠的分数
+	optional bool baidaZhuaHu = 6;//红中在手是否可以抓胡
+	optional bool baida4win=7;//四红中(白搭)获胜
+	optional int32 flyCount =8; //苍蝇数量
+	optional int32 limit = 9; // 封顶
+	optional bool isHuangFan = 10;// 荒番
+	optional bool isFly = 11;// 飞苍蝇
+	optional int32 flyScore = 12; //飞苍蝇分数
+	repeated int32 flyValue = 13;//苍蝇的值
+	optional GameOverMethod gameOverMethod = 14[default=GAME_OVER_ROUND];//游戏结束方式
+	optional string endTime = 15; //结束时间
+	optional int32 cardNum = 16; // 房卡数量
+	optional int32 maxCount = 17 [default=4];//默认值为4
+	optional int32 roomCard = 18;//房卡
 }
 /**游戏结束的方式*/
 enum GameOverMethod{
@@ -64,7 +69,8 @@ message GameRoleData{
 	optional int32 money = 6;
 	optional int32 point = 7;
 	optional int32 sex = 8;
-	optional bool online = 9;
+	optional bool online = 9;	
+	optional string platformRoleId = 10;
 }
 
 enum GameState{
@@ -103,9 +109,14 @@ message RoleRoundOverInfoData{
 	optional RoundCardsData roundCardsData = 2;
 	optional int32 minScore = 3;
 	optional bool gangKai = 4;
-	repeated int32 flyCards = 5;
-	optional OverMethod overMethod = 6;
-	optional int32 roundScore = 7;
+	optional OverMethod overMethod = 5;
+	optional int32 roundScore = 6;
+	optional int32 mingGangScore = 7;
+	optional int32 mingGangCount = 8;
+	optional int32 darkGangScore = 9;
+	optional int32 darkGangCount = 10;
+	optional int32 huangFan = 11;
+	optional int32 moScore = 12;
 }
 
 enum OverMethod{

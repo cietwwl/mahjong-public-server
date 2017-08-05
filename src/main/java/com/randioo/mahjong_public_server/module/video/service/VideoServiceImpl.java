@@ -76,13 +76,25 @@ public class VideoServiceImpl extends ObserveBaseService implements VideoService
         if (FightConstant.FIGHT_START.equals(msg)) {
             OnlyOneRecord(args);
         }
-        
-        if(FightConstant.FIGHT_SCORE.equals(msg)){
+
+        if (FightConstant.FIGHT_SCORE.equals(msg)) {
             allRecord(args);
         }
         // 摸牌
         if (FightConstant.FIGHT_TOUCH_CARD.equals(msg)) {
-            OnlyOneRecord(args);
+            SC sc = (SC) args[0];
+            Game game = (Game) args[1];
+            RoleGameInfo roleGameInfo = (RoleGameInfo) args[2];
+            // 摸牌为0是别人摸牌，只记录到断线重连，不为空录像也要记
+            int touchCard = sc.getSCFightTouchCard().getTouchCard();
+
+            if (touchCard != 0) {
+                for (RoleGameInfo info : game.getRoleIdMap().values()) {
+                    List<SC> scList = this.getCurrentSCList(info, game.getFinishRoundCount() + 1);
+                    scList.add(sc);
+                }
+            }
+            roleGameInfo.roundSCList.add(sc);
         }
         // 出牌
         if (FightConstant.FIGHT_SEND_CARD.equals(msg)) {
@@ -140,14 +152,15 @@ public class VideoServiceImpl extends ObserveBaseService implements VideoService
             int gameId = (int) args[1];
             RoleGameInfo info = (RoleGameInfo) args[2];
             boolean notFull = (boolean) args[3];
-//            if (notFull) {
-//                Game game = fightService.getGameById(gameId);
-//                for (RoleGameInfo roleGameInfo : game.getRoleIdMap().values()) {
-//                    List<SC> list = getCurrentSCList(roleGameInfo, game.getFinishRoundCount()); // 此时玩家进入游戏时，认为
-//                    list.add(sc);
-//                    roleGameInfo.roundSCList.add(sc);
-//                }
-//            }
+            // if (notFull) {
+            // Game game = fightService.getGameById(gameId);
+            // for (RoleGameInfo roleGameInfo : game.getRoleIdMap().values()) {
+            // List<SC> list = getCurrentSCList(roleGameInfo,
+            // game.getFinishRoundCount()); // 此时玩家进入游戏时，认为
+            // list.add(sc);
+            // roleGameInfo.roundSCList.add(sc);
+            // }
+            // }
         }
         if (FightConstant.ROUND_OVER.equals(msg)) {
             SC sc = (SC) args[0];
@@ -158,18 +171,27 @@ public class VideoServiceImpl extends ObserveBaseService implements VideoService
             }
 
             for (RoleGameInfo roleGameInfo : game.getRoleIdMap().values()) {
+                roleGameInfo.roundSCList.add(sc);
                 List<SC> list = getCurrentSCList(roleGameInfo, game.getFinishRoundCount() + 1); // 此时玩家进入游戏时，认为
                 list.add(sc);
             }
         }
 
-        if (FightConstant.FIGHT_RECORD_SC.equals(msg)) {
+        if (FightConstant.FIGHT_GANG_PENG_HU_OVER.equals(msg)) {
+            SC sc = (SC) args[0];
+            Game game = (Game) args[1];
+            RoleGameInfo roleGameInfo = (RoleGameInfo) args[2];
+
+            roleGameInfo.roundSCList.add(sc);
+            List<SC> list = getCurrentSCList(roleGameInfo, game.getFinishRoundCount() + 1); // 此时玩家进入游戏时，认为
+            list.add(sc);
         }
 
         if (FightConstant.FIGHT_GAME_OVER.equals(msg)) {
             SC sc = (SC) args[0];
             Game game = (Game) args[1];
             for (RoleGameInfo roleGameInfo : game.getRoleIdMap().values()) {
+                roleGameInfo.roundSCList.add(sc);
                 List<SC> list = getCurrentSCList(roleGameInfo, game.getFinishRoundCount() + 1); // 此时玩家进入游戏时，认为
                 list.add(sc);
             }

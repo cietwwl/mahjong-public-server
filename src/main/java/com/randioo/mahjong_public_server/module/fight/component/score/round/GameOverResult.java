@@ -17,11 +17,25 @@ public class GameOverResult extends RoundOverResult {
     public int dianChong;
     /** 分数 */
     public int score;
+    /** 明杠分数 */
+    public int mingGangScore;
+    /** 明杠次数 */
+    public int mingGangCount;
+    /** 暗杠分数 */
+    public int darkGangScore;
+    /** 暗杠次数 */
+    public int dardGangCount;
+    /** 补杠分数 */
+    public int addGangScore;
+    /** 补杠次数 */
+    public int addGangCount;
 
     @Override
     public String toString() {
         return "GameOverResult [huCount=" + huCount + ", moHuCount=" + moHuCount + ", zhuaHuCount=" + zhuaHuCount
-                + ", dianChong=" + dianChong + ", score=" + score + "]";
+                + ", dianChong=" + dianChong + ", score=" + score + ", mingGangScore=" + mingGangScore
+                + ", mingGangCount=" + mingGangCount + ", darkGangScore=" + darkGangScore + ", dardGangCount="
+                + dardGangCount + ", addGangScore=" + addGangScore + ", addGangCount=" + addGangCount + "]";
     }
 
 }

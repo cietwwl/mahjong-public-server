@@ -3,7 +3,6 @@ import "Login.proto";
 import "Role.proto";
 import "Match.proto";
 import "Fight.proto";
-import "MoneyExchange.proto";
 import "Settings.proto";
 import "Race.proto";
 import "Heart.proto";
@@ -34,12 +33,12 @@ message CS{
 	optional FightHuRequest FightHuRequest = 19;
 	optional FightGuoRequest FightGuoRequest = 20;
 	optional FightChiRequest FightChiRequest = 21;//吃的请求
-
-	optional MoneyExchangeRequest MoneyExchangeRequest = 22;
+	optional FightQueryGameConfigRequest FightQueryGameConfigRequest = 22;//查询游戏配置
 
 	optional SettingsRequest SettingsRequest = 23;
 	optional SettingsShowRequest SettingsShowRequest = 24;
 
 	optional RaceJoinRaceRequest RaceJoinRaceRequest = 25;
 	optional RaceShowQueueRequest RaceShowQueueRequest = 26;
+
 } // 26

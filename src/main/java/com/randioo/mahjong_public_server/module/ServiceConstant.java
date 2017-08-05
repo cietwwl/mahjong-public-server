@@ -7,4 +7,6 @@ public class ServiceConstant {
     public static final String GUEST_PREFIX_NAME = "guest";
     /** 游客头像 */
     public static final String GUEST_HEAD_IMG_URL = "ui://h24q1ml0x7tz13m";
+    /** 机器人使用的平台id */
+    public static final String ROBOT_PLATFORM_ID = "";
 }

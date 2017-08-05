@@ -3,7 +3,6 @@ import "Login.proto";
 import "Role.proto";
 import "Match.proto";
 import "Fight.proto";
-import "MoneyExchange.proto";
 import "Settings.proto";
 import "Race.proto";
 import "Heart.proto";
@@ -59,16 +58,18 @@ message SC{
 	optional SCFightDisconnect SCFightDisconnect = 44;//通知玩家断连
 	optional FightChiResponse FightChiResponse = 45;//吃的响应
 	optional SCFightScore SCFightScore = 46;//分数改变
-
-	optional MoneyExchangeResponse MoneyExchangeResponse = 47;//燃点币游戏币（欢乐豆）互换
+	optional SCFightChooseCardListOver SCFightChooseCardListOver = 47;//取消通知
+	optional FightQueryGameConfigResponse FightQueryGameConfigResponse = 48;//查询游戏配置
 	
-	optional SettingsResponse SettingsResponse = 48;//设置
-	optional SettingsShowResponse SettingsShowResponse = 49;//设置
+	optional SettingsResponse SettingsResponse = 49;//设置
+	optional SettingsShowResponse SettingsShowResponse = 50;//设置
 
-	optional RaceJoinRaceResponse RaceJoinRaceResponse = 50;
-	optional SCRaceJoinRace SCRaceJoinRace = 51;
-	optional RaceShowQueueResponse RaceShowQueueResponse = 52;
-	optional SCRaceQueueChange SCRaceQueueChange = 53;
+	optional RaceJoinRaceResponse RaceJoinRaceResponse = 51;
+	optional SCRaceJoinRace SCRaceJoinRace = 52;
+	optional RaceShowQueueResponse RaceShowQueueResponse = 53;
+	optional SCRaceQueueChange SCRaceQueueChange = 54;
 
-	optional MatchCheckRoomResponse MatchCheckRoomResponse = 54;// 检查房间号
-} // 54
+	optional MatchCheckRoomResponse MatchCheckRoomResponse = 55;// 检查房间号
+
+	extensions 100 to 200;
+} // 55

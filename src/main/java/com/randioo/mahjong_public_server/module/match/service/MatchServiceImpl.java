@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.GeneratedMessage;
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.randioo.mahjong_public_server.cache.local.GameCache;
 import com.randioo.mahjong_public_server.entity.bo.Game;
 import com.randioo.mahjong_public_server.entity.bo.Role;
@@ -395,6 +396,14 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
         }
         // 获得自己的录像green hat没有返回空的列表
         List<ByteString> scList = inRoom ? getRejoinSCList(game, gameRoleId) : new ArrayList<ByteString>();
+        for (ByteString byteString : scList) {
+            try {
+                System.out.println(SC.parseFrom(byteString));
+            } catch (InvalidProtocolBufferException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
         RoundVideoData roundVideoData = RoundVideoData.newBuilder().addAllSc(scList).build();
 
         this.joinGame(role, gameId);
@@ -523,13 +532,10 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
             String aiGameRoleId = addAIRole(game);
 
             RoleGameInfo info = game.getRoleIdMap().get(aiGameRoleId);
-            int index = game.getRoleIdList().indexOf(aiGameRoleId);
-            this.parseGameRoleData(info, game);
-            GameRoleData AIGameRoleData = GameRoleData.newBuilder().setGameRoleId(info.gameRoleId).setReady(info.ready)
-                    .setSeat(index).setName(ServiceConstant.ROBOT_PREFIX_NAME + info.gameRoleId).build();
+            GameRoleData aiGameRoleData = this.parseGameRoleData(info, game);
 
             SC scJoinGame = SC.newBuilder()
-                    .setSCMatchJoinGame(SCMatchJoinGame.newBuilder().setGameRoleData(AIGameRoleData)).build();
+                    .setSCMatchJoinGame(SCMatchJoinGame.newBuilder().setGameRoleData(aiGameRoleData)).build();
             for (RoleGameInfo roleGameInfo : realRoleGameInfos) {
                 SessionUtils.sc(roleGameInfo.roleId, scJoinGame);
                 boolean notFull = false;
@@ -563,25 +569,29 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
     public GameRoleData parseGameRoleData(RoleGameInfo info, Game game) {
         int index = game.getRoleIdList().indexOf(info.gameRoleId);
 
-        Role role = loginService.getRoleById(info.roleId);
-
         boolean ready = info.ready;
         if (game.getGameState() == GameState.GAME_START_START) {
             ready = false;
         }
 
-        if (role == null) {
-            GameRoleData aIGameRoleData = GameRoleData.newBuilder().setGameRoleId(info.gameRoleId).setReady(ready)
+        // 如果是机器人，则都是上线状态
+        if (info.roleId <= 0) {
+            GameRoleData aiGameRoleData = GameRoleData.newBuilder().setGameRoleId(info.gameRoleId).setReady(ready)
                     .setSeat(index).setName(ServiceConstant.ROBOT_PREFIX_NAME + info.gameRoleId).setOnline(true)
                     .build();
-            return aIGameRoleData;
+            return aiGameRoleData;
         }
+        Role role = loginService.getRoleById(info.roleId);
         IoSession session = SessionCache.getSessionById(info.roleId);
         boolean offline = session == null || session.isConnected();
 
+        // 设置玩家平台id，就是帐号，如果是机器人使用默认字符串
+        String platformRoleId = role == null ? ServiceConstant.ROBOT_PLATFORM_ID : role.getAccount();
+
         return GameRoleData.newBuilder().setGameRoleId(info.gameRoleId).setReady(ready).setSeat(index)
                 .setName(role.getName()).setHeadImgUrl(role.getHeadImgUrl()).setMoney(role.getMoney())
-                .setSex(role.getSex()).setPoint(role.getPoint()).setOnline(offline).build();
+                .setSex(role.getSex()).setPoint(role.getPoint()).setOnline(offline).setPlatformRoleId(platformRoleId)
+                .build();
     }
 
     /**

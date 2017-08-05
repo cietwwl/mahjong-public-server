@@ -89,18 +89,25 @@ message SCFightStart{//
 	optional int32 remainCardCount = 4;
 	optional int32 zhuangSeat = 5;
 	optional int32 seat = 6; // 位置
-	repeated int32 flower = 7;//花牌
+	optional int32 card = 7; //百搭牌 
+	repeated int32 dice = 8; //骰子数
+	repeated int32 flower = 9;//花牌
+	optional bool isHuangFan = 10; //是否荒番
+    optional int32 remainRound = 11;//荒番剩余局数
 }
-
 message SCFightRoundOver{
 	repeated int32 flyCards = 1;
 	repeated RoleRoundOverInfoData roleRoundOverInfoData = 2;
-	//剩余没有打的局数
-	optional int32 remainRoundCount = 3;
+	optional string roomId = 3;//房间号
+	optional int32 finishRoundCount = 4;//打完的局数
+	optional int32 maxRoundCount = 5;//最大局数
 }
 
 message SCFightGameOver{
 	repeated RoleGameOverInfoData roleGameOverInfoData = 1;
+	optional string roomId = 2;//房间号
+	optional int32 finishRoundCount = 3;//打完的局数
+	optional int32 maxRoundCount = 4;//最大局数
 }
 
 message SCFightNoticeSendCard{
@@ -207,4 +214,17 @@ message SCFightDisconnect{
 
 message SCFightScore{
 	repeated ScoreData scoreData = 1;
+}
+
+message SCFightChooseCardListOver{
+	
+}
+
+message FightQueryGameConfigRequest{
+}
+
+message FightQueryGameConfigResponse{
+	optional int32 errorCode= 1[default = 1];
+	optional GameConfigData gameConfigData = 2;
+	optional int32 currentRoundNumber = 3;
 }

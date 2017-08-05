@@ -7,4 +7,4 @@ call order_proto.bat
 echo off
 rem proto_path 是proto文件的import目录
 echo on
-protoc.exe --proto_path=%SOURCE_DIR% --java_out=%TARGET_DIR% ./%SOURCE_DIR%/*.proto
+protoc.exe --proto_path=%SOURCE_DIR% --java_out=%TARGET_DIR% ./%SOURCE_DIR%/*.proto ./%SOURCE_DIR%/extension/*.proto

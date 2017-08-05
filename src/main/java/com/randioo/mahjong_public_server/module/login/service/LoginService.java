@@ -5,11 +5,12 @@ import org.apache.mina.core.session.IoSession;
 import com.google.protobuf.GeneratedMessage;
 import com.randioo.mahjong_public_server.entity.bo.Role;
 import com.randioo.mahjong_public_server.protocol.Entity.RoleData;
+import com.randioo.randioo_server_base.module.login.LoginInfo;
 import com.randioo.randioo_server_base.service.ObserveBaseServiceInterface;
 
 public interface LoginService extends ObserveBaseServiceInterface {
 
-	GeneratedMessage getRoleData(String account, String macAddress, IoSession ioSession);
+	GeneratedMessage getRoleData(LoginInfo loginInfo, IoSession ioSession);
 
 //	GeneratedMessage creatRole(String account);
 //

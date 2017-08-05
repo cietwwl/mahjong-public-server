@@ -10,6 +10,8 @@ public class FightConstant {
     public static final String FIGHT_GAME_OVER = "fight_game_over";
     public static final String FIGHT_NOTICE_SEND_CARD = "fight_notice_send_card";
     public static final String FIGHT_GANG_PENG_HU = "fight_gang_peng_hu";
+
+    public static final String FIGHT_GANG_PENG_HU_OVER = "fight_gang_peng_hu_over";
     public static final String FIGHT_APPLY_LEAVE = "fight_apply_leave";
     public static final String FIGHT_READY = "fight_ready"; // 准备
     public static final String FIGHT_GAME_EXIT = "fight_exit_game";
@@ -64,5 +66,9 @@ public class FightConstant {
     public static final String FIGHT_GUO = "guo"; // 过
 
     public static final String FIGHT_SCORE = "fight_score";// 分数改变
+
+    /** 每个玩家初始的牌数量 */
+    public static final int EVERY_INIT_CARD_COUNT = 13;
+
 
 }

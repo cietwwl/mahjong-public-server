@@ -13,6 +13,7 @@ import com.randioo.mahjong_public_server.dao.RoleDao;
 import com.randioo.mahjong_public_server.entity.bo.Game;
 import com.randioo.mahjong_public_server.entity.bo.Role;
 import com.randioo.mahjong_public_server.module.login.LoginConstant;
+import com.randioo.mahjong_public_server.module.login.component.LoginConfig;
 import com.randioo.mahjong_public_server.module.match.service.MatchService;
 import com.randioo.mahjong_public_server.module.race.service.RaceService;
 import com.randioo.mahjong_public_server.module.role.service.RoleService;
@@ -154,10 +155,7 @@ public class LoginServiceImpl extends ObserveBaseService implements LoginService
     }
 
     @Override
-    public GeneratedMessage getRoleData(String account, String macAddress, IoSession ioSession) {
-        LoginInfo loginInfo = new LoginInfo();
-        loginInfo.setAccount(account);
-        loginInfo.setMacAddress(macAddress);
+    public GeneratedMessage getRoleData(LoginInfo loginInfo, IoSession ioSession) {
 
         Ref<Integer> errorCode = new Ref<>();
 
@@ -165,6 +163,12 @@ public class LoginServiceImpl extends ObserveBaseService implements LoginService
 
         if (roleInterface != null) {
             Role role = (Role) roleInterface;
+
+            // 刷新用户头像
+            LoginConfig loginConfig = (LoginConfig) loginInfo;
+            role.setHeadImgUrl(loginConfig.getHeadImageUrl());
+            
+            loggerinfo(role,loginConfig);
 
             return SC.newBuilder()
                     .setLoginGetRoleDataResponse(LoginGetRoleDataResponse.newBuilder().setRoleData(getRoleData(role)))
