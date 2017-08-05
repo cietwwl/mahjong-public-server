@@ -447,6 +447,8 @@ public class FightServiceImpl extends ObserveBaseService implements FightService
         scFightStartBuilder.setTimes(game.getMultiple());
         scFightStartBuilder.setRemainCardCount(game.getRemainCards().size());
         scFightStartBuilder.setZhuangSeat(game.getZhuangSeat());
+        scFightStartBuilder.setMaxRound(gameConfigData.getRoundCount());
+        scFightStartBuilder.setCurrentRoundNum(game.getFinishRoundCount());
 
         // 发送给每个玩家
         for (RoleGameInfo roleGameInfo : game.getRoleIdMap().values()) {

@@ -94,6 +94,8 @@ message SCFightStart{//
 	repeated int32 flower = 9;//花牌
 	optional bool isHuangFan = 10; //是否荒番
     optional int32 remainRound = 11;//荒番剩余局数
+    optional int32 currentRoundNum = 12;//当前局数
+    optional int32 maxRound = 13;//总局数
 }
 message SCFightRoundOver{
 	repeated int32 flyCards = 1;
