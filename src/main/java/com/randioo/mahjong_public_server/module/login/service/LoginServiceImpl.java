@@ -7,6 +7,7 @@ import org.apache.mina.core.session.IoSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.protobuf.ByteString;
 import com.google.protobuf.GeneratedMessage;
 import com.randioo.mahjong_public_server.cache.local.GameCache;
 import com.randioo.mahjong_public_server.dao.RoleDao;
@@ -113,11 +114,14 @@ public class LoginServiceImpl extends ObserveBaseService implements LoginService
 
         @Override
         public RoleInterface createRole(LoginInfo loginInfo) {
-            String account = loginInfo.getAccount();
+            LoginConfig loginConfig = (LoginConfig) loginInfo;
+            String account = loginConfig.getAccount();
+            String name = loginConfig.getNickname();
             // 用户数据
             // 创建用户
             Role role = new Role();
             role.setAccount(account);
+            role.setName(name);
 
             roleService.newRoleInit(role);
             raceService.newRaceInit(role);
@@ -167,8 +171,9 @@ public class LoginServiceImpl extends ObserveBaseService implements LoginService
             // 刷新用户头像
             LoginConfig loginConfig = (LoginConfig) loginInfo;
             role.setHeadImgUrl(loginConfig.getHeadImageUrl());
-            
-            loggerinfo(role,loginConfig);
+            role.setName(loginConfig.getNickname());
+
+            loggerinfo(role, loginConfig);
 
             return SC.newBuilder()
                     .setLoginGetRoleDataResponse(LoginGetRoleDataResponse.newBuilder().setRoleData(getRoleData(role)))
@@ -201,10 +206,18 @@ public class LoginServiceImpl extends ObserveBaseService implements LoginService
         // 游戏不存在或游戏已经结束,钥匙不存在
         String lockString = game == null || game.getGameState() == GameState.GAME_START_END ? null : matchService
                 .getLockString(game.getLockKey());
-        RoleData.Builder builder = RoleData.newBuilder().setRoleId(roleId).setPoint(1000).setSex(1);
+        RoleData.Builder builder = RoleData.newBuilder().setRoleId(roleId).setPoint(1000).setSex(1)
+                .setName(role.getName()).setHeadImageUrl(role.getHeadImgUrl() != null ? role.getHeadImgUrl() : "")
+                .setRandiooCoin(role.getRandiooMoney());
+        ByteString gameOverSCBytes = role.getGameOverSC();
+        // 如果有录像数据就放入
+        if (gameOverSCBytes != null) {
+            builder.setGameOverSC(gameOverSCBytes);
+        }
 
-        if (lockString != null)
+        if (lockString != null) {
             builder.setRoomId(lockString);
+        }
 
         return builder.build();
     }

@@ -8,19 +8,31 @@ message MatchCreateGameRequest{
 
 message MatchCreateGameResponse{
 	optional int32 errorCode = 1[default = 1];
-	optional string id = 2;
+	optional string roomId = 2;
 	optional bool moguai = 3;
 	optional GameRoleData gameRoleData = 4;
+	optional int32 needMoney = 5;
+}
+
+/**预加入房间*/
+message MatchPreJoinRequest{
+	optional string roomId = 1;
+}
+
+message MatchPreJoinResponse{
+	optional int32 errorCode = 1[default = 1];
+	optional string roomId = 2;
 }
 
 message MatchJoinGameRequest{
-	optional string lockString = 1;
+	optional string roomId = 1;
 }
 
 message MatchJoinGameResponse{
 	optional int32 errorCode = 1[default = 1];
 	optional RoundVideoData RoundVideoData = 2 ; //所有推送数据
-    optional string roomId = 3 ; //房间号
+    optional GameConfigData gameConfigData = 3;
+    optional string roomId = 4;
 }
 
 message SCMatchJoinGame{

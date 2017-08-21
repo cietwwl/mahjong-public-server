@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.randioo.mahjong_public_server.entity.bo.Game;
 import com.randioo.mahjong_public_server.util.CardTools;
 import com.randioo.mahjong_public_server.util.Lists;
 import com.randioo.randioo_server_base.utils.RandomUtils;
@@ -13,7 +14,7 @@ import com.randioo.randioo_server_base.utils.RandomUtils;
 public class RandomDispatcher implements Dispatcher {
 
     @Override
-    public List<CardPart> dispatch(List<Integer> cards, int partCount, int everyPartCount) {
+    public List<CardPart> dispatch(Game game, List<Integer> cards, int partCount, int everyPartCount) {
 
         List<CardPart> cardParts = new ArrayList<>(partCount);
         for (int i = 0; i < partCount; i++) {
@@ -32,7 +33,7 @@ public class RandomDispatcher implements Dispatcher {
         List<Integer> remainCards = new ArrayList<>(CardTools.CARDS.length);
         Lists.fillList(remainCards, CardTools.CARDS);
         RandomDispatcher dispatcher = new RandomDispatcher();
-        List<CardPart> list = dispatcher.dispatch(remainCards, 4, 13);
+        List<CardPart> list = dispatcher.dispatch(null, remainCards, 4, 13);
         System.out.println(list);
         System.out.println(remainCards);
     }

@@ -10,6 +10,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.randioo.mahjong_public_server.cache.local.GameCache;
 import com.randioo.mahjong_public_server.entity.po.CardSort;
 import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
 import com.randioo.mahjong_public_server.util.Lists;
@@ -26,9 +27,14 @@ public class ZLPBaiDaHu extends Hu {
         Set<Integer> baiDaHu = new HashSet<>();
         baiDaHu.add(801);
 
-        boolean hasHu = this.checkHu(gameConfigData, cardSort);
-        if (!hasHu)
-            return;
+        // 如果手上有四个红中直接胡
+        int baidaCard = GameCache.getBaiDaCardNumSet().iterator().next();
+        if (!cardSort.get(3).contains(baidaCard)) {
+            boolean hasHu = this.checkHu(gameConfigData, cardSort);
+            if (!hasHu) {
+                return;
+            }
+        }
 
         // 这个胡是zlp想出来的，我只是负责实现，如果出现问题请找他改进算法
         ZLPBaiDaHu hu = new ZLPBaiDaHu();
@@ -55,6 +61,11 @@ public class ZLPBaiDaHu extends Hu {
 
         // 2.去除所有的白搭
         int baiDaCount = cardSort1.removeAll(801);
+
+        // 只剩下百搭牌,肯定可以胡
+        if (cardSort1.sumCard() == 0) {
+            return true;
+        }
 
         // 3.三个一样的先拿走
         List<Integer> kezi_arr = new ArrayList<>(cardSort1.get(2));
@@ -436,12 +447,15 @@ public class ZLPBaiDaHu extends Hu {
         // 801, 206);
         // List<Integer> cards = Arrays.asList(108, 109, 302, 302, 801, 801,
         // 801, 207);
-        List<Integer> cards = Arrays.asList(108, 109, 201, 202, 203, 203, 203, 801);
+        // List<Integer> cards = Arrays.asList(108, 109, 201, 202, 203, 203,
+        // 203, 801);
+        List<Integer> cards = Arrays.asList(102, 103, 104, 305, 306, 307, 307, 304);
 
         cardSort.fillCardSort(cards);
 
         long start = System.currentTimeMillis();
-        hu.checkHu(null, cardSort);
+        boolean b = hu.checkHu(null, cardSort);
+        System.out.println(b);
         long end = System.currentTimeMillis();
         System.out.println(end - start);
     }

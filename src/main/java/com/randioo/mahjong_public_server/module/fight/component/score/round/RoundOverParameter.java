@@ -12,56 +12,56 @@ import com.randioo.mahjong_public_server.entity.po.CallCardList;
  *
  */
 public class RoundOverParameter {
-	/** 是否要检查胡 */
-	protected boolean checkHu;
-	/** 最低分 */
-	protected int minScore;
-	/** 苍蝇分数 */
-	protected int flyScore;
-	/** 可以胡的牌 */
-	protected List<CallCardList> huCallCardList = new ArrayList<>();
-	/** 玩家列表 */
-	protected List<String> roleIdList = new ArrayList<>();
+    /** 是否要检查胡 */
+    protected boolean checkHu;
+    /** 最低分 */
+    protected int minScore;
+    /** 苍蝇分数 */
+    protected int zhamaScore;
+    /** 可以胡的牌 */
+    protected List<CallCardList> huCallCardList = new ArrayList<>();
+    /** 玩家列表 */
+    protected List<String> roleIdList = new ArrayList<>();
 
-	public boolean isCheckHu() {
-		return checkHu;
-	}
+    public boolean isCheckHu() {
+        return checkHu;
+    }
 
-	public void setCheckHu(boolean checkHu) {
-		this.checkHu = checkHu;
-	}
+    public void setCheckHu(boolean checkHu) {
+        this.checkHu = checkHu;
+    }
 
-	public int getMinScore() {
-		return minScore;
-	}
+    public int getMinScore() {
+        return minScore;
+    }
 
-	public void setMinScore(int minScore) {
-		this.minScore = minScore;
-	}
+    public void setMinScore(int minScore) {
+        this.minScore = minScore;
+    }
 
-	public int getFlyScore() {
-		return flyScore;
-	}
+    public int getZhamaScore() {
+        return zhamaScore;
+    }
 
-	public void setFlyScore(int flyScore) {
-		this.flyScore = flyScore;
-	}
+    public void setZhamaScore(int zhamaScore) {
+        this.zhamaScore = zhamaScore;
+    }
 
-	public List<CallCardList> getHuCallCardList() {
-		return huCallCardList;
-	}
+    public List<CallCardList> getHuCallCardList() {
+        return huCallCardList;
+    }
 
-	public List<String> getRoleIdList() {
-		return roleIdList;
-	}
+    public List<String> getRoleIdList() {
+        return roleIdList;
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("RoundOverParameter [checkHu=").append(checkHu).append(", minScore=").append(minScore)
-				.append(", flyScore=").append(flyScore).append(", huCallCardList=").append(huCallCardList)
-				.append(", roleIdList=").append(roleIdList).append("]");
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("RoundOverParameter [checkHu=").append(checkHu).append(", minScore=").append(minScore)
+                .append(", zhamaScore=").append(zhamaScore).append(", huCallCardList=").append(huCallCardList)
+                .append(", roleIdList=").append(roleIdList).append("]");
+        return builder.toString();
+    }
 
 }

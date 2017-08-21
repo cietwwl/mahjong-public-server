@@ -18,7 +18,7 @@ public class RoundOverResult {
 	/** 暗杠分数 */
 	public int darkGangScore;
 	/** 暗杠次数 */
-	public int dardGangCount;
+	public int darkGangCount;
 	/** 补杠分数 */
 	public int addGangScore;
 	/** 补杠次数 */
@@ -32,7 +32,7 @@ public class RoundOverResult {
 		builder.append("RoundOverResult [seat=").append(seat).append(", score=").append(score).append(", overMethod=")
 				.append(overMethod).append(", gangKai=").append(gangKai).append(", mingGangScore=")
 				.append(mingGangScore).append(", mingGangCount=").append(mingGangCount).append(", darkGangScore=")
-				.append(darkGangScore).append(", dardGangCount=").append(dardGangCount).append(", addGangScore=")
+				.append(darkGangScore).append(", dardGangCount=").append(darkGangCount).append(", addGangScore=")
 				.append(addGangScore).append(", addGangCount=").append(addGangCount).append(", moScore=")
 				.append(moScore).append("]");
 		return builder.toString();

@@ -23,7 +23,7 @@ public class RoundOverCalculator {
     public Map<Integer, RoundOverResult> getRoundOverResults(RoundOverParameter roundOverParameter) {
         boolean checkHu = roundOverParameter.checkHu;
         int minScore = roundOverParameter.minScore;
-        int flyScore = roundOverParameter.flyScore;
+        int zhamaScore = roundOverParameter.zhamaScore;
         List<CallCardList> huCallCardLists = roundOverParameter.huCallCardList;
         List<String> roleIdList = roundOverParameter.roleIdList;
 
@@ -50,7 +50,7 @@ public class RoundOverCalculator {
 
                     if (hu.isMine) {// 自摸 的人底分x3,苍蝇x3，如果是杠开还要再乘2，每家都扣分
                         result.overMethod = OverMethod.OVER_MO_HU;
-                        result.score = minScore * (3 * (hu.gangKai ? 2 : 1)) + flyScore * 3;
+                        result.score = minScore * (3 * (hu.gangKai ? 2 : 1)) + zhamaScore * 3;
                         result.moScore = result.score;
 
                         for (RoundOverResult roundOverResult : results.values()) {
@@ -58,16 +58,16 @@ public class RoundOverCalculator {
                                 continue;
                             }
 
-                            roundOverResult.score += -(minScore * (hu.gangKai ? 2 : 1) + flyScore);
+                            roundOverResult.score += -(minScore * (hu.gangKai ? 2 : 1) + zhamaScore);
                         }
                     } else if (hu.gangChong) {// 杠冲底分x3,苍蝇x3,被杠冲的人扣相同分数
-                        result.score += (minScore + flyScore) * 3;
+                        result.score += (minScore + zhamaScore) * 3;
                         RoundOverResult targetRoundOverResult = results.get(hu.getTargetSeat());
-                        targetRoundOverResult.score += -(minScore + flyScore) * 3;
+                        targetRoundOverResult.score += -(minScore + zhamaScore) * 3;
                     } else {
-                        result.score += minScore + flyScore;
+                        result.score += minScore + zhamaScore;
                         RoundOverResult targetRoundOverResult = results.get(hu.getTargetSeat());
-                        targetRoundOverResult.score += -(minScore + flyScore);
+                        targetRoundOverResult.score += -(minScore + zhamaScore);
                     }
 
                     result.gangKai = hu.gangKai;

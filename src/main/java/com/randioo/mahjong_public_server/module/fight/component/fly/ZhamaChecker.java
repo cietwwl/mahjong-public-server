@@ -9,7 +9,7 @@ import com.randioo.mahjong_public_server.entity.bo.Game;
 import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
 
 @Component
-public class FlyChecker {
+public class ZhamaChecker {
     /**
      * 计算苍蝇
      * 
@@ -17,17 +17,17 @@ public class FlyChecker {
      * @return
      * @author wcy 2017年7月31日
      */
-    public FlyResult calculateFlys(Game game) {
-        FlyResult flyResult = new FlyResult();
-        List<Integer> flys = getFlys(game);
-        List<Integer> resultFlys = getTargetFlys(game, flys);
-        int score = this.getScore(resultFlys, game);
+    public ZhamaResult calculateZhamas(Game game) {
+        ZhamaResult zhamaResult = new ZhamaResult();
+        List<Integer> zhamas = getZhamas(game);
+        List<Integer> resultZhamas = getTargetZhamas(game, zhamas);
+        int score = this.getScore(resultZhamas, game);
 
-        flyResult.setScore(score);
-        flyResult.getTouchCards().addAll(flys);
-        flyResult.getResultFlys().addAll(resultFlys);
+        zhamaResult.setScore(score);
+        zhamaResult.getTouchCards().addAll(zhamas);
+        zhamaResult.getResultZhamas().addAll(resultZhamas);
 
-        return flyResult;
+        return zhamaResult;
     }
 
     /**
@@ -37,43 +37,43 @@ public class FlyChecker {
      * @return
      * @author wcy 2017年7月31日
      */
-    private List<Integer> getFlys(Game game) {
+    private List<Integer> getZhamas(Game game) {
         GameConfigData config = game.getGameConfig();
-        int catchCount = config.getFlyCount();
+        int catchCount = config.getZhamaCount();
         // 没有可以抓的苍蝇直接返回
         if (catchCount == 0)
             return new ArrayList<Integer>();
 
-        List<Integer> flys = new ArrayList<>(catchCount);
+        List<Integer> zhamas = new ArrayList<>(catchCount);
         for (int j = 0; j < catchCount; j++) {
             // 没苍蝇就算了
             try {
-                int flyCard = game.getRemainCards().remove(0);
-                flys.add(flyCard);
+                int zhamaCard = game.getRemainCards().remove(0);
+                zhamas.add(zhamaCard);
             } catch (Exception e) {
                 break;
             }
         }
 
-        return flys;
+        return zhamas;
     }
 
     /**
      * 获得命中的苍蝇
      * 
      * @param game
-     * @param flys
+     * @param zhamas
      * @return
      * @author wcy 2017年7月31日
      */
-    private List<Integer> getTargetFlys(Game game, List<Integer> flys) {
+    private List<Integer> getTargetZhamas(Game game, List<Integer> zhamas) {
         GameConfigData gameConfigData = game.getGameConfig();
 
-        List<Integer> result = new ArrayList<>(flys.size());
+        List<Integer> result = new ArrayList<>(zhamas.size());
 
-        List<Integer> flyValueList = gameConfigData.getFlyValueList();
-        for (Integer i : flys) {
-            if (this.isNumSame(flyValueList, i))
+        List<Integer> zhamaValueList = gameConfigData.getZhamaValueList();
+        for (Integer i : zhamas) {
+            if (this.isNumSame(zhamaValueList, i))
                 result.add(i);
         }
 
@@ -83,26 +83,26 @@ public class FlyChecker {
     /**
      * 获得分数
      * 
-     * @param flys
+     * @param zhamas
      * @param game
      * @return
      * @author wcy 2017年7月31日
      */
-    private int getScore(List<Integer> flys, Game game) {
+    private int getScore(List<Integer> zhamas, Game game) {
         GameConfigData gameConfigData = game.getGameConfig();
-        int score = gameConfigData.getFlyScore();
-        return flys.size() * score;
+        int score = gameConfigData.getZhamaScore();
+        return zhamas.size() * score;
     }
 
     /**
      * 如果数字相同
      * 
-     * @param flyValues
-     * @param fly
+     * @param zhamaValues
+     * @param zhama
      * @return
      * @author wcy 2017年7月31日
      */
-    private boolean isNumSame(List<Integer> flyValues, int fly) {
-        return flyValues.contains(fly %= 10);
+    private boolean isNumSame(List<Integer> zhamaValues, int zhama) {
+        return zhamaValues.contains(zhama %= 10);
     }
 }

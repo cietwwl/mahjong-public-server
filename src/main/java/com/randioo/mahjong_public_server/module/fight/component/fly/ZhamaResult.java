@@ -9,10 +9,10 @@ import java.util.List;
  * @author wcy 2017年7月31日
  *
  */
-public class FlyResult {
+public class ZhamaResult {
     private List<Integer> touchCards = new ArrayList<>();
     private int score;
-    private List<Integer> resultFlys = new ArrayList<>();
+    private List<Integer> resultZhamas = new ArrayList<>();
 
     /**
      * 获得摸得牌
@@ -50,7 +50,7 @@ public class FlyResult {
      * @return
      * @author wcy 2017年7月31日
      */
-    public List<Integer> getResultFlys() {
-        return resultFlys;
+    public List<Integer> getResultZhamas() {
+        return resultZhamas;
     }
 }

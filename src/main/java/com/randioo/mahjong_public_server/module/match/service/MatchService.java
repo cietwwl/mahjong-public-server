@@ -1,7 +1,10 @@
 package com.randioo.mahjong_public_server.module.match.service;
 
+import java.util.List;
+
 import org.apache.mina.core.session.IoSession;
 
+import com.google.protobuf.ByteString;
 import com.google.protobuf.GeneratedMessage;
 import com.randioo.mahjong_public_server.entity.bo.Game;
 import com.randioo.mahjong_public_server.entity.bo.Role;
@@ -20,6 +23,15 @@ public interface MatchService extends ObserveBaseServiceInterface {
      * @author wcy 2017年5月25日
      */
     public void createRoom(Role role, GameConfigData gameConfigData);
+
+    /**
+     * 预加入
+     * 
+     * @param role
+     * @param lockString
+     * @author wcy 2017年8月10日
+     */
+    void preJoinGame(Role role, String lockString);
 
     /**
      * 加入游戏
@@ -47,7 +59,9 @@ public interface MatchService extends ObserveBaseServiceInterface {
 
     Game createGameByGameConfig(GameConfigData gameConfigData);
 
-    void joinGame(Role role, int gameId);
+    void joinGameProcess1(Role role, int gameId);
+
+    void joinGameProcess2(Role role, RoleGameInfo roleGameInfo, Game game);
 
     GameRoleData parseGameRoleData(RoleGameInfo info, Game game);
 
@@ -88,5 +102,15 @@ public interface MatchService extends ObserveBaseServiceInterface {
      * @author wcy 2017年7月28日
      */
     void clearSeatByGameRoleId(Game game, String gameRoleId);
+
+    /**
+     * 获得重连录像
+     * 
+     * @param game
+     * @param gameRoleId
+     * @return
+     * @author wcy 2017年8月16日
+     */
+    List<ByteString> getRejoinSCList(Game game, String gameRoleId);
 
 }

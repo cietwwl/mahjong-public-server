@@ -9,36 +9,41 @@ import "Heart.proto";
 
 message CS{
 	optional HeartRequest HeartRequest = 1;
+	optional CSHeart CSHeart = 2;
 	
-	optional LoginCheckAccountRequest LoginCheckAccountRequest = 2;
-	optional LoginCreateRoleRequest LoginCreateRoleRequest = 3;
-	optional LoginGetRoleDataRequest LoginGetRoleDataRequest = 4;
+	optional LoginCheckAccountRequest LoginCheckAccountRequest = 3;
+	optional LoginCreateRoleRequest LoginCreateRoleRequest = 4;
+	optional LoginGetRoleDataRequest LoginGetRoleDataRequest = 5;
 
-	optional RoleRenameRequest RoleRenameRequest = 5;
-	optional RoleGetRoleDataRequest RoleGetRoleDataRequest = 6;
+	optional RoleRenameRequest RoleRenameRequest = 6;
+	optional RoleGetRoleDataRequest RoleGetRoleDataRequest = 7;
 
-	optional MatchCreateGameRequest MatchCreateGameRequest = 7;
-	optional MatchJoinGameRequest MatchJoinGameRequest = 8;
-	optional MatchCheckRoomRequest MatchCheckRoomRequest = 9;
+	optional MatchCreateGameRequest MatchCreateGameRequest = 8;
+	optional MatchPreJoinRequest MatchPreJoinRequest = 9;//预加入房间
+	optional MatchJoinGameRequest MatchJoinGameRequest = 10;
+	optional MatchCheckRoomRequest MatchCheckRoomRequest = 11;
 
-	optional FightReadyRequest FightReadyRequest = 10;
-	optional FightExitGameRequest FightExitGameRequest = 11;
-	optional FightApplyExitGameRequest FightApplyExitGameRequest = 12;//申请退出
-	optional FightAgreeExitGameRequest FightAgreeExitGameRequest = 13;
-	optional FightSendCardRequest FightSendCardRequest = 14;
-	optional FightRecommandRequest FightRecommandRequest = 15;
-	optional FightGetlastRoundRequest FightGetlastRoundRequest = 16;
-	optional FightPengRequest FightPengRequest = 17;
-	optional FightGangRequest FightGangRequest = 18;
-	optional FightHuRequest FightHuRequest = 19;
-	optional FightGuoRequest FightGuoRequest = 20;
-	optional FightChiRequest FightChiRequest = 21;//吃的请求
-	optional FightQueryGameConfigRequest FightQueryGameConfigRequest = 22;//查询游戏配置
+	optional FightReadyRequest FightReadyRequest = 12;
+	optional FightExitGameRequest FightExitGameRequest = 13;
+	optional FightApplyExitGameRequest FightApplyExitGameRequest = 14;//申请退出
+	optional FightAgreeExitGameRequest FightAgreeExitGameRequest = 15;
+	optional FightSendCardRequest FightSendCardRequest = 16;
+	optional FightRecommandRequest FightRecommandRequest = 17;
+	optional FightGetlastRoundRequest FightGetlastRoundRequest = 18;
+	optional FightPengRequest FightPengRequest = 19;
+	optional FightGangRequest FightGangRequest = 20;
+	optional FightHuRequest FightHuRequest = 21;
+	optional FightGuoRequest FightGuoRequest = 22;
+	optional FightChiRequest FightChiRequest = 23;//吃的请求
+	optional FightQueryGameConfigRequest FightQueryGameConfigRequest = 24;//查询游戏配置
+	optional FightClientDispatchRequest FightClientDispatchRequest = 25;//客户端调试配牌
+	optional FightClientTouchCardRequest FightClientTouchCardRequest = 26;//客户端调试摸牌
+	optional FightConfirmGameOverRequest FightConfirmGameOverRequest = 27;//确认游戏结束
 
-	optional SettingsRequest SettingsRequest = 23;
-	optional SettingsShowRequest SettingsShowRequest = 24;
+	optional SettingsRequest SettingsRequest = 28;
+	optional SettingsShowRequest SettingsShowRequest = 29;
 
-	optional RaceJoinRaceRequest RaceJoinRaceRequest = 25;
-	optional RaceShowQueueRequest RaceShowQueueRequest = 26;
+	optional RaceJoinRaceRequest RaceJoinRaceRequest = 30;
+	optional RaceShowQueueRequest RaceShowQueueRequest = 31;
 
-} // 26
+} // 31

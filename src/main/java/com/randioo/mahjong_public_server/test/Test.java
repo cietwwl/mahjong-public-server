@@ -72,9 +72,9 @@ public class Test {
 		GameConfigData gameConfigData = GameConfigData.newBuilder().setMaxCount(4).build();
 
 		matchService.createRoom(role1, gameConfigData);
-		matchService.joinGame(role2, 1);
-		matchService.joinGame(role3, 1);
-		matchService.joinGame(role4, 1);
+		matchService.joinGameProcess1(role2, 1);
+		matchService.joinGameProcess1(role3, 1);
+		matchService.joinGameProcess1(role4, 1);
 
 		Game game = GameCache.getGameMap().get(1);
 		return game;

@@ -17,6 +17,7 @@ import com.randioo.mahjong_public_server.protocol.Entity.RoleData;
 import com.randioo.mahjong_public_server.protocol.Error.ErrorCode;
 import com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse;
 import com.randioo.mahjong_public_server.protocol.Role.RoleRenameResponse;
+import com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange;
 import com.randioo.mahjong_public_server.protocol.ServerMessage.SC;
 import com.randioo.randioo_platform_sdk.RandiooPlatformSdk;
 import com.randioo.randioo_platform_sdk.entity.AccountInfo;
@@ -29,6 +30,7 @@ import com.randioo.randioo_server_base.module.role.RoleModelService;
 import com.randioo.randioo_server_base.sensitive.SensitiveWordDictionary;
 import com.randioo.randioo_server_base.service.ObserveBaseService;
 import com.randioo.randioo_server_base.template.Ref;
+import com.randioo.randioo_server_base.utils.SessionUtils;
 import com.randioo.randioo_server_base.utils.StringUtils;
 
 @Service("roleService")
@@ -95,7 +97,6 @@ public class RoleServiceImpl extends ObserveBaseService implements RoleService {
     public void newRoleInit(Role role) {
         // 设置战场的第一章
         role.setRoleId(idClassCreator.getId(Role.class));
-        role.setName(role.getAccount());
         role.setVolume(50);
         role.setMusicVolume(50);
 
@@ -150,12 +151,17 @@ public class RoleServiceImpl extends ObserveBaseService implements RoleService {
         String name = null;
         int money = -1;
         int sex = 0;
+        String headImageUrl = "null";
 
         try {
             AccountInfo accountInfo = randiooPlatformSdk.getAccountInfo(role.getAccount());
-            name = accountInfo.nickName;
             money = accountInfo.randiooMoney;
             sex = accountInfo.sex;
+            // 使用平台头像
+            if (GlobleMap.Boolean(GlobleConstant.ARGS_PLATFORM_HEAD_IMAGE_URL)) {
+                headImageUrl = accountInfo.headImgUrl;
+                name = accountInfo.nickName;
+            }
         } catch (AccountErrorException e) {
             loggererror("account " + role.getAccount() + " not on platform");
         } catch (Exception e) {
@@ -164,9 +170,12 @@ public class RoleServiceImpl extends ObserveBaseService implements RoleService {
         if (money == -1)
             money = 0;
 
-        role.setName(StringUtils.isNullOrEmpty(name) ? ServiceConstant.GUEST_PREFIX_NAME + role.getRoleId() : name);
         role.setRandiooMoney(money);
         role.setSex(sex);
+        if (GlobleMap.Boolean(GlobleConstant.ARGS_PLATFORM_HEAD_IMAGE_URL)) {
+            role.setHeadImgUrl(headImageUrl);
+            role.setName(StringUtils.isNullOrEmpty(name) ? ServiceConstant.GUEST_PREFIX_NAME + role.getRoleId() : name);
+        }
     }
 
     @Override
@@ -175,9 +184,14 @@ public class RoleServiceImpl extends ObserveBaseService implements RoleService {
             randiooPlatformSdk.addMoney(role.getAccount(), money);
             role.setRandiooMoney(role.getRandiooMoney() + money);
         } catch (Exception e) {
-            e.printStackTrace();
+            loggererror(role, "没有该帐号,无法改变燃点币");
             return false;
         }
+
+        SCRoleRandiooCoinChange scRoleAddRandiooMoney = SCRoleRandiooCoinChange.newBuilder()
+                .setRandiooCoin(role.getRandiooMoney()).build();
+        SC sc = SC.newBuilder().setSCRoleRandiooCoinChange(scRoleAddRandiooMoney).build();
+        SessionUtils.sc(role.getRoleId(), sc);
         return true;
     }
 

@@ -15,14 +15,15 @@ import com.randioo.randioo_server_base.template.IActionSupport;
 @PTAnnotation(MatchJoinGameRequest.class)
 public class MatchJoinGameAction implements IActionSupport {
 
-	@Autowired
-	private MatchService matchService;
+    @Autowired
+    private MatchService matchService;
 
-	@Override
-	public void execute(Object data, IoSession session) {
-		MatchJoinGameRequest request = (MatchJoinGameRequest) data;
-		Role role = (Role) RoleCache.getRoleBySession(session);
-		matchService.joinGame(role, request.getLockString());
-	}
+    @Override
+    public void execute(Object data, IoSession session) {
+        MatchJoinGameRequest request = (MatchJoinGameRequest) data;
+        Role role = (Role) RoleCache.getRoleBySession(session);
+        String roomId = request.getRoomId();
+        matchService.joinGame(role, roomId);
+    }
 
 }

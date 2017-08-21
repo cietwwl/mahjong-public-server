@@ -3,11 +3,10 @@ package com.randioo.mahjong_public_server.module.video.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.management.relation.RoleInfo;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.protobuf.ByteString;
 import com.google.protobuf.GeneratedMessage;
 import com.randioo.mahjong_public_server.dao.VideoDao;
 import com.randioo.mahjong_public_server.entity.bo.Game;
@@ -22,6 +21,7 @@ import com.randioo.mahjong_public_server.protocol.Entity.GameVideoData;
 import com.randioo.mahjong_public_server.protocol.Entity.RoundVideoData;
 import com.randioo.mahjong_public_server.protocol.ServerMessage.SC;
 import com.randioo.mahjong_public_server.util.VideoUtils;
+import com.randioo.randioo_server_base.cache.RoleCache;
 import com.randioo.randioo_server_base.db.GameDB;
 import com.randioo.randioo_server_base.service.ObserveBaseService;
 import com.randioo.randioo_server_base.template.EntityRunnable;
@@ -151,7 +151,6 @@ public class VideoServiceImpl extends ObserveBaseService implements VideoService
             SC sc = (SC) args[0];
             int gameId = (int) args[1];
             RoleGameInfo info = (RoleGameInfo) args[2];
-            boolean notFull = (boolean) args[3];
             // if (notFull) {
             // Game game = fightService.getGameById(gameId);
             // for (RoleGameInfo roleGameInfo : game.getRoleIdMap().values()) {
@@ -196,6 +195,16 @@ public class VideoServiceImpl extends ObserveBaseService implements VideoService
                 list.add(sc);
             }
             this.saveVideo(game);
+            ByteString gameOverBytes = sc.toByteString();
+            // 每个人都要保存一下录像，直到确认结束
+            for (RoleGameInfo roleGameInfo : game.getRoleIdMap().values()) {
+                int roleId = roleGameInfo.roleId;
+                Role role = (Role) RoleCache.getRoleById(roleId);
+                if (role == null) {
+                    continue;
+                }
+                role.setGameOverSC(gameOverBytes);
+            }
         }
 
         if (FightConstant.FIGHT_CANCEL_GAME.equals(msg)) {

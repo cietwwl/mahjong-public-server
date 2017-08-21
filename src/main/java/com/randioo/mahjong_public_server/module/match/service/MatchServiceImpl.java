@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.mina.core.session.IoSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +14,18 @@ import org.springframework.stereotype.Service;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.GeneratedMessage;
-import com.google.protobuf.InvalidProtocolBufferException;
+import com.randioo.mahjong_public_server.cache.file.GameRoundConfigCache;
 import com.randioo.mahjong_public_server.cache.local.GameCache;
 import com.randioo.mahjong_public_server.entity.bo.Game;
 import com.randioo.mahjong_public_server.entity.bo.Role;
 import com.randioo.mahjong_public_server.entity.bo.VideoData;
+import com.randioo.mahjong_public_server.entity.file.GameRoundConfig;
 import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
 import com.randioo.mahjong_public_server.entity.po.RoleMatchRule;
 import com.randioo.mahjong_public_server.module.ServiceConstant;
 import com.randioo.mahjong_public_server.module.login.service.LoginService;
 import com.randioo.mahjong_public_server.module.match.MatchConstant;
+import com.randioo.mahjong_public_server.module.role.service.RoleService;
 import com.randioo.mahjong_public_server.module.video.service.VideoService;
 import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
 import com.randioo.mahjong_public_server.protocol.Entity.GameRoleData;
@@ -36,7 +37,7 @@ import com.randioo.mahjong_public_server.protocol.Fight.SCFightNoticeReady;
 import com.randioo.mahjong_public_server.protocol.Match.MatchCheckRoomResponse;
 import com.randioo.mahjong_public_server.protocol.Match.MatchCreateGameResponse;
 import com.randioo.mahjong_public_server.protocol.Match.MatchJoinGameResponse;
-import com.randioo.mahjong_public_server.protocol.Match.SCMatchCreateGame;
+import com.randioo.mahjong_public_server.protocol.Match.MatchPreJoinResponse;
 import com.randioo.mahjong_public_server.protocol.Match.SCMatchJoinGame;
 import com.randioo.mahjong_public_server.protocol.ServerMessage.SC;
 import com.randioo.mahjong_public_server.util.key.Key;
@@ -44,6 +45,7 @@ import com.randioo.mahjong_public_server.util.key.KeyStore;
 import com.randioo.mahjong_public_server.util.key.RoomKey;
 import com.randioo.mahjong_public_server.util.vote.AllVoteExceptApplyerStrategy;
 import com.randioo.mahjong_public_server.util.vote.VoteBox.VoteResult;
+import com.randioo.randioo_platform_sdk.RandiooPlatformSdk;
 import com.randioo.randioo_platform_sdk.utils.StringUtils;
 import com.randioo.randioo_server_base.cache.RoleCache;
 import com.randioo.randioo_server_base.cache.SessionCache;
@@ -72,6 +74,9 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 
     @Autowired
     private VideoService videoService;
+
+    @Autowired
+    private RoleService roleService;
 
     @Override
     public void init() {
@@ -139,18 +144,27 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
         // 检查配置是否可以创建游戏
         gameConfigData = addPropGameConfigData(gameConfigData);
         if (!this.checkConfig(gameConfigData)) {
-            SC sc = SC
-                    .newBuilder()
-                    .setMatchCreateGameResponse(
-                            MatchCreateGameResponse.newBuilder().setErrorCode(ErrorCode.CREATE_FAILED.getNumber()))
-                    .build();
+            MatchCreateGameResponse response = MatchCreateGameResponse.newBuilder()
+                    .setErrorCode(ErrorCode.CREATE_FAILED.getNumber()).build();
+            SC sc = SC.newBuilder().setMatchCreateGameResponse(response).build();
+            SessionUtils.sc(role.getRoleId(), sc);
+            return;
+        }
+        // 扣除燃点币
+        int roundCount = gameConfigData.getRoundCount();
+        GameRoundConfig config = GameRoundConfigCache.getGameRoundByRoundCount(roundCount);
+
+        // 重读平台用户信息
+        roleService.initRoleDataFromHttp(role);
+        if (role.getRandiooMoney() < config.needMoney) {
+            MatchCreateGameResponse response = MatchCreateGameResponse.newBuilder()
+                    .setErrorCode(ErrorCode.NOT_RANDIOOMONEY_ENOUGH.getNumber()).setNeedMoney(config.needMoney).build();
+            SC sc = SC.newBuilder().setMatchCreateGameResponse(response).build();
             SessionUtils.sc(role.getRoleId(), sc);
             return;
         }
 
-        // 加工游戏配置
-
-        // 创建游戏
+        // 创建游戏1
         Game game = this.createGame(role.getRoleId(), gameConfigData);
         // 标记房间为好友房间
         game.setGameType(GameType.GAME_TYPE_FRIEND);
@@ -164,24 +178,24 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
 
         // 获得房间锁
         String lockString = this.getLockString(game.getLockKey());
+
         // 创建游戏消息返回
-        SC matchCreateGameResponse = SC
-                .newBuilder()
-                .setMatchCreateGameResponse(
-                        MatchCreateGameResponse.newBuilder().setId(lockString).setGameRoleData(myGameRoleData)).build();
+        MatchCreateGameResponse response = MatchCreateGameResponse.newBuilder().setRoomId(lockString)
+                .setGameRoleData(myGameRoleData).build();
+        SC matchCreateGameResponse = SC.newBuilder().setMatchCreateGameResponse(response).build();
         SessionUtils.sc(role.getRoleId(), matchCreateGameResponse);
 
         // 发送创建游戏的通知
         this.notifyObservers(MatchConstant.MATCH_CREATE_GAME, game, roleGameInfo);
 
         // 当收到创建房间的主推时就要显示准备按钮
-        SessionUtils.sc(
-                role.getRoleId(),
-                SC.newBuilder()
-                        .setSCMatchCreateGame(
-                                SCMatchCreateGame.newBuilder().setRoomId(lockString).setGameRoleData(myGameRoleData)
-                                        .setRoomType(GameType.GAME_TYPE_FRIEND.getNumber())
-                                        .setRoundNum(gameConfigData.getRoundCount())).build());
+        // SessionUtils.sc(
+        // role.getRoleId(),
+        // SC.newBuilder()
+        // .setSCMatchCreateGame(
+        // SCMatchCreateGame.newBuilder().setRoomId(lockString).setGameRoleData(myGameRoleData)
+        // .setRoomType(GameType.GAME_TYPE_FRIEND.getNumber())
+        // .setRoundNum(gameConfigData.getRoundCount())).build());
 
     }
 
@@ -244,13 +258,17 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
         game.setGameId(gameId);
         game.setGameState(GameState.GAME_STATE_PREPARE);
         game.setFinishRoundCount(0);
-        game.setGameConfig(gameConfigData);
 
         // 获得钥匙
         RoomKey key = (RoomKey) this.getLockKey();
         key.setGameId(gameId);
         game.setLockKey(key);
         String lockString = this.getLockString(key);
+
+        // 设置房间号
+        gameConfigData = gameConfigData.toBuilder().setRoomId(lockString).build();
+        game.setGameConfig(gameConfigData);
+
         game.getVoteBox().setStrategy(new AllVoteExceptApplyerStrategy() {
 
             @Override
@@ -343,6 +361,51 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
     }
 
     @Override
+    public void preJoinGame(Role role, String lockString) {
+        Integer gameId = GameCache.getGameLockStringMap().get(lockString);
+        loggerdebug("gameid:" + gameId + " join game");
+        MatchPreJoinResponse.Builder responseBuilder = MatchPreJoinResponse.newBuilder();
+        if (gameId == null) {
+            responseBuilder.setErrorCode(ErrorCode.GAME_JOIN_ERROR.getNumber());
+            SessionUtils.sc(role.getRoleId(), SC.newBuilder().setMatchPreJoinResponse(responseBuilder).build());
+            return;
+        }
+
+        Game game = GameCache.getGameMap().get(gameId);
+        loggerdebug("game:" + game);
+        if (game == null) {
+            responseBuilder.setErrorCode(ErrorCode.GAME_JOIN_ERROR.getNumber());
+            SessionUtils.sc(role.getRoleId(), SC.newBuilder().setMatchPreJoinResponse(responseBuilder).build());
+
+            return;
+        }
+        String targetLock = this.getLockString(game.getLockKey());
+        // 如果锁相同则可以进
+        if (!targetLock.equals(lockString)) {
+            responseBuilder.setErrorCode(ErrorCode.MATCH_ERROR_LOCK.getNumber());
+            SessionUtils.sc(role.getRoleId(), SC.newBuilder().setMatchPreJoinResponse(responseBuilder).build());
+            return;
+        }
+
+        // 检查到达房间最大人数green hat
+        boolean reachMaxRoleCount = this.checkRoomMaxCount(game);
+
+        String gameRoleId = this.getGameRoleId(gameId, role.getRoleId());
+        boolean inRoom = game.getRoleIdMap().containsKey(gameRoleId);
+        // 房间到达上限且该人不在房间中
+        if (reachMaxRoleCount && !inRoom) {
+            responseBuilder.setErrorCode(ErrorCode.MATCH_MAX_ROLE_COUNT.getNumber());
+            SessionUtils.sc(role.getRoleId(), SC.newBuilder().setMatchPreJoinResponse(responseBuilder).build());
+            return;
+        }
+
+        responseBuilder.setRoomId(lockString);
+        SessionUtils.sc(role.getRoleId(), SC.newBuilder().setMatchPreJoinResponse(responseBuilder).build());
+
+        this.joinGameProcess1(role, gameId);
+    }
+
+    @Override
     public void joinGame(Role role, String lockString) {
         Integer gameId = GameCache.getGameLockStringMap().get(lockString);
         loggerdebug("gameid:" + gameId + " join game");
@@ -379,55 +442,57 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
             return;
         }
 
-        // 检查到达房间最大人数green hat
-        boolean reachMaxRoleCount = this.checkRoomMaxCount(game);
+        // 检查到达房间最大人数
+        // boolean reachMaxRoleCount = this.checkRoomMaxCount(game);
 
         String gameRoleId = this.getGameRoleId(gameId, role.getRoleId());
         boolean inRoom = game.getRoleIdMap().containsKey(gameRoleId);
-        // 房间到达上限且该人不在房间中
-        if (reachMaxRoleCount && !inRoom) {
-            SessionUtils.sc(
-                    role.getRoleId(),
-                    SC.newBuilder()
-                            .setMatchJoinGameResponse(
-                                    MatchJoinGameResponse.newBuilder().setErrorCode(
-                                            ErrorCode.MATCH_MAX_ROLE_COUNT.getNumber())).build());
-            return;
-        }
+        // // 房间到达上限且该人不在房间中
+        // if (reachMaxRoleCount && !inRoom) {
+        // SessionUtils.sc(
+        // role.getRoleId(),
+        // SC.newBuilder()
+        // .setMatchJoinGameResponse(
+        // MatchJoinGameResponse.newBuilder().setErrorCode(
+        // ErrorCode.MATCH_MAX_ROLE_COUNT.getNumber())).build());
+        // return;
+        // }
         // 获得自己的录像green hat没有返回空的列表
         List<ByteString> scList = inRoom ? getRejoinSCList(game, gameRoleId) : new ArrayList<ByteString>();
-        for (ByteString byteString : scList) {
-            try {
-                System.out.println(SC.parseFrom(byteString));
-            } catch (InvalidProtocolBufferException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
+        // for (ByteString byteString : scList) {
+        // try {
+        // System.out.println(SC.parseFrom(byteString));
+        // } catch (InvalidProtocolBufferException e) {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // }
+        // }
         RoundVideoData roundVideoData = RoundVideoData.newBuilder().addAllSc(scList).build();
 
-        this.joinGame(role, gameId);
+        RoleGameInfo roleGameInfo = game.getRoleIdMap().get(gameRoleId);
+        // 加入房间流程2
+        this.joinGameProcess2(role, roleGameInfo, game);
 
         SessionUtils.sc(
                 role.getRoleId(),
                 SC.newBuilder()
                         .setMatchJoinGameResponse(
                                 MatchJoinGameResponse.newBuilder().setRoundVideoData(roundVideoData)
-                                        .setRoomId(lockString)).build());
+                                        .setGameConfigData(game.getGameConfig())
+                                        .setRoomId(game.getGameConfig().getRoomId())).build());
 
     }
 
     /**
-     * 检查到达房间green hat最大人数
+     * 检查到达房间最大人数
      * 
      * @param game
      * @return
      * @author wcy 2017年7月28日
      */
     private boolean checkRoomMaxCount(Game game) {
-        String nullGameRoleId = this.getNullGameRoleId(game.getGameId());
-        boolean reachMaxRoleCount = game.getRoleIdList().contains(nullGameRoleId);
-        return !reachMaxRoleCount;
+        GameConfigData config = game.getGameConfig();
+        return game.getRoleIdMap().size() >= config.getMaxCount();
     }
 
     @Override
@@ -448,7 +513,8 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
      * @param gameRoleId
      * @author wcy 2017年7月27日
      */
-    private List<ByteString> getRejoinSCList(Game game, String gameRoleId) {
+    @Override
+    public List<ByteString> getRejoinSCList(Game game, String gameRoleId) {
         List<ByteString> scList = new ArrayList<>();
         RoleGameInfo myInfo = game.getRoleIdMap().get(gameRoleId);
         VideoData videoData = myInfo.videoData;
@@ -459,7 +525,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
             }
         }
 
-        // 单局green hat内的sc
+        // 单局内的sc
         for (SC sc : myInfo.roundSCList) {
             scList.add(sc.toByteString());
         }
@@ -467,43 +533,48 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
     }
 
     @Override
-    public void joinGame(Role role, int gameId) {
+    public void joinGameProcess1(Role role, int gameId) {
         loggerdebug("joinGame" + role.getAccount());
         Game game = GameCache.getGameMap().get(gameId);
         loggerdebug("game-->" + game);
 
-        // 已经在房间里的人不进行green hat加入房间操作
+        // 已经在房间里的人不进行加入房间操作
         String gameRoleId = this.getGameRoleId(game.getGameId(), role.getRoleId());
         boolean containsGameRoleId = game.getRoleIdMap().containsKey(gameRoleId);
         if (!containsGameRoleId) {
             this.addAccountRole(game, role.getRoleId());
         }
 
-        boolean notFull = !containsGameRoleId;
+    }
 
-        RoleGameInfo roleGameInfo = game.getRoleIdMap().get(gameRoleId);
+    @Override
+    public void joinGameProcess2(Role role, RoleGameInfo roleGameInfo, Game game) {
 
         // 先把自己的信息返回给客户端
         GameRoleData myGameRoleData = this.parseGameRoleData(roleGameInfo, game);
+        int gameId = game.getGameId();
+
         SC scJoinGame = SC.newBuilder()
                 .setSCMatchJoinGame(SCMatchJoinGame.newBuilder().setGameRoleData(myGameRoleData).setIsMe(true)).build();
         SessionUtils.sc(role.getRoleId(), scJoinGame);
 
         // 如果玩家没有准备,提示准备
-        if (!roleGameInfo.ready)
+        if (!roleGameInfo.ready) {
             // 告诉该玩家准备
             SessionUtils.sc(role.getRoleId(), SC.newBuilder().setSCFightNoticeReady(SCFightNoticeReady.newBuilder())
                     .build());
+        }
 
         for (RoleGameInfo info : game.getRoleIdMap().values()) {
             if (role.getRoleId() == info.roleId) {
                 // 如果人没有满则要记录加入的人的信息
-                this.notifyObservers(MatchConstant.JOIN_GAME, scJoinGame, gameId, info, notFull);
+                this.notifyObservers(MatchConstant.JOIN_GAME, scJoinGame, gameId, info);
                 continue;
             }
 
-            // 通知自己当前房间green hat里面其他玩家的信息
+            // 通知自己当前房间里面其他玩家的信息
             GameRoleData gameRoleData = this.parseGameRoleData(info, game);
+
             SessionUtils.sc(
                     role.getRoleId(),
                     SC.newBuilder()
@@ -517,7 +588,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
                             .setSCMatchJoinGame(
                                     SCMatchJoinGame.newBuilder().setGameRoleData(myGameRoleData).setIsMe(false))
                             .build());
-            this.notifyObservers(MatchConstant.JOIN_GAME, scJoinGame, gameId, info, notFull);
+            this.notifyObservers(MatchConstant.JOIN_GAME, scJoinGame, gameId, info);
         }
     }
 
@@ -526,7 +597,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
         GameConfigData gameConfigData = game.getGameConfig();
         // 检查是否可以加入npc
         int needAllAICount = gameConfigData.getMaxCount() - game.getRoleIdMap().size();
-        // 先检查要发送给多少个green hat真人
+        // 先检查要发送给多少个真人
         List<RoleGameInfo> realRoleGameInfos = new ArrayList<>(game.getRoleIdMap().values());
         for (int i = 0; i < needAllAICount; i++) {
             String aiGameRoleId = addAIRole(game);
@@ -538,8 +609,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
                     .setSCMatchJoinGame(SCMatchJoinGame.newBuilder().setGameRoleData(aiGameRoleData)).build();
             for (RoleGameInfo roleGameInfo : realRoleGameInfos) {
                 SessionUtils.sc(roleGameInfo.roleId, scJoinGame);
-                boolean notFull = false;
-                this.notifyObservers(MatchConstant.JOIN_GAME, scJoinGame, game.getGameId(), info, notFull);
+                this.notifyObservers(MatchConstant.JOIN_GAME, scJoinGame, game.getGameId(), info);
             }
         }
     }
@@ -583,14 +653,14 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
         }
         Role role = loginService.getRoleById(info.roleId);
         IoSession session = SessionCache.getSessionById(info.roleId);
-        boolean offline = session == null || session.isConnected();
+        boolean online = session != null && session.isConnected();
 
         // 设置玩家平台id，就是帐号，如果是机器人使用默认字符串
         String platformRoleId = role == null ? ServiceConstant.ROBOT_PLATFORM_ID : role.getAccount();
 
         return GameRoleData.newBuilder().setGameRoleId(info.gameRoleId).setReady(ready).setSeat(index)
-                .setName(role.getName()).setHeadImgUrl(role.getHeadImgUrl()).setMoney(role.getMoney())
-                .setSex(role.getSex()).setPoint(role.getPoint()).setOnline(offline).setPlatformRoleId(platformRoleId)
+                .setName(role.getName()).setHeadImgUrl(role.getHeadImgUrl()).setMoney(role.getRandiooMoney())
+                .setSex(role.getSex()).setPoint(role.getPoint()).setOnline(online).setPlatformRoleId(platformRoleId)
                 .build();
     }
 
@@ -627,7 +697,7 @@ public class MatchServiceImpl extends ObserveBaseService implements MatchService
     }
 
     /**
-     * 获得游戏中的空green hat游戏玩家id
+     * 获得游戏中的空游戏玩家id
      * 
      * @param gameId
      * @return

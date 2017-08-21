@@ -1172,6 +1172,290 @@ public final class Role {
     // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.RoleGetRoleDataResponse)
   }
   
+  public static final class SCRoleRandiooCoinChange extends
+      com.google.protobuf.GeneratedMessage {
+    // Use SCRoleRandiooCoinChange.newBuilder() to construct.
+    private SCRoleRandiooCoinChange() {
+      initFields();
+    }
+    private SCRoleRandiooCoinChange(boolean noInit) {}
+    
+    private static final SCRoleRandiooCoinChange defaultInstance;
+    public static SCRoleRandiooCoinChange getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public SCRoleRandiooCoinChange getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_mahjong_public_server_protocol_SCRoleRandiooCoinChange_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.randioo.mahjong_public_server.protocol.Role.internal_static_com_randioo_mahjong_public_server_protocol_SCRoleRandiooCoinChange_fieldAccessorTable;
+    }
+    
+    // optional int32 randiooCoin = 1;
+    public static final int RANDIOOCOIN_FIELD_NUMBER = 1;
+    private boolean hasRandiooCoin;
+    private int randiooCoin_ = 0;
+    public boolean hasRandiooCoin() { return hasRandiooCoin; }
+    public int getRandiooCoin() { return randiooCoin_; }
+    
+    private void initFields() {
+    }
+    public final boolean isInitialized() {
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (hasRandiooCoin()) {
+        output.writeInt32(1, getRandiooCoin());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasRandiooCoin()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, getRandiooCoin());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange result;
+      
+      // Construct using com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange();
+        return builder;
+      }
+      
+      protected com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange.getDescriptor();
+      }
+      
+      public com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange getDefaultInstanceForType() {
+        return com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange) {
+          return mergeFrom((com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange other) {
+        if (other == com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange.getDefaultInstance()) return this;
+        if (other.hasRandiooCoin()) {
+          setRandiooCoin(other.getRandiooCoin());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              setRandiooCoin(input.readInt32());
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // optional int32 randiooCoin = 1;
+      public boolean hasRandiooCoin() {
+        return result.hasRandiooCoin();
+      }
+      public int getRandiooCoin() {
+        return result.getRandiooCoin();
+      }
+      public Builder setRandiooCoin(int value) {
+        result.hasRandiooCoin = true;
+        result.randiooCoin_ = value;
+        return this;
+      }
+      public Builder clearRandiooCoin() {
+        result.hasRandiooCoin = false;
+        result.randiooCoin_ = 0;
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.randioo.mahjong_public_server.protocol.SCRoleRandiooCoinChange)
+    }
+    
+    static {
+      defaultInstance = new SCRoleRandiooCoinChange(true);
+      com.randioo.mahjong_public_server.protocol.Role.internalForceInit();
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.randioo.mahjong_public_server.protocol.SCRoleRandiooCoinChange)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_randioo_mahjong_public_server_protocol_RoleRenameRequest_descriptor;
   private static
@@ -1192,6 +1476,11 @@ public final class Role {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_randioo_mahjong_public_server_protocol_RoleGetRoleDataResponse_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_randioo_mahjong_public_server_protocol_SCRoleRandiooCoinChange_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_randioo_mahjong_public_server_protocol_SCRoleRandiooCoinChange_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1208,7 +1497,8 @@ public final class Role {
       "RoleDataRequest\"w\n\027RoleGetRoleDataRespon" +
       "se\022\024\n\terrorCode\030\001 \001(\005:\0011\022F\n\010roleData\030\002 \001" +
       "(\01324.com.randioo.mahjong_public_server.p" +
-      "rotocol.RoleData"
+      "rotocol.RoleData\".\n\027SCRoleRandiooCoinCha" +
+      "nge\022\023\n\013randiooCoin\030\001 \001(\005"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1247,6 +1537,14 @@ public final class Role {
               new java.lang.String[] { "ErrorCode", "RoleData", },
               com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse.class,
               com.randioo.mahjong_public_server.protocol.Role.RoleGetRoleDataResponse.Builder.class);
+          internal_static_com_randioo_mahjong_public_server_protocol_SCRoleRandiooCoinChange_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_com_randioo_mahjong_public_server_protocol_SCRoleRandiooCoinChange_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_randioo_mahjong_public_server_protocol_SCRoleRandiooCoinChange_descriptor,
+              new java.lang.String[] { "RandiooCoin", },
+              com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange.class,
+              com.randioo.mahjong_public_server.protocol.Role.SCRoleRandiooCoinChange.Builder.class);
           return null;
         }
       };

@@ -24,7 +24,7 @@ public class GameOverResult extends RoundOverResult {
 	/** 暗杠分数 */
 	public int darkGangScore;
 	/** 暗杠次数 */
-	public int dardGangCount;
+	public int darkGangCount;
 	/** 补杠分数 */
 	public int addGangScore;
 	/** 补杠次数 */
@@ -37,7 +37,7 @@ public class GameOverResult extends RoundOverResult {
 				.append(", zhuaHuCount=").append(zhuaHuCount).append(", dianChong=").append(dianChong)
 				.append(", score=").append(score).append(", mingGangScore=").append(mingGangScore)
 				.append(", mingGangCount=").append(mingGangCount).append(", darkGangScore=").append(darkGangScore)
-				.append(", dardGangCount=").append(dardGangCount).append(", addGangScore=").append(addGangScore)
+				.append(", dardGangCount=").append(darkGangCount).append(", addGangScore=").append(addGangScore)
 				.append(", addGangCount=").append(addGangCount).append("]");
 		return builder.toString();
 	}

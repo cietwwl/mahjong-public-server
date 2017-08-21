@@ -9,10 +9,10 @@ import com.randioo.randioo_server_base.module.login.LoginInfo;
  *
  */
 public class LoginConfig extends LoginInfo {
-    /**
-     * 头像url
-     */
+    /** 头像 */
     private String headImageUrl;
+    /** 昵称 */
+    private String nickname;
 
     public String getHeadImageUrl() {
         return headImageUrl;
@@ -22,9 +22,20 @@ public class LoginConfig extends LoginInfo {
         this.headImageUrl = headImageUrl;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     @Override
     public String toString() {
-        return "LoginConfig [headImageUrl=" + headImageUrl + "]";
+        StringBuilder builder = new StringBuilder();
+        builder.append("LoginConfig [headImageUrl=").append(headImageUrl).append(", nickname=").append(nickname)
+                .append("]");
+        return builder.toString();
     }
 
 }

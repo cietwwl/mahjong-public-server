@@ -22,6 +22,7 @@ message LoginGetRoleDataRequest{
 	optional string account=1;
 	optional string uuid = 2;
 	optional string headImageUrl = 3;
+	optional string nickname = 4;
 }
 
 message LoginGetRoleDataResponse{

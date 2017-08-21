@@ -4,7 +4,7 @@ rem ==============这里是可以改的变量=================
 rem 目标语言
 set TARGET=java
 rem 源码的输出位置
-set code_target_dir=..\src\main\java\com\randioo\shanghaimajiang_server\entity\file
+set code_target_dir=..\src\main\java\com\randioo\mahjong_public_server\entity\file
 rem 压缩包存放位置
 set assets_zip_target_dir=..\
 rem =================================================

@@ -1240,6 +1240,13 @@ public final class Login {
     public boolean hasHeadImageUrl() { return hasHeadImageUrl; }
     public java.lang.String getHeadImageUrl() { return headImageUrl_; }
     
+    // optional string nickname = 4;
+    public static final int NICKNAME_FIELD_NUMBER = 4;
+    private boolean hasNickname;
+    private java.lang.String nickname_ = "";
+    public boolean hasNickname() { return hasNickname; }
+    public java.lang.String getNickname() { return nickname_; }
+    
     private void initFields() {
     }
     public final boolean isInitialized() {
@@ -1257,6 +1264,9 @@ public final class Login {
       }
       if (hasHeadImageUrl()) {
         output.writeString(3, getHeadImageUrl());
+      }
+      if (hasNickname()) {
+        output.writeString(4, getNickname());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1278,6 +1288,10 @@ public final class Login {
       if (hasHeadImageUrl()) {
         size += com.google.protobuf.CodedOutputStream
           .computeStringSize(3, getHeadImageUrl());
+      }
+      if (hasNickname()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(4, getNickname());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1446,6 +1460,9 @@ public final class Login {
         if (other.hasHeadImageUrl()) {
           setHeadImageUrl(other.getHeadImageUrl());
         }
+        if (other.hasNickname()) {
+          setNickname(other.getNickname());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1481,6 +1498,10 @@ public final class Login {
             }
             case 26: {
               setHeadImageUrl(input.readString());
+              break;
+            }
+            case 34: {
+              setNickname(input.readString());
               break;
             }
           }
@@ -1548,6 +1569,27 @@ public final class Login {
       public Builder clearHeadImageUrl() {
         result.hasHeadImageUrl = false;
         result.headImageUrl_ = getDefaultInstance().getHeadImageUrl();
+        return this;
+      }
+      
+      // optional string nickname = 4;
+      public boolean hasNickname() {
+        return result.hasNickname();
+      }
+      public java.lang.String getNickname() {
+        return result.getNickname();
+      }
+      public Builder setNickname(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasNickname = true;
+        result.nickname_ = value;
+        return this;
+      }
+      public Builder clearNickname() {
+        result.hasNickname = false;
+        result.nickname_ = getDefaultInstance().getNickname();
         return this;
       }
       
@@ -2206,13 +2248,13 @@ public final class Login {
       "LoginCheckAccountResponse\022\024\n\terrorCode\030\001" +
       " \001(\005:\0011\"7\n\026LoginCreateRoleRequest\022\017\n\007acc" +
       "ount\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\"/\n\027LoginCreateR" +
-      "oleResponse\022\024\n\terrorCode\030\001 \001(\005:\0011\"N\n\027Log" +
+      "oleResponse\022\024\n\terrorCode\030\001 \001(\005:\0011\"`\n\027Log" +
       "inGetRoleDataRequest\022\017\n\007account\030\001 \001(\t\022\014\n" +
-      "\004uuid\030\002 \001(\t\022\024\n\014headImageUrl\030\003 \001(\t\"x\n\030Log" +
-      "inGetRoleDataResponse\022\024\n\terrorCode\030\001 \001(\005",
-      ":\0011\022F\n\010roleData\030\002 \001(\01324.com.randioo.mahj" +
-      "ong_public_server.protocol.RoleData\"\022\n\020S" +
-      "CLoginOtherSide"
+      "\004uuid\030\002 \001(\t\022\024\n\014headImageUrl\030\003 \001(\t\022\020\n\010nic" +
+      "kname\030\004 \001(\t\"x\n\030LoginGetRoleDataResponse\022",
+      "\024\n\terrorCode\030\001 \001(\005:\0011\022F\n\010roleData\030\002 \001(\0132" +
+      "4.com.randioo.mahjong_public_server.prot" +
+      "ocol.RoleData\"\022\n\020SCLoginOtherSide"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2256,7 +2298,7 @@ public final class Login {
           internal_static_com_randioo_mahjong_public_server_protocol_LoginGetRoleDataRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_randioo_mahjong_public_server_protocol_LoginGetRoleDataRequest_descriptor,
-              new java.lang.String[] { "Account", "Uuid", "HeadImageUrl", },
+              new java.lang.String[] { "Account", "Uuid", "HeadImageUrl", "Nickname", },
               com.randioo.mahjong_public_server.protocol.Login.LoginGetRoleDataRequest.class,
               com.randioo.mahjong_public_server.protocol.Login.LoginGetRoleDataRequest.Builder.class);
           internal_static_com_randioo_mahjong_public_server_protocol_LoginGetRoleDataResponse_descriptor =

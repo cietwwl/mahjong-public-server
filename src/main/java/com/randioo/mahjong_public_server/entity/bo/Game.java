@@ -9,6 +9,7 @@ import java.util.Map;
 import com.randioo.mahjong_public_server.entity.po.CallCardList;
 import com.randioo.mahjong_public_server.entity.po.RoleGameInfo;
 import com.randioo.mahjong_public_server.module.fight.component.score.round.GameOverResult;
+import com.randioo.mahjong_public_server.protocol.Entity.ClientCard;
 import com.randioo.mahjong_public_server.protocol.Entity.GameConfigData;
 import com.randioo.mahjong_public_server.protocol.Entity.GameState;
 import com.randioo.mahjong_public_server.protocol.Entity.GameType;
@@ -37,8 +38,6 @@ public class Game {
     private int currentRoleIdIndex;
     /** 当前指针指向的目标牌 */
     private int currentCardSeatIndex;
-    /** 游戏倍数 */
-    private int multiple;
     /** 出牌计数 */
     private int sendCardCount;
     /** 出牌的时间戳 */
@@ -59,12 +58,14 @@ public class Game {
     private Map<Integer, List<Integer>> sendDesktopCardMap = new HashMap<>();
     /** 玩家结果统计 */
     private Map<String, GameOverResult> statisticResultMap = new HashMap<>();
-    /** 是否结算 */
-    private boolean isSaveData = false;
     /** 燃点币 */
     private int randiooMoney;
     /** 投票箱 */
     private VoteBox voteBox = new VoteBox();
+    /** 客户端调试的卡牌卡牌 */
+    private List<ClientCard> clientCards = new ArrayList<>();
+    /** 客户端调试的摸牌 */
+    private int clientTouchCard;
 
     public VoteBox getVoteBox() {
         return voteBox;
@@ -150,14 +151,6 @@ public class Game {
         this.currentRoleIdIndex = currentRoleIdIndex;
     }
 
-    public int getMultiple() {
-        return multiple;
-    }
-
-    public void setMultiple(int multiple) {
-        this.multiple = multiple;
-    }
-
     public int getSendCardCount() {
         return sendCardCount;
     }
@@ -225,20 +218,24 @@ public class Game {
         return statisticResultMap;
     }
 
-    public boolean isSaveData() {
-        return isSaveData;
-    }
-
-    public void setSaveData(boolean isSaveData) {
-        this.isSaveData = isSaveData;
-    }
-
     public int getRandiooMoney() {
         return randiooMoney;
     }
 
     public void setRandiooMoney(int randiooMoney) {
         this.randiooMoney = randiooMoney;
+    }
+
+    public List<ClientCard> getClientCards() {
+        return clientCards;
+    }
+
+    public int getClientTouchCard() {
+        return clientTouchCard;
+    }
+
+    public void setClientTouchCard(int clientTouchCard) {
+        this.clientTouchCard = clientTouchCard;
     }
 
     @Override

@@ -18,58 +18,65 @@ message SC{
 
 	optional RoleRenameResponse RoleRenameResponse = 7;
 	optional RoleGetRoleDataResponse RoleGetRoleDataResponse = 8;
+	optional SCRoleRandiooCoinChange SCRoleRandiooCoinChange = 9;//燃点币变化
 
-	optional MatchCreateGameResponse MatchCreateGameResponse = 9;
-	optional MatchJoinGameResponse MatchJoinGameResponse = 10;
-	optional SCMatchJoinGame SCMatchJoinGame = 11;
-	optional SCMatchMineInfo SCMatchMineInfo = 12;
-	optional SCMatchCreateGame SCMatchCreateGame = 13;
+	optional MatchCreateGameResponse MatchCreateGameResponse = 10;
+	optional MatchJoinGameResponse MatchJoinGameResponse = 11;
+	optional SCMatchJoinGame SCMatchJoinGame = 12;
+	optional SCMatchMineInfo SCMatchMineInfo = 13;
+	optional SCMatchCreateGame SCMatchCreateGame = 14;
+    optional MatchPreJoinResponse MatchPreJoinResponse = 15;//预加入房间
 
-	optional SCFightNoticeReady SCFightNoticeReady = 14;
-	optional FightReadyResponse FightReadyResponse = 15;//准备(只有好友对战用)
-	optional SCFightReady SCFightReady = 16;//某玩家进行准备
-	optional SCFightStart SCFightStart = 17;//游戏开始
-	optional FightExitGameResponse FightExitGameResponse = 18;//游戏退出
-	optional SCFightExitGame SCFightExitGame = 19;//某玩家游戏退出
-	optional FightApplyExitGameResponse FightApplyExitGameResponse = 20;
-	optional SCFightApplyExitGame SCFightApplyExitGame = 21;//某玩家申请游戏退出
-	optional FightAgreeExitGameResponse FightAgreeExitGameResponse = 22;//同意游戏退出
-	optional SCFightClearRoomId SCFightClearRoomId = 23;//清除房间号
-	optional SCFightLoadResource SCFightLoadResource = 24;//游戏资源加载(用于匹配)
-	optional SCFightNoticeSendCard SCFightNoticeSendCard = 25;//通知出牌
-	optional FightSendCardResponse FightSendCardResponse = 26;
-	optional SCFightSendCard SCFightSendCard = 27;
-	optional SCFightRoundOver SCFightRoundOver = 28;
-	optional FightRecommandResponse FightRecommandResponse = 29;
-	optional SCFightGameOver SCFightGameOver = 30;
-	optional FightGetlastRoundResponse FightGetlastRoundResponse = 31;
-	optional SCFightTouchCard SCFightTouchCard = 32;//摸一张牌
-	optional SCFightNoticeChooseCardList SCFightNoticeChooseCardList = 33;//通知所有人的杠碰胡
-	optional FightPengResponse FightPengResponse = 34;
-	optional FightGangResponse FightGangResponse = 35;
-	optional FightHuResponse FightHuResponse = 36;
-	optional SCFightHu SCFightHu = 37;
-	optional FightGuoResponse FightGuoResponse = 38;
-	optional SCFightGuo SCFightGuo = 39;
-	optional SCFightCountdown SCFightCountdown = 40;
-	optional SCFightCardList SCFightCardList = 41;
-	optional SCFightPointSeat SCFightPointSeat = 42;
-	optional SCFightApplyExitResult SCFightApplyExitResult = 43;//申请退出的结果
-	optional SCFightDisconnect SCFightDisconnect = 44;//通知玩家断连
-	optional FightChiResponse FightChiResponse = 45;//吃的响应
-	optional SCFightScore SCFightScore = 46;//分数改变
-	optional SCFightChooseCardListOver SCFightChooseCardListOver = 47;//取消通知
-	optional FightQueryGameConfigResponse FightQueryGameConfigResponse = 48;//查询游戏配置
+	optional SCFightNoticeReady SCFightNoticeReady = 16;
+	optional FightReadyResponse FightReadyResponse = 17;//准备(只有好友对战用)
+	optional SCFightReady SCFightReady = 18;//某玩家进行准备
+	optional SCFightStart SCFightStart = 19;//游戏开始
+	optional FightExitGameResponse FightExitGameResponse = 20;//游戏退出
+	optional SCFightExitGame SCFightExitGame = 21;//某玩家游戏退出
+	optional FightApplyExitGameResponse FightApplyExitGameResponse = 22;
+	optional SCFightApplyExitGame SCFightApplyExitGame = 23;//某玩家申请游戏退出
+	optional FightAgreeExitGameResponse FightAgreeExitGameResponse = 24;//同意游戏退出
+	optional SCFightClearRoomId SCFightClearRoomId = 25;//清除房间号
+	optional SCFightLoadResource SCFightLoadResource = 26;//游戏资源加载(用于匹配)
+	optional SCFightNoticeSendCard SCFightNoticeSendCard = 27;//通知出牌
+	optional FightSendCardResponse FightSendCardResponse = 28;
+	optional SCFightSendCard SCFightSendCard = 29;
+	optional SCFightRoundOver SCFightRoundOver = 30;
+	optional FightRecommandResponse FightRecommandResponse = 31;
+	optional SCFightGameOver SCFightGameOver = 32;
+	optional FightGetlastRoundResponse FightGetlastRoundResponse = 33;
+	optional SCFightTouchCard SCFightTouchCard = 34;//摸一张牌
+	optional SCFightNoticeChooseCardList SCFightNoticeChooseCardList = 35;//通知所有人的杠碰胡
+	optional FightPengResponse FightPengResponse = 36;
+	optional FightGangResponse FightGangResponse = 37;
+	optional FightHuResponse FightHuResponse = 38;
+	optional SCFightHu SCFightHu = 39;
+	optional FightGuoResponse FightGuoResponse = 40;
+	optional SCFightGuo SCFightGuo = 41;
+	optional SCFightCountdown SCFightCountdown = 42;
+	optional SCFightCardList SCFightCardList = 43;
+	optional SCFightPointSeat SCFightPointSeat = 44;
+	optional SCFightApplyExitResult SCFightApplyExitResult = 45;//申请退出的结果
+	optional SCFightDisconnect SCFightDisconnect = 46;//通知玩家断连
+	optional FightChiResponse FightChiResponse = 47;//吃的响应
+	optional SCFightScore SCFightScore = 48;//分数改变
+	optional SCFightChooseCardListOver SCFightChooseCardListOver = 49;//取消通知
+	optional FightQueryGameConfigResponse FightQueryGameConfigResponse = 50;//查询游戏配置
+	optional FightClientDispatchResponse FightClientDispatchResponse = 51;//客户端调试配牌
+	optional FightClientTouchCardResponse FightClientTouchCardResponse = 52;//客户端调试摸牌
+	optional SCFightRoomDismiss SCFightRoomDismiss = 53;//通知房间解散
+	optional FightConfirmGameOverResponse FightConfirmGameOverResponse = 54;//确认游戏结束
 	
-	optional SettingsResponse SettingsResponse = 49;//设置
-	optional SettingsShowResponse SettingsShowResponse = 50;//设置
+	optional SettingsResponse SettingsResponse = 55;//设置
+	optional SettingsShowResponse SettingsShowResponse = 56;//设置
 
-	optional RaceJoinRaceResponse RaceJoinRaceResponse = 51;
-	optional SCRaceJoinRace SCRaceJoinRace = 52;
-	optional RaceShowQueueResponse RaceShowQueueResponse = 53;
-	optional SCRaceQueueChange SCRaceQueueChange = 54;
+	optional RaceJoinRaceResponse RaceJoinRaceResponse = 57;
+	optional SCRaceJoinRace SCRaceJoinRace = 58;
+	optional RaceShowQueueResponse RaceShowQueueResponse = 59;
+	optional SCRaceQueueChange SCRaceQueueChange = 60;
 
-	optional MatchCheckRoomResponse MatchCheckRoomResponse = 55;// 检查房间号
+	optional MatchCheckRoomResponse MatchCheckRoomResponse = 61;// 检查房间号
+	optional SCFightFlowerCount SCFightFlowerCount = 62;//杠 碰时花的计数改变
 
 	extensions 100 to 200;
-} // 55
+} // 62

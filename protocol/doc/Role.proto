@@ -15,3 +15,7 @@ message RoleGetRoleDataResponse{
 	optional int32 errorCode=1 [default = 1];
 	optional RoleData roleData = 2;
 }
+
+message SCRoleRandiooCoinChange{
+	optional int32 randiooCoin = 1;
+}

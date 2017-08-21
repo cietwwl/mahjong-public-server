@@ -5,6 +5,7 @@ import java.util.List;
 import com.randioo.mahjong_public_server.entity.bo.Game;
 import com.randioo.mahjong_public_server.entity.bo.Role;
 import com.randioo.mahjong_public_server.entity.po.CallCardList;
+import com.randioo.mahjong_public_server.protocol.Entity.ClientCard;
 import com.randioo.mahjong_public_server.protocol.Entity.FightVoteApplyExit;
 import com.randioo.randioo_server_base.service.ObserveBaseServiceInterface;
 
@@ -141,11 +142,29 @@ public interface FightService extends ObserveBaseServiceInterface {
     void queryGameConfig(Role role);
 
     /**
-     * 重连
+     * 客户端调试分牌
      * 
      * @param role
-     * @author wcy 2017年7月14日
+     * @param cards
+     * @author wcy 2017年8月14日
      */
-    // void rejoin(Role role);
+    void clientDispatchCards(Role role, List<ClientCard> cards);
+
+    /**
+     * 客户端调试摸牌
+     * 
+     * @param role
+     * @param card
+     * @author wcy 2017年8月14日
+     */
+    void clientTouchCard(Role role, int card);
+
+    /**
+     * 确认游戏结束
+     * 
+     * @param role
+     * @author wcy 2017年8月16日
+     */
+    void confirmGameOver(Role role);
 
 }

@@ -23,6 +23,20 @@ message SCFightExitGame{//
 	optional int32 seat = 1;
 }
 
+/**房间解散*/
+message SCFightRoomDismiss{
+	
+}
+
+/**确认游戏结束*/
+message FightConfirmGameOverRequest{
+	
+}
+
+message FightConfirmGameOverResponse{
+	
+}
+
 message SCFightApplyExitGame{//
 	optional string name = 1;
 	optional int32 countDown = 2;
@@ -82,27 +96,26 @@ message FightRecommandResponse{
 	repeated RecommandPai recommandPai = 2;
 }
 
-message SCFightStart{//
-	repeated int32 pai = 1;
-	optional int32 times = 2;	
-	repeated PaiNum PaiNum = 3;
-	optional int32 remainCardCount = 4;
-	optional int32 zhuangSeat = 5;
-	optional int32 seat = 6; // 位置
-	optional int32 card = 7; //百搭牌 
-	repeated int32 dice = 8; //骰子数
-	repeated int32 flower = 9;//花牌
-	optional bool isHuangFan = 10; //是否荒番
-    optional int32 remainRound = 11;//荒番剩余局数
-    optional int32 currentRoundNum = 12;//当前局数
-    optional int32 maxRound = 13;//总局数
+message SCFightStart{
+	repeated FightStartRoleData fightStartRoleData = 1;
+	optional int32 remainCardCount = 2;
+	optional int32 zhuangSeat = 3;
+	optional int32 baidaCard = 4; //百搭牌
+	repeated int32 dice = 5; //骰子数
+	optional int32 remainHuangFan = 6;//荒番剩余局数
+	optional int32 currentRoundNum = 7;//当前局数
+	optional int32 maxRound = 8;//总局数
+	optional int32 firstBaiDaCard = 9;//第一次产生的百搭牌
 }
 message SCFightRoundOver{
-	repeated int32 flyCards = 1;
-	repeated RoleRoundOverInfoData roleRoundOverInfoData = 2;
-	optional string roomId = 3;//房间号
-	optional int32 finishRoundCount = 4;//打完的局数
-	optional int32 maxRoundCount = 5;//最大局数
+	repeated int32 zhamaCards = 1;//扎马的牌
+	repeated int32 flyCards = 2;//苍蝇牌
+	repeated RoleRoundOverInfoData roleRoundOverInfoData = 3;
+	optional string roomId = 4;//房间号
+	optional int32 finishRoundCount = 5;//打完的局数
+	optional int32 maxRoundCount = 6;//最大局数
+	optional int32 flyScore = 7; //飞苍蝇的分数
+	optional bool huangFan = 8;//是否荒番
 }
 
 message SCFightGameOver{
@@ -134,6 +147,7 @@ message SCFightTouchCard{
 	optional int32 seat = 1;
 	optional int32 touchCard = 2;
 	optional int32 remainCardCount = 3;
+	optional bool isFlower=4[default=false];
 }
 
 message SCFightNoticeChooseCardList{
@@ -229,4 +243,24 @@ message FightQueryGameConfigResponse{
 	optional int32 errorCode= 1[default = 1];
 	optional GameConfigData gameConfigData = 2;
 	optional int32 currentRoundNumber = 3;
+}
+message SCFightFlowerCount{
+	optional int32 flowerCount = 1;
+	optional int32 seat = 2;
+}
+
+message FightClientDispatchRequest{
+	repeated ClientCard cards = 1;
+}
+
+message FightClientDispatchResponse{
+	optional int32 errorCode = 1;
+}
+
+message FightClientTouchCardRequest{
+	optional int32 card = 1;
+}
+
+message FightClientTouchCardResponse{
+	optional int32 errorCode = 1;
 }

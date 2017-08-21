@@ -12,3 +12,7 @@ message HeartResponse{
 message SCHeart{
 	
 }
+
+message CSHeart{
+	
+}
